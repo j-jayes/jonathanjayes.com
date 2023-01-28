@@ -19,7 +19,7 @@ website:
 
 format:
   html:
-    css: assets/bootstrap_1.css
+    theme: assets/custom.scss
     toc: true
 
 execute:

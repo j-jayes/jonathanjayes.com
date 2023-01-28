@@ -1,9 +1,9 @@
+/*-- scss:defaults --*/
+
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:300, 300i&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap');
 
-
-/*-- scss:defaults --*/
 
 $theme: "simplex" !default;
 
@@ -58,7 +58,7 @@ $font-family-sans-serif:    Noto Serif JP !default;
 $font-family-monospace:     IBM Plex Mono !default;
 $font-family-base:          Lato !default;
 
-$headings-margin-bottom:    1.5rem !default;
+$headings-margin-bottom:    $spacer / 1 !default;
 
 
 $font-size-base: 1.1rem !default;
