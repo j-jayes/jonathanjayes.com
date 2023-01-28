@@ -1,0 +1,14 @@
+{
+  "hash": "c7145d0ca618aa10862f90547cc72a5e",
+  "result": {
+    "markdown": "---\ntitle: \"Teaching\"\n---\n\n\n## Regional development and growth\n\nCheck out my site for a set of Stata labs I taught in the Spring of 2023\n\n\n::: {.cell .column-page}\n<iframe src=\"https://j-jayes.github.io/EOSE09-site/\" width=\"100%\" height=\"800\" data-external=\"1\"></iframe>\n:::\n\n\n## Screencasts\n\nHave a look at a set of screencasts I am working on for learning R.\n\n\n::: {.cell .column-page}\n<iframe src=\"https://j-jayes.github.io/screencasts/code/Show_your_stripes.html\" width=\"100%\" height=\"800\" data-external=\"1\"></iframe>\n:::\n\n\n## Data visualization\n\nI am working on adapting a course from Claus Wilke for presentation in Lund.\n\n\n::: {.cell .column-page}\n<iframe src=\"https://j-jayes.github.io/Data-Visualization-in-R-Lund/slides_grid.html\" width=\"100%\" height=\"800\" data-external=\"1\"></iframe>\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

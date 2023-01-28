@@ -1,0 +1,37 @@
+---
+title: "Teaching"
+---
+
+## Regional development and growth
+
+Check out my site for a set of Stata labs I taught in the Spring of 2023
+
+```{r}
+#| column: page
+#| out-width: "100%"
+
+knitr::include_url(url = "https://j-jayes.github.io/EOSE09-site/", height = 800)
+```
+
+## Screencasts
+
+Have a look at a set of screencasts I am working on for learning R.
+
+```{r}
+#| column: page
+#| out-width: "100%"
+
+knitr::include_url(url = "https://j-jayes.github.io/screencasts/code/Show_your_stripes.html", height = 800)
+```
+
+## Data visualization
+
+I am working on adapting a course from Claus Wilke for presentation in Lund.
+
+```{r}
+#| column: page
+#| out-width: "100%"
+
+knitr::include_url(url = "https://j-jayes.github.io/Data-Visualization-in-R-Lund/slides_grid.html", height = 800)
+```
+

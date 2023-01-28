@@ -1,0 +1,13 @@
+---
+title: "Publications"
+---
+
+I have one paper that I'm proud to have published in World Development with my master's supervisor Johan Fourie. Have a look at it below.
+
+```{r}
+#| column: page
+#| out-width: "100%"
+
+knitr::include_url(url = "https://www.sciencedirect.com/science/article/abs/pii/S0305750X2100019X", height = 800)
+```
+

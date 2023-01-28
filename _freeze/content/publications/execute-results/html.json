@@ -1,0 +1,14 @@
+{
+  "hash": "c85146abc6a90da9336bd40966c27aab",
+  "result": {
+    "markdown": "---\ntitle: \"Publications\"\n---\n\n\nI have one paper that I'm proud to have published in World Development with my master's supervisor Johan Fourie. Have a look at it below.\n\n\n::: {.cell .column-page}\n<iframe src=\"https://www.sciencedirect.com/science/article/abs/pii/S0305750X2100019X\" width=\"100%\" height=\"800\" data-external=\"1\"></iframe>\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
