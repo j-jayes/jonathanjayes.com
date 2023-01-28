@@ -1,0 +1,57 @@
+---
+title: "What describes a good album?"
+description: |
+  I mine the transcripts of Anthony Fantano's Youtube album reviews and use penalized regression to discover the words associated with particularly high and low scoring albums.
+draft: true
+author:
+  - name: Jonathan Jayes
+    url:
+      interludeone.com: {}
+date: 2022-06-12
+preview: "https://raw.githubusercontent.com/j-jayes/jjayes_distill/main/_posts/2022-06-01-linkedin-style-about-info/images/gt_educ.PNG"
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: true
+    highlight: haddock
+    highlight_downlit: true
+    toc: true
+
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Introduction
+
+Anthony Fantano is [the internet's busiest music nerd](https://www.youtube.com/watch?v=SCLwyNT25bU). He has been described [in the New York Times as](https://www.nytimes.com/2020/09/30/arts/music/anthony-fantano-the-needle-drop.html):
+
+<blockquote>
+
+The Only Music Critic Who Matters (if You’re Under 25)
+
+</blockquote>
+
+I love to watch his videos and share his penchant for albums that are cohesive, and tell a story. I eagerly awaited [his review of the new Kendrick Lamar ablum, *Mr. Morale & the Big Steppers*](https://www.youtube.com/watch?v=gHQE7tULx6c) (which he gave a **light eight out of ten**).
+
+This got me wondering if I could measure how he describes an album that he enjoys, or particularly dislikes. I remember Chance the Rapper's album The Big Day being describes as ["a pile of slop"](https://www.youtube.com/watch?v=RjriHA-MLPg) and being given a rather vicious **zero out of ten**.
+
+This question can be framed as a regression problem -- the score Fantano rates an album is the outcome variable, and the words that he uses in the review are predictors.
+
+## Don't bury the lede
+
+Here are the words I found that Fantano uses 
+
+
+## Next steps
+
+I really want to create an interactive widget that lets you describe and album and provide some attributes and then predicts the score that Fantano would give.
+
+It would be really fun to use Shapley values as a way to highlight what variables are important in the prediction. I could perhaps use a huggingface transformer model instead of my simple logistic regression model?
+
+## Process (if you're interested)
+
+The remainder of this post discusses how I collected the data and 

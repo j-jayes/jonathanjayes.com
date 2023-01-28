@@ -1,0 +1,323 @@
+---
+title: "Programmatically generate tabs in Rmarkdown"
+description: |
+  A walk-though for writing code that writes it's own code.
+author:
+  - name: Jonathan Jayes
+    url:
+      interludeone.com: {}
+date: 2022-03-04
+preview: "https://raw.githubusercontent.com/j-jayes/Monday-Munch/main/images/cover.jpg"
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: false
+    highlight: haddock
+    highlight_downlit: true
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T, message = F, warning = F)
+```
+
+*Thank you to Adam A. Kemberling for providing some useful feedback on how to explain the panelset syntax and suggesting the use of dplyr::walk() instead of a for loop. His suggestion is [here](https://github.com/j-jayes/jjayes_distill/issues/1#issuecomment-1131681972).*
+
+## Purpose
+
+I want to create a parametrized report in Rmarkdown. The report is populated after querying a database. In short, the Rmarkdown document **must have a tab for each category of a categorical variable**, and draw a ggplot in the tab. The number of categories depends on the result of the query.
+
+We can simulate the problem by removing one of the islands from the `palmerpenguins` dataset:
+
+There are three islands:
+
+```{r, echo=F}
+library(tidyverse)
+library(xaringanExtra)
+xaringanExtra::use_panelset()
+
+palmerpenguins::penguins %>% 
+    count(island) %>% 
+    knitr::kable(col.names = c("Island name", "Number of penguins"))
+```
+
+We will subset the data to choose only two islands:
+
+```{r, code_folding = TRUE}
+df <- palmerpenguins::penguins %>% 
+    filter(island != "Biscoe")
+
+df %>%
+  distinct(island) %>%
+  knitr::kable(col.names = c("Remaining islands"))
+```
+
+## Problem
+
+If I hardcode the number of tabs one of the plots is drawn but has no data!
+
+```{r, include=F}
+plot_penguins <- function(isl) {
+  df %>%
+    filter(island == isl) %>%
+    ggplot(aes(bill_length_mm, 
+               bill_depth_mm, 
+               colour = body_mass_g, 
+               shape = species)) +
+    geom_point(cex = 2) +
+    geom_smooth(method = "lm", se = F) +
+    scale_color_viridis_c(labels = scales::number_format()) +
+    labs(
+      x = "Bill length (mm)",
+      y = "Bill depth (mm)",
+      colour = "Body mass (g)",
+      shape = "Penguin species"
+    )
+}
+```
+
+::::: {.panelset}
+
+::: {.panel}
+
+## Biscoe {.panel-name}
+
+```{r}
+plot_penguins("Biscoe")
+```
+
+::: 
+
+::: {.panel}
+
+### Dream {.panel-name}
+
+```{r}
+plot_penguins("Dream")
+```
+
+::: 
+
+::: {.panel}
+
+### Torgersen {.panel-name}
+
+```{r}
+plot_penguins("Torgersen")
+```
+
+:::
+
+:::::
+
+
+### Bad solution
+
+I could amend my `plot_penguins` function to display nothing if there is no data to plot:
+
+```{r, code_folding=TRUE}
+
+plot_penguins <- function(isl) {
+  if (dim(df %>% filter(island == isl))[1] != 0) { #<<
+    df %>%
+      filter(island == isl) %>%
+      ggplot(aes(bill_length_mm, bill_depth_mm, colour = body_mass_g,
+        shape = species)) +
+      geom_point(cex = 2) +
+      geom_smooth(method = "lm", se = F) +
+      scale_color_viridis_c(labels = scales::number_format()) +
+      labs(
+        x = "Bill length (mm)",
+        y = "Bill depth (mm)",
+        colour = "Body mass (g)",
+        shape = "Penguin species"
+      )
+  } #<<
+}
+
+```
+
+
+::::: {.panelset}
+
+::: {.panel}
+
+## Biscoe {.panel-name}
+
+```{r}
+plot_penguins("Biscoe")
+```
+
+::: 
+
+::: {.panel}
+
+### Dream {.panel-name}
+
+```{r}
+plot_penguins("Dream")
+```
+
+::: 
+
+::: {.panel}
+
+### Torgersen {.panel-name}
+
+```{r}
+plot_penguins("Torgersen")
+```
+
+:::
+
+:::::
+
+This is a poor solution. In the case where there are only a small number of possible categories, it works. However, if there are many potential tab names and many are empty, having to click through and find content is not pleasing at all!
+
+## Better solution
+
+A better solution is to generate the tabs programmatically, with code that writes itself depending on the contents of the returned dataset.
+
+I am creating the tabs with [Garrick Aden-Buie's](https://www.garrickadenbuie.com/) `xaringanExtra` package. Have a look at the specifics in the presentation below.
+
+```{r}
+knitr::include_url("https://pkg.garrickadenbuie.com/xaringanExtra/panelset/?panelset=r-code#2")
+```
+
+Other useful resources incude [this Science Loft post](https://scienceloft.com/technical/programmatically-create-new-headings-and-outputs-in-rmarkdown/) and [this Stack Overflow question](https://stackoverflow.com/questions/63397427/programmatically-create-tab-and-plot-in-markdown).
+
+### Tools
+
+In vanilla Rmarkdown you can create the tabs with a simple heading structure.
+
+```{r, eval=F, echo=T}
+## Here are the penguins {.panelset} 
+
+### Biscoe
+plot_penguins("Biscoe")
+### Dream
+plot_penguins("Dream")
+```
+
+I opt to use [Pandoc's fenced div structure](https://pandoc.org/MANUAL.html#extension-fenced_divs) instead, to avoid inadvertently creating additional tabs with a third level heading. It looks like this:
+
+```{r, eval=F, echo=T}
+::::: {.panelset}
+
+::: {.panel}
+
+[Biscoe]{.panel-name}
+
+plot_penguins("Biscoe")
+:::
+    
+::: {.panel}
+
+[Dream]{.panel-name}
+
+plot_penguins("Dream")
+
+:::
+
+:::::
+```
+
+It is worth highlighting that the tabset
+
+- begins with `::::: {.panelset}` and,
+- ends with five colons `:::::`
+
+Each individual tab needs to
+
+- open with `::: {.panel}`, 
+- include a `[Panel name specified here]{.panel-name}`, and 
+- close with three colons `:::`
+
+## How does it work?
+
+Now I can programmatically create my tabs and plots within the fences. I start with a function that makes the tabs. Then I open the tabset, get a list of the islands present, and walk across each one applying my `make_tab` function before closing the tabset.
+
+```{r, eval=F, echo=T}
+make_tab <- function(isl) {         # function to make the tabs
+  cat("::: {.panel}\n")             # Open tab
+  cat("##", isl, "{.panel-name}\n") # Label tab
+  p <- plot_penguins(isl)           # Create plot
+  print(p)                          # Display plot
+  cat("\n")                         # Space
+  cat(":::\n")                      # Close tab
+}
+
+::::: {.panelset}
+
+isl_list <- unique(df$island) %>%   # Get a list of islands present in the dataset
+    as.character()
+
+dplyr::walk(isl_list, make_tab)     # make the tabs for each island that is there
+
+:::::
+```
+
+
+### Good to remember
+
+- Wrap code you want executed in `cat()`, and `print()` your ggplot objects.
+
+- Set code options to `results = 'asis'` for the code chunk that makes your tabs. According to the [Rmarkdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/results-asis.html): 
+
+<blockquote> 
+This option tells knitr not to wrap your text output in verbatim code blocks, but treat it “as is.” This can be particularly useful when you want to generate content dynamically from R code.
+</blockquote>
+
+- Put in lots of line breaks to separate Rmarkdown content, e.g. frequent uses of `cat("\n")` between elements.
+
+## Does it work?
+
+Yes! Look at that, just two tabs and no empty plots!
+
+```{r, echo=F}
+make_tab <- function(isl) {
+  cat("::: {.panel}\n")
+  cat("##", isl, "{.panel-name}\n")
+  p <- plot_penguins(isl)
+  print(p)
+  cat("\n")
+  cat(":::\n")
+}
+```
+
+::::: {.panelset}
+
+```{r, results='asis'}
+isl_list <- unique(df$island) %>% as.character()
+
+walk(isl_list, make_tab)
+```
+
+:::::
+
+I hope that this was useful. Please create an issue on Github if you have any suggestions.
+
+## Postscript {.appendix}
+
+This is the function that plots the figures:
+
+```{r, eval=F}
+plot_penguins <- function(isl) {
+  df %>%
+    filter(island == isl) %>%
+    ggplot(aes(bill_length_mm, 
+               bill_depth_mm, 
+               colour = body_mass_g, 
+               shape = species)) +
+    geom_point(cex = 2) +
+    geom_smooth(method = "lm", se = F) +
+    scale_color_viridis_c(labels = scales::number_format()) +
+    labs(
+      x = "Bill length (mm)",
+      y = "Bill depth (mm)",
+      colour = "Body mass (g)",
+      shape = "Penguin species"
+    )
+}
+```
+

@@ -1,0 +1,218 @@
+---
+title: "Fired or Retired: NLP classification of CEO exits"
+description: |
+  In this post I train a text classfier to predict if a CEO is fired or retires, based on the 8-K fillings submitted to the SEC in the 270 days before and after the CEO's departure date.
+draft: true
+preview: images/preview.png
+author:
+  - name: Jonathan Jayes
+date: 05-05-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: false
+    highlight: haddock
+    highlight_downlit: true
+    toc: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+
+library(tidyverse)
+library(leaflet)
+library(plotly)
+library(glue)
+library(DT)
+
+theme_set(theme_light())
+```
+
+# A $100m Deli?
+
+Last month we learned about a mostly unremarkable deli in New Jersey, USA, with an unlikely market capitalisation of $100 million. In [this episode](https://www.npr.org/2021/04/21/989625586/the-100-million-deli) of the podcast [Planet Money](https://twitter.com/planetmoney), Mary Childs and Jacob Goldstein explain that one possible reason for the high market cap may be that the deli will be the subject of a reverse takeover (RTO) in the future.
+
+<aside>
+```{r}
+location <- tibble(lng = -75.239275,
+                   lat = 39.840100,
+                   popup = paste(sep = "<br/>",
+  "<b><a href='https://sec.report/CIK/0001632081'>Hometown Deli</a></b>",
+  "541 A MANTUA AVE",
+  "PAULSBORO, NJ"))
+
+m <- leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(
+    lng = location$lng,
+    lat = location$lat,
+    popup = location$popup) %>% 
+    fitBounds(-75.238, 39.844, -75.239, 39.835)
+
+m
+```
+
+Map locating Hometown Deli in Paulsboro, NJ, the only asset of [Hometown International, Inc](https://sec.report/CIK/0001632081)
+</aside>
+
+In a reverse takeover, a private company wants to go public. Instead of going through the hoops of having an Initial Public Offering (IPO), the private company simply buys some semi-defunct but still publicly traded company in order to become publicly traded (usually in the US) themselves. This skirts the onerous requirements that come with making an IPO.
+
+We know what we do about this deli, including that it was founded by a high-school wrestling coach, because of rules governing the transparency of public companies in the US. Publicly traded companies must make regular submissions to the SEC informing regulators and potential investors of their operations.
+
+I was inspired by this story to investigate the kinds of submissions that firms make to the SEC when there is a change in leadership. The 8-K form is an unscheduled submission detailing events or corporate changes at a company including acquisitions, bankruptcy, the resignation of directors, or changes in the fiscal year.
+
+In this post I examine a dataset of ceo exits between x and x in the USA. I create a text classifier using the 8-K submissions of firms. I examine the components of the classification model and I show that it is difficult to predict if a CEO has been fired or retires based on the words of the 8-K submissions alone.
+
+# CEO exits
+
+The dataset I analyse comes from [Gentry et al.](https://onlinelibrary.wiley.com/doi/abs/10.1002/smj.3278) accessible [here](https://zenodo.org/record/4618103#.YJLt6pAzaUk). It details more than 1,400 CEO dismissals at S&P 1500 companies between 1992 and 2018, as well as noting many other reasons for CEO turnover.
+
+As we can see by mousing over the figure below, since 1995 CEOs have, by and large, retired (shown in green) or are left involuntarily after being dismissed for poor job performance (shown in blue). The orange category, other, is not very informative. We will limit our classification problem to just the first two classes.
+
+```{r}
+
+df <- read_rds("data/raw.rds")
+
+descriptions <- read_rds("data/description.rds") %>% 
+  rename(departure_code = `Code Number`)
+
+df <- df %>% 
+  inner_join(descriptions, by = "departure_code")
+  
+```
+
+```{r panelset, echo=FALSE, include=F}
+xaringanExtra::use_panelset()
+```
+
+::::: {.panelset}
+
+::: {.panel}
+
+## CEO exits over time {.panel-name}
+
+We can see that retirements make up nearly 50 percent of the observations throughout our sample.
+
+<centre>
+
+```{r}
+g <- df %>% 
+  mutate(Exit = glue("{Type}")) %>% 
+  filter(between(fyear, 1994, 2018),
+         !is.na(departure_code),
+         !Type %in% c("Missing")) %>% 
+  count(Exit, fyear, departure_code) %>% 
+  mutate(Exit = fct_inorder(Exit)) %>% 
+  ggplot(aes(fyear, n, fill = Exit)) +
+  geom_col(position = "fill") +
+  theme(legend.position = "none",
+        panel.grid = element_blank()) +
+  scale_fill_brewer(palette = "Set3") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = NULL,
+       y = "Share of exits per year")
+
+ggplotly(g, tooltip = "Exit")
+```
+
+</centre>
+:::
+
+::: {.panel}
+
+## Descriptions of CEO exits {.panel-name}
+
+The table below details the classification of CEO exit from the original dataset collected by [Gentry et al.](https://onlinelibrary.wiley.com/doi/abs/10.1002/smj.3278)
+
+```{r}
+descriptions %>% 
+  select(-departure_code) %>% 
+  datatable(rownames = F,
+            colnames = c("Type",
+                         "Description"))
+  
+```
+
+:::
+:::::
+
+# 8-K Forms and text data
+
+To determine if a CEO retired or was fired, I will make use of the 8-K forms filed 270 days before and after the date of exit. The 8-K fillings. I include a screenshot below of an 8-K filling from [Hometown International Inc.](https://sec.report/CIK/0001632081).
+
+![Hometown's current 8-K](images/hometown-international.png)
+
+I scraped these 8-K fillings from the SEC website and removed the formulaic text at the begninning of each form detailing the location of company headquarters and such.
+
+<aside>
+If you want to see the scraping code, have a look at my [GitHub here](https://github.com/j-jayes/tidy-tuesday/blob/main/code/ceo-exits.Rmd)
+</aside>
+
+I then tokenized the text into words using the tokenizer from the `tidytext` package from [Julia Silge and David Robinson](https://www.tidytextmining.com/).
+
+```{r}
+# df_words <- read_rds("data/df_word.rds")
+```
+
+
+```{r, eval=F}
+library(tidytext)
+
+df_words <- df %>% 
+  unnest_tokens(word, "sec_filling_text", token = "words") %>% 
+  anti_join(stop_words)
+```
+
+
+```{r}
+# df_words %>% 
+#   count(departure, word) %>% 
+#   group_by(departure) %>% 
+#   slice_max(n, n = 15) %>% 
+#   ungroup() %>% 
+#   mutate(word = str_to_title(word),
+#          word = reorder_within(word, n, departure)) %>% 
+#   ggplot(aes(n, word, fill = departure)) +
+#   geom_col(show.legend = F) +
+#   facet_wrap(~ departure, scales = "free_y") +
+#   scale_y_reordered() +
+#   scale_x_continuous(labels = scales::number_format()) +
+#   scale_fill_brewer(palette = "Dark2") +
+#   labs(x = "Number of word uses",
+#        y = NULL,
+#        title = "Most common words in 8-K fillings by exit reason") 
+
+```
+
+Tidy log odds package
+
+```{r}
+library(tidylo)
+
+# df_log_odds <- df_words %>% 
+#   count(departure, word) %>% 
+#   bind_log_odds(departure, word, n) %>% 
+#   filter(n > 200) %>% 
+#   group_by(departure) %>% 
+#   slice_max(log_odds_weighted, n = 20) %>% 
+#   ungroup() %>% 
+#   arrange(departure, - log_odds_weighted)
+# 
+# df_log_odds %>% 
+#   mutate(word = str_to_title(word),
+#          word = reorder_within(word, log_odds_weighted, departure)) %>% 
+#   ggplot(aes(log_odds_weighted, word, fill = departure)) +
+#   geom_col(show.legend = F) +
+#   facet_wrap(~ departure, scales = "free_y") +
+#   scale_fill_brewer(palette = "Dark2") +
+#   scale_y_reordered() +
+#   labs(x = "Weighted log odds",
+#        y = NULL,
+#        title = "Words most specific to exit reason")
+
+```
+
+Interim, Acting. 
+
+Interesting that resigned is still there in the Fired category. 

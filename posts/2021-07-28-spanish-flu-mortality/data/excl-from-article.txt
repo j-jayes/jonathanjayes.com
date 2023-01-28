@@ -1,0 +1,77 @@
+
+### Foreign born whites
+
+Test of Phillips' assertion that:
+
+<blockquote>
+
+"Whites born in South Africa seemed to be more vulnerable [to the flu] than those who had grown up in Europe."
+</blockquote>
+
+Phillips cites Dr W Watkins-Pitchford, Director of South African Institute for Medical Research, who said that "It was probable that most of the [European born whites] had acquired a certain amount of immunity in previous epidemics in Europe" [-@Phillips1984, p. 295]
+
+```{r}
+sa_words <- c("Cape Province",
+              "Cape",
+              "Orange Free State",
+              "Transvaal",
+              "Kaap Provincie",
+              "Cradock",
+              "Somerset Strand",
+              "Queenstown",
+              "C.P.",
+              "Free State",
+              "Mafeking",
+              "Kaap",
+              "[not included on form]",
+              "Kaap",
+              "Johannesburg",
+              "Natal",
+              "Bechuanaland",
+              "East London",
+              "K.P.",
+              "Williston, Dist Fraserburg",
+              "Fort Beaufort",
+              "Griqualand West",
+              "O F S",
+              "Orange River Colony",
+              "Port Elizabeth",
+              "Sea Point",
+              "South Africa",
+              "Strand",
+              "Tarkastad")
+
+sa_words <- sa_words %>%
+  paste(collapse = "|")
+
+df %>%
+  filter(race == "White") %>%
+  mutate(birthplace_bin = case_when(
+    str_detect(birthplace, sa_words) ~ "SA",
+    TRUE ~ "Europe"
+  )) %>%
+  filter(between(death_date, ymd("1918-09-01"), ymd("1918-12-30"))) %>%
+  count(birthplace_bin, town) %>%
+  mutate(town = fct_reorder(town, n, .fun = sum)) %>%
+  ggplot(aes(n, town, fill = birthplace_bin)) +
+  geom_col()
+
+
+
+
+# df %>%
+#   filter(race == "White") %>%
+#   mutate(birthplace_bin = case_when(
+#     str_detect(birthplace, sa_words) ~ "SA",
+#     TRUE ~ "Europe"
+#   )) %>%
+#   filter(between(death_date, ymd("1918-09-01"), ymd("1918-12-30"))) %>%
+#   count(birthplace_bin, town) %>%
+#   inner_join(birth_place_shares %>%
+#   select(town, share_europe, share_sa) %>%
+#   distinct()) %>% view
+#   mutate(town = fct_reorder(town, n, .fun = sum)) %>%
+#   ggplot(aes(n, town, fill = birthplace_bin)) +
+#   geom_col()
+```
+

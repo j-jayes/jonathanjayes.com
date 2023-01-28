@@ -1,0 +1,602 @@
+---
+title: "Students Speak"
+description: |
+  Text analysis of students' diary entries during the Covid-19 lockdown in South Africa
+author:
+  - name: Jonathan Jayes
+preview: images/preview.jpg
+date: 07-06-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: false
+    highlight: haddock
+    highlight_downlit: true
+    toc: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+library(tidyverse)
+theme_set(theme_light())
+```
+
+## Students Speak
+
+Hi Johan - here are some visualizations I have put together from your students' diary entries. I think that they tell quite a nice story. I hope that some are useful. I've done them in black and white - I'm not sure where you want to publish them in the end. If you'd like some colour I can add it easily.
+
+I've written up the process mostly so that I can remember. The visualizations are at the bottom of the post.
+
+### Context
+
+The Stellenbosch students of Economic History 281 were encouraged to keep a diary during the lockdown as the Covid-19 pandemic overtook the world in March 2020. This post is a short text analysis of the content of their diary entries.
+
+### Data
+
+The students' diary entries have been ingested to form a dataset such that each row is one student's observation on one day. Additional columns specify the date and the week of the log. There are 333 observations in total. Three examples are shown in the table below.
+
+```{r}
+df <- read_rds("data/clean_text_and_numbers.rds")
+
+library(DT)
+
+df %>% select(date, value, week) %>% 
+  slice(2:4) %>% 
+  datatable(., rownames = F,
+            colnames = c("Date", "Text", "Week"))
+```
+
+These data were supplemented to include the number of Covid-19 cases in South Africa, the number of deaths, and the number of tests performed. These may provide some context around the change in content of the diary entries over time.
+
+```{r}
+# df %>% 
+#   mutate(value = str_extract(value, '.*?[a-z0-9][.?!](?= )'),
+#          new_tests_smoothed_per_thousand = new_tests_smoothed_per_thousand*56000) %>%
+#   head(4) %>% 
+#   datatable(., rownames = F,
+#             colnames = c("Date", "Cases", "Deaths", "Tests", "Text", "Week"))
+```
+
+### Word Cloud
+
+We start with a word cloud which shows the words used by the students in their diary entries.
+
+The size of the word is correlated to how frequently it is used. The sentiment of the word is scored with the [bing sentiment lexicon](https://emilhvitfeldt.github.io/textdata/reference/lexicon_bing.html), a general purpose English sentiment lexicon that categorizes words in a binary fashion, either positive or negative.
+
+```{r}
+word_cloud <- read_rds("data/word_cloud.rds")
+
+library(wordcloud)
+library(reshape2)
+```
+
+
+```{r wordcloud, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Word cloud"}
+# jpeg(
+#     filename="images/comparison_cloud.jpeg",
+#     width=6,
+#     height=4,
+#     units="in",
+#     res=1000)
+# 
+word_cloud %>%
+  filter(!word %in% c("Trump")) %>%
+  acast(word ~ sentiment, value.var = "n", fill = 0) %>%
+  comparison.cloud(
+    colors = c("gray20", "gray60"),
+                   max.words = 100,
+                   # colours = brewer.pal(2, "Dark2"),
+                   match.colors = T)
+# 
+# dev.off()
+
+```
+
+We can see that common positive words include "support", "privileged", "healthy", "productive", and "excited". Common negative words are dominated by "virus", followed by "difficult", "struggling", and "infected".
+
+This is slightly more informative than a generic word cloud showing word frequency. However, it should be noted that the words must occur in both the students' diary entries and the [bing sentiment lexicon](https://emilhvitfeldt.github.io/textdata/reference/lexicon_bing.html) in order to be shown in the word cloud.
+
+Table \@ref(tab:excluded) shows some common words in the students' diary entries which are excluded from the wordcloud in Figure \@ref(fig:wordcloud).
+
+```{r excluded}
+library(tidytext)
+
+df %>% 
+  unnest_tokens(word, value) %>% 
+  anti_join(stop_words) %>% 
+  anti_join(get_sentiments("bing")) %>% 
+  count(word, sort = T) %>% head(15) %>% 
+  mutate(word = str_to_title(word)) %>% 
+  knitr::kable(col.names = c("Word", "Number of uses"),
+               caption = "Common words excluded from wordcloud")
+
+```
+
+We can also include a conventional word cloud beside the comparison cloud, and shown in Figure \@ref(fig:image-grobs).
+
+```{r}
+# pal <- gray.colors(4, start = 0.2, end = 0.6, gamma = 2, rev = FALSE)
+
+# jpeg(
+#     filename="images/word_cloud.jpeg",
+#     width=6,
+#     height=4,
+#     units="in",
+#     res=1000)
+# 
+# df %>% 
+#   unnest_tokens(word, value) %>% 
+#   anti_join(stop_words) %>% 
+#   mutate(word = str_to_title(word)) %>% 
+#   count(word) %>%  
+#   with(wordcloud(word, n, random.order = FALSE, max.words = 60, 
+#                  colors = pal))
+# 
+# dev.off()
+```
+
+```{r image-grobs, layout="l-body-outset", fig.cap="Conventional word cloud and comparison cloud"}
+knitr::include_graphics("images/word_cloud_composite.jpg")
+```
+
+### Evolution of students' diary entry sentiment over time.
+
+Figure \@ref(fig:sentiment) below shows the change in sentiment of the student responses over the course of the lockdown. It requires some explanation: the words used by the students are grouped by week, scored according to a sentiment lexicon, the score is averaged across the week. The points on the graph represent the average sentiment of the students' diary entries in a particular week.
+
+```{r}
+sentiment_words <- df %>% 
+  unnest_tokens(word, value) %>% 
+  anti_join(stop_words)
+
+sentiment_scores <- sentiment_words %>% 
+  inner_join(get_sentiments("afinn"))
+```
+
+
+```{r sentiment, layout="l-body-outset", fig.width = 8, fig.height=4, fig.cap="Evolution of sentiment"}
+# figure showing how sentiment changed across the weeks
+sentiment_scores %>% 
+  group_by(week) %>% 
+  mutate(mean_sentimet = mean(value),
+         date_max = max(date)) %>% 
+  ungroup() %>% 
+  select(date_max, mean_sentimet) %>% 
+  distinct() %>% 
+  ggplot(aes(date_max, mean_sentimet)) +
+  geom_point(size = 4) +
+  geom_line() +
+  geom_hline(yintercept = 0, lty = 2) +
+  labs(y = "Average sentiment of students' diary entries",
+       x = NULL)
+```
+
+We can see that at the outset, sentiment is poor, this improves, and then drops dramatically at the end of the period. It is noteworthy that the average sentiment is negative for the entirety of the period, highlighted by the dotted line at zero.
+
+This can be explained by the choice of sentiment lexicon used to score the words. The [AFINN-111 dataset](https://emilhvitfeldt.github.io/textdata/reference/lexicon_afinn.html) is a lexicon of English words rated for valence with an integer between minus five and plus five. The words were  manually labelled by Finn Årup Nielsen in 2009-2011. An example of the scores assigned to words in the students' diary entries is shown in Table \@ref(tab:afinn) below.
+
+```{r afinn}
+sentiment_scores %>% select(word, value) %>% 
+  distinct(word, .keep_all = T) %>% 
+  filter(value %in% c(-4, -3, 4, 5)) %>% 
+  arrange(value) %>% 
+  filter(!word %in% c("rape")) %>% 
+  group_by(value) %>% 
+  slice_head(n = 3) %>% 
+  ungroup() %>% 
+  mutate(word = str_to_title(word)) %>% 
+  knitr::kable(col.names = c("Word", "Sentiment score"), 
+               caption = "AFINN sentiment scores")
+  
+```
+
+### What are the words most specific to each week of the student diary entries?
+
+The wordcloud in Figure \@ref(fig:wordcloud) showed the most common words. What if we want to see the words that are most specific to each week of the diary entries? We can use the `tidylo` package that provides the weighted log odds ratio for each word across the weeks of diary entries. This provides a quantification of how specific each word is to the week that it is used in. For more information see [Fightin' Words: Lexical Feature Selection and Evaluation for Identifying the Content of Political Conflict by Monroe, Colaresi, and Quinn (2008)](https://www.cambridge.org/core/journals/political-analysis/article/fightin-words-lexical-feature-selection-and-evaluation-for-identifying-the-content-of-political-conflict/81B3703230D21620B81EB6E2266C7A66).
+
+Table \@ref(tab:words) below shows the words most specific to each week.
+
+```{r}
+library(readxl)
+word_weeks <- read_excel("data/Week-words.xlsx")
+
+words_to_display <- word_weeks %>% 
+  group_by(week) %>% 
+  mutate(words_paste = paste(words, collapse = "\n")) %>% 
+  ungroup() %>% 
+  distinct(week, words_paste)
+```
+
+
+```{r words}
+words_to_display %>% 
+  mutate(words_paste = strsplit(words_paste, "\n")) %>% 
+  unnest(words_paste) %>% 
+  group_by(week) %>% 
+  sample_n(4) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = "week", values_from = "words_paste", names_prefix = "Week ") %>% 
+  unnest(cols = c(`Week 1`, `Week 2`, `Week 3`, `Week 4`, `Week 5`, `Week 6`)) %>% 
+  knitr::kable(caption = "Week specific words calculated with weighted log odds")
+```
+
+Nice! We can see that we capture some elements of the experience in each week of lockdown.
+
+```{r}
+df_sent <- sentiment_scores %>% 
+  group_by(week) %>% 
+  mutate(mean_sentiment = mean(value),
+         max_date = max(date)) %>% 
+  ungroup() %>% 
+  # select(week, mean_sentiment) %>% 
+  distinct(week, mean_sentiment, max_date) 
+
+df_sent <- df_sent %>% 
+  inner_join(words_to_display, by = "week")
+```
+
+### Sentiment and week-specific words
+
+This figure superimposes the week-specific words above the line graph that shows the evolution of the students' sentiment across the weeks.
+
+```{r wwf, layout="l-body-outset", fig.width = 8, fig.height=5, fig.cap="Sentiment and week-words figure"}
+# jpeg(
+#     filename="images/fig_4_sentiment_and_week_words.jpeg",
+#     width=7,
+#     height=5,
+#     units="in",
+#     res=1000)
+
+
+df_sent %>% 
+  ggplot(aes(max_date, mean_sentiment, label = words_paste)) +
+  geom_line(aes(group = 1)) +
+  geom_point(size = 3) +
+  geom_text(cex = 3, nudge_y = .1, colour = "grey20") +
+  geom_hline(yintercept = 0, lty = 2) +
+  expand_limits(y = .08,
+                x = c(lubridate::ymd("2020-03-22"), lubridate::ymd("2020-04-25"))) +
+  labs(y = "Average sentiment of students' diary entries",
+       x = NULL,
+       caption = "Note: words displayed are most specific to each week of diary entries")
+
+# dev.off()
+
+```
+
+I think it captures a bit of the experience - at the outset there was anxiety about the lockdown, difficulties with internet access and a worry about the rise in cases. This was followed by conspiracy theories and discussions of obligation and privilege. The collective mood improved toward Easter, and was further buoyed by the announcement of a large stimulus package by the government. Finally there was exasperation about the state of employment and livelihoods.
+
+### Comparison of students' diary entries with Covid-19 statistics.
+
+Figure \@ref(fig:context) shows the evolution of the sentiment of the students' diary entries beside the rising Covid-19 case numbers in South Africa.
+
+```{r}
+library(patchwork)
+
+p1 <- df_sent %>% 
+  ggplot(aes(max_date, mean_sentiment, label = words_paste)) +
+  geom_line(aes(group = 1)) +
+  geom_point(size = 3) +
+  geom_text(cex = 2.5, nudge_y = .1, colour = "grey20") +
+  geom_hline(yintercept = 0, lty = 2) +
+  expand_limits(y = .08,
+                x = c(lubridate::ymd("2020-03-22"), lubridate::ymd("2020-04-25"))) +
+  labs(y = "Average sentiment of\nstudents' diary entries",
+       x = NULL)
+
+df <- read_rds("data/clean_text_and_numbers.rds")
+
+p2 <- df %>% 
+  filter(date >= lubridate::ymd("2020-03-22")) %>% 
+  mutate(new_test_smoothed = new_tests_smoothed_per_thousand*56000) %>% 
+  ggplot() +
+  geom_line(aes(date, total_cases, lty = "Total cases")) +
+  geom_line(aes(date, total_deaths, lty = "Total deaths")) +
+  geom_line(aes(date, new_test_smoothed, lty = "Tests per day")) +
+  scale_y_continuous(labels = scales::number_format()) +
+  expand_limits(x = lubridate::ymd("2020-04-25")) +
+  labs(x = NULL,
+       y = "Tests, Cases, Deaths",
+       lty = NULL) +
+  theme(legend.position = "bottom")
+```
+
+
+```{r context, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Comparison figure"}
+# jpeg(
+#     filename="images/fig_5_comparison_figure.jpeg",
+#     width=8,
+#     height=6,
+#     units="in",
+#     res=1000)
+
+p1 / p2 
+
+# dev.off()
+```
+
+It is difficult to conclude about a relationship between the number of cases and the sentiment of the students' reflections. While there appears to be a relationship between average sentiment and number of tests at the outset of the lockdown, I think this is statistical noise rather than some sort of correlation.
+
+### Contextualization of timing of diary entries
+
+The purpose of this selection of figures is to emphasize that the diary entries were recorded at the outset of the pandemic in South Africa. The number of cases was relatively low compared to the steep increase in cases which followed in winter of 2020.
+
+The figures below compare the period of diary entries to the number of cases and deaths in the first year of the pandemic.
+
+I think option two conveys the message clearly and without clutter.
+
+```{r panelset, echo=FALSE, include=F}
+# library(xaringanExtra)
+xaringanExtra::use_panelset()
+```
+
+```{r, echo=FALSE, include=F}
+df_covid <- read.csv("data/owid-covid-data.csv")
+
+df_covid <- df_covid %>% as_tibble() %>%
+  mutate(date = lubridate::ymd(date)) %>% 
+  filter(date <= lubridate::ymd("2021-03-23"))
+```
+
+::::: {.panelset}
+::: {.panel}
+
+## Option 1 {.panel-name}
+
+Here we have a two panel plot of the Covid-19 statistics and number of diary entries recorded by the students.
+
+```{r}
+g1 <- df_covid %>% 
+  ggplot() +
+  geom_line(aes(date, total_cases, lty = "Total cases")) +
+  geom_line(aes(date, total_deaths, lty = "Total deaths")) +
+  scale_y_continuous(labels = scales::number_format(accuracy = 1)) +
+  scale_x_date(limits = c(lubridate::ymd("2020-03-22"), lubridate::ymd("2021-03-23"))) +
+  theme(legend.position = "none") +
+  annotate(geom = "text", 
+           x = lubridate::ymd("2021-02-23"), 
+           y = 1312336,
+           label = "Total cases") +
+      annotate(geom = "text", 
+           x = lubridate::ymd("2021-02-23"), 
+           y = 163039,
+           label = "Total deaths") +
+  labs(y = "Number of\ncases and deaths",
+       x = NULL,
+       lty = NULL)
+
+g2 <- df %>% 
+  count(date) %>% 
+  filter(n < 18) %>% 
+  ggplot(aes(date, n)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::number_format(accuracy = 1)) +
+  expand_limits(x = c(lubridate::ymd("2020-03-22"), lubridate::ymd("2021-03-23"))) +
+  labs(y = "Number of\ndiary entries",
+       x = NULL)
+  
+g1 / g2
+```
+
+
+:::
+::: {.panel}
+
+## Option 2 {.panel-name}
+
+Next we have a single panel with the period of diary entries superimposed on the Covid-19 statistics.
+
+```{r}
+df_covid %>%
+  ggplot() +
+  geom_rect(aes(xmin = lubridate::ymd("2020-03-22"), 
+                xmax = lubridate::ymd("2020-04-22"),
+                ymin = 0,
+                ymax = 1738961,
+                fill = "Period of diary entries")) + 
+  geom_line(aes(date, total_cases, lty = "Total cases")) +
+  geom_line(aes(date, total_deaths, lty = "Total deaths")) +
+    annotate(geom = "text", 
+           x = lubridate::ymd("2021-02-23"), 
+           y = 1312336,
+           label = "Total cases") +
+      annotate(geom = "text", 
+           x = lubridate::ymd("2021-02-23"), 
+           y = 163039,
+           label = "Total deaths") +
+      annotate(geom = "text", 
+           x = lubridate::ymd("2020-05-22"), 
+           y = 1468961,
+           label = "Period of diary entries",
+           hjust = -.1) +
+      annotate(
+           geom = "curve", 
+           x = lubridate::ymd("2020-04-22"), 
+           y = 1438961, 
+           xend = lubridate::ymd("2020-05-22"), yend = 1468961, 
+           curvature = -.3, arrow = arrow(length = unit(2, "mm"))
+          ) +
+  scale_y_continuous(labels = scales::number_format(accuracy = 1)) +
+  scale_x_date(limits = c(lubridate::ymd("2020-03-22"), lubridate::ymd("2021-03-23"))) +
+  coord_cartesian(ylim = c(NA, 1538961)) +
+  scale_fill_grey(start = .7) +
+  theme(legend.position = "none") +
+  labs(y = "Number of cases and deaths",
+       x = NULL,
+       lty = NULL,
+       fill = NULL)
+```
+
+
+:::
+::: {.panel}
+
+## Option 3 {.panel-name}
+
+Alternatively we can annotate a thick line to show where the diary entries occur.
+
+```{r}
+df_covid %>%
+  ggplot() +
+  geom_line(aes(date, total_cases, lty = "Total cases")) +
+  geom_line(aes(date, total_deaths, lty = "Total deaths")) +
+  # highlighting when the diary entries took place
+  geom_line(aes(date, total_cases, size = "Period of diary entries"), 
+            data = df_covid %>% 
+              filter(between(date, lubridate::ymd("2020-03-21"), lubridate::ymd("2020-04-22")))) + 
+  scale_y_continuous(labels = scales::number_format(accuracy = 1)) +
+  scale_x_date(limits = c(lubridate::ymd("2020-03-22"), lubridate::ymd("2021-03-23"))) +
+  theme(legend.position = "right") +
+  labs(y = "Number of cases and deaths",
+       x = NULL,
+       lty = NULL,
+       size = NULL)
+```
+
+
+:::
+::: {.panel}
+
+## Option 4 {.panel-name}
+
+Alternatively we can have a legend variant of option 2.
+
+```{r}
+coeff <- 10
+
+# jpeg(
+#     filename="images/fig_7_context_diary_dates.jpeg",
+#     width=6,
+#     height=4,
+#     units="in",
+#     res=1000)
+
+df_covid %>%
+  ggplot() +
+  geom_rect(aes(xmin = lubridate::ymd("2020-03-22"), 
+                xmax = lubridate::ymd("2020-04-22"),
+                ymin = 0,
+                ymax = 1738961,
+                fill = "Period of diary entries")) + 
+  geom_line(aes(date, total_cases, lty = "Total cases")) +
+  geom_line(aes(date, total_deaths*coeff, lty = "Total deaths")) +
+  scale_y_continuous(labels = scales::number_format(accuracy = 1),
+                     sec.axis = sec_axis(~.*1/coeff, name="Number of deaths", 
+                                         labels = scales::number_format(accuracy = 1))) +
+  scale_x_date(limits = c(lubridate::ymd("2020-03-22"), lubridate::ymd("2021-03-23"))) +
+  scale_fill_grey(start = .7) +
+  coord_cartesian(ylim = c(NA, 1538961)) +
+  theme(legend.position = "bottom") +
+  labs(y = "Number of cases",
+       x = NULL,
+       lty = NULL,
+       fill = NULL)
+
+# dev.off()
+```
+
+
+:::
+:::::
+
+#### Financial markets comparison
+
+```{r}
+df_stocks <- read.csv("data/stocks.csv") %>% 
+  as_tibble() %>% 
+  rename(x = ï..x) %>% 
+  mutate(x = parse_number(x)) %>% 
+  mutate(x = round(x, 0)) %>% 
+  mutate(date = lubridate::ymd("2019-08-05") + x) %>% 
+  select(date, value = y) %>% 
+  mutate(cat = "JSE All Share Index") %>% 
+  filter(between(date, lubridate::ymd("2020-03-22"), lubridate::ymd("2020-04-23")))
+
+df_zar <- read.csv("data/zar.csv") %>% 
+  as_tibble() %>% 
+  mutate(date = lubridate::ymd(Date)) %>% 
+  select(-Date, value = Value) %>% 
+  mutate(cat = "ZAR to USD exchange rate") %>% 
+  filter(between(date, lubridate::ymd("2020-03-22"), lubridate::ymd("2020-04-23")))
+
+sent_df <- sentiment_scores %>% 
+  group_by(week) %>% 
+  mutate(mean_sentimet = mean(value),
+         date_max = max(date)) %>% 
+  ungroup() %>% 
+  select(date = date_max, 
+         value = mean_sentimet) %>% 
+  distinct() %>% 
+  mutate(cat = "Mean sentiment of student's diary entries")
+```
+
+Figure \@ref(fig:fin-mkt-comp) shows the mean sentiment of the students' diary entries alongside the JSE All Share Index for the same period, as well as the Rand to US Dollar exchange rate. Several students question in their entries what will happen to the stock market, with one stating, "I was looking at good stock picks on the JSE today. Every disaster can be an opportunity...".
+
+```{r fin-mkt-comp, layout="l-body-outset", fig.width = 8, fig.height=5, fig.cap="Financial markets comparison figure"}
+# jpeg(
+#     filename="images/fig_6_fin_mkts.jpeg",
+#     width=6,
+#     height=4,
+#     units="in",
+#     res=1000)
+
+
+sent_df %>% 
+  bind_rows(df_zar, df_stocks) %>% 
+  mutate(cat = fct_relevel(cat, "Mean sentiment of student's diary entries")) %>% 
+  ggplot(aes(date, value, lty = cat)) +
+  geom_line() +
+  theme(legend.position = "none") +
+  facet_wrap(~cat, scales = "free_y",
+             ncol = 1) +
+  scale_y_continuous(labels = scales::number_format()) +
+  labs(x = NULL,
+       y = NULL)
+
+# dev.off()
+```
+
+Again the trends displayed may constitute statistical noise. The JSE was rising out of an enormous trough created as investors panicked with Covid-19 spreading into Europe and the US. The Rand is a notoriously volatile currency. Yet, these trends are interesting to show in the context of the early weeks of lockdown.
+
+#### Interactive figure
+
+We can also make this a little more attractive as an interactive chart with some colour and hover labels.
+
+```{r}
+library(ggiraph)
+
+gg <- df_sent %>%
+  mutate( # JavaScript call to open website 
+    caption = glue::glue("Average sentiment of diary entries: {round(mean_sentiment, 2)}\nMost week-specific words:\n{words_paste}"),
+  ) %>% 
+  ggplot() +
+  geom_line_interactive(aes(max_date, mean_sentiment)) +
+  geom_point_interactive(
+    aes(x = max_date, 
+        y = mean_sentiment,
+        colour = factor(week),
+        tooltip = caption),
+    size = 4
+  ) +
+  geom_hline_interactive(yintercept = 0, lty = 2) +
+  scale_color_brewer(palette = "Dark2") +
+  theme(legend.position = "none") +
+  labs(y = "Average sentiment of students' diary entries",
+       x = NULL)
+
+gg_int <- girafe(
+  ggobj = gg,
+  width_svg = 6,
+  height_svg = 6*0.618,
+  options = list(
+    opts_hover(css = "colour: #E69F00; fill-opacity: 1.0; stroke: #E69F00;")
+  )
+)
+```
+
+Figure \@ref(fig:interactive) shows the same information as above with a hover field to show the week-specific words. Mouse over the points to see the words most specific to each week and the average sentiment of the students' diary entries.
+
+```{r interactive, layout="l-body-outset", fig.width = 6, fig.height=4, fig.cap="Interctive figure"}
+gg_int
+```
+

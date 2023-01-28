@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>Students Speak</title>
+
+  <meta property="description" itemprop="description" content="Text analysis of students&#39; diary entries during the Covid-19 lockdown in South Africa"/>
+
+
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2021-07-06"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-07-06"/>
+  <meta name="article:author" content="Jonathan Jayes"/>
+
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="Students Speak"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Text analysis of students&#39; diary entries during the Covid-19 lockdown in South Africa"/>
+  <meta property="og:locale" content="en_US"/>
+
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Students Speak"/>
+  <meta property="twitter:description" content="Text analysis of students&#39; diary entries during the Covid-19 lockdown in South Africa"/>
+
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","preview","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Students Speak"]},{"type":"character","attributes":{},"value":["Text analysis of students' diary entries during the Covid-19 lockdown in South Africa\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Jonathan Jayes"]}]}]},{"type":"character","attributes":{},"value":["images/preview.jpg"]},{"type":"character","attributes":{},"value":["07-06-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding","highlight","highlight_downlit","toc"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["haddock"]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["data/clean_text_and_numbers.rds","data/owid-covid-data.csv","data/stocks.csv","data/Week-words.xlsx","data/word_cloud.rds","data/zar.csv","images/comparison_cloud.jpeg","images/preview.jpg","images/word_cloud.jpeg","images/word_cloud_composite.jpg","students-speak_files/anchor-4.2.2/anchor.min.js","students-speak_files/bowser-1.9.3/bowser.min.js","students-speak_files/crosstalk-1.1.1/css/crosstalk.css","students-speak_files/crosstalk-1.1.1/js/crosstalk.js","students-speak_files/crosstalk-1.1.1/js/crosstalk.js.map","students-speak_files/crosstalk-1.1.1/js/crosstalk.min.js","students-speak_files/crosstalk-1.1.1/js/crosstalk.min.js.map","students-speak_files/d3-bundle-5.16.0/d3-bundle.min.js","students-speak_files/d3-lasso-0.0.5/d3-lasso.min.js","students-speak_files/datatables-binding-0.18/datatables.js","students-speak_files/datatables-css-0.0.0/datatables-crosstalk.css","students-speak_files/distill-2.2.21/template.v2.js","students-speak_files/dt-core-1.10.20/css/jquery.dataTables.extra.css","students-speak_files/dt-core-1.10.20/css/jquery.dataTables.min.css","students-speak_files/dt-core-1.10.20/js/jquery.dataTables.min.js","students-speak_files/figure-html5/context-1.png","students-speak_files/figure-html5/context_fig-1.png","students-speak_files/figure-html5/fin-mkt-comp-1.png","students-speak_files/figure-html5/sentiment-1.png","students-speak_files/figure-html5/unnamed-chunk-10-1.png","students-speak_files/figure-html5/unnamed-chunk-11-1.png","students-speak_files/figure-html5/unnamed-chunk-12-1.png","students-speak_files/figure-html5/unnamed-chunk-13-1.png","students-speak_files/figure-html5/unnamed-chunk-2-1.png","students-speak_files/figure-html5/unnamed-chunk-4-1.png","students-speak_files/figure-html5/unnamed-chunk-6-1.png","students-speak_files/figure-html5/unnamed-chunk-8-1.png","students-speak_files/figure-html5/week_words_fig-1.png","students-speak_files/figure-html5/wordcloud-1.png","students-speak_files/figure-html5/wwf-1.png","students-speak_files/ggiraphjs-0.4.1/ggiraphjs.min.css","students-speak_files/ggiraphjs-0.4.1/ggiraphjs.min.js","students-speak_files/girafe-binding-0.7.10/girafe.js","students-speak_files/header-attrs-2.9/header-attrs.js","students-speak_files/htmlwidgets-1.5.3/htmlwidgets.js","students-speak_files/jquery-1.11.3/jquery.min.js","students-speak_files/jquery-3.5.1/jquery-AUTHORS.txt","students-speak_files/jquery-3.5.1/jquery.js","students-speak_files/jquery-3.5.1/jquery.min.js","students-speak_files/jquery-3.5.1/jquery.min.map","students-speak_files/panelset-0.2.6/panelset.css","students-speak_files/panelset-0.2.6/panelset.js","students-speak_files/popper-2.6.0/popper.min.js","students-speak_files/save-svg-as-png-1.4.17/save-svg-as-png.min.js","students-speak_files/tippy-6.2.7/tippy-bundle.umd.min.js","students-speak_files/tippy-6.2.7/tippy-light-border.css","students-speak_files/tippy-6.2.7/tippy.css","students-speak_files/tippy-6.2.7/tippy.umd.min.js","students-speak_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+  <style type="text/css">
+
+  body {
+    background-color: white;
+  }
+
+  .pandoc-table {
+    width: 100%;
+  }
+
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+  }
+
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .shaded-content {
+    background: white;
+  }
+
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+
+  d-appendix {
+    padding-top: 30px;
+  }
+
+  d-article>p>img {
+    width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* CSS for d-contents */
+
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+
+  .d-contents ul {
+    padding-left: 1em
+  }
+
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+
+
+  /* Figure */
+
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+
+  .figure img {
+    width: 100%;
+  }
+
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
+
+  /* Tweak 1000px media break to show more text */
+
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+
+
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
+
+
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* Social footer */
+
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+
+  .disqus-comments {
+    margin-right: 30px;
+  }
+
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  #disqus_thread {
+    margin-top: 30px;
+  }
+
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+
+
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+
+
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+
+  /* Styles for posts lists (not auto-injected) */
+
+
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .posts-list img {
+    opacity: 1;
+  }
+
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+
+  .posts-more {
+    clear: both;
+  }
+
+
+  .posts-sidebar {
+    font-size: 16px;
+  }
+
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+
+  .categories li>a {
+    border-bottom: none;
+  }
+
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .categories .active {
+    font-weight: 600;
+  }
+
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+
+
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+
+
+
+  </style>
+
+  <script type="application/javascript">
+
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+
+  // show body when load is complete
+  function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
+
+    // set body to visible
+    document.body.style.visibility = 'visible';
+
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+
+  function init_distill() {
+
+    init_common();
+
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+
+      // capture layout
+      var layout = $(this).attr('data-layout');
+
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+
+
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+
+    // load distill framework
+    load_distill_framework();
+
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
+      // clear polling timer
+      clearInterval(tid);
+
+      // show body now that everything is ready
+      on_load_complete();
+    }
+
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+
+  }
+
+  function init_downlevel() {
+
+    init_common();
+
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+
+    // remove toc
+    $('.d-contents').remove();
+
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+
+
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+
+    $('body').addClass('downlevel');
+
+    on_load_complete();
+  }
+
+
+  function init_common() {
+
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+
+      }
+    });
+
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+
+  </script>
+
+  <!--/radix_placeholder_distill-->
+  <script src="students-speak_files/header-attrs-2.9/header-attrs.js"></script>
+  <script src="students-speak_files/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+  <script src="students-speak_files/jquery-3.5.1/jquery.min.js"></script>
+  <link href="students-speak_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+  <script src="students-speak_files/datatables-binding-0.18/datatables.js"></script>
+  <link href="students-speak_files/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <link href="students-speak_files/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+  <script src="students-speak_files/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+  <link href="students-speak_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+  <script src="students-speak_files/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+  <link href="students-speak_files/panelset-0.2.6/panelset.css" rel="stylesheet" />
+  <script src="students-speak_files/panelset-0.2.6/panelset.js"></script>
+  <script src="students-speak_files/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+  <script src="students-speak_files/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+  <script src="students-speak_files/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+  <link href="students-speak_files/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet" />
+  <script src="students-speak_files/ggiraphjs-0.4.1/ggiraphjs.min.js"></script>
+  <script src="students-speak_files/girafe-binding-0.7.10/girafe.js"></script>
+  <script src="students-speak_files/popper-2.6.0/popper.min.js"></script>
+  <link href="students-speak_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="students-speak_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="students-speak_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="students-speak_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="students-speak_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="students-speak_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="students-speak_files/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Students Speak","description":"Text analysis of students' diary entries during the Covid-19 lockdown in South Africa","authors":[{"author":"Jonathan Jayes","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-07-06T00:00:00.000+02:00","citationText":"Jayes, 2021"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Students Speak</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>Text analysis of students’ diary entries during the Covid-19 lockdown in South Africa</p></p>
+</div>
+
+<div class="d-byline">
+  Jonathan Jayes  
+  
+<br/>07-06-2021
+</div>
+
+<div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#students-speak">Students Speak</a>
+<ul>
+<li><a href="#context">Context</a></li>
+<li><a href="#data">Data</a></li>
+<li><a href="#word-cloud">Word Cloud</a></li>
+<li><a href="#evolution-of-students-diary-entry-sentiment-over-time.">Evolution of students’ diary entry sentiment over time.</a></li>
+<li><a href="#what-are-the-words-most-specific-to-each-week-of-the-student-diary-entries">What are the words most specific to each week of the student diary entries?</a></li>
+<li><a href="#sentiment-and-week-specific-words">Sentiment and week-specific words</a></li>
+<li><a href="#comparison-of-students-diary-entries-with-covid-19-statistics.">Comparison of students’ diary entries with Covid-19 statistics.</a></li>
+<li><a href="#contextualization-of-timing-of-diary-entries">Contextualization of timing of diary entries</a></li>
+</ul></li>
+</ul>
+</nav>
+</div>
+<h2 id="students-speak">Students Speak</h2>
+<p>Hi Johan - here are some visualizations I have put together from your students’ diary entries. I think that they tell quite a nice story. I hope that some are useful. I’ve done them in black and white - I’m not sure where you want to publish them in the end. If you’d like some colour I can add it easily.</p>
+<p>I’ve written up the process mostly so that I can remember. The visualizations are at the bottom of the post.</p>
+<h3 id="context">Context</h3>
+<p>The Stellenbosch students of Economic History 281 were encouraged to keep a diary during the lockdown as the Covid-19 pandemic overtook the world in March 2020. This post is a short text analysis of the content of their diary entries.</p>
+<h3 id="data">Data</h3>
+<p>The students’ diary entries have been ingested to form a dataset such that each row is one student’s observation on one day. Additional columns specify the date and the week of the log. There are 333 observations in total. Three examples are shown in the table below.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div id="htmlwidget-87ad4185aa1841e698f4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-87ad4185aa1841e698f4">{"x":{"filter":"none","data":[["2020-03-21","2020-03-21","2020-03-21"],["Today has probably been the most challenging day yet. I feel like my mind hasn’t taken a break. There are just so many unknown factors right now and I don’t know how to fully prepare myself. I like plan and to know how things are going to be. It is driving me crazy with everything being so fluid at the moment. I understand it must be difficult for the University to give us clear answers as to what is going to happen exactly in the coming weeks, but it is so difficult to know what head space to be in and how to prepare. […] I just feel like I need a break from it all to focus on other things and pretend that life is normal, even just for a minute.","I realized today that people only care about things that affect them directly. A family friend turned 50 today and I declined to go to the party, but my family still wants to proceed with my grandmother’s 70th birthday party. This does not seem fair to me.[…] I’ve come to the conclusion that it is our civil duty to educate those around us on how we’re supposed to act and act in union with the rest of the world, even if said people are your own family.","Today I went hiking up Lion’s Head with two friends. Later, my family from Switzerland called me and informed me that their government implemented a state of emergency. From now on no stores will open apart from pharmacies and grocery stores. Hospital visits are only allowed for emergencies. Everyone is to stay at home and gatherings of more than 6 persons are forbidden. I suspect that South Africa will enforce similar arrangements if the situation gets worse. For now, I am glad that some gyms and stores haven’t closed yet. It still feels like a holiday at the moment."],[1,1,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Date<\/th>\n      <th>Text<\/th>\n      <th>Week<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>These data were supplemented to include the number of Covid-19 cases in South Africa, the number of deaths, and the number of tests performed. These may provide some context around the change in content of the diary entries over time.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h3 id="word-cloud">Word Cloud</h3>
+<p>We start with a word cloud which shows the words used by the students in their diary entries.</p>
+<p>The size of the word is correlated to how frequently it is used. The sentiment of the word is scored with the <a href="https://emilhvitfeldt.github.io/textdata/reference/lexicon_bing.html">bing sentiment lexicon</a>, a general purpose English sentiment lexicon that categorizes words in a binary fashion, either positive or negative.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="figure"><span id="fig:wordcloud"></span>
+<img src="students-speak_files/figure-html5/wordcloud-1.png" alt="Word cloud" width="768" />
+<p class="caption">
+Figure 1: Word cloud
+</p>
+</div>
+</div>
+<p>We can see that common positive words include “support”, “privileged”, “healthy”, “productive”, and “excited”. Common negative words are dominated by “virus”, followed by “difficult”, “struggling”, and “infected”.</p>
+<p>This is slightly more informative than a generic word cloud showing word frequency. However, it should be noted that the words must occur in both the students’ diary entries and the <a href="https://emilhvitfeldt.github.io/textdata/reference/lexicon_bing.html">bing sentiment lexicon</a> in order to be shown in the word cloud.</p>
+<p>Table <a href="#tab:excluded">1</a> shows some common words in the students’ diary entries which are excluded from the wordcloud in Figure <a href="#fig:wordcloud">1</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<caption><span id="tab:excluded">Table 1: </span>Common words excluded from wordcloud</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Word</th>
+<th style="text-align: right;">Number of uses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Lockdown</td>
+<td style="text-align: right;">251</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">People</td>
+<td style="text-align: right;">211</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Day</td>
+<td style="text-align: right;">183</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Time</td>
+<td style="text-align: right;">172</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Family</td>
+<td style="text-align: right;">111</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Feel</td>
+<td style="text-align: right;">92</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">South</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Home</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">World</td>
+<td style="text-align: right;">78</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Days</td>
+<td style="text-align: right;">71</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Africa</td>
+<td style="text-align: right;">61</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Life</td>
+<td style="text-align: right;">54</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Online</td>
+<td style="text-align: right;">51</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">19</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Friends</td>
+<td style="text-align: right;">50</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We can also include a conventional word cloud beside the comparison cloud, and shown in Figure <a href="#fig:image-grobs">2</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="figure"><span id="fig:image-grobs"></span>
+<img src="images/word_cloud_composite.jpg" alt="Conventional word cloud and comparison cloud" width="6000" />
+<p class="caption">
+Figure 2: Conventional word cloud and comparison cloud
+</p>
+</div>
+</div>
+<h3 id="evolution-of-students-diary-entry-sentiment-over-time.">Evolution of students’ diary entry sentiment over time.</h3>
+<p>Figure <a href="#fig:sentiment">3</a> below shows the change in sentiment of the student responses over the course of the lockdown. It requires some explanation: the words used by the students are grouped by week, scored according to a sentiment lexicon, the score is averaged across the week. The points on the graph represent the average sentiment of the students’ diary entries in a particular week.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="figure"><span id="fig:sentiment"></span>
+<img src="students-speak_files/figure-html5/sentiment-1.png" alt="Evolution of sentiment" width="768" />
+<p class="caption">
+Figure 3: Evolution of sentiment
+</p>
+</div>
+</div>
+<p>We can see that at the outset, sentiment is poor, this improves, and then drops dramatically at the end of the period. It is noteworthy that the average sentiment is negative for the entirety of the period, highlighted by the dotted line at zero.</p>
+<p>This can be explained by the choice of sentiment lexicon used to score the words. The <a href="https://emilhvitfeldt.github.io/textdata/reference/lexicon_afinn.html">AFINN-111 dataset</a> is a lexicon of English words rated for valence with an integer between minus five and plus five. The words were manually labelled by Finn Årup Nielsen in 2009-2011. An example of the scores assigned to words in the students’ diary entries is shown in Table <a href="#tab:afinn">2</a> below.</p>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<caption><span id="tab:afinn">Table 2: </span>AFINN sentiment scores</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Word</th>
+<th style="text-align: right;">Sentiment score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Bullshit</td>
+<td style="text-align: right;">-4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Catastrophic</td>
+<td style="text-align: right;">-4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Panic</td>
+<td style="text-align: right;">-3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fake</td>
+<td style="text-align: right;">-3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Worse</td>
+<td style="text-align: right;">-3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Funny</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fun</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wonderful</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Thrilled</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="what-are-the-words-most-specific-to-each-week-of-the-student-diary-entries">What are the words most specific to each week of the student diary entries?</h3>
+<p>The wordcloud in Figure <a href="#fig:wordcloud">1</a> showed the most common words. What if we want to see the words that are most specific to each week of the diary entries? We can use the <code>tidylo</code> package that provides the weighted log odds ratio for each word across the weeks of diary entries. This provides a quantification of how specific each word is to the week that it is used in. For more information see <a href="https://www.cambridge.org/core/journals/political-analysis/article/fightin-words-lexical-feature-selection-and-evaluation-for-identifying-the-content-of-political-conflict/81B3703230D21620B81EB6E2266C7A66">Fightin’ Words: Lexical Feature Selection and Evaluation for Identifying the Content of Political Conflict by Monroe, Colaresi, and Quinn (2008)</a>.</p>
+<p>Table <a href="#tab:words">3</a> below shows the words most specific to each week.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<caption><span id="tab:words">Table 3: </span>Week specific words calculated with weighted log odds</caption>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 15%" />
+<col style="width: 19%" />
+<col style="width: 11%" />
+<col style="width: 13%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Week 1</th>
+<th style="text-align: left;">Week 2</th>
+<th style="text-align: left;">Week 3</th>
+<th style="text-align: left;">Week 4</th>
+<th style="text-align: left;">Week 5</th>
+<th style="text-align: left;">Week 6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NSFAS</td>
+<td style="text-align: left;">Townships</td>
+<td style="text-align: left;">Continues to rise</td>
+<td style="text-align: left;">Payment</td>
+<td style="text-align: left;">Fresh produce</td>
+<td style="text-align: left;">Level 5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Airports</td>
+<td style="text-align: left;">Internet access</td>
+<td style="text-align: left;">An obligation</td>
+<td style="text-align: left;">Extension</td>
+<td style="text-align: left;">SUN Learn</td>
+<td style="text-align: left;">Unemployed</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">National lockdown</td>
+<td style="text-align: left;">Lockdown starts</td>
+<td style="text-align: left;">Privilege</td>
+<td style="text-align: left;">Emotions</td>
+<td style="text-align: left;">Grade</td>
+<td style="text-align: left;">President Ramaphosa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">African leaders</td>
+<td style="text-align: left;">Cases recorded</td>
+<td style="text-align: left;">Conspiracy theories</td>
+<td style="text-align: left;">Good Friday</td>
+<td style="text-align: left;">R500 billion</td>
+<td style="text-align: left;">Lockdown restrictions</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Nice! We can see that we capture some elements of the experience in each week of lockdown.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h3 id="sentiment-and-week-specific-words">Sentiment and week-specific words</h3>
+<p>This figure superimposes the week-specific words above the line graph that shows the evolution of the students’ sentiment across the weeks.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="figure"><span id="fig:wwf"></span>
+<img src="students-speak_files/figure-html5/wwf-1.png" alt="Sentiment and week-words figure" width="768" />
+<p class="caption">
+Figure 4: Sentiment and week-words figure
+</p>
+</div>
+</div>
+<p>I think it captures a bit of the experience - at the outset there was anxiety about the lockdown, difficulties with internet access and a worry about the rise in cases. This was followed by conspiracy theories and discussions of obligation and privilege. The collective mood improved toward Easter, and was further buoyed by the announcement of a large stimulus package by the government. Finally there was exasperation about the state of employment and livelihoods.</p>
+<h3 id="comparison-of-students-diary-entries-with-covid-19-statistics.">Comparison of students’ diary entries with Covid-19 statistics.</h3>
+<p>Figure <a href="#fig:context">5</a> shows the evolution of the sentiment of the students’ diary entries beside the rising Covid-19 case numbers in South Africa.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="figure"><span id="fig:context"></span>
+<img src="students-speak_files/figure-html5/context-1.png" alt="Comparison figure" width="768" />
+<p class="caption">
+Figure 5: Comparison figure
+</p>
+</div>
+</div>
+<p>It is difficult to conclude about a relationship between the number of cases and the sentiment of the students’ reflections. While there appears to be a relationship between average sentiment and number of tests at the outset of the lockdown, I think this is statistical noise rather than some sort of correlation.</p>
+<h3 id="contextualization-of-timing-of-diary-entries">Contextualization of timing of diary entries</h3>
+<p>The purpose of this selection of figures is to emphasize that the diary entries were recorded at the outset of the pandemic in South Africa. The number of cases was relatively low compared to the steep increase in cases which followed in winter of 2020.</p>
+<p>The figures below compare the period of diary entries to the number of cases and deaths in the first year of the pandemic.</p>
+<p>I think option two conveys the message clearly and without clutter.</p>
+<div class="panelset">
+<section id="option-1" class="panel-name panel">
+<h2 class="panel-name">Option 1</h2>
+<p>Here we have a two panel plot of the Covid-19 statistics and number of diary entries recorded by the students.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="students-speak_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+</div>
+</section>
+<section id="option-2" class="panel-name panel">
+<h2 class="panel-name">Option 2</h2>
+<p>Next we have a single panel with the period of diary entries superimposed on the Covid-19 statistics.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="students-speak_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
+</div>
+</section>
+<section id="option-3" class="panel-name panel">
+<h2 class="panel-name">Option 3</h2>
+<p>Alternatively we can annotate a thick line to show where the diary entries occur.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="students-speak_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
+</div>
+</section>
+<section id="option-4" class="panel-name panel">
+<h2 class="panel-name">Option 4</h2>
+<p>Alternatively we can have a legend variant of option 2.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="students-speak_files/figure-html5/unnamed-chunk-13-1.png" width="624" /></p>
+</div>
+</section>
+</div>
+<h4 id="financial-markets-comparison">Financial markets comparison</h4>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>Figure <a href="#fig:fin-mkt-comp">6</a> shows the mean sentiment of the students’ diary entries alongside the JSE All Share Index for the same period, as well as the Rand to US Dollar exchange rate. Several students question in their entries what will happen to the stock market, with one stating, “I was looking at good stock picks on the JSE today. Every disaster can be an opportunity…”.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="figure"><span id="fig:fin-mkt-comp"></span>
+<img src="students-speak_files/figure-html5/fin-mkt-comp-1.png" alt="Financial markets comparison figure" width="768" />
+<p class="caption">
+Figure 6: Financial markets comparison figure
+</p>
+</div>
+</div>
+<p>Again the trends displayed may constitute statistical noise. The JSE was rising out of an enormous trough created as investors panicked with Covid-19 spreading into Europe and the US. The Rand is a notoriously volatile currency. Yet, these trends are interesting to show in the context of the early weeks of lockdown.</p>
+<h4 id="interactive-figure">Interactive figure</h4>
+<p>We can also make this a little more attractive as an interactive chart with some colour and hover labels.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>Figure <a href="#fig:interactive">7</a> shows the same information as above with a hover field to show the week-specific words. Mouse over the points to see the words most specific to each week and the average sentiment of the students’ diary entries.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<div class="figure"><span id="fig:interactive"></span>
+<div id="htmlwidget-1a0d9924af655118c20c" style="width:576px;height:384px;" class="girafe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1a0d9924af655118c20c">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9' viewBox='0 0 432.00 266.98'>\n  <g>\n    <defs>\n      <clipPath id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_1'>\n        <rect x='0.00' y='0.00' width='432.00' height='266.98'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='0.00' y='0.00' width='432.00' height='266.98' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_1' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_1)' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round'/>\n    <defs>\n      <clipPath id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_2'>\n        <rect x='0.00' y='0.00' width='432.00' height='266.98'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='0.00' y='0.00' width='432.00' height='266.98' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_2' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_2)' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n    <defs>\n      <clipPath id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3'>\n        <rect x='38.52' y='5.48' width='388.00' height='242.94'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='38.52' y='5.48' width='388.00' height='242.94' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_3' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n    <polyline points='38.52,213.80 426.52,213.80' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_4' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='38.52,169.96 426.52,169.96' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_5' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='38.52,126.12 426.52,126.12' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_6' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='38.52,82.28 426.52,82.28' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_7' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='38.52,38.44 426.52,38.44' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_8' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='86.56,248.41 86.56,5.48' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_9' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='171.70,248.41 171.70,5.48' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_10' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='256.84,248.41 256.84,5.48' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_11' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='341.99,248.41 341.99,5.48' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_12' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='38.52,235.72 426.52,235.72' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_13' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='38.52,191.88 426.52,191.88' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_14' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='38.52,148.04 426.52,148.04' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_15' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='38.52,104.20 426.52,104.20' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_16' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='38.52,60.36 426.52,60.36' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_17' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='38.52,16.52 426.52,16.52' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_18' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='43.99,248.41 43.99,5.48' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_19' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='129.13,248.41 129.13,5.48' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_20' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='214.27,248.41 214.27,5.48' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_21' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='299.42,248.41 299.42,5.48' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_22' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='384.56,248.41 384.56,5.48' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_23' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='56.15,199.05 141.29,164.90 226.44,194.81 311.58,48.69 396.72,60.85 408.88,237.37' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_24' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <circle cx='56.15' cy='199.05' r='3.47pt' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_25' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='#1B9E77' fill-opacity='1' stroke='#1B9E77' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Average sentiment of diary entries: -0.42&amp;lt;br/&amp;gt;Most week-specific words:&amp;lt;br/&amp;gt;National lockdown&amp;lt;br/&amp;gt;Church&amp;lt;br/&amp;gt;African leaders&amp;lt;br/&amp;gt;Airports&amp;lt;br/&amp;gt;NSFAS'/>\n    <circle cx='141.29' cy='164.90' r='3.47pt' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_26' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='#D95F02' fill-opacity='1' stroke='#D95F02' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Average sentiment of diary entries: -0.34&amp;lt;br/&amp;gt;Most week-specific words:&amp;lt;br/&amp;gt;Townships&amp;lt;br/&amp;gt;Lockdown starts&amp;lt;br/&amp;gt;Virus&amp;lt;br/&amp;gt;Internet access&amp;lt;br/&amp;gt;Cases recorded'/>\n    <circle cx='226.44' cy='194.81' r='3.47pt' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_27' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='#7570B3' fill-opacity='1' stroke='#7570B3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Average sentiment of diary entries: -0.41&amp;lt;br/&amp;gt;Most week-specific words:&amp;lt;br/&amp;gt;Conspiracy theories&amp;lt;br/&amp;gt;Continues to rise&amp;lt;br/&amp;gt;Privilege&amp;lt;br/&amp;gt;An obligation'/>\n    <circle cx='311.58' cy='48.69' r='3.47pt' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_28' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='#E7298A' fill-opacity='1' stroke='#E7298A' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Average sentiment of diary entries: -0.07&amp;lt;br/&amp;gt;Most week-specific words:&amp;lt;br/&amp;gt;Easter Sunday&amp;lt;br/&amp;gt;Hot Cross buns&amp;lt;br/&amp;gt;Good Friday&amp;lt;br/&amp;gt;Payment&amp;lt;br/&amp;gt;Extension&amp;lt;br/&amp;gt;Emotions'/>\n    <circle cx='396.72' cy='60.85' r='3.47pt' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_29' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='#66A61E' fill-opacity='1' stroke='#66A61E' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Average sentiment of diary entries: -0.1&amp;lt;br/&amp;gt;Most week-specific words:&amp;lt;br/&amp;gt;R500 billion&amp;lt;br/&amp;gt;Economic stimulus&amp;lt;br/&amp;gt;Fresh produce&amp;lt;br/&amp;gt;SUN Learn&amp;lt;br/&amp;gt;Zoom&amp;lt;br/&amp;gt;Grade'/>\n    <circle cx='408.88' cy='237.37' r='3.47pt' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_30' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='#E6AB02' fill-opacity='1' stroke='#E6AB02' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Average sentiment of diary entries: -0.5&amp;lt;br/&amp;gt;Most week-specific words:&amp;lt;br/&amp;gt;Clothing bank&amp;lt;br/&amp;gt;President Ramaphosa&amp;lt;br/&amp;gt;Level 5&amp;lt;br/&amp;gt;Livelihoods&amp;lt;br/&amp;gt;Unemployed&amp;lt;br/&amp;gt;Lockdown restrictions'/>\n    <line x1='38.52' y1='16.52' x2='426.52' y2='16.52' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_31' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-dasharray='4,4' stroke-linejoin='round' stroke-linecap='butt' fill='#000000' fill-opacity='1'/>\n    <rect x='38.52' y='5.48' width='388.00' height='242.94' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_32' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_3)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n    <defs>\n      <clipPath id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4'>\n        <rect x='0.00' y='0.00' width='432.00' height='266.98'/>\n      <\/clipPath>\n    <\/defs>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='18.41' y='238.87' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_33' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>-0.5<\/text>\n    <\/g>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='18.41' y='195.03' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_34' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>-0.4<\/text>\n    <\/g>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='18.41' y='151.19' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_35' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>-0.3<\/text>\n    <\/g>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='18.41' y='107.35' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_36' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>-0.2<\/text>\n    <\/g>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='18.41' y='63.51' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_37' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>-0.1<\/text>\n    <\/g>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='21.34' y='19.67' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_38' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>0.0<\/text>\n    <\/g>\n    <polyline points='35.78,235.72 38.52,235.72' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_39' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='35.78,191.88 38.52,191.88' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_40' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='35.78,148.04 38.52,148.04' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_41' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='35.78,104.20 38.52,104.20' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_42' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='35.78,60.36 38.52,60.36' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_43' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='35.78,16.52 38.52,16.52' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_44' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='43.99,251.15 43.99,248.41' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_45' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='129.13,251.15 129.13,248.41' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_46' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='214.27,251.15 214.27,248.41' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_47' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='299.42,251.15 299.42,248.41' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_48' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='384.56,251.15 384.56,248.41' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_49' clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='30.29' y='259.65' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_50' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>Mar 23<\/text>\n    <\/g>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='115.43' y='259.65' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_51' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>Mar 30<\/text>\n    <\/g>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='201.31' y='259.65' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_52' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>Apr 06<\/text>\n    <\/g>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='286.45' y='259.65' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_53' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>Apr 13<\/text>\n    <\/g>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text x='371.59' y='259.65' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_54' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>Apr 20<\/text>\n    <\/g>\n    <g clip-path='url(#svg_88759148-db89-4edf-8d60-fc81f271b1f9_cl_4)'>\n      <text transform='translate(13.36,233.72) rotate(-90.00)' id='svg_88759148-db89-4edf-8d60-fc81f271b1f9_el_55' font-size='8.25pt' font-family='Arial'>Average sentiment of students' diary entries<\/text>\n    <\/g>\n  <\/g>\n<\/svg>","js":null,"uid":"svg_88759148-db89-4edf-8d60-fc81f271b1f9","ratio":1.61812297734628,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px 2px 2px 2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}\n","placement":"doc","offx":10,"offy":0,"use_cursor_pos":true,"opacity":0.9,"usefill":false,"usestroke":false,"delay":{"over":200,"out":500}},"hover":{"css":".hover_SVGID_ { colour: #E69F00; fill-opacity: 1.0; stroke: #E69F00; }","reactive":false},"hoverkey":{"css":".hover_key_SVGID_ { stroke:red; }","reactive":false},"hovertheme":{"css":".hover_theme_SVGID_ { fill:green; }","reactive":false},"hoverinv":{"css":""},"zoom":{"min":1,"max":1},"capture":{"css":".selected_SVGID_ { fill:red;stroke:gray; }","type":"multiple","only_shiny":true,"selected":[]},"capturekey":{"css":".selected_key_SVGID_ { stroke:gray; }","type":"single","only_shiny":true,"selected":[]},"capturetheme":{"css":".selected_theme_SVGID_ { stroke:gray; }","type":"single","only_shiny":true,"selected":[]},"toolbar":{"position":"topright","saveaspng":true,"pngname":"diagram"},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 7: Interctive figure
+</p>
+</div>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>

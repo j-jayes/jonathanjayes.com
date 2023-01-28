@@ -1,0 +1,168 @@
+---
+title: "ChatGPT fills in for me as a blog post author"
+description: |
+  I ask ChatGPT to write a blog post in the same manner as one I wrote last week. The results will amaze you!
+author:
+  - name: Jonathan Jayes
+    url:
+      interludeone.com: {}
+date: 2022-12-20
+preview: "https://github.com/j-jayes/jjayes_distill/raw/fba82ad50bbd00f3768079fb983f8c8d2706cde2/_posts/2022-12-20-gpt-chat-blog-post-author/images/DALL%C2%B7E%202022-12-20%2016.38.40%20-%20A%20diagram%20of%20three%20penguins%20in%20the%20style%20of%20Paul%20C%C3%A9zanne%2C%20hyper%20realistic%2C%20beautiful%20art.png"
+output:
+  distill::distill_article:
+    self_contained: false
+    highlight: haddock
+    highlight_downlit: true
+    toc: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+## Purpose
+
+[ChatGPT](https://chat.openai.com/chat) is all the rage at the moment. On Friday last week I spent an hour writing [a short blog post](https://interludeone.com/posts/2022-12-15-coef-plots/) to explain how to draw coefficient plots for a colleague.
+
+Today I asked ChatGPT to to the same. 
+
+It took 30 seconds. 
+
+Here are the results!
+
+```{r, echo=FALSE}
+knitr::include_graphics("images/DALL·E 2022-12-20 16.38.40 - A diagram of three penguins in the style of Paul Cézanne, hyper realistic, beautiful art.png")
+```
+
+<aside>
+Penguins created with [DALL·E](https://openai.com/dall-e-2/) with the prompt "A diagram of three penguins in the style of Paul Cézanne, hyper realistic, beautiful art"
+</aside>
+
+
+### Prompt
+
+'Prompt engineering' describes the art of illiciting useful responses from Large Language Models (LLMs). Yet, the latest iteration of ChatGPT often gives me what I ask for on the first try. 
+
+Here, I asked ChatGPT to:
+
+<blockquote>
+
+Write a blog post for a website using R tidyverse syntax that shows how to draw a coefficient plot with error bars in ggplot. Use the Palmer Penguins dataset and show the relationship between bill_length_mm and body_mass_g. Use the lm() command to run a regression and the broom::tidy(conf.int = TRUE) command on the regression output to draw error bars with the geom_errorbarh() geometry.
+
+</blockquote>
+
+### Output
+
+I recieved text and code that ran almost perfectly: 
+
+It began
+
+<blockquote>
+
+Are you trying to visualize the relationship between two variables in your dataset using ggplot and the tidyverse syntax in R? One way to do this is by creating a coefficient plot, which is a type of scatterplot that includes error bars for the data points. In this blog post, we'll walk through the steps for creating a coefficient plot with error bars using the Palmer Penguins dataset, which includes measurements of bill length and body mass for several species of penguins.
+
+To start, let's load the necessary packages :
+
+</blockquote>
+
+
+```{r}
+library(tidyverse)
+library(broom)
+```
+
+<blockquote>
+
+Next, we'll load the Palmer Penguins dataset and take a look at the variables we have to work with:
+
+</blockquote>
+
+```{r}
+library(palmerpenguins)
+data("penguins")
+
+head(penguins)
+```
+
+<blockquote>
+
+We can see that the dataset includes variables such as bill_length_mm, body_mass_g, and species. For our coefficient plot, we'll focus on the relationship between bill_length_mm and body_mass_g.
+
+To understand the coefficient plot, we'll start by using the ggplot function to specify the data and the aesthetics for a scatter plot. We'll set the x variable to be bill_length_mm and the y variable to be body_mass_g.
+
+
+</blockquote>
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g))
+```
+
+<blockquote>
+
+Now we'll add the geom_point layer to plot the data points and the geom_smooth layer to add a smooth line of best fit.
+
+</blockquote>
+
+```{r}
+ggplot(data = penguins, aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point() +
+  geom_smooth()
+```
+
+<blockquote>
+
+This gives us a scatter plot with a line of best fit. We can see that body mass increases as does bill length.
+
+Next, we can use the lm() command to run a regression analysis on the data, using bill length as the predictor variable and body mass as the outcome variable. We can then use the broom::tidy() function with the conf.int = TRUE argument to extract the regression results, including the confidence intervals for the coefficients:
+
+</blockquote>
+
+```{r}
+reg_results <- lm(body_mass_g ~ bill_length_mm, data = penguins)
+reg_tidy <- broom::tidy(reg_results, conf.int = TRUE)
+```
+
+<blockquote>
+
+Now that we have the regression results, we can use ggplot to create our coefficient plot.
+
+To add the error bars, we'll use the geom_errorbarh() geometry and specify the xmin and xmax aesthetics as the lower and upper bounds of the confidence intervals, respectively:
+
+
+</blockquote>
+
+```{r}
+ggplot(reg_tidy, aes(x = estimate, y = term)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high))
+```
+
+<blockquote>
+
+
+And that's it! We now have a coefficient plot with error bars showing the relationship between bill length and body mass in the Palmer Penguins dataset. This plot can help us understand how the two variables are related, and how certain we can be about the strength of that relationship based on the size of the error bars.
+
+I hope this tutorial was helpful in showing you how to create a coefficient plot with error bars using the tidyverse syntax in R. If you have any questions or comments, please feel free to leave them below. Happy plotting!
+
+</blockquote>
+
+### What would I change?
+
+This was a fantastic tutorial and written up in a way that is relatively easy to understand too. I enjoyed the use of succinct variable names and how to the point the write up was.
+
+The only things I added in my own post on Friday were a dotted line at zero, a title, and some axis labels. This is shown below.
+
+```{r}
+ggplot(reg_tidy, aes(x = estimate, y = term)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_vline(xintercept = 0, lty = 2) +
+  labs(
+    x = "Estimate of effect of variable on body mass (in grams)",
+    y = NULL,
+    title = "Coefficient plot with error bars"
+  )
+```
+
+Wow! Amazing. I learned a bunch about **ggplot** and R from reading the code which accompanied [David Robinson's screencasts]() in 2019 and 2020. I am excited for the generation of data analysts beginning their journey now - being able to ask for tailored instructions for a task is a real boon!

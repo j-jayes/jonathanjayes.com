@@ -1,0 +1,26 @@
+---
+title: "Welcome to Interlude One"
+description: |
+  "Like all good fruit, the balance of life is in the ripe and ruin"
+preview: images/alt-j.jpg
+author:
+  - name: Jonathan Jayes
+date: 03-13-2020
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating blogs with Distill at:
+# https://rstudio.github.io/distill/blog.html
+
+```
+
+This is a line from Interlude One off of Alt-J's first album, An Awesome Wave. I like this lyric a great deal!
+
+I aspire to balance in my own life. This site is a space to share what I find interesting, and encourage me to keep learning and sharing. It includes exploratory data analyses, R tutorials, and answers to some data specific questions. I hope that you enjoy your look around.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gBArR3FJ2ow" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

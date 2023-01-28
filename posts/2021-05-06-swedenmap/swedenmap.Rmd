@@ -1,0 +1,127 @@
+---
+title: "Mapping Sweden's Regional GDP"
+description: |
+  Visualizing the relationship between population and regional GDP share in 1571, based on data from Enflo and Missiaia (2018).
+preview: images/preview.png
+author:
+  - name: Jonathan Jayes
+date: 05-06-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: false
+    highlight: haddock
+    highlight_downlit: true
+    toc: true
+bibliography: bib.bib
+
+---
+
+```{r, include=F}
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+
+library(tidyverse)
+library(sf)
+library(ggiraph)
+library(cowplot)
+theme_set(theme_light())
+```
+
+
+```{r, include=F}
+df <- st_read("data/maps/sverige-lan-counties-of-sweden.shp")
+
+s_map <- df %>%
+  mutate( # JavaScript call to open website 
+    onclick = glue::glue(
+'window.open("https://en.wikipedia.org/wiki/{lan_namn}")')
+  ) %>%
+  ggplot() +
+  geom_sf_interactive(
+    aes(data_id = lan_namn, 
+        tooltip = lan_namn,
+        onclick = onclick)
+  ) +
+  theme_void()
+
+# girafe(
+#   ggobj = s_map,
+#   width_svg = 6,
+#   height_svg = 6*0.618
+# )
+
+```
+
+
+```{r}
+library(readxl)
+
+reg_acc <- read_excel("data/sweden_regional_accounts.xlsx")
+
+# what do we miss?
+# df %>% anti_join(reg_acc, by = "lan_namn")
+
+df <- df %>% inner_join(reg_acc, by = "lan_namn")
+```
+
+## What was the relationship between population and regional GDP in Sweden in 1571?
+
+### Scatter plot and interactive map
+
+The scatter plot below shows the relationship between population in the Swedish counties in 1571 (x-axis) and regional GDP share (y-axis). 
+
+Hovering over a point shows the name of the county, and highlights its location on the map of Sweden to the right (shown with their current borders).
+
+Clicking on a county on the map will take you to it's page on [Wikipedia](https://www.wikipedia.org/).
+
+```{r}
+sweden_scatter <- df %>% 
+  ggplot(aes(pop, GDP_share)) +
+  geom_smooth(method = "lm", se = F) +
+   geom_point_interactive(
+    aes(
+      tooltip = lan_namn,
+      data_id = lan_namn
+    ),
+    na.rm = TRUE, size = 6,
+    shape = 21,
+    color = "#0072B2", fill = "#0072B280"
+  ) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  scale_x_continuous(labels = scales::number_format()) +
+  labs(x = "Population in the Swedish counties in 1571",
+       y = "Regional GDP share") +
+  theme(panel.grid = element_blank())
+```
+
+
+```{r}
+int_fig <- girafe(
+  ggobj = plot_grid(sweden_scatter, s_map, rel_widths = c(1.2, 1)),
+  width_svg = 5,
+  height_svg = 3,
+  options = list(
+    # opts_tooltip(css = tooltip_css, delay_mouseover = 0, delay_mouseout = 0),
+    opts_hover(css = "fill: #E69F00; fill-opacity: 1.0; stroke: #E69F00;")
+  )
+)
+
+int_fig
+
+# write_rds(int_fig, "data/interactive_fig.rds")
+
+```
+
+
+
+Source: @Enflo, Data accessible [here](https://www.ekh.lu.se/en/research/economic-history-data/shra1571-2010).
+
+<aside>
+Figure inspiration and code from [Claus Wilke](https://wilkelab.org/SDS375/slides/interactive-plots.html#1)
+</aside>
+
+
+### What do we learn?
+
+In the scatter plot above we can see that the two northernmost counties, though large in land are are very sparsely populated. The line of best fit shows that Västmanland County has a high relative share of GDP compared to it's population, and that Kalmar Län has a high population relative to it's share of GDP in 1571.
+

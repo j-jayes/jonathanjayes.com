@@ -1,0 +1,529 @@
+---
+title: "Flavours of cocoa"
+description: |
+  An exploration of chocolate bar reviews
+author:
+  - name: Jonathan Jayes
+    url: {interludeone.com}
+date: 2022-02-15
+preview: "https://raw.githubusercontent.com/j-jayes/screencasts/main/figures/Chocolate_bar_ratings.jpeg"
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: false
+    highlight: haddock
+    highlight_downlit: true
+    toc: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
+```
+
+# Flavours of Cocoa
+
+Welcome to the first in a series of data screencasts where I attempt to show you how great the R language is.
+
+This post follows along with the data screencast and includes the code methodically.
+
+It begins by reading in the data, then tidying it up, analysing it, making some visualizations and then performing some predictive modelling.
+
+## Beans?
+
+I'm signed up to a fantastic newsletter called ["Data is Plural"](https://www.data-is-plural.com/) curated by journalist Jeremy Singer-Vine. Truly, it is a treasure trove of interesting public datasets from all over the internet. You can sign up to the newsletter [here](https://buttondown.email/data-is-plural) if this sounds up your alley. 
+
+This week it included a link to a fun selection of chocolate bar reviews, which Jeremy described as:
+
+<blockquote>
+
+Chocolate bar reviews. The [Manhattan Chocolate Society](http://flavorsofcacao.com/mcs_index.html)’s [Brady Brelinski](http://flavorsofcacao.com/contact.html) has reviewed 2,500+ bars of craft chocolate since 2006, and compiles his findings into a [copy-paste-able](http://flavorsofcacao.com/chocolate_database.html) table that lists each bar’s manufacturer, bean origin, percent cocoa, ingredients, review notes, and numerical rating.
+
+</blockquote>
+
+A live link to the database is shown below.
+
+```{r}
+knitr::include_url("http://flavorsofcacao.com/chocolate_database.html")
+```
+
+## Ingest the data
+
+I've copied and pasted the data into an Excel spreadsheet, accessible on my [Github](https://github.com/j-jayes/jjayes_distill/blob/main/_posts/2022-01-17-flavours-of-cocoa/data/chocolate-bar-ratings.xlsx) if you want to download it an analyse it yourself.
+
+<aside>
+
+The underlying data is served in a Javascript container on the website rather than vanilla HTML. This makes it a little bit more difficult to scrape with a package like `rvest`, for example. Hence the Excel spreadsheet.
+
+</aside>
+
+To begin the analysis, we'll read in the Excel file using the `readxl` package, and the `here` package that helps us with file paths.^[The `here` package allows us to abstract from the specific file path on our local computer and use a generic path that will work on any computer that we download our R project to. For example, instead of specifying the path "C:/Users/Jonathan/Documents/R-work/jjayes_distill/_posts/2022-01-17-flavours-of-cocoa/data/chocolate-bar-ratings.xlsx" we can just call the `here` function from the package with the same name - here("_posts", "2022-01-17-flavours-of-cocoa", "data", "chocolate-bar-ratings.xlsx"). This is wonderful for switching between, for example, a Windows and a Mac, where the slashes are in opposite directions and can cause some frustration!]
+
+We don't need to load the packages via the `library(readxl)` command because we're only going to use them once or twice. Instead we can call the name of the package followed by two colons and the command, as shown below.
+
+
+```{r}
+library(tidyverse)
+theme_set(theme_light())
+# read in the data
+df <- readxl::read_excel(here::here("_posts", 
+                                    "2022-01-17-flavours-of-cocoa", 
+                                    "data", 
+                                    "chocolate-bar-ratings.xlsx"))
+
+# display the first six rows of tibble
+head(df)
+```
+
+This gives us a `tibble` (similar to a dataframe) with 10 columns (4 numeric and 6 character) and 2,530 individual reviews. 
+
+The column names are a big ugly though:
+
+```{r}
+# show column names
+df %>% colnames()
+```
+
+We can use the janitor package to make the column names snake case (lower case with words separated by an underscore).
+
+```{r}
+# clean names
+df <- df %>% 
+    janitor::clean_names()
+
+# show names again
+df %>% colnames()
+```
+
+Now that we have a nice `tibble` with clean names, we can ask what the data itself looks like. There are many ways to get summary statistics of a dataset. I love the `skim` function from the `skimr` package.
+
+```{r, layout = "l-body-outset"}
+# skim the dataset
+skimr::skim(df)
+```
+
+Great! Our reviews are almost all complete. 
+
+*   Only 3 percent are missing information on the ingredients. 
+*   The reviews begin in 2006, the mean review is from 2014, and the latest is from 2021. 
+*   The percent of the bar comprising of cocoa ranges from 42 to 100, with a mean of 72.
+*   We have 62 unique countries of origin for the beans, and 67 countries of manufacture.
+*   There are 21 unique combinations of ingredients, comprising of seven elements in total.
+
+## Data cleaning and feature engineering
+
+Let's have a look at that ingredients column.
+
+```{r}
+# count elements of ingredients column
+df %>% 
+    count(ingredients, sort = T)
+```
+
+So we have a number of ingredients, a dash, and then a key for what the ingredients are. Consulting the website reveals that there are seven possible ingredients:
+
+```{r, echo=FALSE}
+str <- "B = Beans, S = Sugar, S* = Sweetener other than white cane or beet sugar, C = Cocoa Butter, V = Vanilla, L = Lecithin, Sa = Salt"
+
+str <- str %>% 
+  as_tibble() %>% 
+  separate_rows(value, sep = ",") %>% 
+  separate(value, c("key", "value"), "=") %>% 
+  mutate(across(c(key, value), str_squish))
+
+knitr::kable(str)
+```
+
+These key and value combinations are very sensible - if we have a lot of data we can save space by using the keys instead of the whole string. However, I would prefer to have them written out, because we're going to split them into their own columns a little bit later. 
+
+We can use the `str_replace_all` function from the `stringr` package to replace items in the list of ingredients with names.
+
+```{r}
+df <- df %>% 
+  mutate(ingredients = str_replace_all(ingredients, c("Sa" = "salt",
+                                                      # the * is a special character 
+                                                      # when writing Regex and so 
+                                                      # we use the two backslashes to 
+                                                      # "escape" the meaning
+                                                      "S\\*" = "non_sugar_sweetener",
+                                                      "B" = "beans",
+                                                      "S" =  "sugar",
+                                                      "V" = "vanilla",
+                                                      "L" = "lecithin",
+                                                      "C" = "cocoa_butter"
+                                                      )))
+
+```
+
+Let's look again at our ingredients column:
+
+```{r}
+df %>% 
+    count(ingredients, sort = T)
+```
+
+Fantastic! Now we have the number of ingredients, a dash, and then each ingredient by name in one column. Let's separate this information into two columns so that we can use the number of ingredients as a feature.
+
+The `separate` function from the `tidyr` package is made just for this purpose. It takes three arguments:
+
+1. the name of the column to separate.
+2. new column names corresponding to the number of elements.
+3. the separator between elements.
+
+```{r}
+df <- df %>% 
+  separate(col = ingredients, 
+           into = c("n_ingredients", "ingredients"),
+           sep = "-") %>% 
+    # parse_number looks for a number inside a character column and discards the rest
+  mutate(n_ingredients = parse_number(n_ingredients),
+         # str_squish removes whitespace around the elements in the ingredients column
+         ingredients = str_squish(ingredients))
+
+df %>% 
+  select(n_ingredients, ingredients)
+```
+
+Now we have a numeric column with the number of ingredints and a column called ingredients with each element separated by a comma.
+
+Finally, let's break the ingredients from a comma separated list into a binary variable for each ingredient. We can use the `recipes` package that is part of the `tidymodels` metapackage - a framework for doing statistical modelling in a tidy manner.
+
+First we break our ingredients into 6 columns. The problem we run into is that for bars that contain different ingredients, the order of the ingredients split into the columns is not constant.
+
+```{r}
+# df <- df %>% 
+#   separate(ingredients, into = c(paste0("ingredient_", rep(1:6))),
+#            sep = ",") 
+
+# df %>% 
+#     select(company_manufacturer , starts_with("ingredient_")) %>%
+#     slice(c(1L, 51L, 54L))
+```
+
+Perhaps there is a better way to do this? Separate rows and pivot wider?
+
+```{r}
+df %>% 
+    separate_rows(ingredients, sep = ",") %>%
+    count(ingredients)
+
+
+df <- df %>% 
+    separate_rows(ingredients, sep = ",") %>%
+    filter(!is.na(ingredients)) %>% 
+    pivot_wider(names_from = ingredients, values_from = ingredients) %>% 
+    mutate(across(beans:non_sugar_sweetener, ~ ifelse(is.na(.), 0, 1)))
+```
+
+
+
+Tidymodels 
+
+```{r}
+# library(tidymodels)
+# dummy_multi_choice_rec <- recipe(~ ., data = df) %>%
+#   step_dummy_multi_choice(starts_with("ingredient_")) %>%
+#   prep()
+# 
+# df <- bake(dummy_multi_choice_rec, new_data = NULL)
+```
+
+## Analysing the data
+
+### Basic descriptives
+
+```{r}
+df %>% 
+  count(rating, sort = T)
+```
+
+Score range between 1 and 4, and the modal value is 3.5.
+
+```{r}
+# histogram
+df %>% 
+  ggplot(aes(rating)) +
+  geom_histogram(bins = 14, alpha = .7, fill = "midnightblue") +
+    labs(x = "Chocolate bar rating",
+         y = "Number of bars")
+```
+
+### Have the ratings been increasing over time?
+
+```{r}
+df %>% 
+    group_by(review_date) %>% 
+    summarise(mean_rating = mean(rating)) %>% 
+    ungroup() %>% 
+    knitr::kable(digits = 2)
+```
+
+It certainly seems like the mean rating is increasing over time. What is driving this?
+
+<aside>
+
+We can make a plot of the figures above to see the increasing trend.
+
+```{r}
+df %>% 
+    group_by(review_date) %>% 
+    summarise(mean_rating = mean(rating)) %>% 
+    ungroup() %>% 
+    ggplot(aes(review_date, mean_rating)) +
+    geom_point(colour = "midnightblue", alpha = .6, size = 5) +
+    geom_smooth(method = "lm", se = F, colour = "grey20") +
+    labs(x = "Date of review",
+         y = "Mean rating")
+```
+
+</aside>
+
+Let's make a boxplot to see how the spread of scores has changed over time.
+
+```{r}
+df %>%
+  ggplot(aes(review_date, rating, group = review_date)) +
+  geom_jitter(alpha = .2) +
+  geom_boxplot(varwidth = TRUE, fill = "midnightblue", alpha = .6)
+```
+
+It seems as if the share of bars with very low scores has decreased over time, while the median value has remained relatively stable over time, shown by the bar in the centre of the boxplots.
+
+What about making a joy plot or ridgeline plot with the `ggridges` package? This allows us to see how the spread of values has changed over time.
+
+```{r, layout = "l-body-outset"}
+library(ggridges)
+
+df %>%
+  ggplot(aes(rating, y = factor(review_date), fill = review_date)) +
+  geom_density_ridges() +
+  scale_fill_viridis_c(option = "magma") +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_colorbar(
+    title.position = "bottom",
+    barwidth = 25,
+    title.hjust = .5
+  )) +
+    labs(y = NULL,
+         x = "Chocolate bar rating",
+         fill = "Date of review")
+```
+
+This confirms what we saw in the boxplots above: fewer low scores in more recent years mean that the mean has increased, while the top of the distributions remain largely the same.
+
+### What are the frequencies of ingredients and percentages?
+
+```{r, layout = "l-body-outset"}
+df %>% 
+  mutate(cocoa_percent = round(cocoa_percent, 1)) %>% 
+  count(cocoa_percent, n_ingredients) %>% 
+  ggplot(aes(cocoa_percent, n_ingredients, fill = n)) +
+  geom_tile() +
+  scale_fill_viridis_c() +
+  scale_x_continuous(labels = scales::percent_format()) +
+  labs(x = "Cocoa percent",
+       y = "Number of ingredients",
+       fill = "Number of bars reviewed") +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_colorbar(title.position = "bottom",
+                               barwidth = 25,
+                               title.hjust = .5))
+```
+
+
+### What about the different countries??
+
+```{r, layout = "l-body-outset"}
+df %>% 
+  count(country_of_bean_origin, sort = T)
+
+df %>% 
+  add_count(country_of_bean_origin) %>%
+  # only include countries with more than 60 bars
+  filter(n > 60) %>% 
+  group_by(country_of_bean_origin) %>% 
+  summarise(mean_rating = mean(rating)) %>% 
+  mutate(country_of_bean_origin = fct_reorder(country_of_bean_origin, mean_rating)) %>% 
+  ggplot(aes(mean_rating, country_of_bean_origin)) +
+  geom_col(fill = "midnightblue", alpha = .8) +
+  # ensure that x-axis looks appropriate.
+  coord_cartesian(xlim = c(3,3.3)) +
+    labs(x = "Average rating for countries of origin with more than 60 bars reviewed",
+         y = NULL)
+```
+
+
+### Country map
+
+```{r}
+library(tmap)
+data("World")
+
+world <- World %>% as_tibble()
+```
+
+To join our data on chocolate to this map, we need to get coutnry codes, using the `countrycode` package.
+
+```{r}
+library(countrycode)
+
+df <- df %>% 
+    mutate(iso_a3 = countrycode(sourcevar = country_of_bean_origin, origin = "country.name", destination = "iso3c"))
+```
+
+
+```{r}
+library(sf)
+
+df_map <- df %>% 
+    group_by(iso_a3) %>%
+    add_count() %>% 
+    summarise(mean_rating = mean(rating),
+              n = n) %>% 
+    ungroup() %>% 
+    distinct() %>% 
+    left_join(world, by = "iso_a3")
+```
+
+
+```{r, layout = "l-body-outset"}
+df_map %>% 
+    filter(n > 3) %>% 
+    st_as_sf() %>% ggplot() +
+    geom_sf(data = World, fill = "grey80", alpha = .5) +
+    geom_sf(aes(fill = mean_rating)) +
+    scale_fill_viridis_c(trans = "sqrt") +
+    labs(fill = "Mean country rating")
+```
+
+## Word model
+
+```{r}
+df_characteristics <- df %>% 
+  select(c(most_memorable_characteristics, rating)) %>% 
+  separate_rows(most_memorable_characteristics, sep = ",") %>% 
+  mutate(most_memorable_characteristics = str_squish(most_memorable_characteristics))
+```
+
+
+```{r}
+df_characteristics %>% 
+  count(most_memorable_characteristics, sort = T)
+```
+
+We can start with a naive analysis that looks only at average score per word. These are the highest scoring words.
+
+```{r}
+# df_characteristics %>% 
+#   group_by(most_memorable_characteristics) %>% 
+#   add_count() %>% 
+#   mutate(avg_rating = mean(rating)) %>% 
+#   ungroup() %>% 
+#   slice_max(avg_rating, n = 12, with_ties = F)
+
+df_characteristics %>% 
+  group_by(most_memorable_characteristics) %>% 
+  add_count() %>% 
+  filter(n > 3) %>% 
+  mutate(avg_rating = mean(rating)) %>% 
+  ungroup() %>% 
+  distinct(most_memorable_characteristics, avg_rating) %>% 
+  slice_max(avg_rating, n = 12, with_ties = F) %>% 
+    mutate(avg_rating = round(avg_rating, 2)) %>% 
+    knitr::kable(col.names = c("Most memorable characteristics", "Average rating"))
+```
+
+
+```{r}
+library(tidymodels)
+library(textrecipes)
+
+df_characteristics_folds <- vfold_cv(df_characteristics)
+
+glmnet_recipe <- 
+  recipe(formula = rating ~ ., data = df_characteristics) %>% 
+  step_tokenize(most_memorable_characteristics) %>% 
+  step_tokenfilter(most_memorable_characteristics, max_tokens = 100) %>% 
+  step_tf(most_memorable_characteristics) %>% 
+  step_normalize(all_predictors(), -all_nominal())
+```
+
+
+```{r}
+glmnet_recipe %>% prep() %>% juice()
+```
+
+
+```{r, eval=F}
+glmnet_spec <- 
+  linear_reg(penalty = tune(), mixture = 1) %>% 
+  set_mode("regression") %>% 
+  set_engine("glmnet") 
+
+glmnet_workflow <- 
+  workflow() %>% 
+  add_recipe(glmnet_recipe) %>% 
+  add_model(glmnet_spec) 
+
+glmnet_grid <- tidyr::crossing(penalty = 10^seq(-6, -1, length.out = 20)) 
+
+glmnet_tune <- 
+  tune_grid(glmnet_workflow, df_characteristics_folds, grid = glmnet_grid)
+```
+
+```{r, include=F}
+glmnet_tune <- read_rds(here::here("_posts", 
+                                    "2022-01-17-flavours-of-cocoa", 
+                                    "data", 
+                                    "glm_tune.rds"))
+```
+
+
+```{r}
+glmnet_tune %>% 
+  autoplot()
+```
+
+
+```{r, eval=F}
+glmnet_model_final <- finalize_workflow(glmnet_workflow, glmnet_tune %>% 
+  select_best())
+
+final_fit <- glmnet_model_final %>% 
+  fit(df_characteristics)
+```
+
+What does the fit look like? These are the terms that have the greatest effect on bar rating.
+
+```{r, include=F}
+final_fit <- read_rds(here::here("_posts", 
+                                    "2022-01-17-flavours-of-cocoa", 
+                                    "data", 
+                                    "final_fit.rds"))
+```
+
+
+```{r, layout = "l-body-outset"}
+final_fit %>%
+  extract_fit_parsnip() %>%
+  tidy() %>%
+  filter(term != "(Intercept)") %>%
+  mutate(term = str_remove(term, "tf_most_memorable_characteristics_")) %>%
+  mutate(sign = estimate > 0) %>%
+  group_by(sign) %>%
+  mutate(estimate = abs(estimate)) %>% 
+  slice_max(estimate, n = 12) %>%
+  ungroup() %>%
+  mutate(estimate = ifelse(sign == TRUE, estimate, -estimate)) %>% 
+  mutate(term = fct_reorder(term, estimate)) %>%
+  ggplot(aes(estimate, term, fill = sign)) +
+  geom_col(show.legend = F) +
+  geom_vline(xintercept = 0, lty = 2) +
+  scale_fill_brewer(palette = "Paired") +
+  labs(x = "Effect of term on chocolate bar score",
+       y = "Memorable characteristic")
+```
+
+
+Wow! have a look at the terms up top - "creamy", "complex" and "rich" are good chocolate words. On the other side, "bitter", "off" and "chemical" are terms that lower the score of the bar.
+
