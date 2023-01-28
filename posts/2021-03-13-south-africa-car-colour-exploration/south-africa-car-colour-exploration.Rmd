@@ -2,7 +2,7 @@
 title: "South African Car Colour Exploration"
 description: |
   In this document I walk through creating a stacked area chart showing the evolution of car colour over time in South Africa. The data comes from nearly 45,000 adverts for cars that I scraped from Gumtree.
-preview: images/stacked_area.jpeg
+image: images/stacked_area.jpeg
 author:
   - name: Jonathan Jayes
 date: 11-24-2020

@@ -2,7 +2,7 @@
 title: "Shipping and Scraping - Part 1 in a Series on Shipping"
 description: |
   In this post I walk through scraping data on cargo ships from Wikipedia as part of a series on shipping. I make use of R, the rvest package for webscraping and the SelectorGadget tool for CSS selection.
-preview: images/preview_ship_linkedin.jpeg
+image: images/preview_ship_linkedin.jpeg
 author:
   - name: Jonathan Jayes
 date: 04-08-2021
@@ -52,10 +52,11 @@ Before we begin with the scraping walkthrough, I want to visualize the data and 
 
 The small multiples plot below shows the evolution of cargo ship size from 1870 to today. On the x-axis is the length of the average cargo ship per decade from Wikipedia's list of cargo ships^[I focus on all cargo ships until the 1970s, whereafter I focus only on container ships. Additional data on container ships is scraped from VesselFinder.com]. On the y-axis is the average ship beam, or width at the widest point. The colour of the rectangle shows the deadweight tonnage of the average ship, or amount of cargo that the ship can carry. 
 
-<aside>
-Deadweight tonnage or tons deadweight is a measure of how much weight a ship can carry. It is the sum of the weights of cargo, fuel, fresh water, ballast water, provisions, passengers, and crew. </aside>
+[Deadweight tonnage or tons deadweight is a measure of how much weight a ship can carry. It is the sum of the weights of cargo, fuel, fresh water, ballast water, provisions, passengers, and crew.]{.aside}
 
-```{r, layout="l-body-outset", fig.width = 10, fig.height=6}
+```{r,  fig.width = 10, fig.height=6}
+#| column: page
+
 df %>% 
   mutate(decade = launched - launched %% 10) %>% 
   group_by(decade) %>% 
@@ -84,17 +85,13 @@ Cargo ships have increased dramatically in size over time! The oldest ship in ou
 
 Today, container ships like the *Ever Given* are nearly 400m long, 60m wide, and can carry more than 20,000 twenty-foot containers. That's enough space for 745 million bananas!
 
-<aside>
-TEUs, or twenty-foot equivalent units, is the measure that shipping companies use to compare volume. A TEU is 6.1m long, 2.4m wide and usually 2.6m high. Source: [Wikipedia](https://en.wikipedia.org/wiki/Twenty-foot_equivalent_unit)
-</aside>
+[TEUs, or twenty-foot equivalent units, is the measure that shipping companies use to compare volume. A TEU is 6.1m long, 2.4m wide and usually 2.6m high. Source: [Wikipedia](https://en.wikipedia.org/wiki/Twenty-foot_equivalent_unit)]{.aside}
 
 ### Increasing size of container ships by length, width and tonnage.
 
 In the plots below we focus only on container ships built after 1970. This era saw the construction of the first ships purpose built to carry ISO containers, which could be loaded and unloaded rapidly at port, repacked and shipped onward on any compatible ship, truck or train. The ISO standard container transformed the shipping industry and replaced the prior status quo of break bulk carriers. One of the consequences was a dramatic reduction in demand for "stevedores" or "longshoremen"; workers who would manually unload cargo from break bulk carriers.
 
-<aside>
-If you're interested in containerization, I highly reccomend [this episode](https://www.tradetalkspodcast.com/podcast/133-how-one-man-and-some-metal-boxes-revolutionized-global-trade/) from the podcast Trade Talks, and [this eight-part series](https://cms.megaphone.fm/channel/PPY8156500299?selected=PPY1876923489) from Alexis Madrigal.
-</aside>
+[If you're interested in containerization, I highly reccomend [this episode](https://www.tradetalkspodcast.com/podcast/133-how-one-man-and-some-metal-boxes-revolutionized-global-trade/) from the podcast Trade Talks, and [this eight-part series](https://cms.megaphone.fm/channel/PPY8156500299?selected=PPY1876923489) from Alexis Madrigal.]{.aside}
 
 ```{r}
 facet_plot <- function(metric){
@@ -189,8 +186,8 @@ Container ships have also become wider, with lumping at beams of 32m, 40m and 59
 
 So it certainly seems that cargo ships have been becoming larger over time. Interestingly, it appears that while the largest container ships continue to get larger and carry more cargo, there is still a need for relatively small ships. There are a significant number of container ships that can carry less than 50 000 tons launched since 2010, shown in the density plot below. We could say that there has been a bifurcation in ship capacity, with a few enormous ships, and a greater number of smaller ships operating in tandem today.
 
-```{r, layout="l-body-outset", fig.width = 8, fig.height=6}
-
+```{r,  fig.width = 8, fig.height=6}
+#| column: page
 df %>% 
   filter(launched > 1970,
          !str_detect(name, "Amoco")) %>% 
@@ -215,11 +212,7 @@ df %>%
 
 [Economies of scale](https://en.wikipedia.org/wiki/Economies_of_scale) describes a decrease in the per unit cost as scale of an operation increases. This perfectly fits the shipping industry's relentless path towards upsizing ships, cranes and ports. One of the reasons has to do with fluid dynamics. [Hull resistance](https://ijmt.ir/article-1-428-en.pdf) is one of the key factors impacting fuel consumption. For vessels in water, drag loss is less than proportional to increasing cargo carried. In other words, making a ship larger usually results in less fuel consumption per ton of cargo, holding all else constant. As we have seen in the figures above, container ships have become larger and larger as they carry more cargo per ship, in an effort to save fuel.
 
-<aside>
-Other methods of drag reduction include improved hull design, injecting air around the hull surface and reducing hull roughness from slime and weeds. See [Resistence and powering of ships](https://www.usna.edu/NAOE/_files/documents/Courses/EN400/02.07%20Chapter%207.pdf)
-
-![Improved hull design](images/hull-design.PNG){#id .class width=60% height=60%}
-</aside>
+[Other methods of drag reduction include improved hull design, injecting air around the hull surface and reducing hull roughness from slime and weeds. See [Resistence and powering of ships](https://www.usna.edu/NAOE/_files/documents/Courses/EN400/02.07%20Chapter%207.pdf) ![Improved hull design](images/hull-design.PNG){#id .class width=60% height=60%}]{.aside}
 
 According to Marc Levinson, author of [The Box: How the Shipping Container Made the World Smaller and the World Economy Bigger](https://press.princeton.edu/books/paperback/9780691170817/the-box), the shippers applied this idea to every element of the industry. He says:
 
@@ -239,9 +232,7 @@ Now that we have had a look at the data, I want to walk through how it can easil
 
 The source of the pre-1970 data is Wikipedia's list of cargo ships, a screenshot of which I include below. The plan to get the data involves collecting a list of links to each page and then scraping the information about each ship from it's page. The code chunks below show the process of scraping the data and you can access the scripts on my [GitHub repository](https://github.com/j-jayes/container-ships).
 
-<aside>
-If you want to follow along with a video of the scraping process, I highly recommend [this video on ramen reviews](https://youtu.be/tCa2di7aEP4) from David Robinson.
-</aside>
+[If you want to follow along with a video of the scraping process, I highly recommend [this video on ramen reviews](https://youtu.be/tCa2di7aEP4) from David Robinson.]{.aside}
 
 <center>
 
@@ -375,9 +366,7 @@ We do not care about all of this information, so we will filter for what we want
 
 The code below iterates through the list of links and returns the information in the infobox from each page. The `possibly` statement is a helpful function from the `purrr` package that allows us to return a message if the operation fails, in this case a string that just says "failed". 
 
-<aside>
-For more about the usefulness of `purrr`'s safely functions see [Dealing with failure](https://r4ds.had.co.nz/iteration.html?q=dealing%20with%20#dealing-with-failure) in *R for Data Science* by Hadley Wickham and Garrett Grolemund.
-</aside>
+[For more about the usefulness of `purrr`'s safely functions see [Dealing with failure](https://r4ds.had.co.nz/iteration.html?q=dealing%20with%20#dealing-with-failure) in *R for Data Science* by Hadley Wickham and Garrett Grolemund.]{.aside}
 
 ```{r, eval=F, echo=T}
 # mapping through each url

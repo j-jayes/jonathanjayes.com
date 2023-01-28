@@ -2,7 +2,7 @@
 title: "Mapping Sweden's Regional GDP"
 description: |
   Visualizing the relationship between population and regional GDP share in 1571, based on data from Enflo and Missiaia (2018).
-preview: images/preview.png
+image: images/preview.png
 author:
   - name: Jonathan Jayes
 date: 05-06-2021
@@ -116,9 +116,8 @@ int_fig
 
 Source: @Enflo, Data accessible [here](https://www.ekh.lu.se/en/research/economic-history-data/shra1571-2010).
 
-<aside>
-Figure inspiration and code from [Claus Wilke](https://wilkelab.org/SDS375/slides/interactive-plots.html#1)
-</aside>
+
+[Figure inspiration and code from [Claus Wilke](https://wilkelab.org/SDS375/slides/interactive-plots.html#1)]{.aside}
 
 
 ### What do we learn?

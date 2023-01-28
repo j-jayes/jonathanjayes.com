@@ -1,16 +1,37 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "posts/2021-07-06-students-speak/students-speak.html",
+    "href": "posts/2021-07-06-students-speak/students-speak.html",
+    "title": "Students Speak",
     "section": "",
-    "text": "About this site\n\n\n[1] 2"
+    "text": "Hi Johan - here are some visualizations I have put together from your students’ diary entries. I think that they tell quite a nice story. I hope that some are useful. I’ve done them in black and white - I’m not sure where you want to publish them in the end. If you’d like some colour I can add it easily.\nI’ve written up the process mostly so that I can remember. The visualizations are at the bottom of the post.\n\n\nThe Stellenbosch students of Economic History 281 were encouraged to keep a diary during the lockdown as the Covid-19 pandemic overtook the world in March 2020. This post is a short text analysis of the content of their diary entries.\n\n\n\nThe students’ diary entries have been ingested to form a dataset such that each row is one student’s observation on one day. Additional columns specify the date and the week of the log. There are 333 observations in total. Three examples are shown in the table below.\n\n\n\n\n\n\n\nThese data were supplemented to include the number of Covid-19 cases in South Africa, the number of deaths, and the number of tests performed. These may provide some context around the change in content of the diary entries over time.\n\n\n\n\n\n\nWe start with a word cloud which shows the words used by the students in their diary entries.\nThe size of the word is correlated to how frequently it is used. The sentiment of the word is scored with the bing sentiment lexicon, a general purpose English sentiment lexicon that categorizes words in a binary fashion, either positive or negative.\n\n\n\n\n\n\n\n\nWord cloud\n\n\n\n\nWe can see that common positive words include “support”, “privileged”, “healthy”, “productive”, and “excited”. Common negative words are dominated by “virus”, followed by “difficult”, “struggling”, and “infected”.\nThis is slightly more informative than a generic word cloud showing word frequency. However, it should be noted that the words must occur in both the students’ diary entries and the bing sentiment lexicon in order to be shown in the word cloud.\nTable @ref(tab:excluded) shows some common words in the students’ diary entries which are excluded from the wordcloud in Figure @ref(fig:wordcloud).\n\n\n\nCommon words excluded from wordcloud\n\n\nWord\nNumber of uses\n\n\n\n\nLockdown\n251\n\n\nPeople\n211\n\n\nDay\n183\n\n\nTime\n172\n\n\nFamily\n111\n\n\nFeel\n92\n\n\nSouth\n90\n\n\nHome\n80\n\n\nWorld\n78\n\n\nDays\n71\n\n\nAfrica\n61\n\n\nLife\n54\n\n\nOnline\n51\n\n\n19\n50\n\n\nFriends\n50\n\n\n\n\n\nWe can also include a conventional word cloud beside the comparison cloud, and shown in Figure @ref(fig:image-grobs).\n\n\n\n\n\n\nConventional word cloud and comparison cloud\n\n\n\n\n\nFigure @ref(fig:sentiment) below shows the change in sentiment of the student responses over the course of the lockdown. It requires some explanation: the words used by the students are grouped by week, scored according to a sentiment lexicon, the score is averaged across the week. The points on the graph represent the average sentiment of the students’ diary entries in a particular week.\n\n\n\n\n\n\n\n\nEvolution of sentiment\n\n\n\n\nWe can see that at the outset, sentiment is poor, this improves, and then drops dramatically at the end of the period. It is noteworthy that the average sentiment is negative for the entirety of the period, highlighted by the dotted line at zero.\nThis can be explained by the choice of sentiment lexicon used to score the words. The AFINN-111 dataset is a lexicon of English words rated for valence with an integer between minus five and plus five. The words were manually labelled by Finn Årup Nielsen in 2009-2011. An example of the scores assigned to words in the students’ diary entries is shown in Table @ref(tab:afinn) below.\n\n\n\nAFINN sentiment scores\n\n\nWord\nSentiment score\n\n\n\n\nBullshit\n-4\n\n\nCatastrophic\n-4\n\n\nPanic\n-3\n\n\nFake\n-3\n\n\nWorse\n-3\n\n\nFunny\n4\n\n\nFun\n4\n\n\nWonderful\n4\n\n\nThrilled\n5\n\n\n\n\n\n\n\n\nThe wordcloud in Figure @ref(fig:wordcloud) showed the most common words. What if we want to see the words that are most specific to each week of the diary entries? We can use the tidylo package that provides the weighted log odds ratio for each word across the weeks of diary entries. This provides a quantification of how specific each word is to the week that it is used in. For more information see Fightin’ Words: Lexical Feature Selection and Evaluation for Identifying the Content of Political Conflict by Monroe, Colaresi, and Quinn (2008).\nTable @ref(tab:words) below shows the words most specific to each week.\n\n\n\n\n\n\nWeek specific words calculated with weighted log odds\n\n\n\n\n\n\n\n\n\n\nWeek 1\nWeek 2\nWeek 3\nWeek 4\nWeek 5\nWeek 6\n\n\n\n\nAfrican leaders\nLockdown starts\nPrivilege\nEaster Sunday\nZoom\nClothing bank\n\n\nChurch\nVirus\nConspiracy theories\nPayment\nR500 billion\nLockdown restrictions\n\n\nAirports\nTownships\nAn obligation\nHot Cross buns\nSUN Learn\nLevel 5\n\n\nNSFAS\nCases recorded\nContinues to rise\nExtension\nEconomic stimulus\nLivelihoods\n\n\n\n\n\nNice! We can see that we capture some elements of the experience in each week of lockdown.\n\n\n\n\n\n\nThis figure superimposes the week-specific words above the line graph that shows the evolution of the students’ sentiment across the weeks.\n\n\n\n\n\nSentiment and week-words figure\n\n\n\n\nI think it captures a bit of the experience - at the outset there was anxiety about the lockdown, difficulties with internet access and a worry about the rise in cases. This was followed by conspiracy theories and discussions of obligation and privilege. The collective mood improved toward Easter, and was further buoyed by the announcement of a large stimulus package by the government. Finally there was exasperation about the state of employment and livelihoods.\n\n\n\nFigure @ref(fig:context) shows the evolution of the sentiment of the students’ diary entries beside the rising Covid-19 case numbers in South Africa.\n\n\n\n\n\n\n\n\nComparison figure\n\n\n\n\nIt is difficult to conclude about a relationship between the number of cases and the sentiment of the students’ reflections. While there appears to be a relationship between average sentiment and number of tests at the outset of the lockdown, I think this is statistical noise rather than some sort of correlation.\n\n\n\nThe purpose of this selection of figures is to emphasize that the diary entries were recorded at the outset of the pandemic in South Africa. The number of cases was relatively low compared to the steep increase in cases which followed in winter of 2020.\nThe figures below compare the period of diary entries to the number of cases and deaths in the first year of the pandemic.\nI think option two conveys the message clearly and without clutter."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Quarto-blank-website",
-    "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\n[1] 2"
+    "objectID": "posts/2021-07-06-students-speak/students-speak.html#option-1",
+    "href": "posts/2021-07-06-students-speak/students-speak.html#option-1",
+    "title": "Students Speak",
+    "section": "Option 1",
+    "text": "Option 1\nHere we have a two panel plot of the Covid-19 statistics and number of diary entries recorded by the students."
+  },
+  {
+    "objectID": "posts/2021-07-06-students-speak/students-speak.html#option-2",
+    "href": "posts/2021-07-06-students-speak/students-speak.html#option-2",
+    "title": "Students Speak",
+    "section": "Option 2",
+    "text": "Option 2\nNext we have a single panel with the period of diary entries superimposed on the Covid-19 statistics."
+  },
+  {
+    "objectID": "posts/2021-07-06-students-speak/students-speak.html#option-3",
+    "href": "posts/2021-07-06-students-speak/students-speak.html#option-3",
+    "title": "Students Speak",
+    "section": "Option 3",
+    "text": "Option 3\nAlternatively we can annotate a thick line to show where the diary entries occur."
+  },
+  {
+    "objectID": "posts/2021-07-06-students-speak/students-speak.html#option-4",
+    "href": "posts/2021-07-06-students-speak/students-speak.html#option-4",
+    "title": "Students Speak",
+    "section": "Option 4",
+    "text": "Option 4\nAlternatively we can have a legend variant of option 2."
   }
 ]

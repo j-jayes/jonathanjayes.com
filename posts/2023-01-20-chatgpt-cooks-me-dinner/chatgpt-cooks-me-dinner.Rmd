@@ -7,7 +7,7 @@ author:
     url:
       interludeone.com: {}
 date: 2023-01-20
-preview: "images/preview.png"
+image: "images/preview.png"
 output:
   distill::distill_article:
     self_contained: false

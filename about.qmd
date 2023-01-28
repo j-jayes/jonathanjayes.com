@@ -1,9 +1,86 @@
 ---
-title: "About"
+title: "Jonathan Jayes"
+about:
+  template: trestles
+  image: assets/jj.png
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com/JonathanJayes
+    - icon: github
+      text: Github
+      href: https://github.com
+    - icon: mail
+      text: Mail
+      href: mailto:j0nathanjayes@gmail.com
+    - icon: LinkedIn
+      text: LinkedIn
+      href: https://www.linkedin.com/in/jonathanjayes/
 ---
 
-About this site
+
+## Bio
+
+"I enjoy some of the old and I enjoy the new. 
+And if I can find a balance between it, that's where I find my satisfaction."
+
+-- [Anderson .Paak - The Dreamer (feat. Talib Kweli & Timan Family Choir)
+](https://www.youtube.com/watch?v=Jv95aptVSUk)
+
+## Education
+
 
 ```{r}
-1 + 1
+library(gt)
+library(tidyverse)
+
+education <- tribble(
+  ~logo, ~link, ~institution, ~degree, ~date, ~grade_comment,
+  # LU
+  "assets/education-images/lu.jfif", "https://ehl.lu.se/ekonomisk-historia", "Lund University", "Master's degree, Economics", "2021", "Exchange semester",
+  # SU
+  "assets/education-images/su.jfif", "https://www.ekon.sun.ac.za/", "Stellenbosch University", "Master's degree, Economics", "2020", "Grade: <em>cum laude</em>",
+  # uct hnours
+  "assets/education-images/uct.jfif", "http://www.economics.uct.ac.za/", "University of Cape Town", "Honours degree, Economics", "2018", "Grade: 2:1",
+  # uct undergrad
+  "assets/education-images/uct.jfif", "http://www.economics.uct.ac.za/", "University of Cape Town", "Bachelor's degree, Economics and Economic History", "2015-2017", "Grade: 2:1",
+)
+
+education <- education %>%
+  mutate(
+    logo = glue::glue("<a href = {link}>
+                        <img src='{logo}' width='50' height='50'>
+                      </a>"),
+    institution = glue::glue("<b>{institution}</b>"),
+    date = glue::glue("<span style='opacity: .7;'> {date} </span>"),
+    grade_comment = glue::glue("<span style='opacity: .7;'> {grade_comment} </span>"),
+  )
+
+education <- education %>%
+  mutate(text = str_c(
+    institution, "<br>",
+    degree, "<br>",
+    date, "<br>",
+    grade_comment
+  )) %>%
+  select(logo, text) %>%
+  mutate(
+    logo = purrr::map(logo, gt::html),
+    text = purrr::map(text, gt::html)
+  )
+
+education %>%
+  gt() %>%
+  # tab_header(md("**Education**")) %>%
+  cols_align(align = c("left"), columns = text) %>%
+  cols_label(
+    logo = "",
+    text = "",
+  )
 ```
+
+## Experience
+
+**Laboratory for the Economics of Africa's Past** | Researcher under [Prof Johan Fourie](https://www.johanfourie.com/)| January 2020 - July 2021
+
+**FTI Consulting** | Junior Economist in [Economic and Financial Consulting Practice](https://www.linkedin.com/showcase/fti-consulting-south-africa/) | March 2019 - January 2020

@@ -3,7 +3,7 @@ title: "Fired or Retired: NLP classification of CEO exits"
 description: |
   In this post I train a text classfier to predict if a CEO is fired or retires, based on the 8-K fillings submitted to the SEC in the 270 days before and after the CEO's departure date.
 draft: true
-preview: images/preview.png
+image: images/preview.png
 author:
   - name: Jonathan Jayes
 date: 05-05-2021
@@ -33,7 +33,7 @@ theme_set(theme_light())
 
 Last month we learned about a mostly unremarkable deli in New Jersey, USA, with an unlikely market capitalisation of $100 million. In [this episode](https://www.npr.org/2021/04/21/989625586/the-100-million-deli) of the podcast [Planet Money](https://twitter.com/planetmoney), Mary Childs and Jacob Goldstein explain that one possible reason for the high market cap may be that the deli will be the subject of a reverse takeover (RTO) in the future.
 
-<aside>
+
 ```{r}
 location <- tibble(lng = -75.239275,
                    lat = 39.840100,
@@ -54,7 +54,7 @@ m
 ```
 
 Map locating Hometown Deli in Paulsboro, NJ, the only asset of [Hometown International, Inc](https://sec.report/CIK/0001632081)
-</aside>
+
 
 In a reverse takeover, a private company wants to go public. Instead of going through the hoops of having an Initial Public Offering (IPO), the private company simply buys some semi-defunct but still publicly traded company in order to become publicly traded (usually in the US) themselves. This skirts the onerous requirements that come with making an IPO.
 
@@ -145,9 +145,9 @@ To determine if a CEO retired or was fired, I will make use of the 8-K forms fil
 
 I scraped these 8-K fillings from the SEC website and removed the formulaic text at the begninning of each form detailing the location of company headquarters and such.
 
-<aside>
+
 If you want to see the scraping code, have a look at my [GitHub here](https://github.com/j-jayes/tidy-tuesday/blob/main/code/ceo-exits.Rmd)
-</aside>
+
 
 I then tokenized the text into words using the tokenizer from the `tidytext` package from [Julia Silge and David Robinson](https://www.tidytextmining.com/).
 

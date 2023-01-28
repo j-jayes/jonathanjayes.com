@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.237">
+<meta name="generator" content="quarto-1.2.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Template title - Quarto-blank-website</title>
+<title>Interlude One</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,6 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./assets/favicon.ico" rel="icon">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -59,19 +61,53 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
 
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="assets/styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./assets/favicon_logo.com" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Template title</span>
+    <span class="navbar-title">Interlude One</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -97,38 +133,539 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#blog-posts" id="toc-blog-posts" class="nav-link active" data-scroll-target="#blog-posts">Blog posts</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Quarto-blank-website</h1>
+
+
+<section id="blog-posts" class="level2">
+<h2 class="anchored" data-anchor-id="blog-posts">Blog posts</h2>
+
+
+
+</section>
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1674918818327" data-listing-reading-time-sort="0.02">
+<div class="thumbnail">
+<a href="./posts/test/test.html">
+<div class="thumbnail-image">
+
 </div>
+</a><p><a href="./posts/test/test.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/test/test.html">
+<h3 class="no-anchor listing-title">
+Test
+</h3>
+<div class="listing-subtitle">
 
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p>This is a Quarto website.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+</div>
+<div class="listing-description">
+This is a test.
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/test/test.html"> </a>
 </div>
 </div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1674920201622" data-listing-reading-time-sort="1.51">
+<div class="thumbnail">
+<p><a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html"> <img src="./posts/2023-01-20-chatgpt-cooks-me-dinner/images/preview.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html">
+<h3 class="no-anchor listing-title">
+ChatGPT cooks me dinner
+</h3>
+<div class="listing-subtitle">
 
+</div>
+<div class="listing-description">
+<p>🍲 Master the kitchen like a pro with the help of ChatGPT! 🍴 I tried it out and the results will blow your mind! 🤯 Find out what happened when I asked a language model for recipe ideas and cooking instructions. 😲 You won’t believe how delicious my Gammon and Vegetable Stew with Mint turned out! 🍽️ Don’t miss out on this must-read blog post! 👀</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html">
+<div class="listing-date">
+Jan 20, 2023
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1671490800000" data-listing-file-modified-sort="1674921229587" data-listing-reading-time-sort="4.175">
+<div class="thumbnail">
+<p><a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html"> <img src="https://github.com/j-jayes/jjayes_distill/raw/fba82ad50bbd00f3768079fb983f8c8d2706cde2/_posts/2022-12-20-gpt-chat-blog-post-author/images/DALL%C2%B7E%202022-12-20%2016.38.40%20-%20A%20diagram%20of%20three%20penguins%20in%20the%20style%20of%20Paul%20C%C3%A9zanne%2C%20hyper%20realistic%2C%20beautiful%20art.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html">
+<h3 class="no-anchor listing-title">
+ChatGPT fills in for me as a blog post author
+</h3>
+<div class="listing-subtitle">
 
+</div>
+<div class="listing-description">
+<p>I ask ChatGPT to write a blog post in the same manner as one I wrote last week. The results will amaze you!</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html">
+<div class="listing-date">
+Dec 20, 2022
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1671058800000" data-listing-file-modified-sort="1674923804769" data-listing-reading-time-sort="4.68">
+<div class="thumbnail">
+<a href="./posts/2022-12-15-coef-plots/coef-plots.html">
+<div class="thumbnail-image">
 
-</main> <!-- /main -->
+</div>
+</a><p><a href="./posts/2022-12-15-coef-plots/coef-plots.html"></a></p>
+</div>
+<div class="body">
+<a href="./posts/2022-12-15-coef-plots/coef-plots.html">
+<h3 class="no-anchor listing-title">
+Coefficient plots in <code>ggplot</code>
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Drawing coefficient plots in R and <code>ggplot</code>.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2022-12-15-coef-plots/coef-plots.html">
+<div class="listing-date">
+Dec 15, 2022
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1654034400000" data-listing-file-modified-sort="1674921112098" data-listing-reading-time-sort="7.97">
+<div class="thumbnail">
+<p><a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html"> <img src="https://github.com/j-jayes/img-repo/raw/1f154af0b081a6423c73c6fe453c93ea16c891c2/images/owid_smokers.PNG" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html">
+<h3 class="no-anchor listing-title">
+Our World In Data choropleth
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>A post on how recreate the Our World In Data characteristic choropleth in R.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html">
+<div class="listing-date">
+Jun 1, 2022
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1652997600000" data-listing-file-modified-sort="1674920178471" data-listing-reading-time-sort="3.35">
+<div class="thumbnail">
+<p><a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html"> <img src="https://raw.githubusercontent.com/j-jayes/jjayes_distill/main/_posts/2022-06-01-linkedin-style-about-info/images/gt_educ.PNG" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html">
+<h3 class="no-anchor listing-title">
+LinkedIn style tables for personal websites
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>A post on how to us the {gt} table package to make tables for the about page of a pesonal website or blog.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html">
+<div class="listing-date">
+May 20, 2022
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1646348400000" data-listing-file-modified-sort="1674920173243" data-listing-reading-time-sort="6.08">
+<div class="thumbnail">
+<p><a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html"> <img src="https://raw.githubusercontent.com/j-jayes/Monday-Munch/main/images/cover.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html">
+<h3 class="no-anchor listing-title">
+Programmatically generate tabs in Rmarkdown
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>A walk-though for writing code that writes it’s own code.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html">
+<div class="listing-date">
+Mar 4, 2022
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1644879600000" data-listing-file-modified-sort="1674922652838" data-listing-reading-time-sort="16.97">
+<div class="thumbnail">
+<p><a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html"> <img src="./posts/2022-01-17-flavours-of-cocoa/images/preview.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html">
+<h3 class="no-anchor listing-title">
+Flavours of cocoa
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>An exploration of chocolate bar reviews</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html">
+<div class="listing-date">
+Feb 15, 2022
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1642374000000" data-listing-file-modified-sort="1674922597151" data-listing-reading-time-sort="7.03">
+<div class="thumbnail">
+<p><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html"> <img src="./posts/2022-01-24-fathom-twitter/images/preview.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html">
+<h3 class="no-anchor listing-title">
+R vs Python? R &amp; Python!
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Mining the twitter archive of <span>Fathom Data</span></p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html">
+<div class="listing-date">
+Jan 17, 2022
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1625522400000" data-listing-file-modified-sort="1674923170388" data-listing-reading-time-sort="18.615">
+<div class="thumbnail">
+<p><a href="./posts/2021-07-06-students-speak/students-speak.html"> <img src="./posts/2021-07-06-students-speak/images/preview.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-07-06-students-speak/students-speak.html">
+<h3 class="no-anchor listing-title">
+Students Speak
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Text analysis of students’ diary entries during the Covid-19 lockdown in South Africa</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-07-06-students-speak/students-speak.html">
+<div class="listing-date">
+Jul 6, 2021
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-listing-date-sort="1621548000000" data-listing-file-modified-sort="1674920145819" data-listing-reading-time-sort="10.225">
+<div class="thumbnail">
+<p><a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html"> <img src="./posts/2021-05-21-ggplot-resources/images/preview.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html">
+<h3 class="no-anchor listing-title">
+Resources for Learning R and Mastering ggplot
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>A collection of videos and resources to get you started using R and the tidyverse for exploratory data analysis and visualization.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html">
+<div class="listing-date">
+May 21, 2021
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-listing-date-sort="1620252000000" data-listing-file-modified-sort="1674921170108" data-listing-reading-time-sort="2.065">
+<div class="thumbnail">
+<p><a href="./posts/2021-05-06-swedenmap/swedenmap.html"> <img src="./posts/2021-05-06-swedenmap/images/preview.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-05-06-swedenmap/swedenmap.html">
+<h3 class="no-anchor listing-title">
+Mapping Sweden’s Regional GDP
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Visualizing the relationship between population and regional GDP share in 1571, based on data from Enflo and Missiaia (2018).</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-05-06-swedenmap/swedenmap.html">
+<div class="listing-date">
+May 6, 2021
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="12" data-listing-date-sort="1617832800000" data-listing-file-modified-sort="1674920546768" data-listing-reading-time-sort="15.815">
+<div class="thumbnail">
+<p><a href="./posts/2021-04-03-container-ships/container-ships.html"> <img src="./posts/2021-04-03-container-ships/images/preview_ship_linkedin.jpeg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-04-03-container-ships/container-ships.html">
+<h3 class="no-anchor listing-title">
+Shipping and Scraping - Part 1 in a Series on Shipping
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>In this post I walk through scraping data on cargo ships from Wikipedia as part of a series on shipping. I make use of R, the rvest package for webscraping and the SelectorGadget tool for CSS selection.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-04-03-container-ships/container-ships.html">
+<div class="listing-date">
+Apr 8, 2021
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="13" data-listing-date-sort="1613775600000" data-listing-file-modified-sort="1674922261037" data-listing-reading-time-sort="8.065">
+<div class="thumbnail">
+<p><a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html"> <img src="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/images/reg_1.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html">
+<h3 class="no-anchor listing-title">
+Swedish trade in goods and exchange students
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>I wanted to see if there was an association between the volume of trade between a country and Sweden, and the number of exchange students that have come to Lund Univesity from there, this semester.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html">
+<div class="listing-date">
+Feb 20, 2021
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="14" data-listing-date-sort="1606172400000" data-listing-file-modified-sort="1674920102232" data-listing-reading-time-sort="7.975">
+<div class="thumbnail">
+<p><a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html"> <img src="./posts/2021-03-13-south-africa-car-colour-exploration/images/stacked_area.jpeg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html">
+<h3 class="no-anchor listing-title">
+South African Car Colour Exploration
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>In this document I walk through creating a stacked area chart showing the evolution of car colour over time in South Africa. The data comes from nearly 45,000 adverts for cars that I scraped from Gumtree.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html">
+<div class="listing-date">
+Nov 24, 2020
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="15" data-listing-date-sort="1602280800000" data-listing-file-modified-sort="1674923286289" data-listing-reading-time-sort="0.575">
+<div class="thumbnail">
+<p><a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html"> <img src="./posts/2021-03-18-car-price-explorer/images/preview.png" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html">
+<h3 class="no-anchor listing-title">
+Car Price Comparison Tool
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>This web app helps South Africans gauge the median price for a second hand car. You can compare price by odometer reading, make and model, and province. Ad links are included in a table beside the output.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html">
+<div class="listing-date">
+Oct 10, 2020
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="16" data-listing-date-sort="1586296800000" data-listing-file-modified-sort="1674921796311" data-listing-reading-time-sort="3.59">
+<div class="thumbnail">
+<p><a href="./posts/2021-04-21-chips/chips.html"> <img src="./posts/2021-04-21-chips/figures/Transistors_colour.jpeg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/2021-04-21-chips/chips.html">
+<h3 class="no-anchor listing-title">
+Recreating Our World In Data’s Beautiful Transistor Count Graphic
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Scraping data from Wikipedia and recreating OWID’s figure with ggplot2.</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/2021-04-21-chips/chips.html">
+<div class="listing-date">
+Apr 8, 2020
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="17" data-listing-date-sort="1584054000000" data-listing-file-modified-sort="1674920208256" data-listing-reading-time-sort="0.43">
+<div class="thumbnail">
+<p><a href="./posts/welcome/welcome.html"> <img src="./posts/welcome/images/alt-j.jpg" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/welcome/welcome.html">
+<h3 class="no-anchor listing-title">
+Welcome to Interlude One
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>“Like all good fruit, the balance of life is in the ripe and ruin”</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/welcome/welcome.html">
+<div class="listing-date">
+Mar 13, 2020
+</div>
+<div class="listing-author">
+Jonathan Jayes
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

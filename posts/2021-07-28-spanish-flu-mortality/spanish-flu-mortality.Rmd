@@ -3,7 +3,7 @@ title: "Spanish Flu Mortality"
 description: |
   This paper examines mortality during the Spanish flu pandemic of 1918 in 15 districts in the Cape Province of South Africa.
 draft: true
-preview: images/ridge-plot.jpeg
+image: images/ridge-plot.jpeg
 author:
   - name: Jonathan Jayes
 date: 07-28-2021
@@ -19,7 +19,7 @@ bibliography: bibliography.bib
 
 ```{r, include = F}
 knitr::opts_chunk$set(echo = F, message = F, warning = F)
-setwd("~/Recon/jjayes_distill/_posts/2021-07-28-spanish-flu-mortality")
+setwd(here::here("posts/2021-07-28-spanish-flu-mortality"))
 library(tidyverse)
 library(tidymodels)
 library(tidytext)
@@ -73,7 +73,7 @@ N.B. -- If the certificate of a Medical Practitioner is produced, the causes of 
 Source: @Civil1918
 </blockquote>
 
-<aside>
+
 
 ```{r}
 library(ggridges)
@@ -146,7 +146,7 @@ table
 ```
 
 
-</aside>
+
 
 ### Classification of race from ethnicity
 
@@ -158,7 +158,7 @@ Race is one important feature of the analysis which follows. As noted in @Fourie
 
 Further, more than 200 ethnicities appear only once among the records, such that the distribution of observed ethnicities is skewed to the right, with 419 *different* ethnicities recorded, evident in Figure \@ref(fig:ethnicity-distribution). 
 
-<aside>
+
 ```{r, ethnicity-distribution, fig.cap="Distribution of ethnicities recorded on Forms of Information of a Death"}
 
 jpeg(
@@ -178,7 +178,7 @@ df %>%
 
 dev.off()
 ```
-</aside>
+
 
 To classify these 419 different categorical values down into a more manageable number; 3 broad race groupings in use in the Cape at the time and in South Africa today, I use a combination of regular expression and a linear support vector machine learning algorithm.
 
@@ -194,8 +194,8 @@ In quantifying the number of South Africans who died during the pandemic, there 
 
 Figure \@ref(fig:viridis-deaths) shows a heatmap of the frequency of deaths in each district. The pandemic period is striking. Further, we see lighter coloured areas in larger districts like Oudtshoorn and Queenstown which have higher mortality prior to the pandemic (owing to their larger populations and hence greater number of deaths) than small districts such as Elliot and Sea Point.
 
-```{r viridis-deaths, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Heatmap of deaths per week"}
-
+```{r viridis-deaths,  fig.width = 8, fig.height=6, fig.cap="Heatmap of deaths per week"}
+#| column: page
 jpeg(
     filename="images_bloom/12_4.jpeg",
     width=6,
@@ -234,12 +234,12 @@ dev.off()
 
 There is considerable variation in the crude death rate by district during the pandemic, as shown in Figure \@ref(fig:town-density). Here we can see two important features of the pandemic in our sample of Cape districts. First, the pandemic arrived in different districts at different times. In districts close to Cape Town and along the train line to Kimberley, where the soldiers arrived soon after they were released from quarantine at port, the virus spread rapidly. The evidence in this paper corroborate that of @Phillips1984 regarding the swift abatement of the virus following the peak in October. Only in Oudtshoorn and Komga do the effects of the flu appear to have lingered, with elevated mortality rates into December of 1918. Second, the rate of death, and likely the spread of the disease, differed between districts. For example, the steep surge of cases in Queenstown contrasts with a sustained deadly spread in Oudtshoorn.
 
-<aside>
+
 Crude death rate is the total number of deaths during a given time interval divided by the population.
-</aside>
 
-```{r town-density, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Ridge plot of number of deaths in district by date"}
 
+```{r town-density,  fig.width = 8, fig.height=6, fig.cap="Ridge plot of number of deaths in district by date"}
+#| column: page
 jpeg(
     filename="images_bloom/12_5.jpeg",
     width=6,
@@ -293,8 +293,8 @@ A great benefit of the dataset at hand is the recording of a cause of death on t
 - There are discrepancies in the reporting of the disease by district. Contrast for instance the labelling of deaths in Cradock and Paarl. In the top facet of Figure \@ref(fig:cradock-paarl-causes), it is evident that the vast majority of deaths during the pandemic are labelled as Spanish flu deaths. In contrast, fewer than half of the deaths that occurred during the pandemic are labelled as Spanish flu deaths in Paarl.
 - To avoid this complication it is tempting to simply count the number of deaths in each district during the pandemic period and conclude that these were caused by the flu. However, districts of different population sizes would have expected different numbers of deaths in the absence of the pandemic. Hence it is not advisable to conclude that all recorded deaths were due to the flu.
 
-```{r cradock-paarl-causes, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Density plot comparing causes of death during the pandemic in Cradock and Paarl"}
-
+```{r cradock-paarl-causes,  fig.width = 8, fig.height=6, fig.cap="Density plot comparing causes of death during the pandemic in Cradock and Paarl"}
+#| column: page
 jpeg(
     filename="images_bloom/12_6.jpeg",
     width=6,
@@ -329,7 +329,7 @@ dev.off()
 
 Table \@ref(tab:cradock-paarl-causes-tab) evidences that the majority of deaths in Paarl during the pandemic were labelled simply as "Influenza".
 
-```{r cradock-paarl-causes-tab, layout="l-body-outset"}
+```{r cradock-paarl-causes-tab, }
 cradock_paarl_tab <- df %>%
   filter(
     between(death_date, ymd("1918-09-01"), ymd("1919-01-01")),
@@ -369,15 +369,16 @@ An alternate set of methods for quantifying excess mortality use history as a gu
 
 First, making use of the death notices from 1915 to 1917 and following the methodology laid out by the South Africa Medical Research Council (SAMRC) in @Dorrington2021, I calculate the average number of deaths per month in each town during the pandemic peak of October, November and December in the three preceding years as a baseline. The SAMRC define excess mortality is calculated as "the number of all-cause deaths in the last week less the number that might have been expected to have occurred" [@Dorrington2021, p. 2]. I widen the bandwidth from one week to one month due to the coarsity of the data at district level. The resulting smoother estimates have less noise and appear reasonable. I then subtract this expected number of deaths from the observed number during the pandemic to calculate excess mortality during the 3 months of pandemic peak in 1918. The advantage of this method is that it captures the seasonal variation in mortality, as shown in Figure \@ref(fig:seasonality). It is interesting to note that the the smoothed line shows a peak in mortality in the third quarter of the year in the Cape between 1915 and 1920. This is in contrast to the seasonal pattern in mortality in South Africa as a whole in since 2015 as shown by @Dorrington2021 which displays a dramatic peak during mid-winter shown in \@ref(fig:samrc-pattern).
 
-<aside>
+
 
 ```{r, samrc-pattern, echo=FALSE, out.width='40%', fig.cap="Seasonal pattern in mortality in South Africa"}
 knitr::include_graphics('images/samrc.PNG')
 ```
 Source: @Dorrington2021
-</aside>
 
-```{r seasonality, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Mortality by week across districts - excluding 1918"}
+
+```{r seasonality,  fig.width = 8, fig.height=6, fig.cap="Mortality by week across districts - excluding 1918"}
+#| column: page
 jpeg(
     filename="images_bloom/12_7.jpeg",
     width=6,
@@ -411,7 +412,7 @@ dev.off()
 
 This first method results in estimates of excess mortality shown in Table \@ref(tab:samrc-method-tab). Here it is evident that while the largest number of deaths occurred in Queenstown and Paarl, the districts of Peddie and Elliot saw more than 10 times as many deaths as they had in the period between October and December in the three years preceding the pandemic.
 
-```{r samrc-method-tab, layout="l-body-outset"}
+```{r samrc-method-tab, }
 df_samrc <- df %>%
   mutate(
     week = week(death_date),
@@ -461,7 +462,7 @@ df_samrc %>%
 
 Second, I follow the methodology of @AcuaSoto2011InfluenzaAP who define excess mortality as "deaths observed during the pandemic years minus the average death counts in the pre-pandemic years" [@AcuaSoto2011InfluenzaAP, p.23]. While these authors had access to seven years of data preceding the pandemic, I calculate a simple average of the number of deaths per year in each district in the three prior years and subtract the number of deaths in 1918. Table \@ref(tab:mean-mortality-by-district-tab) shows the mortality by district from 1915 to 1917, and the average across these three years.
 
-```{r mean-mortality-by-district-tab, layout="l-body-outset"}
+```{r mean-mortality-by-district-tab, }
 df_acuasoto <- df %>%
   filter(death_date < ymd("1918-01-01")) %>%
   mutate(year = year(death_date)) %>%
@@ -496,7 +497,8 @@ df_acuasoto %>%
 
 Figure \@ref(fig:excess-mortality-method-2) shows the excess mortality based on method two. Here we can see that Peddie and Elliot stand out with large excess mortality relative to their mean mortality preceding the pandemic.
 
-```{r excess-mortality-method-2, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Excess mortality based on methodology by @AcuaSoto2011InfluenzaAP"}
+```{r excess-mortality-method-2,  fig.width = 8, fig.height=6, fig.cap="Excess mortality based on methodology by @AcuaSoto2011InfluenzaAP"}
+#| column: page
 jpeg(
     filename="images_bloom/12_8.jpeg",
     width=6,
@@ -546,11 +548,12 @@ I use three regression models. These are linear model with only an intercept - i
 
 Next, I use a simple linear regression. This accounts, for instance, for population growth and consequent linear increases in the number of registered deaths per district per year that we would expect with a larger population.
 
-<aside>
+
 
 The linear trend is shown in Figure \@ref(fig:linear-trend) here, alongside a line of equality: 
 
-```{r, linear-trend, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Linear trend for predicted and excess mortality"}
+```{r, linear-trend,  fig.width = 8, fig.height=6, fig.cap="Linear trend for predicted and excess mortality"}
+#| column: page
 library(ggrepel)
 
 jpeg(
@@ -592,14 +595,15 @@ dev.off()
 
 Is appears that towns with higher predicted mortality in 1918 based on the linear trend have higher actual mortality in 1918. 
 
-</aside>
+
 
 Further I use a regression model from Serfling that accounts for the seasonality of respiratory diseases like flu and influenza. According to @Cowling2006, “Serfling’s method uses cyclic regression to model the weekly proportion of deaths from pneumonia and influenza and to define an epidemic threshold that is adjusted for seasonal effects." [-@Cowling2006, 4].
 
 Figure \@ref(fig:regression-methods) shows the mean and predicted ranges of expected mortality based on the three methods, as well as the observed pandemic mortality. It is evident that the districts with larger populations also have a larger range in the mortality protections. Oudtshoorn has a wide range in the projected mortality, followed by Paarl and Queenstown.
 
 
-```{r, regression-methods, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Excess mortality based on regression methods"}
+```{r, regression-methods,  fig.width = 8, fig.height=6, fig.cap="Excess mortality based on regression methods"}
+#| column: page
 df_reg <- df %>%
   mutate(date = lubridate::floor_date(death_date, "week")) %>%
   count(date, town) %>%
@@ -710,7 +714,7 @@ dev.off()
 
 In Table \@ref(tab:regression-tab-range) I show the excess mortality based on these regression methods. The estimates of excess mortality are similar to the estimates produced following the Acua-Soto methodology. The excess mortality percentages are lower than that calculated by following the SAMRC methodology due to a lower smaller detonator in calculating the latter, just the three months of the pandemic peak.
 
-```{r, regression-tab-range, layout="l-body-outset"}
+```{r, regression-tab-range, }
 regression_based_excess_mort <- df_reg %>% 
   distinct(town, mean_projected_deaths, observed) %>% 
   mutate(excess_mortality = observed - mean_projected_deaths,
@@ -734,7 +738,7 @@ regression_based_excess_mort %>%
 
 Table \@ref(tab:excess-mort-comparison-tab) shows the differences in the number and percentage estimates of excess mortality produced following the three methods detailed above. The estimates differ between the methods, and there is not a clear relationship amongst the different methods as to which produces the largest across all the districts.
 
-```{r, excess-mort-comparison-tab, layout="l-body-outset"}
+```{r, excess-mort-comparison-tab, }
 df_excess_mort_comp <- df_samrc %>%
   select(town,
     excess_mortality_samrc = excess_mortality,
@@ -848,7 +852,8 @@ dev.off()
 
 In an effort to contextualize these estimates, I compare the excess mortality figures in each town with the number of deaths recorded as caused by respiratory diseases^[The specific terms are detailed in the appendix], as well as figures from the Pandemic Commission of Inquiry referenced by @Phillips1984.
 
-```{r, phillips-comparison-fig, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Comparison of excess mortality estimates, respiratory deaths and government estimates"}
+```{r, phillips-comparison-fig,  fig.width = 8, fig.height=6, fig.cap="Comparison of excess mortality estimates, respiratory deaths and government estimates"}
+#| column: page
 phillips <- read_rds("data/phillips-comparison-august.rds") %>% 
   janitor::clean_names() %>% 
   mutate(stat = case_when(
@@ -907,7 +912,7 @@ I begin with a proxy for pre-existing health in a district by calculating the in
 
 Table \@ref(tab:births-tab) shows the number of births in 1916 in each district, by race, multiplied by 3. Figure \@ref(fig:infant-mortality) shows these figures with a confidence interval around them. It is clear that there is heterogeneity in infant mortality by race and district, such that this may be correlated with pandemic mortality rates. While the infant mortality rates may appear very high, it is possible that there is under-reporting in the number of births by district, while the death of a child is so tragic that it is recorded at a higher rate than the birth of a child. It is not prescient to conclude on these anomalies without additional sources of data.
 
-```{r, births-tab, layout="l-body-outset"}
+```{r, births-tab, }
 births_by_town <- read_rds("data/births_by_town.rds")
 
 df_infant <- births_by_town %>%
@@ -946,8 +951,8 @@ df_infant %>%
 ```
 
 
-```{r, infant-mortality, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Infant mortality per 1000 children"}
-
+```{r, infant-mortality,  fig.width = 8, fig.height=6, fig.cap="Infant mortality per 1000 children"}
+#| column: page
 jpeg(
     filename="images_bloom/12_13.jpeg",
     width=6,
@@ -976,7 +981,8 @@ Figure \@ref(fig:infant-mort-scatter) shows the relationship between infant mort
 
 Figure \@ref(fig:infant-mort-scatter) evidences a strong linear correlation between infant mortality rates and pandemic mortality rates across districts for black and coloured individuals, and across groups. The slope of the linear fit is less among white residents of the 14 districts^[Sea Point lacks a denominator as it was not recorded separately from Cape Town].
 
-```{r, infant-mort-scatter, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Scatterplot and linear fit of infant and pandemic mortality by district"}
+```{r, infant-mort-scatter,  fig.width = 8, fig.height=6, fig.cap="Scatterplot and linear fit of infant and pandemic mortality by district"}
+#| column: page
 infant_mortality <- read_rds("data/infant_mortality.rds")
 
 values <- hcl_palettes("sequential (single-hue)", n = 3, palette = "Grays", plot = TRUE)
@@ -1103,7 +1109,9 @@ In a similar vein, I assess the correlation between child mortality and pandemic
 
 Figure \@ref(fig:child-mortality) shows that there is heterogeneity amongst the districts in child mortality, and that on average child mortality for white residents is lower than for black and coloured residents.
 
-```{r child-mortality, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Child mortality per 1000 children"}
+```{r child-mortality,  fig.width = 8, fig.height=6, fig.cap="Child mortality per 1000 children"}
+#| column: page
+
 child_mortality <- read_rds("data/child_mortality.rds")
 
 jpeg(
@@ -1134,7 +1142,7 @@ dev.off()
 
 Table \@ref(tab:child-mort-tab)
 
-```{r, child-mort-tab, layout="l-body-outset"}
+```{r, child-mort-tab, }
 child_mortality %>% 
   filter(race != "Both groups") %>% 
   group_by(town) %>% 
@@ -1152,8 +1160,8 @@ child_mortality %>%
 
 Figure \@ref(fig:child-mort-scatter) shows the linear fits superimposed on the scatter plots of child mortality rates and pandemic mortality rates. Visually, all three have a positive slope, with the steepest gradient on the aggregate sample.
 
-```{r, child-mort-scatter, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Scatterplot and linear fit of child and pandemic mortality by district"}
-
+```{r, child-mort-scatter,  fig.width = 8, fig.height=6, fig.cap="Scatterplot and linear fit of child and pandemic mortality by district"}
+#| column: page
 # jpeg(
 #     filename="images/grey_child-mort-scatter.jpeg",
 #     width=6,
@@ -1272,7 +1280,7 @@ Regression table \@ref(fig:child-mort-scatter) shows that after accounting for r
 
 I follow their methodology here to assess the same question. First I calculate the pre-pandemic mortality rates by district from influenza, pneumonia and both. These are shown in Table \@ref(tab:pneumonia-influenza-tab) below.
 
-```{r, pneumonia-influenza-tab, layout="l-body-outset"}
+```{r, pneumonia-influenza-tab, }
 pneumonia_influenza <- read_rds("data/pneumonia_influenza.rds")
   
 pneumonia_influenza %>% 
@@ -1295,7 +1303,8 @@ pneumonia_influenza %>%
 Figure \@ref(fig:pneumonia-influenza-mort) shows that while the slopes separated by race are lower, there is still a strong correlation between pre-existing pneumonia and influenza mortality rates and the pandemic mortality rate in each district. The strongest correlation appears to be the aggregated sample.
 
 
-```{r, pneumonia-influenza-mort, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Scatterplot and linear fit of pneumonia mortality and pandemic mortality by district"}
+```{r, pneumonia-influenza-mort,  fig.width = 8, fig.height=6, fig.cap="Scatterplot and linear fit of pneumonia mortality and pandemic mortality by district"}
+#| column: page
 pneumonia_influenza_mort <- read_rds("data/pneumonia_infleunza_mort.rds")
 
 jpeg(
@@ -1426,7 +1435,7 @@ I use a proxy for literacy of the individual's family to assess if literacy has 
 
 Table \@ref(tab:literacy-tab) shows that there is considerable variation in our literacy proxy by district and race. Figure \@ref(fig:literacy-fig) shows that the share of informants who sign the Forms in Sea Point, Fraserburg and Elliot is 100 percent. Given that it is likely the registrar signed each form on behalf of the informant, I will exclude these three from the regression.
 
-```{r, literacy-tab, layout="l-body-outset"}
+```{r, literacy-tab, }
 df %>%
   filter(death_date < ymd("1918-09-01")) %>% 
   mutate(signed_yes_or_no = str_to_lower(signed_yes_or_no)) %>%
@@ -1452,8 +1461,8 @@ df %>%
                caption = "Percentage of district death notices wherein Informant signed")
 ```
 
-```{r, literacy-fig, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Share of informants who sign"}
-
+```{r, literacy-fig,  fig.width = 8, fig.height=6, fig.cap="Share of informants who sign"}
+#| column: page
 # jpeg(
 #     filename="images/literacy-fig.jpeg",
 #     width=6,
@@ -1488,7 +1497,8 @@ df %>%
 
 In Figure \@ref(fig:literacy-scatter), the best fit line for "Both groups", shown in yellow, leads us to believe that as the proportion of our district with the literacy proxy increases, the pandemic mortality decreases, in line with our hypothesis. Further, amongst black and coloured individuals, an increasing share of literate informants appears to result in marginally lower mortality rates during the pandemic. This is in support of the hypothesis. Yet amongst the white population of the districts, there appears to be an upward slope at the top end of the literacy distribution. 
 
-```{r, literacy-scatter, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Scatter plot and linear fit of literacy proxy and pandemic mortality by district"}
+```{r, literacy-scatter,  fig.width = 8, fig.height=6, fig.cap="Scatter plot and linear fit of literacy proxy and pandemic mortality by district"}
+#| column: page
 df_literacy <- read_rds("data/df_literacy.rds")
 
 # jpeg(
@@ -1563,7 +1573,8 @@ Regression table \@ref(fig:literacy-scatter) shows that when we control for race
 
 Another measure of social capital is foreign born status, with the hypothesis being that foreign born individuals are less likely to adopt the health measures suggested by local governments. Figure \@ref(fig:birth-places) shows the proportion of residents of each district born in various regions outside of the Cape (shown in red). This data is from the Statistics of Population of 1918 [@OfficeofCensusandStatisticsPretoria1918]. This means that we would expect the mortality rate during the flu to increase with the share of residents born outside the Cape.
 
-```{r, birth-places, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Birth places of district residents"}
+```{r, birth-places,  fig.width = 8, fig.height=6, fig.cap="Birth places of district residents"}
+#| column: page
 birth_place_shares <- read_rds("data/birth_place_shares.rds")
 
 # jpeg(
@@ -1598,7 +1609,8 @@ birth_place_shares %>%
 
 Figure \@ref(fig:birth-place-corr) shows that across our districts, there is a slight negative correlation between the share of residents born outside of the Cape. However, the confidence interval around this linear fit is wide. Regression table \@ref(fig:birth-place-corr) confirms that there is no significant correlation between the share of residents born outside of the Cape and pandemic mortality rates, even at the ten percent level.
 
-```{r, birth-place-corr, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Scatter plot and linear fit of residents born outside of the Cape Province and pandemic mortality by district"}
+```{r, birth-place-corr,  fig.width = 8, fig.height=6, fig.cap="Scatter plot and linear fit of residents born outside of the Cape Province and pandemic mortality by district"}
+#| column: page
 # jpeg(
 #     filename="images/birth-place-corr.jpeg",
 #     width=6,
@@ -1770,7 +1782,8 @@ results <- read_rds("data/results.rds")
 
 In Figure \@ref(fig:tuning-fig) I draw a plot of model performance across the three metrics we specified above, accuracy, sensitivity and specificity. Balancing type 1 and type 2 errors here is not too important given that both sensitivity and specificity are so high. We can see that moving from 100 to 150 retained tokens, or predictors in our model, improves accuracy, sensitivity and specificity. Moving to 200 tokens worsens specificity marginally.
 
-```{r, tuning-fig, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Model metrics for classification model and hyperparamter values", code_folding=F}
+```{r, tuning-fig,  fig.width = 8, fig.height=6, fig.cap="Model metrics for classification model and hyperparamter values", code_folding=F}
+#| column: page
 # jpeg(
 #     filename="images/tuning-fig.jpeg",
 #     width=6,
@@ -1815,8 +1828,8 @@ collect_metrics(final_fit)
 
 The confusion matrix shown in Figre \@ref(fig:conf-mat-fig) displays the number of predictions that the classifier made correctly and incorrectly. It is evident that it made 6 mistakes in total, out of the 3750 observations kept in the testing set. Two were predicted black when in truth they were coloured, and four predicted coloured when they were in fact black.
 
-```{r, conf-mat-fig, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Confusion matrix for classification model", code_folding=F}
-
+```{r, conf-mat-fig,  fig.width = 8, fig.height=6, fig.cap="Confusion matrix for classification model", code_folding=F}
+#| column: page
 # jpeg(
 #     filename="images/conf-mat-fig.jpeg",
 #     width=6,
@@ -1861,8 +1874,8 @@ words <- read_rds("data/words.rds")
 ```
 
 
-```{r, words-fig, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Determinants of classification model", code_folding=F}
-
+```{r, words-fig,  fig.width = 8, fig.height=6, fig.cap="Determinants of classification model", code_folding=F}
+#| column: page
 # jpeg(
 #     filename="images/words-fig.jpeg",
 #     width=6,
@@ -1889,8 +1902,8 @@ Figure \@ref(fig:words-fig) allows us to see that if the ethnicity contains the 
 
 Figure \@ref(fig:ethnicity-race-classification) shows the 12 most common classes in each race grouping.
 
-```{r, ethnicity-race-classification, layout="l-body-outset", fig.width = 8, fig.height=6, fig.cap="Output of classification model"}
-
+```{r, ethnicity-race-classification,  fig.width = 8, fig.height=6, fig.cap="Output of classification model"}
+#| column: page
 # jpeg(
 #     filename="images/ethnicity-race-classification.jpeg",
 #     width=6,

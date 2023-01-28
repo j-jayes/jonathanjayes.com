@@ -6,7 +6,7 @@ author:
   - name: Jonathan Jayes
     url: {interludeone.com}
 date: 2022-02-15
-preview: "https://raw.githubusercontent.com/j-jayes/screencasts/main/figures/Chocolate_bar_ratings.jpeg"
+image: images/preview.png
 output:
   distill::distill_article:
     self_contained: false
@@ -49,15 +49,15 @@ knitr::include_url("http://flavorsofcacao.com/chocolate_database.html")
 
 ## Ingest the data
 
-I've copied and pasted the data into an Excel spreadsheet, accessible on my [Github](https://github.com/j-jayes/jjayes_distill/blob/main/_posts/2022-01-17-flavours-of-cocoa/data/chocolate-bar-ratings.xlsx) if you want to download it an analyse it yourself.
+I've copied and pasted the data into an Excel spreadsheet, accessible on my [Github](https://github.com/j-jayes/jjayes_distill/blob/main/posts/2022-01-17-flavours-of-cocoa/data/chocolate-bar-ratings.xlsx) if you want to download it an analyse it yourself.
 
-<aside>
+
 
 The underlying data is served in a Javascript container on the website rather than vanilla HTML. This makes it a little bit more difficult to scrape with a package like `rvest`, for example. Hence the Excel spreadsheet.
 
-</aside>
 
-To begin the analysis, we'll read in the Excel file using the `readxl` package, and the `here` package that helps us with file paths.^[The `here` package allows us to abstract from the specific file path on our local computer and use a generic path that will work on any computer that we download our R project to. For example, instead of specifying the path "C:/Users/Jonathan/Documents/R-work/jjayes_distill/_posts/2022-01-17-flavours-of-cocoa/data/chocolate-bar-ratings.xlsx" we can just call the `here` function from the package with the same name - here("_posts", "2022-01-17-flavours-of-cocoa", "data", "chocolate-bar-ratings.xlsx"). This is wonderful for switching between, for example, a Windows and a Mac, where the slashes are in opposite directions and can cause some frustration!]
+
+To begin the analysis, we'll read in the Excel file using the `readxl` package, and the `here` package that helps us with file paths.^[The `here` package allows us to abstract from the specific file path on our local computer and use a generic path that will work on any computer that we download our R project to. For example, instead of specifying the path "C:/Users/Jonathan/Documents/R-work/jjayes_distill/posts/2022-01-17-flavours-of-cocoa/data/chocolate-bar-ratings.xlsx" we can just call the `here` function from the package with the same name - here("posts", "2022-01-17-flavours-of-cocoa", "data", "chocolate-bar-ratings.xlsx"). This is wonderful for switching between, for example, a Windows and a Mac, where the slashes are in opposite directions and can cause some frustration!]
 
 We don't need to load the packages via the `library(readxl)` command because we're only going to use them once or twice. Instead we can call the name of the package followed by two colons and the command, as shown below.
 
@@ -66,7 +66,7 @@ We don't need to load the packages via the `library(readxl)` command because we'
 library(tidyverse)
 theme_set(theme_light())
 # read in the data
-df <- readxl::read_excel(here::here("_posts", 
+df <- readxl::read_excel(here::here("posts", 
                                     "2022-01-17-flavours-of-cocoa", 
                                     "data", 
                                     "chocolate-bar-ratings.xlsx"))
@@ -97,7 +97,8 @@ df %>% colnames()
 
 Now that we have a nice `tibble` with clean names, we can ask what the data itself looks like. There are many ways to get summary statistics of a dataset. I love the `skim` function from the `skimr` package.
 
-```{r, layout = "l-body-outset"}
+```{r, }
+#| column: page
 # skim the dataset
 skimr::skim(df)
 ```
@@ -260,7 +261,7 @@ df %>%
 
 It certainly seems like the mean rating is increasing over time. What is driving this?
 
-<aside>
+
 
 We can make a plot of the figures above to see the increasing trend.
 
@@ -276,7 +277,7 @@ df %>%
          y = "Mean rating")
 ```
 
-</aside>
+
 
 Let's make a boxplot to see how the spread of scores has changed over time.
 
@@ -291,7 +292,8 @@ It seems as if the share of bars with very low scores has decreased over time, w
 
 What about making a joy plot or ridgeline plot with the `ggridges` package? This allows us to see how the spread of values has changed over time.
 
-```{r, layout = "l-body-outset"}
+```{r, }
+#| column: page
 library(ggridges)
 
 df %>%
@@ -313,7 +315,8 @@ This confirms what we saw in the boxplots above: fewer low scores in more recent
 
 ### What are the frequencies of ingredients and percentages?
 
-```{r, layout = "l-body-outset"}
+```{r, }
+#| column: page
 df %>% 
   mutate(cocoa_percent = round(cocoa_percent, 1)) %>% 
   count(cocoa_percent, n_ingredients) %>% 
@@ -333,7 +336,8 @@ df %>%
 
 ### What about the different countries??
 
-```{r, layout = "l-body-outset"}
+```{r, }
+#| column: page
 df %>% 
   count(country_of_bean_origin, sort = T)
 
@@ -386,7 +390,8 @@ df_map <- df %>%
 ```
 
 
-```{r, layout = "l-body-outset"}
+```{r, }
+#| column: page
 df_map %>% 
     filter(n > 3) %>% 
     st_as_sf() %>% ggplot() +
@@ -472,7 +477,7 @@ glmnet_tune <-
 ```
 
 ```{r, include=F}
-glmnet_tune <- read_rds(here::here("_posts", 
+glmnet_tune <- read_rds(here::here("posts", 
                                     "2022-01-17-flavours-of-cocoa", 
                                     "data", 
                                     "glm_tune.rds"))
@@ -496,14 +501,15 @@ final_fit <- glmnet_model_final %>%
 What does the fit look like? These are the terms that have the greatest effect on bar rating.
 
 ```{r, include=F}
-final_fit <- read_rds(here::here("_posts", 
+final_fit <- read_rds(here::here("posts", 
                                     "2022-01-17-flavours-of-cocoa", 
                                     "data", 
                                     "final_fit.rds"))
 ```
 
 
-```{r, layout = "l-body-outset"}
+```{r, }
+#| column: page
 final_fit %>%
   extract_fit_parsnip() %>%
   tidy() %>%

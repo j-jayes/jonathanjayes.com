@@ -1,11 +1,9 @@
 ---
-title: "Quarto-blank-website"
+listing:
+  contents: posts
+  sort:
+    - "date desc"
+    - "title desc"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+## Blog posts

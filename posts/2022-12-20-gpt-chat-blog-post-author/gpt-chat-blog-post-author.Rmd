@@ -7,7 +7,7 @@ author:
     url:
       interludeone.com: {}
 date: 2022-12-20
-preview: "https://github.com/j-jayes/jjayes_distill/raw/fba82ad50bbd00f3768079fb983f8c8d2706cde2/_posts/2022-12-20-gpt-chat-blog-post-author/images/DALL%C2%B7E%202022-12-20%2016.38.40%20-%20A%20diagram%20of%20three%20penguins%20in%20the%20style%20of%20Paul%20C%C3%A9zanne%2C%20hyper%20realistic%2C%20beautiful%20art.png"
+image: "https://github.com/j-jayes/jjayes_distill/raw/fba82ad50bbd00f3768079fb983f8c8d2706cde2/_posts/2022-12-20-gpt-chat-blog-post-author/images/DALL%C2%B7E%202022-12-20%2016.38.40%20-%20A%20diagram%20of%20three%20penguins%20in%20the%20style%20of%20Paul%20C%C3%A9zanne%2C%20hyper%20realistic%2C%20beautiful%20art.png"
 output:
   distill::distill_article:
     self_contained: false
@@ -35,9 +35,7 @@ Here are the results!
 knitr::include_graphics("images/DALL·E 2022-12-20 16.38.40 - A diagram of three penguins in the style of Paul Cézanne, hyper realistic, beautiful art.png")
 ```
 
-<aside>
-Penguins created with [DALL·E](https://openai.com/dall-e-2/) with the prompt "A diagram of three penguins in the style of Paul Cézanne, hyper realistic, beautiful art"
-</aside>
+[Penguins created with [DALL·E](https://openai.com/dall-e-2/) with the prompt "A diagram of three penguins in the style of Paul Cézanne, hyper realistic, beautiful art"]{.aside}
 
 
 ### Prompt

@@ -2,7 +2,7 @@
 title: "Resources for Learning R and Mastering ggplot"
 description: |
   A collection of videos and resources to get you started using R and the tidyverse for exploratory data analysis and visualization.
-preview: images/preview.png
+image: images/preview.png
 author:
   - name: Jonathan Jayes
     url: {}

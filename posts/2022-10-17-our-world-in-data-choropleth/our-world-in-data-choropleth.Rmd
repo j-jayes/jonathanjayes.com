@@ -7,7 +7,7 @@ author:
     url:
       interludeone.com: {}
 date: 2022-06-01
-preview: "https://github.com/j-jayes/img-repo/raw/1f154af0b081a6423c73c6fe453c93ea16c891c2/images/owid_smokers.PNG"
+image: "https://github.com/j-jayes/img-repo/raw/1f154af0b081a6423c73c6fe453c93ea16c891c2/images/owid_smokers.PNG"
 output:
   distill::distill_article:
     self_contained: false
@@ -21,7 +21,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-setwd("~/Recon/jjayes_distill/_posts/2022-10-17-our-world-in-data-choropleth")
+setwd(here::here("posts/2022-10-17-our-world-in-data-choropleth"))
 ```
 
 

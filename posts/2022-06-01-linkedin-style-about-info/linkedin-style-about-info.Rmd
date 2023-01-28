@@ -7,7 +7,7 @@ author:
     url:
       interludeone.com: {}
 date: 2022-05-20
-preview: "https://raw.githubusercontent.com/j-jayes/jjayes_distill/main/_posts/2022-06-01-linkedin-style-about-info/images/gt_educ.PNG"
+image: "https://raw.githubusercontent.com/j-jayes/jjayes_distill/main/_posts/2022-06-01-linkedin-style-about-info/images/gt_educ.PNG"
 output:
   distill::distill_article:
     self_contained: false

@@ -1,0 +1,16 @@
+{
+  "hash": "71d0629121604f958cedae6a5aa2e657",
+  "result": {
+    "markdown": "---\ntitle: \"Car Price Comparison Tool\"\ndescription: |\n  This web app helps South Africans gauge the median price for a second hand car. You can compare price by odometer reading, make and model, and province. Ad links are included in a table beside the output.\nimage: images/preview.png\nauthor:\n  - name: Jonathan Jayes\ndate: 10-10-2020\noutput:\n  distill::distill_article:\n    self_contained: false\n---\n\n\n\n\nHere's a [link](http://jonathan-jayes.shinyapps.io/gumtree-price-explorer) to the web app, along with an image of what it looks like.\n\nThe app has three components. In the scatter plot you can see the price of each car advertised on Gumtree on the y-axis against its odometer reading on the x. Below this is a box and whisker plot of price to show the distribution of prices for the cars in the range. To the right is a table showing the details of each advert along with a link. You can choose the make, model, province, odometer range and year of manufacture in the panel on the left.\n\n<center>\n\n![Web App](images/preview.png){#id .class width=50%}\n</center>\n\nI hope that you find it useful!\n",
+    "supporting": [
+      "car-price-explorer_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

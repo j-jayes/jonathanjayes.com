@@ -5,6 +5,7 @@ description: |
 author:
   - name: Jonathan Jayes
     url: {interludeone.com}
+image: images/preview.png
 date: 2022-01-17
 output:
   distill::distill_article:
@@ -42,7 +43,7 @@ df <- get_timelines(c("fathomdata", "datawookie"), n = 3200)
 ```{r, include=F}
 library(tidyverse)
 library(scales)
-df <- read_rds(here::here("_posts", "2022-01-24-fathom-twitter", "df_fathom_datawookie.rds"))
+df <- read_rds(here::here("posts", "2022-01-24-fathom-twitter", "df_fathom_datawookie.rds"))
 theme_set(theme_light())
 ```
 
@@ -73,11 +74,7 @@ hashtags <- df %>%
 
 In the column chart below we can visualize the number of times the 12 most frequently used hashtags appear by type of tweet. Evidently original tweets include hashtags about both Rstats and Python, as well as SQL and CSS. The retweets skew heavily towards Rstats though.
 
-<aside>
-
-I've made use of the lovely `reorder_within` command in combination with the `scale_y_reordered` command, both from the `tidytext` package to reorder the hashtags by frequency within the type of tweet. This means that though the same terms appear across facets, they can be in a different order within each.
-
-</aside>
+[I've made use of the lovely `reorder_within` command in combination with the `scale_y_reordered` command, both from the `tidytext` package to reorder the hashtags by frequency within the type of tweet. This means that though the same terms appear across facets, they can be in a different order within each.]{.aside}
 
 ```{r, layout = "l-body-outset", fig.cap= "Column chart of hashtag frequency by tweet type"}
 library(tidytext)

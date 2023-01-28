@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jonathan Jayes">
+<meta name="dcterms.date" content="2020-11-24">
+<meta name="description" content="In this document I walk through creating a stacked area chart showing the evolution of car colour over time in South Africa. The data comes from nearly 45,000 adverts for cars that I scraped from Gumtree.">
+
+<title>Interlude One - South African Car Colour Exploration</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="../../site_libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="../../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="../../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/favicon_logo.com" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Interlude One</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a>
+  <ul class="collapse">
+  <li><a href="#what-does-the-data-look-like" id="toc-what-does-the-data-look-like" class="nav-link" data-scroll-target="#what-does-the-data-look-like">What does the data look like?</a></li>
+  <li><a href="#what-are-the-most-common-car-colours-advertised" id="toc-what-are-the-most-common-car-colours-advertised" class="nav-link" data-scroll-target="#what-are-the-most-common-car-colours-advertised">What are the most common car colours advertised?</a></li>
+  <li><a href="#how-has-the-colour-of-cars-changed-over-time" id="toc-how-has-the-colour-of-cars-changed-over-time" class="nav-link" data-scroll-target="#how-has-the-colour-of-cars-changed-over-time">How has the colour of cars changed over time?</a></li>
+  <li><a href="#first-stacked-area-chart-attempt" id="toc-first-stacked-area-chart-attempt" class="nav-link" data-scroll-target="#first-stacked-area-chart-attempt">First stacked area chart attempt</a></li>
+  <li><a href="#solution-to-gaps-in-area-chart" id="toc-solution-to-gaps-in-area-chart" class="nav-link" data-scroll-target="#solution-to-gaps-in-area-chart">Solution to gaps in area chart</a></li>
+  <li><a href="#putting-it-together" id="toc-putting-it-together" class="nav-link" data-scroll-target="#putting-it-together">Putting it together</a></li>
+  <li><a href="#tightening-up-the-graphic" id="toc-tightening-up-the-graphic" class="nav-link" data-scroll-target="#tightening-up-the-graphic">Tightening up the graphic</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#post-script" id="toc-post-script" class="nav-link" data-scroll-target="#post-script">Post script</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">South African Car Colour Exploration</h1>
+</div>
+
+<div>
+  <div class="description">
+    <p>In this document I walk through creating a stacked area chart showing the evolution of car colour over time in South Africa. The data comes from nearly 45,000 adverts for cars that I scraped from Gumtree.</p>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jonathan Jayes </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 24, 2020</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
+<p>While driving to Cape Town this past weekend in my beautiful white Hyundai i10, a German friend asked why every second car in South Africa was white in colour. While I didn’t have a compelling reason, I did have a some data to assess whether it was true that half of cars on the road are white.</p>
+<p>In this document I walk through creating a stacked area chart showing the evolution of car colour over time in South Africa. The data comes from nearly 45,000 adverts for cars that I scraped from Gumtree.</p>
+<p>I show a useful trick for filling in missing data that creates gaps in the area chart using dplyr’s pivot_wider and pivot_longer commands.</p>
+<p>Here is the final interactive graphic:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df_plotly <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/car_colour/df_plotly.rds"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(plotly)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> df_plotly <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, share, <span class="at">fill =</span> colour)) <span class="sc">+</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#17202A"</span>, <span class="st">"#2471A3"</span>, <span class="st">"#800020"</span>, <span class="st">"#F39C12"</span>, <span class="st">"#27AE60"</span>, <span class="st">"#BDC3C7"</span>, <span class="st">"midnightblue"</span>, <span class="st">"#C0392B"</span>, <span class="st">"#95A5A6"</span>, <span class="st">"#F8F9F9"</span>)) <span class="sc">+</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Evolution of car colour in South Africa: 1995-2020"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Based on Gumtree vehicle adverts"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year of production"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Share of cars in each colour per year"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">""</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Source: Gumtree vehicle adverts scraped in October 2020</span><span class="sc">\n</span><span class="st">Graphic: Jonathan Jayes"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-87e0779e406f2f9bd6ff" style="width:100%;height:464px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-87e0779e406f2f9bd6ff">{"x":{"data":[{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.95945945945946,0.951515151515151,0.981132075471698,0.944954128440367,0.972477064220184,0.953781512605042,0.967625899280576,0.941860465116279,0.907692307692308,0.856060606060606,0.834355828220859,0.814328960645812,0.830464716006885,0.855314960629921,0.859666339548577,0.907692307692308,0.949610077984403,0.946845289541919,0.940305010893246,0.953407510431154,0.971493359248461,0.9701317715959,0.983020012128563,0.984989429175476,0.987053340238219,0.968358093768088,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.95945945945946],"text":["year: 1995<br />share: 0.0405405405<br />colour: Black","year: 1996<br />share: 0.0484848485<br />colour: Black","year: 1997<br />share: 0.0188679245<br />colour: Black","year: 1998<br />share: 0.0550458716<br />colour: Black","year: 1999<br />share: 0.0275229358<br />colour: Black","year: 2000<br />share: 0.0462184874<br />colour: Black","year: 2001<br />share: 0.0323741007<br />colour: Black","year: 2002<br />share: 0.0581395349<br />colour: Black","year: 2003<br />share: 0.0923076923<br />colour: Black","year: 2004<br />share: 0.1439393939<br />colour: Black","year: 2005<br />share: 0.1656441718<br />colour: Black","year: 2006<br />share: 0.1856710394<br />colour: Black","year: 2007<br />share: 0.1695352840<br />colour: Black","year: 2008<br />share: 0.1446850394<br />colour: Black","year: 2009<br />share: 0.1403336605<br />colour: Black","year: 2010<br />share: 0.0923076923<br />colour: Black","year: 2011<br />share: 0.0503899220<br />colour: Black","year: 2012<br />share: 0.0531547105<br />colour: Black","year: 2013<br />share: 0.0596949891<br />colour: Black","year: 2014<br />share: 0.0465924896<br />colour: Black","year: 2015<br />share: 0.0285066408<br />colour: Black","year: 2016<br />share: 0.0298682284<br />colour: Black","year: 2017<br />share: 0.0169799879<br />colour: Black","year: 2018<br />share: 0.0150105708<br />colour: Black","year: 2019<br />share: 0.0129466598<br />colour: Black","year: 2020<br />share: 0.0316419062<br />colour: Black","year: 2020<br />share: 0.0316419062<br />colour: Black","year: 2019<br />share: 0.0129466598<br />colour: Black","year: 2018<br />share: 0.0150105708<br />colour: Black","year: 2017<br />share: 0.0169799879<br />colour: Black","year: 2016<br />share: 0.0298682284<br />colour: Black","year: 2015<br />share: 0.0285066408<br />colour: Black","year: 2014<br />share: 0.0465924896<br />colour: Black","year: 2013<br />share: 0.0596949891<br />colour: Black","year: 2012<br />share: 0.0531547105<br />colour: Black","year: 2011<br />share: 0.0503899220<br />colour: Black","year: 2010<br />share: 0.0923076923<br />colour: Black","year: 2009<br />share: 0.1403336605<br />colour: Black","year: 2008<br />share: 0.1446850394<br />colour: Black","year: 2007<br />share: 0.1695352840<br />colour: Black","year: 2006<br />share: 0.1856710394<br />colour: Black","year: 2005<br />share: 0.1656441718<br />colour: Black","year: 2004<br />share: 0.1439393939<br />colour: Black","year: 2003<br />share: 0.0923076923<br />colour: Black","year: 2002<br />share: 0.0581395349<br />colour: Black","year: 2001<br />share: 0.0323741007<br />colour: Black","year: 2000<br />share: 0.0462184874<br />colour: Black","year: 1999<br />share: 0.0275229358<br />colour: Black","year: 1998<br />share: 0.0550458716<br />colour: Black","year: 1997<br />share: 0.0188679245<br />colour: Black","year: 1996<br />share: 0.0484848485<br />colour: Black","year: 1995<br />share: 0.0405405405<br />colour: Black","year: 1995<br />share: 0.0405405405<br />colour: Black"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(23,32,42,0.8)","hoveron":"points","name":"Black","legendgroup":"Black","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.716216216216216,0.678787878787879,0.754716981132076,0.701834862385321,0.697247706422018,0.697478991596639,0.823741007194245,0.813953488372093,0.778461538461538,0.71969696969697,0.687116564417178,0.660948536831483,0.710843373493976,0.727362204724409,0.748773307163886,0.806020066889632,0.860227954409118,0.859118409680207,0.850980392156863,0.859527121001391,0.897311305474571,0.875549048316252,0.905700424499697,0.917758985200846,0.926980838943553,0.894462666409415,0.968358093768088,0.987053340238219,0.984989429175476,0.983020012128563,0.9701317715959,0.971493359248461,0.953407510431154,0.940305010893246,0.946845289541919,0.949610077984403,0.907692307692308,0.859666339548577,0.855314960629921,0.830464716006885,0.814328960645812,0.834355828220859,0.856060606060606,0.907692307692308,0.941860465116279,0.967625899280576,0.953781512605042,0.972477064220184,0.944954128440367,0.981132075471698,0.951515151515151,0.95945945945946,0.716216216216216],"text":["year: 1995<br />share: 0.2432432432<br />colour: Blue","year: 1996<br />share: 0.2727272727<br />colour: Blue","year: 1997<br />share: 0.2264150943<br />colour: Blue","year: 1998<br />share: 0.2431192661<br />colour: Blue","year: 1999<br />share: 0.2752293578<br />colour: Blue","year: 2000<br />share: 0.2563025210<br />colour: Blue","year: 2001<br />share: 0.1438848921<br />colour: Blue","year: 2002<br />share: 0.1279069767<br />colour: Blue","year: 2003<br />share: 0.1292307692<br />colour: Blue","year: 2004<br />share: 0.1363636364<br />colour: Blue","year: 2005<br />share: 0.1472392638<br />colour: Blue","year: 2006<br />share: 0.1533804238<br />colour: Blue","year: 2007<br />share: 0.1196213425<br />colour: Blue","year: 2008<br />share: 0.1279527559<br />colour: Blue","year: 2009<br />share: 0.1108930324<br />colour: Blue","year: 2010<br />share: 0.1016722408<br />colour: Blue","year: 2011<br />share: 0.0893821236<br />colour: Blue","year: 2012<br />share: 0.0877268799<br />colour: Blue","year: 2013<br />share: 0.0893246187<br />colour: Blue","year: 2014<br />share: 0.0938803894<br />colour: Blue","year: 2015<br />share: 0.0741820538<br />colour: Blue","year: 2016<br />share: 0.0945827233<br />colour: Blue","year: 2017<br />share: 0.0773195876<br />colour: Blue","year: 2018<br />share: 0.0672304440<br />colour: Blue","year: 2019<br />share: 0.0600725013<br />colour: Blue","year: 2020<br />share: 0.0738954274<br />colour: Blue","year: 2020<br />share: 0.0738954274<br />colour: Blue","year: 2019<br />share: 0.0600725013<br />colour: Blue","year: 2018<br />share: 0.0672304440<br />colour: Blue","year: 2017<br />share: 0.0773195876<br />colour: Blue","year: 2016<br />share: 0.0945827233<br />colour: Blue","year: 2015<br />share: 0.0741820538<br />colour: Blue","year: 2014<br />share: 0.0938803894<br />colour: Blue","year: 2013<br />share: 0.0893246187<br />colour: Blue","year: 2012<br />share: 0.0877268799<br />colour: Blue","year: 2011<br />share: 0.0893821236<br />colour: Blue","year: 2010<br />share: 0.1016722408<br />colour: Blue","year: 2009<br />share: 0.1108930324<br />colour: Blue","year: 2008<br />share: 0.1279527559<br />colour: Blue","year: 2007<br />share: 0.1196213425<br />colour: Blue","year: 2006<br />share: 0.1533804238<br />colour: Blue","year: 2005<br />share: 0.1472392638<br />colour: Blue","year: 2004<br />share: 0.1363636364<br />colour: Blue","year: 2003<br />share: 0.1292307692<br />colour: Blue","year: 2002<br />share: 0.1279069767<br />colour: Blue","year: 2001<br />share: 0.1438848921<br />colour: Blue","year: 2000<br />share: 0.2563025210<br />colour: Blue","year: 1999<br />share: 0.2752293578<br />colour: Blue","year: 1998<br />share: 0.2431192661<br />colour: Blue","year: 1997<br />share: 0.2264150943<br />colour: Blue","year: 1996<br />share: 0.2727272727<br />colour: Blue","year: 1995<br />share: 0.2432432432<br />colour: Blue","year: 1995<br />share: 0.2432432432<br />colour: Blue"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(36,113,163,0.8)","hoveron":"points","name":"Blue","legendgroup":"Blue","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.668918918918919,0.654545454545455,0.69811320754717,0.688073394495413,0.665137614678899,0.676470588235294,0.820143884892086,0.805232558139535,0.763076923076923,0.704545454545455,0.679754601226994,0.657921291624622,0.701376936316695,0.724409448818898,0.746810598626104,0.802675585284281,0.860227954409118,0.859118409680207,0.846623093681917,0.856397774687065,0.894395853579527,0.872620790629575,0.900242571255306,0.915644820295983,0.926290350422924,0.894269727956782,0.894462666409415,0.926980838943553,0.917758985200846,0.905700424499697,0.875549048316252,0.897311305474571,0.859527121001391,0.850980392156863,0.859118409680207,0.860227954409118,0.806020066889632,0.748773307163886,0.727362204724409,0.710843373493976,0.660948536831483,0.687116564417178,0.71969696969697,0.778461538461538,0.813953488372093,0.823741007194245,0.697478991596639,0.697247706422018,0.701834862385321,0.754716981132076,0.678787878787879,0.716216216216216,0.668918918918919],"text":["year: 1995<br />share: 0.0472972973<br />colour: Burgundy","year: 1996<br />share: 0.0242424242<br />colour: Burgundy","year: 1997<br />share: 0.0566037736<br />colour: Burgundy","year: 1998<br />share: 0.0137614679<br />colour: Burgundy","year: 1999<br />share: 0.0321100917<br />colour: Burgundy","year: 2000<br />share: 0.0210084034<br />colour: Burgundy","year: 2001<br />share: 0.0035971223<br />colour: Burgundy","year: 2002<br />share: 0.0087209302<br />colour: Burgundy","year: 2003<br />share: 0.0153846154<br />colour: Burgundy","year: 2004<br />share: 0.0151515152<br />colour: Burgundy","year: 2005<br />share: 0.0073619632<br />colour: Burgundy","year: 2006<br />share: 0.0030272452<br />colour: Burgundy","year: 2007<br />share: 0.0094664372<br />colour: Burgundy","year: 2008<br />share: 0.0029527559<br />colour: Burgundy","year: 2009<br />share: 0.0019627085<br />colour: Burgundy","year: 2010<br />share: 0.0033444816<br />colour: Burgundy","year: 2011<br />share: 0.0000000000<br />colour: Burgundy","year: 2012<br />share: 0.0000000000<br />colour: Burgundy","year: 2013<br />share: 0.0043572985<br />colour: Burgundy","year: 2014<br />share: 0.0031293463<br />colour: Burgundy","year: 2015<br />share: 0.0029154519<br />colour: Burgundy","year: 2016<br />share: 0.0029282577<br />colour: Burgundy","year: 2017<br />share: 0.0054578532<br />colour: Burgundy","year: 2018<br />share: 0.0021141649<br />colour: Burgundy","year: 2019<br />share: 0.0006904885<br />colour: Burgundy","year: 2020<br />share: 0.0001929385<br />colour: Burgundy","year: 2020<br />share: 0.0001929385<br />colour: Burgundy","year: 2019<br />share: 0.0006904885<br />colour: Burgundy","year: 2018<br />share: 0.0021141649<br />colour: Burgundy","year: 2017<br />share: 0.0054578532<br />colour: Burgundy","year: 2016<br />share: 0.0029282577<br />colour: Burgundy","year: 2015<br />share: 0.0029154519<br />colour: Burgundy","year: 2014<br />share: 0.0031293463<br />colour: Burgundy","year: 2013<br />share: 0.0043572985<br />colour: Burgundy","year: 2012<br />share: 0.0000000000<br />colour: Burgundy","year: 2011<br />share: 0.0000000000<br />colour: Burgundy","year: 2010<br />share: 0.0033444816<br />colour: Burgundy","year: 2009<br />share: 0.0019627085<br />colour: Burgundy","year: 2008<br />share: 0.0029527559<br />colour: Burgundy","year: 2007<br />share: 0.0094664372<br />colour: Burgundy","year: 2006<br />share: 0.0030272452<br />colour: Burgundy","year: 2005<br />share: 0.0073619632<br />colour: Burgundy","year: 2004<br />share: 0.0151515152<br />colour: Burgundy","year: 2003<br />share: 0.0153846154<br />colour: Burgundy","year: 2002<br />share: 0.0087209302<br />colour: Burgundy","year: 2001<br />share: 0.0035971223<br />colour: Burgundy","year: 2000<br />share: 0.0210084034<br />colour: Burgundy","year: 1999<br />share: 0.0321100917<br />colour: Burgundy","year: 1998<br />share: 0.0137614679<br />colour: Burgundy","year: 1997<br />share: 0.0566037736<br />colour: Burgundy","year: 1996<br />share: 0.0242424242<br />colour: Burgundy","year: 1995<br />share: 0.0472972973<br />colour: Burgundy","year: 1995<br />share: 0.0472972973<br />colour: Burgundy"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(128,0,32,0.8)","hoveron":"points","name":"Burgundy","legendgroup":"Burgundy","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.668918918918919,0.642424242424242,0.685534591194969,0.68348623853211,0.623853211009174,0.634453781512605,0.737410071942446,0.718023255813953,0.704615384615385,0.630681818181818,0.634355828220859,0.615539858728557,0.625645438898451,0.677165354330709,0.697742885181551,0.758528428093646,0.825434913017397,0.838807260155575,0.820915032679739,0.827190542420028,0.871396177518627,0.85592972181552,0.882352941176471,0.905285412262156,0.918004488175384,0.890796835809377,0.894269727956782,0.926290350422924,0.915644820295983,0.900242571255306,0.872620790629575,0.894395853579527,0.856397774687065,0.846623093681917,0.859118409680207,0.860227954409118,0.802675585284281,0.746810598626104,0.724409448818898,0.701376936316695,0.657921291624622,0.679754601226994,0.704545454545455,0.763076923076923,0.805232558139535,0.820143884892086,0.676470588235294,0.665137614678899,0.688073394495413,0.69811320754717,0.654545454545455,0.668918918918919,0.668918918918919],"text":["year: 1995<br />share: 0.0000000000<br />colour: Gold","year: 1996<br />share: 0.0121212121<br />colour: Gold","year: 1997<br />share: 0.0125786164<br />colour: Gold","year: 1998<br />share: 0.0045871560<br />colour: Gold","year: 1999<br />share: 0.0412844037<br />colour: Gold","year: 2000<br />share: 0.0420168067<br />colour: Gold","year: 2001<br />share: 0.0827338129<br />colour: Gold","year: 2002<br />share: 0.0872093023<br />colour: Gold","year: 2003<br />share: 0.0584615385<br />colour: Gold","year: 2004<br />share: 0.0738636364<br />colour: Gold","year: 2005<br />share: 0.0453987730<br />colour: Gold","year: 2006<br />share: 0.0423814329<br />colour: Gold","year: 2007<br />share: 0.0757314974<br />colour: Gold","year: 2008<br />share: 0.0472440945<br />colour: Gold","year: 2009<br />share: 0.0490677134<br />colour: Gold","year: 2010<br />share: 0.0441471572<br />colour: Gold","year: 2011<br />share: 0.0347930414<br />colour: Gold","year: 2012<br />share: 0.0203111495<br />colour: Gold","year: 2013<br />share: 0.0257080610<br />colour: Gold","year: 2014<br />share: 0.0292072323<br />colour: Gold","year: 2015<br />share: 0.0229996761<br />colour: Gold","year: 2016<br />share: 0.0166910688<br />colour: Gold","year: 2017<br />share: 0.0178896301<br />colour: Gold","year: 2018<br />share: 0.0103594080<br />colour: Gold","year: 2019<br />share: 0.0082858622<br />colour: Gold","year: 2020<br />share: 0.0034728921<br />colour: Gold","year: 2020<br />share: 0.0034728921<br />colour: Gold","year: 2019<br />share: 0.0082858622<br />colour: Gold","year: 2018<br />share: 0.0103594080<br />colour: Gold","year: 2017<br />share: 0.0178896301<br />colour: Gold","year: 2016<br />share: 0.0166910688<br />colour: Gold","year: 2015<br />share: 0.0229996761<br />colour: Gold","year: 2014<br />share: 0.0292072323<br />colour: Gold","year: 2013<br />share: 0.0257080610<br />colour: Gold","year: 2012<br />share: 0.0203111495<br />colour: Gold","year: 2011<br />share: 0.0347930414<br />colour: Gold","year: 2010<br />share: 0.0441471572<br />colour: Gold","year: 2009<br />share: 0.0490677134<br />colour: Gold","year: 2008<br />share: 0.0472440945<br />colour: Gold","year: 2007<br />share: 0.0757314974<br />colour: Gold","year: 2006<br />share: 0.0423814329<br />colour: Gold","year: 2005<br />share: 0.0453987730<br />colour: Gold","year: 2004<br />share: 0.0738636364<br />colour: Gold","year: 2003<br />share: 0.0584615385<br />colour: Gold","year: 2002<br />share: 0.0872093023<br />colour: Gold","year: 2001<br />share: 0.0827338129<br />colour: Gold","year: 2000<br />share: 0.0420168067<br />colour: Gold","year: 1999<br />share: 0.0412844037<br />colour: Gold","year: 1998<br />share: 0.0045871560<br />colour: Gold","year: 1997<br />share: 0.0125786164<br />colour: Gold","year: 1996<br />share: 0.0121212121<br />colour: Gold","year: 1995<br />share: 0.0000000000<br />colour: Gold","year: 1995<br />share: 0.0000000000<br />colour: Gold"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(243,156,18,0.8)","hoveron":"points","name":"Gold","legendgroup":"Gold","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.554054054054054,0.509090909090909,0.578616352201258,0.527522935779817,0.527522935779817,0.584033613445378,0.654676258992806,0.671511627906977,0.646153846153846,0.611742424242424,0.61840490797546,0.592330978809284,0.607573149741824,0.660433070866142,0.681059862610402,0.755183946488294,0.817636472705459,0.835350043215212,0.816122004357299,0.823018080667594,0.868480725623583,0.85095168374817,0.877198302001213,0.902748414376321,0.912825824270671,0.886552189851437,0.890796835809377,0.918004488175384,0.905285412262156,0.882352941176471,0.85592972181552,0.871396177518627,0.827190542420028,0.820915032679739,0.838807260155575,0.825434913017397,0.758528428093646,0.697742885181551,0.677165354330709,0.625645438898451,0.615539858728557,0.634355828220859,0.630681818181818,0.704615384615385,0.718023255813953,0.737410071942446,0.634453781512605,0.623853211009174,0.68348623853211,0.685534591194969,0.642424242424242,0.668918918918919,0.554054054054054],"text":["year: 1995<br />share: 0.1148648649<br />colour: Green","year: 1996<br />share: 0.1333333333<br />colour: Green","year: 1997<br />share: 0.1069182390<br />colour: Green","year: 1998<br />share: 0.1559633028<br />colour: Green","year: 1999<br />share: 0.0963302752<br />colour: Green","year: 2000<br />share: 0.0504201681<br />colour: Green","year: 2001<br />share: 0.0827338129<br />colour: Green","year: 2002<br />share: 0.0465116279<br />colour: Green","year: 2003<br />share: 0.0584615385<br />colour: Green","year: 2004<br />share: 0.0189393939<br />colour: Green","year: 2005<br />share: 0.0159509202<br />colour: Green","year: 2006<br />share: 0.0232088799<br />colour: Green","year: 2007<br />share: 0.0180722892<br />colour: Green","year: 2008<br />share: 0.0167322835<br />colour: Green","year: 2009<br />share: 0.0166830226<br />colour: Green","year: 2010<br />share: 0.0033444816<br />colour: Green","year: 2011<br />share: 0.0077984403<br />colour: Green","year: 2012<br />share: 0.0034572169<br />colour: Green","year: 2013<br />share: 0.0047930283<br />colour: Green","year: 2014<br />share: 0.0041724618<br />colour: Green","year: 2015<br />share: 0.0029154519<br />colour: Green","year: 2016<br />share: 0.0049780381<br />colour: Green","year: 2017<br />share: 0.0051546392<br />colour: Green","year: 2018<br />share: 0.0025369979<br />colour: Green","year: 2019<br />share: 0.0051786639<br />colour: Green","year: 2020<br />share: 0.0042446460<br />colour: Green","year: 2020<br />share: 0.0042446460<br />colour: Green","year: 2019<br />share: 0.0051786639<br />colour: Green","year: 2018<br />share: 0.0025369979<br />colour: Green","year: 2017<br />share: 0.0051546392<br />colour: Green","year: 2016<br />share: 0.0049780381<br />colour: Green","year: 2015<br />share: 0.0029154519<br />colour: Green","year: 2014<br />share: 0.0041724618<br />colour: Green","year: 2013<br />share: 0.0047930283<br />colour: Green","year: 2012<br />share: 0.0034572169<br />colour: Green","year: 2011<br />share: 0.0077984403<br />colour: Green","year: 2010<br />share: 0.0033444816<br />colour: Green","year: 2009<br />share: 0.0166830226<br />colour: Green","year: 2008<br />share: 0.0167322835<br />colour: Green","year: 2007<br />share: 0.0180722892<br />colour: Green","year: 2006<br />share: 0.0232088799<br />colour: Green","year: 2005<br />share: 0.0159509202<br />colour: Green","year: 2004<br />share: 0.0189393939<br />colour: Green","year: 2003<br />share: 0.0584615385<br />colour: Green","year: 2002<br />share: 0.0465116279<br />colour: Green","year: 2001<br />share: 0.0827338129<br />colour: Green","year: 2000<br />share: 0.0504201681<br />colour: Green","year: 1999<br />share: 0.0963302752<br />colour: Green","year: 1998<br />share: 0.1559633028<br />colour: Green","year: 1997<br />share: 0.1069182390<br />colour: Green","year: 1996<br />share: 0.1333333333<br />colour: Green","year: 1995<br />share: 0.1148648649<br />colour: Green","year: 1995<br />share: 0.1148648649<br />colour: Green"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(39,174,96,0.8)","hoveron":"points","name":"Green","legendgroup":"Green","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.513513513513514,0.478787878787879,0.515723270440252,0.490825688073395,0.481651376146789,0.53781512605042,0.589928057553957,0.578488372093023,0.523076923076923,0.517045454545455,0.52760736196319,0.476286579212916,0.507745266781411,0.540354330708661,0.548577036310108,0.645484949832776,0.688062387522495,0.713483146067416,0.688888888888889,0.722183588317107,0.760932944606414,0.74407027818448,0.785021224984839,0.809936575052854,0.829104091144485,0.804553347482153,0.886552189851437,0.912825824270671,0.902748414376321,0.877198302001213,0.85095168374817,0.868480725623583,0.823018080667594,0.816122004357299,0.835350043215212,0.817636472705459,0.755183946488294,0.681059862610402,0.660433070866142,0.607573149741824,0.592330978809284,0.61840490797546,0.611742424242424,0.646153846153846,0.671511627906977,0.654676258992806,0.584033613445378,0.527522935779817,0.527522935779817,0.578616352201258,0.509090909090909,0.554054054054054,0.513513513513514],"text":["year: 1995<br />share: 0.0405405405<br />colour: Grey","year: 1996<br />share: 0.0303030303<br />colour: Grey","year: 1997<br />share: 0.0628930818<br />colour: Grey","year: 1998<br />share: 0.0366972477<br />colour: Grey","year: 1999<br />share: 0.0458715596<br />colour: Grey","year: 2000<br />share: 0.0462184874<br />colour: Grey","year: 2001<br />share: 0.0647482014<br />colour: Grey","year: 2002<br />share: 0.0930232558<br />colour: Grey","year: 2003<br />share: 0.1230769231<br />colour: Grey","year: 2004<br />share: 0.0946969697<br />colour: Grey","year: 2005<br />share: 0.0907975460<br />colour: Grey","year: 2006<br />share: 0.1160443996<br />colour: Grey","year: 2007<br />share: 0.0998278830<br />colour: Grey","year: 2008<br />share: 0.1200787402<br />colour: Grey","year: 2009<br />share: 0.1324828263<br />colour: Grey","year: 2010<br />share: 0.1096989967<br />colour: Grey","year: 2011<br />share: 0.1295740852<br />colour: Grey","year: 2012<br />share: 0.1218668971<br />colour: Grey","year: 2013<br />share: 0.1272331155<br />colour: Grey","year: 2014<br />share: 0.1008344924<br />colour: Grey","year: 2015<br />share: 0.1075477810<br />colour: Grey","year: 2016<br />share: 0.1068814056<br />colour: Grey","year: 2017<br />share: 0.0921770770<br />colour: Grey","year: 2018<br />share: 0.0928118393<br />colour: Grey","year: 2019<br />share: 0.0837217331<br />colour: Grey","year: 2020<br />share: 0.0819988424<br />colour: Grey","year: 2020<br />share: 0.0819988424<br />colour: Grey","year: 2019<br />share: 0.0837217331<br />colour: Grey","year: 2018<br />share: 0.0928118393<br />colour: Grey","year: 2017<br />share: 0.0921770770<br />colour: Grey","year: 2016<br />share: 0.1068814056<br />colour: Grey","year: 2015<br />share: 0.1075477810<br />colour: Grey","year: 2014<br />share: 0.1008344924<br />colour: Grey","year: 2013<br />share: 0.1272331155<br />colour: Grey","year: 2012<br />share: 0.1218668971<br />colour: Grey","year: 2011<br />share: 0.1295740852<br />colour: Grey","year: 2010<br />share: 0.1096989967<br />colour: Grey","year: 2009<br />share: 0.1324828263<br />colour: Grey","year: 2008<br />share: 0.1200787402<br />colour: Grey","year: 2007<br />share: 0.0998278830<br />colour: Grey","year: 2006<br />share: 0.1160443996<br />colour: Grey","year: 2005<br />share: 0.0907975460<br />colour: Grey","year: 2004<br />share: 0.0946969697<br />colour: Grey","year: 2003<br />share: 0.1230769231<br />colour: Grey","year: 2002<br />share: 0.0930232558<br />colour: Grey","year: 2001<br />share: 0.0647482014<br />colour: Grey","year: 2000<br />share: 0.0462184874<br />colour: Grey","year: 1999<br />share: 0.0458715596<br />colour: Grey","year: 1998<br />share: 0.0366972477<br />colour: Grey","year: 1997<br />share: 0.0628930818<br />colour: Grey","year: 1996<br />share: 0.0303030303<br />colour: Grey","year: 1995<br />share: 0.0405405405<br />colour: Grey","year: 1995<br />share: 0.0405405405<br />colour: Grey"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(189,195,199,0.8)","hoveron":"points","name":"Grey","legendgroup":"Grey","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.493243243243243,0.454545454545455,0.484276729559748,0.435779816513762,0.458715596330275,0.483193277310924,0.535971223021583,0.561046511627907,0.492307692307692,0.475378787878788,0.430674846625767,0.435923309788093,0.45697074010327,0.479330708661417,0.478900883218842,0.57257525083612,0.608878224355129,0.629213483146067,0.593028322440087,0.615438108484006,0.643990929705215,0.620497803806735,0.657064887810794,0.725369978858351,0.696875539444157,0.697279567817866,0.804553347482153,0.829104091144485,0.809936575052854,0.785021224984839,0.74407027818448,0.760932944606414,0.722183588317107,0.688888888888889,0.713483146067416,0.688062387522495,0.645484949832776,0.548577036310108,0.540354330708661,0.507745266781411,0.476286579212916,0.52760736196319,0.517045454545455,0.523076923076923,0.578488372093023,0.589928057553957,0.53781512605042,0.481651376146789,0.490825688073395,0.515723270440252,0.478787878787879,0.513513513513514,0.493243243243243],"text":["year: 1995<br />share: 0.0202702703<br />colour: Other","year: 1996<br />share: 0.0242424242<br />colour: Other","year: 1997<br />share: 0.0314465409<br />colour: Other","year: 1998<br />share: 0.0550458716<br />colour: Other","year: 1999<br />share: 0.0229357798<br />colour: Other","year: 2000<br />share: 0.0546218487<br />colour: Other","year: 2001<br />share: 0.0539568345<br />colour: Other","year: 2002<br />share: 0.0174418605<br />colour: Other","year: 2003<br />share: 0.0307692308<br />colour: Other","year: 2004<br />share: 0.0416666667<br />colour: Other","year: 2005<br />share: 0.0969325153<br />colour: Other","year: 2006<br />share: 0.0403632694<br />colour: Other","year: 2007<br />share: 0.0507745267<br />colour: Other","year: 2008<br />share: 0.0610236220<br />colour: Other","year: 2009<br />share: 0.0696761531<br />colour: Other","year: 2010<br />share: 0.0729096990<br />colour: Other","year: 2011<br />share: 0.0791841632<br />colour: Other","year: 2012<br />share: 0.0842696629<br />colour: Other","year: 2013<br />share: 0.0958605664<br />colour: Other","year: 2014<br />share: 0.1067454798<br />colour: Other","year: 2015<br />share: 0.1169420149<br />colour: Other","year: 2016<br />share: 0.1235724744<br />colour: Other","year: 2017<br />share: 0.1279563372<br />colour: Other","year: 2018<br />share: 0.0845665962<br />colour: Other","year: 2019<br />share: 0.1322285517<br />colour: Other","year: 2020<br />share: 0.1072737797<br />colour: Other","year: 2020<br />share: 0.1072737797<br />colour: Other","year: 2019<br />share: 0.1322285517<br />colour: Other","year: 2018<br />share: 0.0845665962<br />colour: Other","year: 2017<br />share: 0.1279563372<br />colour: Other","year: 2016<br />share: 0.1235724744<br />colour: Other","year: 2015<br />share: 0.1169420149<br />colour: Other","year: 2014<br />share: 0.1067454798<br />colour: Other","year: 2013<br />share: 0.0958605664<br />colour: Other","year: 2012<br />share: 0.0842696629<br />colour: Other","year: 2011<br />share: 0.0791841632<br />colour: Other","year: 2010<br />share: 0.0729096990<br />colour: Other","year: 2009<br />share: 0.0696761531<br />colour: Other","year: 2008<br />share: 0.0610236220<br />colour: Other","year: 2007<br />share: 0.0507745267<br />colour: Other","year: 2006<br />share: 0.0403632694<br />colour: Other","year: 2005<br />share: 0.0969325153<br />colour: Other","year: 2004<br />share: 0.0416666667<br />colour: Other","year: 2003<br />share: 0.0307692308<br />colour: Other","year: 2002<br />share: 0.0174418605<br />colour: Other","year: 2001<br />share: 0.0539568345<br />colour: Other","year: 2000<br />share: 0.0546218487<br />colour: Other","year: 1999<br />share: 0.0229357798<br />colour: Other","year: 1998<br />share: 0.0550458716<br />colour: Other","year: 1997<br />share: 0.0314465409<br />colour: Other","year: 1996<br />share: 0.0242424242<br />colour: Other","year: 1995<br />share: 0.0202702703<br />colour: Other","year: 1995<br />share: 0.0202702703<br />colour: Other"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(25,25,112,0.8)","hoveron":"points","name":"Other","legendgroup":"Other","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.277027027027027,0.327272727272727,0.339622641509434,0.334862385321101,0.389908256880734,0.369747899159664,0.467625899280576,0.465116279069767,0.446153846153846,0.443181818181818,0.392638036809816,0.404641775983855,0.408777969018933,0.433070866141732,0.439646712463199,0.523745819397993,0.569886022795441,0.570008643042351,0.520261437908497,0.543115438108484,0.569484936831876,0.555490483162518,0.592177077016374,0.667441860465116,0.645606766787502,0.63496044761721,0.697279567817866,0.696875539444157,0.725369978858351,0.657064887810794,0.620497803806735,0.643990929705215,0.615438108484006,0.593028322440087,0.629213483146067,0.608878224355129,0.57257525083612,0.478900883218842,0.479330708661417,0.45697074010327,0.435923309788093,0.430674846625767,0.475378787878788,0.492307692307692,0.561046511627907,0.535971223021583,0.483193277310924,0.458715596330275,0.435779816513762,0.484276729559748,0.454545454545455,0.493243243243243,0.277027027027027],"text":["year: 1995<br />share: 0.2162162162<br />colour: Red","year: 1996<br />share: 0.1272727273<br />colour: Red","year: 1997<br />share: 0.1446540881<br />colour: Red","year: 1998<br />share: 0.1009174312<br />colour: Red","year: 1999<br />share: 0.0688073394<br />colour: Red","year: 2000<br />share: 0.1134453782<br />colour: Red","year: 2001<br />share: 0.0683453237<br />colour: Red","year: 2002<br />share: 0.0959302326<br />colour: Red","year: 2003<br />share: 0.0461538462<br />colour: Red","year: 2004<br />share: 0.0321969697<br />colour: Red","year: 2005<br />share: 0.0380368098<br />colour: Red","year: 2006<br />share: 0.0312815338<br />colour: Red","year: 2007<br />share: 0.0481927711<br />colour: Red","year: 2008<br />share: 0.0462598425<br />colour: Red","year: 2009<br />share: 0.0392541708<br />colour: Red","year: 2010<br />share: 0.0488294314<br />colour: Red","year: 2011<br />share: 0.0389922016<br />colour: Red","year: 2012<br />share: 0.0592048401<br />colour: Red","year: 2013<br />share: 0.0727668845<br />colour: Red","year: 2014<br />share: 0.0723226704<br />colour: Red","year: 2015<br />share: 0.0745059929<br />colour: Red","year: 2016<br />share: 0.0650073206<br />colour: Red","year: 2017<br />share: 0.0648878108<br />colour: Red","year: 2018<br />share: 0.0579281184<br />colour: Red","year: 2019<br />share: 0.0512687727<br />colour: Red","year: 2020<br />share: 0.0623191202<br />colour: Red","year: 2020<br />share: 0.0623191202<br />colour: Red","year: 2019<br />share: 0.0512687727<br />colour: Red","year: 2018<br />share: 0.0579281184<br />colour: Red","year: 2017<br />share: 0.0648878108<br />colour: Red","year: 2016<br />share: 0.0650073206<br />colour: Red","year: 2015<br />share: 0.0745059929<br />colour: Red","year: 2014<br />share: 0.0723226704<br />colour: Red","year: 2013<br />share: 0.0727668845<br />colour: Red","year: 2012<br />share: 0.0592048401<br />colour: Red","year: 2011<br />share: 0.0389922016<br />colour: Red","year: 2010<br />share: 0.0488294314<br />colour: Red","year: 2009<br />share: 0.0392541708<br />colour: Red","year: 2008<br />share: 0.0462598425<br />colour: Red","year: 2007<br />share: 0.0481927711<br />colour: Red","year: 2006<br />share: 0.0312815338<br />colour: Red","year: 2005<br />share: 0.0380368098<br />colour: Red","year: 2004<br />share: 0.0321969697<br />colour: Red","year: 2003<br />share: 0.0461538462<br />colour: Red","year: 2002<br />share: 0.0959302326<br />colour: Red","year: 2001<br />share: 0.0683453237<br />colour: Red","year: 2000<br />share: 0.1134453782<br />colour: Red","year: 1999<br />share: 0.0688073394<br />colour: Red","year: 1998<br />share: 0.1009174312<br />colour: Red","year: 1997<br />share: 0.1446540881<br />colour: Red","year: 1996<br />share: 0.1272727273<br />colour: Red","year: 1995<br />share: 0.2162162162<br />colour: Red","year: 1995<br />share: 0.2162162162<br />colour: Red"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(192,57,43,0.8)","hoveron":"points","name":"Red","legendgroup":"Red","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.22972972972973,0.236363636363636,0.238993710691824,0.247706422018349,0.307339449541284,0.26890756302521,0.26978417266187,0.252906976744186,0.218461538461538,0.174242424242424,0.134969325153374,0.160443995963673,0.167814113597246,0.205708661417323,0.201177625122669,0.290301003344482,0.286142771445711,0.328867761452031,0.301089324618736,0.345271210013908,0.359572400388727,0.343484626647145,0.375682231655549,0.390063424947146,0.3909891248058,0.418097626857033,0.63496044761721,0.645606766787502,0.667441860465116,0.592177077016374,0.555490483162518,0.569484936831876,0.543115438108484,0.520261437908497,0.570008643042351,0.569886022795441,0.523745819397993,0.439646712463199,0.433070866141732,0.408777969018933,0.404641775983855,0.392638036809816,0.443181818181818,0.446153846153846,0.465116279069767,0.467625899280576,0.369747899159664,0.389908256880734,0.334862385321101,0.339622641509434,0.327272727272727,0.277027027027027,0.22972972972973],"text":["year: 1995<br />share: 0.0472972973<br />colour: Silver","year: 1996<br />share: 0.0909090909<br />colour: Silver","year: 1997<br />share: 0.1006289308<br />colour: Silver","year: 1998<br />share: 0.0871559633<br />colour: Silver","year: 1999<br />share: 0.0825688073<br />colour: Silver","year: 2000<br />share: 0.1008403361<br />colour: Silver","year: 2001<br />share: 0.1978417266<br />colour: Silver","year: 2002<br />share: 0.2122093023<br />colour: Silver","year: 2003<br />share: 0.2276923077<br />colour: Silver","year: 2004<br />share: 0.2689393939<br />colour: Silver","year: 2005<br />share: 0.2576687117<br />colour: Silver","year: 2006<br />share: 0.2441977800<br />colour: Silver","year: 2007<br />share: 0.2409638554<br />colour: Silver","year: 2008<br />share: 0.2273622047<br />colour: Silver","year: 2009<br />share: 0.2384690873<br />colour: Silver","year: 2010<br />share: 0.2334448161<br />colour: Silver","year: 2011<br />share: 0.2837432513<br />colour: Silver","year: 2012<br />share: 0.2411408816<br />colour: Silver","year: 2013<br />share: 0.2191721133<br />colour: Silver","year: 2014<br />share: 0.1978442281<br />colour: Silver","year: 2015<br />share: 0.2099125364<br />colour: Silver","year: 2016<br />share: 0.2120058565<br />colour: Silver","year: 2017<br />share: 0.2164948454<br />colour: Silver","year: 2018<br />share: 0.2773784355<br />colour: Silver","year: 2019<br />share: 0.2546176420<br />colour: Silver","year: 2020<br />share: 0.2168628208<br />colour: Silver","year: 2020<br />share: 0.2168628208<br />colour: Silver","year: 2019<br />share: 0.2546176420<br />colour: Silver","year: 2018<br />share: 0.2773784355<br />colour: Silver","year: 2017<br />share: 0.2164948454<br />colour: Silver","year: 2016<br />share: 0.2120058565<br />colour: Silver","year: 2015<br />share: 0.2099125364<br />colour: Silver","year: 2014<br />share: 0.1978442281<br />colour: Silver","year: 2013<br />share: 0.2191721133<br />colour: Silver","year: 2012<br />share: 0.2411408816<br />colour: Silver","year: 2011<br />share: 0.2837432513<br />colour: Silver","year: 2010<br />share: 0.2334448161<br />colour: Silver","year: 2009<br />share: 0.2384690873<br />colour: Silver","year: 2008<br />share: 0.2273622047<br />colour: Silver","year: 2007<br />share: 0.2409638554<br />colour: Silver","year: 2006<br />share: 0.2441977800<br />colour: Silver","year: 2005<br />share: 0.2576687117<br />colour: Silver","year: 2004<br />share: 0.2689393939<br />colour: Silver","year: 2003<br />share: 0.2276923077<br />colour: Silver","year: 2002<br />share: 0.2122093023<br />colour: Silver","year: 2001<br />share: 0.1978417266<br />colour: Silver","year: 2000<br />share: 0.1008403361<br />colour: Silver","year: 1999<br />share: 0.0825688073<br />colour: Silver","year: 1998<br />share: 0.0871559633<br />colour: Silver","year: 1997<br />share: 0.1006289308<br />colour: Silver","year: 1996<br />share: 0.0909090909<br />colour: Silver","year: 1995<br />share: 0.0472972973<br />colour: Silver","year: 1995<br />share: 0.0472972973<br />colour: Silver"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(149,165,166,0.8)","hoveron":"points","name":"Silver","legendgroup":"Silver","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.418097626857033,0.3909891248058,0.390063424947146,0.375682231655549,0.343484626647145,0.359572400388727,0.345271210013908,0.301089324618736,0.328867761452031,0.286142771445711,0.290301003344482,0.201177625122669,0.205708661417323,0.167814113597246,0.160443995963673,0.134969325153374,0.174242424242424,0.218461538461538,0.252906976744186,0.26978417266187,0.26890756302521,0.307339449541284,0.247706422018349,0.238993710691824,0.236363636363636,0.22972972972973,0],"text":["year: 1995<br />share: 0.2297297297<br />colour: White","year: 1996<br />share: 0.2363636364<br />colour: White","year: 1997<br />share: 0.2389937107<br />colour: White","year: 1998<br />share: 0.2477064220<br />colour: White","year: 1999<br />share: 0.3073394495<br />colour: White","year: 2000<br />share: 0.2689075630<br />colour: White","year: 2001<br />share: 0.2697841727<br />colour: White","year: 2002<br />share: 0.2529069767<br />colour: White","year: 2003<br />share: 0.2184615385<br />colour: White","year: 2004<br />share: 0.1742424242<br />colour: White","year: 2005<br />share: 0.1349693252<br />colour: White","year: 2006<br />share: 0.1604439960<br />colour: White","year: 2007<br />share: 0.1678141136<br />colour: White","year: 2008<br />share: 0.2057086614<br />colour: White","year: 2009<br />share: 0.2011776251<br />colour: White","year: 2010<br />share: 0.2903010033<br />colour: White","year: 2011<br />share: 0.2861427714<br />colour: White","year: 2012<br />share: 0.3288677615<br />colour: White","year: 2013<br />share: 0.3010893246<br />colour: White","year: 2014<br />share: 0.3452712100<br />colour: White","year: 2015<br />share: 0.3595724004<br />colour: White","year: 2016<br />share: 0.3434846266<br />colour: White","year: 2017<br />share: 0.3756822317<br />colour: White","year: 2018<br />share: 0.3900634249<br />colour: White","year: 2019<br />share: 0.3909891248<br />colour: White","year: 2020<br />share: 0.4180976269<br />colour: White","year: 2020<br />share: 0.4180976269<br />colour: White","year: 2020<br />share: 0.4180976269<br />colour: White","year: 2019<br />share: 0.3909891248<br />colour: White","year: 2018<br />share: 0.3900634249<br />colour: White","year: 2017<br />share: 0.3756822317<br />colour: White","year: 2016<br />share: 0.3434846266<br />colour: White","year: 2015<br />share: 0.3595724004<br />colour: White","year: 2014<br />share: 0.3452712100<br />colour: White","year: 2013<br />share: 0.3010893246<br />colour: White","year: 2012<br />share: 0.3288677615<br />colour: White","year: 2011<br />share: 0.2861427714<br />colour: White","year: 2010<br />share: 0.2903010033<br />colour: White","year: 2009<br />share: 0.2011776251<br />colour: White","year: 2008<br />share: 0.2057086614<br />colour: White","year: 2007<br />share: 0.1678141136<br />colour: White","year: 2006<br />share: 0.1604439960<br />colour: White","year: 2005<br />share: 0.1349693252<br />colour: White","year: 2004<br />share: 0.1742424242<br />colour: White","year: 2003<br />share: 0.2184615385<br />colour: White","year: 2002<br />share: 0.2529069767<br />colour: White","year: 2001<br />share: 0.2697841727<br />colour: White","year: 2000<br />share: 0.2689075630<br />colour: White","year: 1999<br />share: 0.3073394495<br />colour: White","year: 1998<br />share: 0.2477064220<br />colour: White","year: 1997<br />share: 0.2389937107<br />colour: White","year: 1996<br />share: 0.2363636364<br />colour: White","year: 1995<br />share: 0.2297297297<br />colour: White","year: 1995<br />share: 0.2297297297<br />colour: White"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(248,249,249,0.8)","hoveron":"points","name":"White","legendgroup":"White","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Evolution of car colour in South Africa: 1995-2020","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1993.75,2021.25],"tickmode":"array","ticktext":["1995","2000","2005","2010","2015","2020"],"tickvals":[1995,2000,2005,2010,2015,2020],"categoryorder":"array","categoryarray":["1995","2000","2005","2010","2015","2020"],"nticks":null,"ticks":"outside","tickcolor":"rgba(179,179,179,1)","ticklen":3.65296803652968,"tickwidth":0.33208800332088,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Year of production","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.05,1.05],"tickmode":"array","ticktext":["0%","25%","50%","75%","100%"],"tickvals":[0,0.25,0.5,0.75,1],"categoryorder":"array","categoryarray":["0%","25%","50%","75%","100%"],"nticks":null,"ticks":"outside","tickcolor":"rgba(179,179,179,1)","ticklen":3.65296803652968,"tickwidth":0.33208800332088,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Share of cars in each colour per year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(179,179,179,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"5d043962526":{"x":{},"y":{},"fill":{},"type":"scatter"}},"cur_data":"5d043962526","visdat":{"5d043962526":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/car_colour/gumtree_ads_2020-10-01-11-33-am.rds"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(make),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">!</span><span class="fu">is.na</span>(colour),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">!</span><span class="fu">is.na</span>(model)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Removing the duplicated province names   </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">mutate</span>(<span class="at">province =</span> <span class="fu">str_remove</span>(province, <span class="st">"</span><span class="sc">\\</span><span class="st">,.*"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="what-does-the-data-look-like" class="level3">
+<h3 class="anchored" data-anchor-id="what-does-the-data-look-like">What does the data look like?</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">df</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">44644</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 13%">
+<col style="width: 18%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">link</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2218</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ad_url</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">78</td>
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">38392</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">site</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">seller_type</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">title</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">26140</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">text</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3885</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">38343</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ad_date</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">42416</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">seller_name</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">8872</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">location</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">428</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">seller_age</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">n_all_time_ads</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3481</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scrape_time</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">35812</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">location_2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">428</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">for_sale_by</td>
+<td style="text-align: right;">226</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">make</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">model</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">459</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">body_type</td>
+<td style="text-align: right;">226</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">transmission</td>
+<td style="text-align: right;">206</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fuel_type</td>
+<td style="text-align: right;">104</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">colour</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">na</td>
+<td style="text-align: right;">44644</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">province</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">page</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">14.51</td>
+<td style="text-align: right;">12.66</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: right;">11.0</td>
+<td style="text-align: right;">22.00</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: left;">▇▃▂▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ad_number</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">23570.95</td>
+<td style="text-align: right;">14487.85</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">11471.75</td>
+<td style="text-align: right;">22889.5</td>
+<td style="text-align: right;">34258.25</td>
+<td style="text-align: right;">56454</td>
+<td style="text-align: left;">▇▇▇▆▂</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">price</td>
+<td style="text-align: right;">229</td>
+<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">218706.68</td>
+<td style="text-align: right;">692268.63</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">109900.00</td>
+<td style="text-align: right;">165000.0</td>
+<td style="text-align: right;">259900.00</td>
+<td style="text-align: right;">140000000</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">n_photos</td>
+<td style="text-align: right;">1099</td>
+<td style="text-align: right;">0.98</td>
+<td style="text-align: right;">8.63</td>
+<td style="text-align: right;">3.08</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">9.0</td>
+<td style="text-align: right;">12.00</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">▁▂▃▃▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">n_views</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">588.85</td>
+<td style="text-align: right;">1281.69</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">91.00</td>
+<td style="text-align: right;">233.5</td>
+<td style="text-align: right;">580.00</td>
+<td style="text-align: right;">46956</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">n_active_ads</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">130.20</td>
+<td style="text-align: right;">225.27</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.50</td>
+<td style="text-align: right;">29.0</td>
+<td style="text-align: right;">100.00</td>
+<td style="text-align: right;">997</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">year</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2013.76</td>
+<td style="text-align: right;">6.66</td>
+<td style="text-align: right;">1900</td>
+<td style="text-align: right;">2011.00</td>
+<td style="text-align: right;">2016.0</td>
+<td style="text-align: right;">2018.00</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: left;">▁▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">kilometers</td>
+<td style="text-align: right;">1189</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">92267.35</td>
+<td style="text-align: right;">157493.13</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">26890.50</td>
+<td style="text-align: right;">72000.0</td>
+<td style="text-align: right;">130000.00</td>
+<td style="text-align: right;">9999999</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The dataset has some really nice information on the cars advertised, including their characteristics, as well as the location and name of the seller.</p>
+<p>For this graphic, we only need the car’s year and colour.</p>
+</section>
+<section id="what-are-the-most-common-car-colours-advertised" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-the-most-common-car-colours-advertised">What are the most common car colours advertised?</h3>
+<p>We start by plotting the number of cars in each colour advertised on Gumtree. In this plot I show the 12 most common colours.</p>
+<p>It is evident that white and silver cars are very common. In as far as our data reflects cars on the road, white cars make up nearly 1/3 of all cars advertised! A little less than the half quoted in the discussion above, but certainly the dominant colour.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">colour =</span> <span class="fu">fct_lump</span>(colour, <span class="dv">12</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(colour) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(colour, <span class="at">sort =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">colour =</span> <span class="fu">fct_reorder</span>(colour, n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(n, colour)) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> <span class="dv">0</span>, <span class="at">yend =</span> colour)) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">colour =</span> <span class="st">"orange"</span>) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> scales<span class="sc">::</span><span class="fu">comma</span>(n)), <span class="at">hjust =</span> <span class="sc">-</span>.<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">comma_format</span>(), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">16000</span>)) <span class="sc">+</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of vehicles"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"What are the most common vehicle colours advertised on Gumtree?"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Data from 45,000 adverts from across the country"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="south-africa-car-colour-exploration_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="how-has-the-colour-of-cars-changed-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="how-has-the-colour-of-cars-changed-over-time">How has the colour of cars changed over time?</h3>
+<p>Next we want to know if some colours have become more popular over time. Given that our data source is a snapshot of cars for sale at one point in time and on one online website, this is unlikely to be representative of the entire population of cars in South Africa. However, it will be interesting to see the trends that do exist in this data.</p>
+<p>We start with a simple plot of the number of cars advertised in the none more common colours, by year.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_colours <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, colour) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">between</span>(year, <span class="dv">1990</span>, <span class="dv">2020</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>It makes sense that the majority of adverts are for cars that are produced recently, and it is striking that white and silver cars see such a dramatic increase, even relative to the third most common car colour, grey.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_colours <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">colour =</span> <span class="fu">fct_lump</span>(colour, <span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(colour <span class="sc">!=</span> <span class="st">"Other"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">colour =</span> <span class="fu">fct_reorder</span>(colour, n, <span class="at">.fun =</span> sum, <span class="at">.desc =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, n, <span class="at">fill =</span> colour)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>() <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> colour)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="south-africa-car-colour-exploration_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="first-stacked-area-chart-attempt" class="level3">
+<h3 class="anchored" data-anchor-id="first-stacked-area-chart-attempt">First stacked area chart attempt</h3>
+<p>In this plot we show the evolution of car colour between 1990 and the present.</p>
+<p>There are a few problems with this plot. First, there are too many colours, the least common of which have just a few entries. Second, the missing values for the less common colours create unappealing white gaps in the bottom left of the plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_colours <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_tally</span>(n) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">colour =</span> <span class="fu">fct_reorder</span>(colour, nn, <span class="at">.fun =</span> sum, <span class="at">.desc =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">share =</span> n <span class="sc">/</span> nn) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, share, <span class="at">fill =</span> colour)) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="south-africa-car-colour-exploration_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="solution-to-gaps-in-area-chart" class="level3">
+<h3 class="anchored" data-anchor-id="solution-to-gaps-in-area-chart">Solution to gaps in area chart</h3>
+<p>To solve this problem, we can fill in the missing values by making the dataset wider and then long gain.</p>
+<p>Using dplyr’s <code>pivot_wider</code> and the <code>values_fill = 0</code> option, we create a wide dataset with one row for each year, shown below.</p>
+<p>We go from a long dataset like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_colours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+   year colour     n
+  &lt;dbl&gt; &lt;chr&gt;  &lt;int&gt;
+1  1990 Black      2
+2  1990 Blue      14
+3  1990 Gold       3
+4  1990 Green      3
+5  1990 Grey       5
+6  1990 Other      3</code></pre>
+</div>
+</div>
+<p>To a wide one, like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_colours <span class="ot">&lt;-</span> df_colours <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">colour =</span> <span class="fu">fct_lump</span>(colour, <span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year, colour) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> colour, <span class="at">values_from =</span> n, <span class="at">values_fill =</span> <span class="dv">0</span>) </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_colours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 11
+   year Black  Blue  Gold Green  Grey Other   Red Silver White Burgundy
+  &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;int&gt;    &lt;int&gt;
+1  1990     2    14     3     3     5     4    10      3    10        0
+2  1991     3    11     2     4     4     3     9      3    12        1
+3  1992     1    16     2     4     5     7    11      3    14        1
+4  1993     0    13     2     1     4     1    13      7    18        1
+5  1994     2    15     0     8     7     1    13      6    41        6
+6  1995     6    36     0    17     6     3    32      7    34        7</code></pre>
+</div>
+</div>
+<p>Now we have a ‘wide’ dataset with the missing values filled in with zeros</p>
+<p>We can then make it long again, with the <code>pivot_longer</code> command, specifying that we want the original column names back.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_colours <span class="ot">&lt;-</span> df_colours <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>year, <span class="at">names_to =</span> <span class="st">"colour"</span>, <span class="at">values_to =</span> <span class="st">"n"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_colours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+   year colour     n
+  &lt;dbl&gt; &lt;chr&gt;  &lt;int&gt;
+1  1990 Black      2
+2  1990 Blue      14
+3  1990 Gold       3
+4  1990 Green      3
+5  1990 Grey       5
+6  1990 Other      4</code></pre>
+</div>
+</div>
+</section>
+<section id="putting-it-together" class="level3">
+<h3 class="anchored" data-anchor-id="putting-it-together">Putting it together</h3>
+<p>Now we have a plot with no white gaps, and an appropriate number of colours. However, it would be nice to have the colours on the plot match the colours of the cars, and have some labels to make it clear to the reader how to interpret the graphic.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_colours <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_tally</span>(n) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">share =</span> n <span class="sc">/</span> nn) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, share, <span class="at">fill =</span> colour)) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="south-africa-car-colour-exploration_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="tightening-up-the-graphic" class="level3">
+<h3 class="anchored" data-anchor-id="tightening-up-the-graphic">Tightening up the graphic</h3>
+<p>We use ggplot’s <code>scale_fill_manual</code> to specify the hex codes for the colours in the order that they appear in the plot.</p>
+<p>We add in a title and axes labels, and make the plot interactive with <code>ggplotly</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> df_colours <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">1994</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_tally</span>(n) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">share =</span> n <span class="sc">/</span> nn) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, share, <span class="at">fill =</span> colour)) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#17202A"</span>, <span class="st">"#2471A3"</span>, <span class="st">"#800020"</span>, <span class="st">"#F39C12"</span>, <span class="st">"#27AE60"</span>, <span class="st">"#BDC3C7"</span>, <span class="st">"midnightblue"</span>, <span class="st">"#C0392B"</span>, <span class="st">"#95A5A6"</span>, <span class="st">"#F8F9F9"</span>)) <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Evolution of car colour in South Africa: 1995-2020"</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Based on Gumtree vehicle adverts"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year of production"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Share of cars in each colour per year"</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">""</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Source: Gumtree vehicle adverts scraped in October 2020</span><span class="sc">\n</span><span class="st">Graphic: Jonathan Jayes"</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-e1d20746c5fc1931c8b5" style="width:100%;height:464px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e1d20746c5fc1931c8b5">{"x":{"data":[{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.95945945945946,0.951515151515151,0.981132075471698,0.944954128440367,0.972477064220184,0.953781512605042,0.967625899280576,0.941860465116279,0.907692307692308,0.856060606060606,0.834355828220859,0.814328960645812,0.830464716006885,0.855314960629921,0.859666339548577,0.907692307692308,0.949610077984403,0.946845289541919,0.940305010893246,0.953407510431154,0.971493359248461,0.9701317715959,0.983020012128563,0.984989429175476,0.987053340238219,0.968358093768088,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.95945945945946],"text":["year: 1995<br />share: 0.0405405405<br />colour: Black","year: 1996<br />share: 0.0484848485<br />colour: Black","year: 1997<br />share: 0.0188679245<br />colour: Black","year: 1998<br />share: 0.0550458716<br />colour: Black","year: 1999<br />share: 0.0275229358<br />colour: Black","year: 2000<br />share: 0.0462184874<br />colour: Black","year: 2001<br />share: 0.0323741007<br />colour: Black","year: 2002<br />share: 0.0581395349<br />colour: Black","year: 2003<br />share: 0.0923076923<br />colour: Black","year: 2004<br />share: 0.1439393939<br />colour: Black","year: 2005<br />share: 0.1656441718<br />colour: Black","year: 2006<br />share: 0.1856710394<br />colour: Black","year: 2007<br />share: 0.1695352840<br />colour: Black","year: 2008<br />share: 0.1446850394<br />colour: Black","year: 2009<br />share: 0.1403336605<br />colour: Black","year: 2010<br />share: 0.0923076923<br />colour: Black","year: 2011<br />share: 0.0503899220<br />colour: Black","year: 2012<br />share: 0.0531547105<br />colour: Black","year: 2013<br />share: 0.0596949891<br />colour: Black","year: 2014<br />share: 0.0465924896<br />colour: Black","year: 2015<br />share: 0.0285066408<br />colour: Black","year: 2016<br />share: 0.0298682284<br />colour: Black","year: 2017<br />share: 0.0169799879<br />colour: Black","year: 2018<br />share: 0.0150105708<br />colour: Black","year: 2019<br />share: 0.0129466598<br />colour: Black","year: 2020<br />share: 0.0316419062<br />colour: Black","year: 2020<br />share: 0.0316419062<br />colour: Black","year: 2019<br />share: 0.0129466598<br />colour: Black","year: 2018<br />share: 0.0150105708<br />colour: Black","year: 2017<br />share: 0.0169799879<br />colour: Black","year: 2016<br />share: 0.0298682284<br />colour: Black","year: 2015<br />share: 0.0285066408<br />colour: Black","year: 2014<br />share: 0.0465924896<br />colour: Black","year: 2013<br />share: 0.0596949891<br />colour: Black","year: 2012<br />share: 0.0531547105<br />colour: Black","year: 2011<br />share: 0.0503899220<br />colour: Black","year: 2010<br />share: 0.0923076923<br />colour: Black","year: 2009<br />share: 0.1403336605<br />colour: Black","year: 2008<br />share: 0.1446850394<br />colour: Black","year: 2007<br />share: 0.1695352840<br />colour: Black","year: 2006<br />share: 0.1856710394<br />colour: Black","year: 2005<br />share: 0.1656441718<br />colour: Black","year: 2004<br />share: 0.1439393939<br />colour: Black","year: 2003<br />share: 0.0923076923<br />colour: Black","year: 2002<br />share: 0.0581395349<br />colour: Black","year: 2001<br />share: 0.0323741007<br />colour: Black","year: 2000<br />share: 0.0462184874<br />colour: Black","year: 1999<br />share: 0.0275229358<br />colour: Black","year: 1998<br />share: 0.0550458716<br />colour: Black","year: 1997<br />share: 0.0188679245<br />colour: Black","year: 1996<br />share: 0.0484848485<br />colour: Black","year: 1995<br />share: 0.0405405405<br />colour: Black","year: 1995<br />share: 0.0405405405<br />colour: Black"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(23,32,42,0.8)","hoveron":"points","name":"Black","legendgroup":"Black","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.716216216216216,0.678787878787879,0.754716981132076,0.701834862385321,0.697247706422018,0.697478991596639,0.823741007194245,0.813953488372093,0.778461538461538,0.71969696969697,0.687116564417178,0.660948536831483,0.710843373493976,0.727362204724409,0.748773307163886,0.806020066889632,0.860227954409118,0.859118409680207,0.850980392156863,0.859527121001391,0.897311305474571,0.875549048316252,0.905700424499697,0.917758985200846,0.926980838943553,0.894462666409415,0.968358093768088,0.987053340238219,0.984989429175476,0.983020012128563,0.9701317715959,0.971493359248461,0.953407510431154,0.940305010893246,0.946845289541919,0.949610077984403,0.907692307692308,0.859666339548577,0.855314960629921,0.830464716006885,0.814328960645812,0.834355828220859,0.856060606060606,0.907692307692308,0.941860465116279,0.967625899280576,0.953781512605042,0.972477064220184,0.944954128440367,0.981132075471698,0.951515151515151,0.95945945945946,0.716216216216216],"text":["year: 1995<br />share: 0.2432432432<br />colour: Blue","year: 1996<br />share: 0.2727272727<br />colour: Blue","year: 1997<br />share: 0.2264150943<br />colour: Blue","year: 1998<br />share: 0.2431192661<br />colour: Blue","year: 1999<br />share: 0.2752293578<br />colour: Blue","year: 2000<br />share: 0.2563025210<br />colour: Blue","year: 2001<br />share: 0.1438848921<br />colour: Blue","year: 2002<br />share: 0.1279069767<br />colour: Blue","year: 2003<br />share: 0.1292307692<br />colour: Blue","year: 2004<br />share: 0.1363636364<br />colour: Blue","year: 2005<br />share: 0.1472392638<br />colour: Blue","year: 2006<br />share: 0.1533804238<br />colour: Blue","year: 2007<br />share: 0.1196213425<br />colour: Blue","year: 2008<br />share: 0.1279527559<br />colour: Blue","year: 2009<br />share: 0.1108930324<br />colour: Blue","year: 2010<br />share: 0.1016722408<br />colour: Blue","year: 2011<br />share: 0.0893821236<br />colour: Blue","year: 2012<br />share: 0.0877268799<br />colour: Blue","year: 2013<br />share: 0.0893246187<br />colour: Blue","year: 2014<br />share: 0.0938803894<br />colour: Blue","year: 2015<br />share: 0.0741820538<br />colour: Blue","year: 2016<br />share: 0.0945827233<br />colour: Blue","year: 2017<br />share: 0.0773195876<br />colour: Blue","year: 2018<br />share: 0.0672304440<br />colour: Blue","year: 2019<br />share: 0.0600725013<br />colour: Blue","year: 2020<br />share: 0.0738954274<br />colour: Blue","year: 2020<br />share: 0.0738954274<br />colour: Blue","year: 2019<br />share: 0.0600725013<br />colour: Blue","year: 2018<br />share: 0.0672304440<br />colour: Blue","year: 2017<br />share: 0.0773195876<br />colour: Blue","year: 2016<br />share: 0.0945827233<br />colour: Blue","year: 2015<br />share: 0.0741820538<br />colour: Blue","year: 2014<br />share: 0.0938803894<br />colour: Blue","year: 2013<br />share: 0.0893246187<br />colour: Blue","year: 2012<br />share: 0.0877268799<br />colour: Blue","year: 2011<br />share: 0.0893821236<br />colour: Blue","year: 2010<br />share: 0.1016722408<br />colour: Blue","year: 2009<br />share: 0.1108930324<br />colour: Blue","year: 2008<br />share: 0.1279527559<br />colour: Blue","year: 2007<br />share: 0.1196213425<br />colour: Blue","year: 2006<br />share: 0.1533804238<br />colour: Blue","year: 2005<br />share: 0.1472392638<br />colour: Blue","year: 2004<br />share: 0.1363636364<br />colour: Blue","year: 2003<br />share: 0.1292307692<br />colour: Blue","year: 2002<br />share: 0.1279069767<br />colour: Blue","year: 2001<br />share: 0.1438848921<br />colour: Blue","year: 2000<br />share: 0.2563025210<br />colour: Blue","year: 1999<br />share: 0.2752293578<br />colour: Blue","year: 1998<br />share: 0.2431192661<br />colour: Blue","year: 1997<br />share: 0.2264150943<br />colour: Blue","year: 1996<br />share: 0.2727272727<br />colour: Blue","year: 1995<br />share: 0.2432432432<br />colour: Blue","year: 1995<br />share: 0.2432432432<br />colour: Blue"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(36,113,163,0.8)","hoveron":"points","name":"Blue","legendgroup":"Blue","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.668918918918919,0.654545454545455,0.69811320754717,0.688073394495413,0.665137614678899,0.676470588235294,0.820143884892086,0.805232558139535,0.763076923076923,0.704545454545455,0.679754601226994,0.657921291624622,0.701376936316695,0.724409448818898,0.746810598626104,0.802675585284281,0.860227954409118,0.859118409680207,0.846623093681917,0.856397774687065,0.894395853579527,0.872620790629575,0.900242571255306,0.915644820295983,0.926290350422924,0.894269727956782,0.894462666409415,0.926980838943553,0.917758985200846,0.905700424499697,0.875549048316252,0.897311305474571,0.859527121001391,0.850980392156863,0.859118409680207,0.860227954409118,0.806020066889632,0.748773307163886,0.727362204724409,0.710843373493976,0.660948536831483,0.687116564417178,0.71969696969697,0.778461538461538,0.813953488372093,0.823741007194245,0.697478991596639,0.697247706422018,0.701834862385321,0.754716981132076,0.678787878787879,0.716216216216216,0.668918918918919],"text":["year: 1995<br />share: 0.0472972973<br />colour: Burgundy","year: 1996<br />share: 0.0242424242<br />colour: Burgundy","year: 1997<br />share: 0.0566037736<br />colour: Burgundy","year: 1998<br />share: 0.0137614679<br />colour: Burgundy","year: 1999<br />share: 0.0321100917<br />colour: Burgundy","year: 2000<br />share: 0.0210084034<br />colour: Burgundy","year: 2001<br />share: 0.0035971223<br />colour: Burgundy","year: 2002<br />share: 0.0087209302<br />colour: Burgundy","year: 2003<br />share: 0.0153846154<br />colour: Burgundy","year: 2004<br />share: 0.0151515152<br />colour: Burgundy","year: 2005<br />share: 0.0073619632<br />colour: Burgundy","year: 2006<br />share: 0.0030272452<br />colour: Burgundy","year: 2007<br />share: 0.0094664372<br />colour: Burgundy","year: 2008<br />share: 0.0029527559<br />colour: Burgundy","year: 2009<br />share: 0.0019627085<br />colour: Burgundy","year: 2010<br />share: 0.0033444816<br />colour: Burgundy","year: 2011<br />share: 0.0000000000<br />colour: Burgundy","year: 2012<br />share: 0.0000000000<br />colour: Burgundy","year: 2013<br />share: 0.0043572985<br />colour: Burgundy","year: 2014<br />share: 0.0031293463<br />colour: Burgundy","year: 2015<br />share: 0.0029154519<br />colour: Burgundy","year: 2016<br />share: 0.0029282577<br />colour: Burgundy","year: 2017<br />share: 0.0054578532<br />colour: Burgundy","year: 2018<br />share: 0.0021141649<br />colour: Burgundy","year: 2019<br />share: 0.0006904885<br />colour: Burgundy","year: 2020<br />share: 0.0001929385<br />colour: Burgundy","year: 2020<br />share: 0.0001929385<br />colour: Burgundy","year: 2019<br />share: 0.0006904885<br />colour: Burgundy","year: 2018<br />share: 0.0021141649<br />colour: Burgundy","year: 2017<br />share: 0.0054578532<br />colour: Burgundy","year: 2016<br />share: 0.0029282577<br />colour: Burgundy","year: 2015<br />share: 0.0029154519<br />colour: Burgundy","year: 2014<br />share: 0.0031293463<br />colour: Burgundy","year: 2013<br />share: 0.0043572985<br />colour: Burgundy","year: 2012<br />share: 0.0000000000<br />colour: Burgundy","year: 2011<br />share: 0.0000000000<br />colour: Burgundy","year: 2010<br />share: 0.0033444816<br />colour: Burgundy","year: 2009<br />share: 0.0019627085<br />colour: Burgundy","year: 2008<br />share: 0.0029527559<br />colour: Burgundy","year: 2007<br />share: 0.0094664372<br />colour: Burgundy","year: 2006<br />share: 0.0030272452<br />colour: Burgundy","year: 2005<br />share: 0.0073619632<br />colour: Burgundy","year: 2004<br />share: 0.0151515152<br />colour: Burgundy","year: 2003<br />share: 0.0153846154<br />colour: Burgundy","year: 2002<br />share: 0.0087209302<br />colour: Burgundy","year: 2001<br />share: 0.0035971223<br />colour: Burgundy","year: 2000<br />share: 0.0210084034<br />colour: Burgundy","year: 1999<br />share: 0.0321100917<br />colour: Burgundy","year: 1998<br />share: 0.0137614679<br />colour: Burgundy","year: 1997<br />share: 0.0566037736<br />colour: Burgundy","year: 1996<br />share: 0.0242424242<br />colour: Burgundy","year: 1995<br />share: 0.0472972973<br />colour: Burgundy","year: 1995<br />share: 0.0472972973<br />colour: Burgundy"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(128,0,32,0.8)","hoveron":"points","name":"Burgundy","legendgroup":"Burgundy","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.668918918918919,0.642424242424242,0.685534591194969,0.68348623853211,0.623853211009174,0.634453781512605,0.737410071942446,0.718023255813953,0.704615384615385,0.630681818181818,0.634355828220859,0.615539858728557,0.625645438898451,0.677165354330709,0.697742885181551,0.758528428093646,0.825434913017397,0.838807260155575,0.820915032679739,0.827190542420028,0.871396177518627,0.85592972181552,0.882352941176471,0.905285412262156,0.918004488175384,0.890796835809377,0.894269727956782,0.926290350422924,0.915644820295983,0.900242571255306,0.872620790629575,0.894395853579527,0.856397774687065,0.846623093681917,0.859118409680207,0.860227954409118,0.802675585284281,0.746810598626104,0.724409448818898,0.701376936316695,0.657921291624622,0.679754601226994,0.704545454545455,0.763076923076923,0.805232558139535,0.820143884892086,0.676470588235294,0.665137614678899,0.688073394495413,0.69811320754717,0.654545454545455,0.668918918918919,0.668918918918919],"text":["year: 1995<br />share: 0.0000000000<br />colour: Gold","year: 1996<br />share: 0.0121212121<br />colour: Gold","year: 1997<br />share: 0.0125786164<br />colour: Gold","year: 1998<br />share: 0.0045871560<br />colour: Gold","year: 1999<br />share: 0.0412844037<br />colour: Gold","year: 2000<br />share: 0.0420168067<br />colour: Gold","year: 2001<br />share: 0.0827338129<br />colour: Gold","year: 2002<br />share: 0.0872093023<br />colour: Gold","year: 2003<br />share: 0.0584615385<br />colour: Gold","year: 2004<br />share: 0.0738636364<br />colour: Gold","year: 2005<br />share: 0.0453987730<br />colour: Gold","year: 2006<br />share: 0.0423814329<br />colour: Gold","year: 2007<br />share: 0.0757314974<br />colour: Gold","year: 2008<br />share: 0.0472440945<br />colour: Gold","year: 2009<br />share: 0.0490677134<br />colour: Gold","year: 2010<br />share: 0.0441471572<br />colour: Gold","year: 2011<br />share: 0.0347930414<br />colour: Gold","year: 2012<br />share: 0.0203111495<br />colour: Gold","year: 2013<br />share: 0.0257080610<br />colour: Gold","year: 2014<br />share: 0.0292072323<br />colour: Gold","year: 2015<br />share: 0.0229996761<br />colour: Gold","year: 2016<br />share: 0.0166910688<br />colour: Gold","year: 2017<br />share: 0.0178896301<br />colour: Gold","year: 2018<br />share: 0.0103594080<br />colour: Gold","year: 2019<br />share: 0.0082858622<br />colour: Gold","year: 2020<br />share: 0.0034728921<br />colour: Gold","year: 2020<br />share: 0.0034728921<br />colour: Gold","year: 2019<br />share: 0.0082858622<br />colour: Gold","year: 2018<br />share: 0.0103594080<br />colour: Gold","year: 2017<br />share: 0.0178896301<br />colour: Gold","year: 2016<br />share: 0.0166910688<br />colour: Gold","year: 2015<br />share: 0.0229996761<br />colour: Gold","year: 2014<br />share: 0.0292072323<br />colour: Gold","year: 2013<br />share: 0.0257080610<br />colour: Gold","year: 2012<br />share: 0.0203111495<br />colour: Gold","year: 2011<br />share: 0.0347930414<br />colour: Gold","year: 2010<br />share: 0.0441471572<br />colour: Gold","year: 2009<br />share: 0.0490677134<br />colour: Gold","year: 2008<br />share: 0.0472440945<br />colour: Gold","year: 2007<br />share: 0.0757314974<br />colour: Gold","year: 2006<br />share: 0.0423814329<br />colour: Gold","year: 2005<br />share: 0.0453987730<br />colour: Gold","year: 2004<br />share: 0.0738636364<br />colour: Gold","year: 2003<br />share: 0.0584615385<br />colour: Gold","year: 2002<br />share: 0.0872093023<br />colour: Gold","year: 2001<br />share: 0.0827338129<br />colour: Gold","year: 2000<br />share: 0.0420168067<br />colour: Gold","year: 1999<br />share: 0.0412844037<br />colour: Gold","year: 1998<br />share: 0.0045871560<br />colour: Gold","year: 1997<br />share: 0.0125786164<br />colour: Gold","year: 1996<br />share: 0.0121212121<br />colour: Gold","year: 1995<br />share: 0.0000000000<br />colour: Gold","year: 1995<br />share: 0.0000000000<br />colour: Gold"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(243,156,18,0.8)","hoveron":"points","name":"Gold","legendgroup":"Gold","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.554054054054054,0.509090909090909,0.578616352201258,0.527522935779817,0.527522935779817,0.584033613445378,0.654676258992806,0.671511627906977,0.646153846153846,0.611742424242424,0.61840490797546,0.592330978809284,0.607573149741824,0.660433070866142,0.681059862610402,0.755183946488294,0.817636472705459,0.835350043215212,0.816122004357299,0.823018080667594,0.868480725623583,0.85095168374817,0.877198302001213,0.902748414376321,0.912825824270671,0.886552189851437,0.890796835809377,0.918004488175384,0.905285412262156,0.882352941176471,0.85592972181552,0.871396177518627,0.827190542420028,0.820915032679739,0.838807260155575,0.825434913017397,0.758528428093646,0.697742885181551,0.677165354330709,0.625645438898451,0.615539858728557,0.634355828220859,0.630681818181818,0.704615384615385,0.718023255813953,0.737410071942446,0.634453781512605,0.623853211009174,0.68348623853211,0.685534591194969,0.642424242424242,0.668918918918919,0.554054054054054],"text":["year: 1995<br />share: 0.1148648649<br />colour: Green","year: 1996<br />share: 0.1333333333<br />colour: Green","year: 1997<br />share: 0.1069182390<br />colour: Green","year: 1998<br />share: 0.1559633028<br />colour: Green","year: 1999<br />share: 0.0963302752<br />colour: Green","year: 2000<br />share: 0.0504201681<br />colour: Green","year: 2001<br />share: 0.0827338129<br />colour: Green","year: 2002<br />share: 0.0465116279<br />colour: Green","year: 2003<br />share: 0.0584615385<br />colour: Green","year: 2004<br />share: 0.0189393939<br />colour: Green","year: 2005<br />share: 0.0159509202<br />colour: Green","year: 2006<br />share: 0.0232088799<br />colour: Green","year: 2007<br />share: 0.0180722892<br />colour: Green","year: 2008<br />share: 0.0167322835<br />colour: Green","year: 2009<br />share: 0.0166830226<br />colour: Green","year: 2010<br />share: 0.0033444816<br />colour: Green","year: 2011<br />share: 0.0077984403<br />colour: Green","year: 2012<br />share: 0.0034572169<br />colour: Green","year: 2013<br />share: 0.0047930283<br />colour: Green","year: 2014<br />share: 0.0041724618<br />colour: Green","year: 2015<br />share: 0.0029154519<br />colour: Green","year: 2016<br />share: 0.0049780381<br />colour: Green","year: 2017<br />share: 0.0051546392<br />colour: Green","year: 2018<br />share: 0.0025369979<br />colour: Green","year: 2019<br />share: 0.0051786639<br />colour: Green","year: 2020<br />share: 0.0042446460<br />colour: Green","year: 2020<br />share: 0.0042446460<br />colour: Green","year: 2019<br />share: 0.0051786639<br />colour: Green","year: 2018<br />share: 0.0025369979<br />colour: Green","year: 2017<br />share: 0.0051546392<br />colour: Green","year: 2016<br />share: 0.0049780381<br />colour: Green","year: 2015<br />share: 0.0029154519<br />colour: Green","year: 2014<br />share: 0.0041724618<br />colour: Green","year: 2013<br />share: 0.0047930283<br />colour: Green","year: 2012<br />share: 0.0034572169<br />colour: Green","year: 2011<br />share: 0.0077984403<br />colour: Green","year: 2010<br />share: 0.0033444816<br />colour: Green","year: 2009<br />share: 0.0166830226<br />colour: Green","year: 2008<br />share: 0.0167322835<br />colour: Green","year: 2007<br />share: 0.0180722892<br />colour: Green","year: 2006<br />share: 0.0232088799<br />colour: Green","year: 2005<br />share: 0.0159509202<br />colour: Green","year: 2004<br />share: 0.0189393939<br />colour: Green","year: 2003<br />share: 0.0584615385<br />colour: Green","year: 2002<br />share: 0.0465116279<br />colour: Green","year: 2001<br />share: 0.0827338129<br />colour: Green","year: 2000<br />share: 0.0504201681<br />colour: Green","year: 1999<br />share: 0.0963302752<br />colour: Green","year: 1998<br />share: 0.1559633028<br />colour: Green","year: 1997<br />share: 0.1069182390<br />colour: Green","year: 1996<br />share: 0.1333333333<br />colour: Green","year: 1995<br />share: 0.1148648649<br />colour: Green","year: 1995<br />share: 0.1148648649<br />colour: Green"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(39,174,96,0.8)","hoveron":"points","name":"Green","legendgroup":"Green","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.513513513513514,0.478787878787879,0.515723270440252,0.490825688073395,0.481651376146789,0.53781512605042,0.589928057553957,0.578488372093023,0.523076923076923,0.517045454545455,0.52760736196319,0.476286579212916,0.507745266781411,0.540354330708661,0.548577036310108,0.645484949832776,0.688062387522495,0.713483146067416,0.688888888888889,0.722183588317107,0.760932944606414,0.74407027818448,0.785021224984839,0.809936575052854,0.829104091144485,0.804553347482153,0.886552189851437,0.912825824270671,0.902748414376321,0.877198302001213,0.85095168374817,0.868480725623583,0.823018080667594,0.816122004357299,0.835350043215212,0.817636472705459,0.755183946488294,0.681059862610402,0.660433070866142,0.607573149741824,0.592330978809284,0.61840490797546,0.611742424242424,0.646153846153846,0.671511627906977,0.654676258992806,0.584033613445378,0.527522935779817,0.527522935779817,0.578616352201258,0.509090909090909,0.554054054054054,0.513513513513514],"text":["year: 1995<br />share: 0.0405405405<br />colour: Grey","year: 1996<br />share: 0.0303030303<br />colour: Grey","year: 1997<br />share: 0.0628930818<br />colour: Grey","year: 1998<br />share: 0.0366972477<br />colour: Grey","year: 1999<br />share: 0.0458715596<br />colour: Grey","year: 2000<br />share: 0.0462184874<br />colour: Grey","year: 2001<br />share: 0.0647482014<br />colour: Grey","year: 2002<br />share: 0.0930232558<br />colour: Grey","year: 2003<br />share: 0.1230769231<br />colour: Grey","year: 2004<br />share: 0.0946969697<br />colour: Grey","year: 2005<br />share: 0.0907975460<br />colour: Grey","year: 2006<br />share: 0.1160443996<br />colour: Grey","year: 2007<br />share: 0.0998278830<br />colour: Grey","year: 2008<br />share: 0.1200787402<br />colour: Grey","year: 2009<br />share: 0.1324828263<br />colour: Grey","year: 2010<br />share: 0.1096989967<br />colour: Grey","year: 2011<br />share: 0.1295740852<br />colour: Grey","year: 2012<br />share: 0.1218668971<br />colour: Grey","year: 2013<br />share: 0.1272331155<br />colour: Grey","year: 2014<br />share: 0.1008344924<br />colour: Grey","year: 2015<br />share: 0.1075477810<br />colour: Grey","year: 2016<br />share: 0.1068814056<br />colour: Grey","year: 2017<br />share: 0.0921770770<br />colour: Grey","year: 2018<br />share: 0.0928118393<br />colour: Grey","year: 2019<br />share: 0.0837217331<br />colour: Grey","year: 2020<br />share: 0.0819988424<br />colour: Grey","year: 2020<br />share: 0.0819988424<br />colour: Grey","year: 2019<br />share: 0.0837217331<br />colour: Grey","year: 2018<br />share: 0.0928118393<br />colour: Grey","year: 2017<br />share: 0.0921770770<br />colour: Grey","year: 2016<br />share: 0.1068814056<br />colour: Grey","year: 2015<br />share: 0.1075477810<br />colour: Grey","year: 2014<br />share: 0.1008344924<br />colour: Grey","year: 2013<br />share: 0.1272331155<br />colour: Grey","year: 2012<br />share: 0.1218668971<br />colour: Grey","year: 2011<br />share: 0.1295740852<br />colour: Grey","year: 2010<br />share: 0.1096989967<br />colour: Grey","year: 2009<br />share: 0.1324828263<br />colour: Grey","year: 2008<br />share: 0.1200787402<br />colour: Grey","year: 2007<br />share: 0.0998278830<br />colour: Grey","year: 2006<br />share: 0.1160443996<br />colour: Grey","year: 2005<br />share: 0.0907975460<br />colour: Grey","year: 2004<br />share: 0.0946969697<br />colour: Grey","year: 2003<br />share: 0.1230769231<br />colour: Grey","year: 2002<br />share: 0.0930232558<br />colour: Grey","year: 2001<br />share: 0.0647482014<br />colour: Grey","year: 2000<br />share: 0.0462184874<br />colour: Grey","year: 1999<br />share: 0.0458715596<br />colour: Grey","year: 1998<br />share: 0.0366972477<br />colour: Grey","year: 1997<br />share: 0.0628930818<br />colour: Grey","year: 1996<br />share: 0.0303030303<br />colour: Grey","year: 1995<br />share: 0.0405405405<br />colour: Grey","year: 1995<br />share: 0.0405405405<br />colour: Grey"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(189,195,199,0.8)","hoveron":"points","name":"Grey","legendgroup":"Grey","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.493243243243243,0.454545454545455,0.484276729559748,0.435779816513762,0.458715596330275,0.483193277310924,0.535971223021583,0.561046511627907,0.492307692307692,0.475378787878788,0.430674846625767,0.435923309788093,0.45697074010327,0.479330708661417,0.478900883218842,0.57257525083612,0.608878224355129,0.629213483146067,0.593028322440087,0.615438108484006,0.643990929705215,0.620497803806735,0.657064887810794,0.725369978858351,0.696875539444157,0.697279567817866,0.804553347482153,0.829104091144485,0.809936575052854,0.785021224984839,0.74407027818448,0.760932944606414,0.722183588317107,0.688888888888889,0.713483146067416,0.688062387522495,0.645484949832776,0.548577036310108,0.540354330708661,0.507745266781411,0.476286579212916,0.52760736196319,0.517045454545455,0.523076923076923,0.578488372093023,0.589928057553957,0.53781512605042,0.481651376146789,0.490825688073395,0.515723270440252,0.478787878787879,0.513513513513514,0.493243243243243],"text":["year: 1995<br />share: 0.0202702703<br />colour: Other","year: 1996<br />share: 0.0242424242<br />colour: Other","year: 1997<br />share: 0.0314465409<br />colour: Other","year: 1998<br />share: 0.0550458716<br />colour: Other","year: 1999<br />share: 0.0229357798<br />colour: Other","year: 2000<br />share: 0.0546218487<br />colour: Other","year: 2001<br />share: 0.0539568345<br />colour: Other","year: 2002<br />share: 0.0174418605<br />colour: Other","year: 2003<br />share: 0.0307692308<br />colour: Other","year: 2004<br />share: 0.0416666667<br />colour: Other","year: 2005<br />share: 0.0969325153<br />colour: Other","year: 2006<br />share: 0.0403632694<br />colour: Other","year: 2007<br />share: 0.0507745267<br />colour: Other","year: 2008<br />share: 0.0610236220<br />colour: Other","year: 2009<br />share: 0.0696761531<br />colour: Other","year: 2010<br />share: 0.0729096990<br />colour: Other","year: 2011<br />share: 0.0791841632<br />colour: Other","year: 2012<br />share: 0.0842696629<br />colour: Other","year: 2013<br />share: 0.0958605664<br />colour: Other","year: 2014<br />share: 0.1067454798<br />colour: Other","year: 2015<br />share: 0.1169420149<br />colour: Other","year: 2016<br />share: 0.1235724744<br />colour: Other","year: 2017<br />share: 0.1279563372<br />colour: Other","year: 2018<br />share: 0.0845665962<br />colour: Other","year: 2019<br />share: 0.1322285517<br />colour: Other","year: 2020<br />share: 0.1072737797<br />colour: Other","year: 2020<br />share: 0.1072737797<br />colour: Other","year: 2019<br />share: 0.1322285517<br />colour: Other","year: 2018<br />share: 0.0845665962<br />colour: Other","year: 2017<br />share: 0.1279563372<br />colour: Other","year: 2016<br />share: 0.1235724744<br />colour: Other","year: 2015<br />share: 0.1169420149<br />colour: Other","year: 2014<br />share: 0.1067454798<br />colour: Other","year: 2013<br />share: 0.0958605664<br />colour: Other","year: 2012<br />share: 0.0842696629<br />colour: Other","year: 2011<br />share: 0.0791841632<br />colour: Other","year: 2010<br />share: 0.0729096990<br />colour: Other","year: 2009<br />share: 0.0696761531<br />colour: Other","year: 2008<br />share: 0.0610236220<br />colour: Other","year: 2007<br />share: 0.0507745267<br />colour: Other","year: 2006<br />share: 0.0403632694<br />colour: Other","year: 2005<br />share: 0.0969325153<br />colour: Other","year: 2004<br />share: 0.0416666667<br />colour: Other","year: 2003<br />share: 0.0307692308<br />colour: Other","year: 2002<br />share: 0.0174418605<br />colour: Other","year: 2001<br />share: 0.0539568345<br />colour: Other","year: 2000<br />share: 0.0546218487<br />colour: Other","year: 1999<br />share: 0.0229357798<br />colour: Other","year: 1998<br />share: 0.0550458716<br />colour: Other","year: 1997<br />share: 0.0314465409<br />colour: Other","year: 1996<br />share: 0.0242424242<br />colour: Other","year: 1995<br />share: 0.0202702703<br />colour: Other","year: 1995<br />share: 0.0202702703<br />colour: Other"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(25,25,112,0.8)","hoveron":"points","name":"Other","legendgroup":"Other","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.277027027027027,0.327272727272727,0.339622641509434,0.334862385321101,0.389908256880734,0.369747899159664,0.467625899280576,0.465116279069767,0.446153846153846,0.443181818181818,0.392638036809816,0.404641775983855,0.408777969018933,0.433070866141732,0.439646712463199,0.523745819397993,0.569886022795441,0.570008643042351,0.520261437908497,0.543115438108484,0.569484936831876,0.555490483162518,0.592177077016374,0.667441860465116,0.645606766787502,0.63496044761721,0.697279567817866,0.696875539444157,0.725369978858351,0.657064887810794,0.620497803806735,0.643990929705215,0.615438108484006,0.593028322440087,0.629213483146067,0.608878224355129,0.57257525083612,0.478900883218842,0.479330708661417,0.45697074010327,0.435923309788093,0.430674846625767,0.475378787878788,0.492307692307692,0.561046511627907,0.535971223021583,0.483193277310924,0.458715596330275,0.435779816513762,0.484276729559748,0.454545454545455,0.493243243243243,0.277027027027027],"text":["year: 1995<br />share: 0.2162162162<br />colour: Red","year: 1996<br />share: 0.1272727273<br />colour: Red","year: 1997<br />share: 0.1446540881<br />colour: Red","year: 1998<br />share: 0.1009174312<br />colour: Red","year: 1999<br />share: 0.0688073394<br />colour: Red","year: 2000<br />share: 0.1134453782<br />colour: Red","year: 2001<br />share: 0.0683453237<br />colour: Red","year: 2002<br />share: 0.0959302326<br />colour: Red","year: 2003<br />share: 0.0461538462<br />colour: Red","year: 2004<br />share: 0.0321969697<br />colour: Red","year: 2005<br />share: 0.0380368098<br />colour: Red","year: 2006<br />share: 0.0312815338<br />colour: Red","year: 2007<br />share: 0.0481927711<br />colour: Red","year: 2008<br />share: 0.0462598425<br />colour: Red","year: 2009<br />share: 0.0392541708<br />colour: Red","year: 2010<br />share: 0.0488294314<br />colour: Red","year: 2011<br />share: 0.0389922016<br />colour: Red","year: 2012<br />share: 0.0592048401<br />colour: Red","year: 2013<br />share: 0.0727668845<br />colour: Red","year: 2014<br />share: 0.0723226704<br />colour: Red","year: 2015<br />share: 0.0745059929<br />colour: Red","year: 2016<br />share: 0.0650073206<br />colour: Red","year: 2017<br />share: 0.0648878108<br />colour: Red","year: 2018<br />share: 0.0579281184<br />colour: Red","year: 2019<br />share: 0.0512687727<br />colour: Red","year: 2020<br />share: 0.0623191202<br />colour: Red","year: 2020<br />share: 0.0623191202<br />colour: Red","year: 2019<br />share: 0.0512687727<br />colour: Red","year: 2018<br />share: 0.0579281184<br />colour: Red","year: 2017<br />share: 0.0648878108<br />colour: Red","year: 2016<br />share: 0.0650073206<br />colour: Red","year: 2015<br />share: 0.0745059929<br />colour: Red","year: 2014<br />share: 0.0723226704<br />colour: Red","year: 2013<br />share: 0.0727668845<br />colour: Red","year: 2012<br />share: 0.0592048401<br />colour: Red","year: 2011<br />share: 0.0389922016<br />colour: Red","year: 2010<br />share: 0.0488294314<br />colour: Red","year: 2009<br />share: 0.0392541708<br />colour: Red","year: 2008<br />share: 0.0462598425<br />colour: Red","year: 2007<br />share: 0.0481927711<br />colour: Red","year: 2006<br />share: 0.0312815338<br />colour: Red","year: 2005<br />share: 0.0380368098<br />colour: Red","year: 2004<br />share: 0.0321969697<br />colour: Red","year: 2003<br />share: 0.0461538462<br />colour: Red","year: 2002<br />share: 0.0959302326<br />colour: Red","year: 2001<br />share: 0.0683453237<br />colour: Red","year: 2000<br />share: 0.1134453782<br />colour: Red","year: 1999<br />share: 0.0688073394<br />colour: Red","year: 1998<br />share: 0.1009174312<br />colour: Red","year: 1997<br />share: 0.1446540881<br />colour: Red","year: 1996<br />share: 0.1272727273<br />colour: Red","year: 1995<br />share: 0.2162162162<br />colour: Red","year: 1995<br />share: 0.2162162162<br />colour: Red"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(192,57,43,0.8)","hoveron":"points","name":"Red","legendgroup":"Red","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0.22972972972973,0.236363636363636,0.238993710691824,0.247706422018349,0.307339449541284,0.26890756302521,0.26978417266187,0.252906976744186,0.218461538461538,0.174242424242424,0.134969325153374,0.160443995963673,0.167814113597246,0.205708661417323,0.201177625122669,0.290301003344482,0.286142771445711,0.328867761452031,0.301089324618736,0.345271210013908,0.359572400388727,0.343484626647145,0.375682231655549,0.390063424947146,0.3909891248058,0.418097626857033,0.63496044761721,0.645606766787502,0.667441860465116,0.592177077016374,0.555490483162518,0.569484936831876,0.543115438108484,0.520261437908497,0.570008643042351,0.569886022795441,0.523745819397993,0.439646712463199,0.433070866141732,0.408777969018933,0.404641775983855,0.392638036809816,0.443181818181818,0.446153846153846,0.465116279069767,0.467625899280576,0.369747899159664,0.389908256880734,0.334862385321101,0.339622641509434,0.327272727272727,0.277027027027027,0.22972972972973],"text":["year: 1995<br />share: 0.0472972973<br />colour: Silver","year: 1996<br />share: 0.0909090909<br />colour: Silver","year: 1997<br />share: 0.1006289308<br />colour: Silver","year: 1998<br />share: 0.0871559633<br />colour: Silver","year: 1999<br />share: 0.0825688073<br />colour: Silver","year: 2000<br />share: 0.1008403361<br />colour: Silver","year: 2001<br />share: 0.1978417266<br />colour: Silver","year: 2002<br />share: 0.2122093023<br />colour: Silver","year: 2003<br />share: 0.2276923077<br />colour: Silver","year: 2004<br />share: 0.2689393939<br />colour: Silver","year: 2005<br />share: 0.2576687117<br />colour: Silver","year: 2006<br />share: 0.2441977800<br />colour: Silver","year: 2007<br />share: 0.2409638554<br />colour: Silver","year: 2008<br />share: 0.2273622047<br />colour: Silver","year: 2009<br />share: 0.2384690873<br />colour: Silver","year: 2010<br />share: 0.2334448161<br />colour: Silver","year: 2011<br />share: 0.2837432513<br />colour: Silver","year: 2012<br />share: 0.2411408816<br />colour: Silver","year: 2013<br />share: 0.2191721133<br />colour: Silver","year: 2014<br />share: 0.1978442281<br />colour: Silver","year: 2015<br />share: 0.2099125364<br />colour: Silver","year: 2016<br />share: 0.2120058565<br />colour: Silver","year: 2017<br />share: 0.2164948454<br />colour: Silver","year: 2018<br />share: 0.2773784355<br />colour: Silver","year: 2019<br />share: 0.2546176420<br />colour: Silver","year: 2020<br />share: 0.2168628208<br />colour: Silver","year: 2020<br />share: 0.2168628208<br />colour: Silver","year: 2019<br />share: 0.2546176420<br />colour: Silver","year: 2018<br />share: 0.2773784355<br />colour: Silver","year: 2017<br />share: 0.2164948454<br />colour: Silver","year: 2016<br />share: 0.2120058565<br />colour: Silver","year: 2015<br />share: 0.2099125364<br />colour: Silver","year: 2014<br />share: 0.1978442281<br />colour: Silver","year: 2013<br />share: 0.2191721133<br />colour: Silver","year: 2012<br />share: 0.2411408816<br />colour: Silver","year: 2011<br />share: 0.2837432513<br />colour: Silver","year: 2010<br />share: 0.2334448161<br />colour: Silver","year: 2009<br />share: 0.2384690873<br />colour: Silver","year: 2008<br />share: 0.2273622047<br />colour: Silver","year: 2007<br />share: 0.2409638554<br />colour: Silver","year: 2006<br />share: 0.2441977800<br />colour: Silver","year: 2005<br />share: 0.2576687117<br />colour: Silver","year: 2004<br />share: 0.2689393939<br />colour: Silver","year: 2003<br />share: 0.2276923077<br />colour: Silver","year: 2002<br />share: 0.2122093023<br />colour: Silver","year: 2001<br />share: 0.1978417266<br />colour: Silver","year: 2000<br />share: 0.1008403361<br />colour: Silver","year: 1999<br />share: 0.0825688073<br />colour: Silver","year: 1998<br />share: 0.0871559633<br />colour: Silver","year: 1997<br />share: 0.1006289308<br />colour: Silver","year: 1996<br />share: 0.0909090909<br />colour: Silver","year: 1995<br />share: 0.0472972973<br />colour: Silver","year: 1995<br />share: 0.0472972973<br />colour: Silver"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(149,165,166,0.8)","hoveron":"points","name":"Silver","legendgroup":"Silver","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2020,2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1995],"y":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.418097626857033,0.3909891248058,0.390063424947146,0.375682231655549,0.343484626647145,0.359572400388727,0.345271210013908,0.301089324618736,0.328867761452031,0.286142771445711,0.290301003344482,0.201177625122669,0.205708661417323,0.167814113597246,0.160443995963673,0.134969325153374,0.174242424242424,0.218461538461538,0.252906976744186,0.26978417266187,0.26890756302521,0.307339449541284,0.247706422018349,0.238993710691824,0.236363636363636,0.22972972972973,0],"text":["year: 1995<br />share: 0.2297297297<br />colour: White","year: 1996<br />share: 0.2363636364<br />colour: White","year: 1997<br />share: 0.2389937107<br />colour: White","year: 1998<br />share: 0.2477064220<br />colour: White","year: 1999<br />share: 0.3073394495<br />colour: White","year: 2000<br />share: 0.2689075630<br />colour: White","year: 2001<br />share: 0.2697841727<br />colour: White","year: 2002<br />share: 0.2529069767<br />colour: White","year: 2003<br />share: 0.2184615385<br />colour: White","year: 2004<br />share: 0.1742424242<br />colour: White","year: 2005<br />share: 0.1349693252<br />colour: White","year: 2006<br />share: 0.1604439960<br />colour: White","year: 2007<br />share: 0.1678141136<br />colour: White","year: 2008<br />share: 0.2057086614<br />colour: White","year: 2009<br />share: 0.2011776251<br />colour: White","year: 2010<br />share: 0.2903010033<br />colour: White","year: 2011<br />share: 0.2861427714<br />colour: White","year: 2012<br />share: 0.3288677615<br />colour: White","year: 2013<br />share: 0.3010893246<br />colour: White","year: 2014<br />share: 0.3452712100<br />colour: White","year: 2015<br />share: 0.3595724004<br />colour: White","year: 2016<br />share: 0.3434846266<br />colour: White","year: 2017<br />share: 0.3756822317<br />colour: White","year: 2018<br />share: 0.3900634249<br />colour: White","year: 2019<br />share: 0.3909891248<br />colour: White","year: 2020<br />share: 0.4180976269<br />colour: White","year: 2020<br />share: 0.4180976269<br />colour: White","year: 2020<br />share: 0.4180976269<br />colour: White","year: 2019<br />share: 0.3909891248<br />colour: White","year: 2018<br />share: 0.3900634249<br />colour: White","year: 2017<br />share: 0.3756822317<br />colour: White","year: 2016<br />share: 0.3434846266<br />colour: White","year: 2015<br />share: 0.3595724004<br />colour: White","year: 2014<br />share: 0.3452712100<br />colour: White","year: 2013<br />share: 0.3010893246<br />colour: White","year: 2012<br />share: 0.3288677615<br />colour: White","year: 2011<br />share: 0.2861427714<br />colour: White","year: 2010<br />share: 0.2903010033<br />colour: White","year: 2009<br />share: 0.2011776251<br />colour: White","year: 2008<br />share: 0.2057086614<br />colour: White","year: 2007<br />share: 0.1678141136<br />colour: White","year: 2006<br />share: 0.1604439960<br />colour: White","year: 2005<br />share: 0.1349693252<br />colour: White","year: 2004<br />share: 0.1742424242<br />colour: White","year: 2003<br />share: 0.2184615385<br />colour: White","year: 2002<br />share: 0.2529069767<br />colour: White","year: 2001<br />share: 0.2697841727<br />colour: White","year: 2000<br />share: 0.2689075630<br />colour: White","year: 1999<br />share: 0.3073394495<br />colour: White","year: 1998<br />share: 0.2477064220<br />colour: White","year: 1997<br />share: 0.2389937107<br />colour: White","year: 1996<br />share: 0.2363636364<br />colour: White","year: 1995<br />share: 0.2297297297<br />colour: White","year: 1995<br />share: 0.2297297297<br />colour: White"],"type":"scatter","mode":"lines","line":{"width":0.755905511811024,"color":"rgba(0,0,0,0.8)","dash":"solid"},"fill":"toself","fillcolor":"rgba(248,249,249,0.8)","hoveron":"points","name":"White","legendgroup":"White","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Evolution of car colour in South Africa: 1995-2020","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1993.75,2021.25],"tickmode":"array","ticktext":["1995","2000","2005","2010","2015","2020"],"tickvals":[1995,2000,2005,2010,2015,2020],"categoryorder":"array","categoryarray":["1995","2000","2005","2010","2015","2020"],"nticks":null,"ticks":"outside","tickcolor":"rgba(179,179,179,1)","ticklen":3.65296803652968,"tickwidth":0.33208800332088,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Year of production","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.05,1.05],"tickmode":"array","ticktext":["0%","25%","50%","75%","100%"],"tickvals":[0,0.25,0.5,0.75,1],"categoryorder":"array","categoryarray":["0%","25%","50%","75%","100%"],"nticks":null,"ticks":"outside","tickcolor":"rgba(179,179,179,1)","ticklen":3.65296803652968,"tickwidth":0.33208800332088,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Share of cars in each colour per year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(179,179,179,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"5d0464e86062":{"x":{},"y":{},"fill":{},"type":"scatter"}},"cur_data":"5d0464e86062","visdat":{"5d0464e86062":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>Wow! Blue and Green cars really lost out to white and Silver ones over time. Of the cars advertised that were produced in 2020, nearly 42% are white!</p>
+<p>Black cars seemed to have a peak in popularity around 2007, and then decline again, coinciding with the first round of load-shedding in South Africa.</p>
+<p>Thanks for reading along, and I hope you enjoyed learning about ggplot as well as the cars on South Africa’s roads!</p>
+</section>
+<section id="post-script" class="level3">
+<h3 class="anchored" data-anchor-id="post-script">Post script</h3>
+<p>Here is the static figure with accompanying caption.</p>
+<div class="cell" data-preview="true">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># jpeg(</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     filename="figures/stacked_area_2.jpeg",</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     width=6,</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     height=4,</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     units="in",</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     res=1000)</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>df_colours <span class="sc">%&gt;%</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">1994</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_tally</span>(n) <span class="sc">%&gt;%</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">share =</span> n <span class="sc">/</span> nn) <span class="sc">%&gt;%</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">colour =</span> <span class="fu">fct_relevel</span>(colour, <span class="st">"Silver"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, share, <span class="at">fill =</span> colour)) <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#95A5A6"</span>, <span class="st">"#17202A"</span>, <span class="st">"#2471A3"</span>, <span class="st">"#800020"</span>, <span class="st">"#F39C12"</span>, <span class="st">"#27AE60"</span>, <span class="st">"#BDC3C7"</span>, <span class="st">"midnightblue"</span>, <span class="st">"#C0392B"</span>, <span class="st">"#EAECEE"</span>)) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>()) <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Evolution of car colour in South Africa: 1995-2020"</span>,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Based on Gumtree vehicle adverts"</span>,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year of production"</span>,</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Share of cars in each colour per year"</span>,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">""</span>,</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: Gumtree vehicle adverts scraped in October 2020</span><span class="sc">\n</span><span class="st">Graphic: Jonathan Jayes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="south-africa-car-colour-exploration_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dev.off()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Distill is a publication format for scientific and technical writing, native to the web.</p>
+<p>Learn more about using Distill at <a href="https://rstudio.github.io/distill" class="uri">https://rstudio.github.io/distill</a>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

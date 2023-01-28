@@ -7,7 +7,7 @@ author:
     url:
       interludeone.com: {}
 date: 2022-03-04
-preview: "https://raw.githubusercontent.com/j-jayes/Monday-Munch/main/images/cover.jpg"
+image: "https://raw.githubusercontent.com/j-jayes/Monday-Munch/main/images/cover.jpg"
 output:
   distill::distill_article:
     self_contained: false

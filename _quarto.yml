@@ -1,19 +1,31 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    - "*.Rmd"
 
 website:
   favicon: assets/favicon.ico
-  title: "{{< var title >}}"
+  title: "Interlude One"
   navbar:
+    logo: assets/favicon_logo.com
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
 
-format: html
+format:
+  html:
+    theme:
+    - flatly
+    - assets/custom.scss
+    css: assets/styles.css
+    toc: true
 
 execute:
   echo: false
   warning: false
   message: false
+  freeze: auto

@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Fira+Sans+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Hind:wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:300, 300i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap');
 
 /*-- scss:defaults --*/
 $white:    #fff !default;
@@ -17,16 +15,18 @@ $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
 $black:    #000 !default;
 
-$primary: #22458a !default;
-$link-color: #875e29 !default;
+$primary: #2b8cbe !default;
+$link-color: #404040 !default;
+ 
 
-$font-family-sans-serif:      Hind, sans-serif !default;
+$font-family-sans-serif:      Lato, sans-serif !default;
 $font-family-serif:           Barlow, serif !default;  /* Not actually a serif font but whatever */
-$h1-font-family:              Lato, sans-serif !default;
-$h2-font-family:              Lato, sans-serif !default;
-$h3-font-family:              Lato, sans-serif !default;
-$h4-font-family:              Lato, sans-serif !default;
-$h5-font-family:              Lato, sans-serif !default;
+$mono-font:                   IBM Plex Mono !default;
+$h1-font-family:              Noto Serif JP !default;
+$h2-font-family:              Noto Serif JP !default;
+$h3-font-family:              Noto Serif JP !default;
+$h4-font-family:              Noto Serif JP !default;
+$h5-font-family:              Noto Serif JP !default;
 
 $font-size-base:              1.05rem !default;
 $headings-font-weight:        400 !default;

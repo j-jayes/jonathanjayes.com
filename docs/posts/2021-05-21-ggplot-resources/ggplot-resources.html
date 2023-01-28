@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jonathan Jayes">
+<meta name="dcterms.date" content="2021-05-21">
+<meta name="description" content="A collection of videos and resources to get you started using R and the tidyverse for exploratory data analysis and visualization.">
+
+<title>Interlude One - Resources for Learning R and Mastering ggplot</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<link href="../../site_libs/panelset-0.2.6/panelset.css" rel="stylesheet">
+<script src="../../site_libs/panelset-0.2.6/panelset.js"></script>
+
+
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/favicon_logo.com" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Interlude One</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a>
+  <ul class="collapse">
+  <li><a href="#why-use-r" id="toc-why-use-r" class="nav-link" data-scroll-target="#why-use-r">Why use R?</a></li>
+  </ul></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Resources for Learning R and Mastering ggplot</h1>
+</div>
+
+<div>
+  <div class="description">
+    <p>A collection of videos and resources to get you started using R and the tidyverse for exploratory data analysis and visualization.</p>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jonathan Jayes </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 21, 2021</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
+<p>Data visualisation is super fun and a great tool for communication. I have put together <a href="https://j-jayes.github.io/data-viz-workshop/">some slides</a> for talk on data visualisation for economic historians at the <a href="https://leapstellenbosch.org.za/">Laboratory for the Economics of Africa’s Past</a>. These resources are collected here to help when you think ‘where do I start with R?’.</p>
+<p>I hope that you find these resources useful. They are divided up into different sections in the tabs below.</p>
+<section id="why-use-r" class="level3">
+<h3 class="anchored" data-anchor-id="why-use-r">Why use R?</h3>
+<p>There are a multitude of different pieces of software and different workflows that you can use to create beautiful and intelligible data visualizations.</p>
+<p>I think R is a very good choice. There are three reasons I love R for data viz.</p>
+<ol type="1">
+<li><code>ggplot2</code> is a fantastic library for making data visualizations - it is customizable and logical.</li>
+<li>The <a href="https://twitter.com/rstatstweet?lang=en">R community</a> is very supportive and makes learning and improving a pleasure.</li>
+<li>The entire process of importing and cleaning data, visualizing it, and then sharing it is made easy in <a href="https://www.rstudio.com/">Rstudio</a>.</li>
+</ol>
+</section>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<p>In the tabs below, I have collected some resources that I hope will be beneficial on your journey.</p>
+<div class="panelset">
+<div class="panel">
+<p><span class="panel-name">Installing R</span></p>
+<section id="getting-started" class="level1">
+<h1>Getting started</h1>
+<p>Before we can do the fun stuff, we need to install R and RStudio.</p>
+<p>The <a href="https://moderndive.com">Modern Dive textbook</a> has a great primer on <a href="https://moderndive.com/1-getting-started.html">getting started in R</a> with an explanation of the difference between R and RStudio:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/modern-dive-analogy.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Modern Dive analogy</figcaption><p></p>
+</figure>
+</div>
+<p>The Rstudio Education team also have a great <a href="https://education.rstudio.com/learn/beginner/">beginner guide</a> to R that covers installation.</p>
+</section>
+</div>
+<div class="panel">
+<p><span class="panel-name">Learning R</span></p>
+<section id="videos-and-textbooks-for-learning-how-to-use-r" class="level1">
+<h1>Videos and textbooks for learning how to use R</h1>
+<section id="the-r-bible" class="level3">
+<h3 class="anchored" data-anchor-id="the-r-bible">The R bible</h3>
+<p>The definitive guide to using R in a modern manner is <a href="https://r4ds.had.co.nz/">R for Data Science</a> by Hadley Wickham and Garrett Grolemund. I am not sure that is the best place to start, but it is certainly a helpful resource to come back to once you’re up and running.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/r4ds.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">The R for Data Science textbook</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="rstudio-education" class="level3">
+<h3 class="anchored" data-anchor-id="rstudio-education">RStudio Education</h3>
+<p><a href="https://education.rstudio.com/learn/beginner/">Rstudio Education</a> have put together a set of instructions for learning R at different levels of competency. These include great guides for installing R, R Studio and the <code>tidyverse</code> packages right at the beginning.</p>
+<p>The <a href="https://education.rstudio.com/learn/beginner/">beginner</a>, <a href="https://education.rstudio.com/learn/intermediate/">intermediate</a> and <a href="https://education.rstudio.com/learn/expert/">expert</a> start guides are linked here.</p>
+<p>The RStudio team have put a lot of effort into creating resources that are useful for many R users, from <a href="https://www.rstudio.com/resources/webinars/sharing-on-short-notice-how-to-get-your-materials-online-with-r-markdown/">helping teachers take their course work online</a>, to <a href="http://www.reproduciblefinance.com/">financial analysis</a>, to <a href="https://education.rstudio.com/blog/2021/02/distill-it-down/">creating a personal website</a> and <a href="https://rstudio.github.io/distill/">academic publishing</a>. Have a look around <a href="https://www.rstudio.com/resources/webinars/">their website</a> for more.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/rstudio-education.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Rstudio Education graphics</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="other-great-video-resources" class="level3">
+<h3 class="anchored" data-anchor-id="other-great-video-resources">Other great video resources</h3>
+<p>I am a visual learner and as a consequence I like to watch how things are done and copy them. Because Youtube allows for pausing and recapping at your own pace, I think this is a great way to learn. I’ve collected some videos in these resources which I think are a good place to start.</p>
+<p><a href="https://youtu.be/tCa2di7aEP4">David Robinson’s Youtube Channel</a></p>
+<p>David Robinson does a weekly screencast where he shows how to do exploratory data analysis and makes plots in R.</p>
+<p>Here is a video about analysing text from reviews of ramen noodles. It has some useful tips for drawing tie-fighter plots and interpreting linear regressions.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tCa2di7aEP4?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>He also has a <a href="https://www.youtube.com/watch?v=NDHSBUN_rVU">talk</a> about tricks in the <code>tidyverse</code>.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NDHSBUN_rVU?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<p><a href="https://juliasilge.com/blog/hawaii-post-offices/">Julia Silge’s blog</a></p>
+<p>Julia Silge’s blog is mostly about doing modelling in R, and text modelling in particular. It is a very useful place to look if you want to understand the tidymodels framework which provides access to a host of machine learning techniques in a very easy to use manner. She also has a <a href="https://www.youtube.com/watch?v=RA5SyY-s-AA&amp;feature=emb_imp_woyt">Youtube channel</a>.</p>
+<p>Here is a video from Julia looking at sentiment analysis in R:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/whE85O1XCkg?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<p><a href="https://www.tidytextmining.com/">The tidy text mining textbook</a></p>
+<p>Written by Julia Silge and David Robinson, this book gives a lovely introduction to text mining in R. It has lots of examples and includes all the code necessary. As a bonus it is free!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tidytextmining.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Tidy Text Mining Textbook</figcaption><p></p>
+</figure>
+</div>
+<p><a href="https://www.youtube.com/c/AndrewCouch/featured">Andrew Couch’s Youtube Channel</a> has a marvelous set of walk throughs of innovative and exciting packages in R. He’s a young data scientist who is creating fantastic content focussed on R and the <code>tidyverse</code>.</p>
+<p>Here is one of his videos on creating functions with the <code>tidyverse</code>.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7oz1qGClrl0?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+</section>
+<section id="another-resource-collection" class="level3">
+<h3 class="anchored" data-anchor-id="another-resource-collection">Another resource collection!</h3>
+<p>The <a href="https://www.learnr4free.com/en/index.html">LearnR4Free website</a> compiled by <a href="https://twitter.com/MineDogucu">Mine Dogucu</a> has a great set of resources that are free to use for the learner.</p>
+</section>
+</section>
+</div>
+<div class="panel">
+<p><span class="panel-name">Datasets</span></p>
+<section id="useful-sources-of-data-to-practice-your-skills-on" class="level1">
+<h1>Useful sources of data to practice your skills on</h1>
+<p>Having great datasets available helps to keep me interested in learning new skills. Here are three sources of interesting data:</p>
+<p><a href="https://github.com/rfordatascience/tidytuesday">The Tidy Tuesday Project</a></p>
+Tidy Tuesday is a project run by the R for Data Science foundation - each week they share a real world data set and encourage R users to practice their skills. It has a really fantastic community aspect and if you share your work on Twitter people are always helpful and kind. Others share their work and their code so you can see how their plots were made. In their words,
+<blockquote class="blockquote">
+The intent of Tidy Tuesday is to provide a safe and supportive forum for individuals to practice their wrangling and data visualization skills independent of drawing conclusions.
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tidy-tuesday.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Tidy Tuesday</figcaption><p></p>
+</figure>
+</div>
+<p><a href="https://www.data-is-plural.com/">Data is Plural</a></p>
+<p>“Data is Plural is a weekly newsletter of useful/curious datasets, published by Jeremy Singer-Vine”. This sums it up - really interesting stuff from all over the internet.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/data-is-plural.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Data is plural</figcaption><p></p>
+</figure>
+</div>
+<p><a href="https://nakeddata.org/">Naked Data</a></p>
+<p>“Naked Data is a weekly newsletter which rounds up the best in data-driven storytelling created in or about the Global South.” Get the best bits of twitter without having to spend all day scrolling. Really great newsletter based in SA.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/naked-data.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Naked Data</figcaption><p></p>
+</figure>
+</div>
+</section>
+</div>
+<div class="panel">
+<p><span class="panel-name">Visualization</span></p>
+<section id="great-places-to-get-inspiration-figures-and-code-from" class="level1">
+<h1>Great places to get inspiration, figures and code from</h1>
+<section id="fundementals-of-data-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="fundementals-of-data-visualization">Fundementals of data visualization</h3>
+<p>There are many books on the theory and practice of data visualization. I think <a href="https://clauswilke.com/dataviz/">Fundamentals of Data Visualization</a> by <a href="https://clauswilke.com/">Claus Wilke</a> is an excellent choice to start with. The preface reads:</p>
+<blockquote cite="https://clauswilke.com/dataviz/preface.html" class="blockquote">
+If you are a scientist, an analyst, a consultant, or anybody else who has to prepare technical documents or reports, one of the most important skills you need to have is the ability to make compelling data visualizations, generally in the form of figures. Figures will typically carry the weight of your arguments. They need to be clear, attractive, and convincing.
+</blockquote>
+<p>The book provides great advice for matching your data to a good chart type. For how to make the chosen chart in R, have a look at his course, linked below.</p>
+<p><img src="images/fundementals-of-data-viz.png" class="img-fluid"></p>
+</section>
+<section id="the-best-course-in-data-viz" class="level3">
+<h3 class="anchored" data-anchor-id="the-best-course-in-data-viz">The best course in data viz</h3>
+<p><a href="https://wilkelab.org/SDS375/syllabus.html">Clause Wilke’s Course on Data Visualization in R</a> is a fantastic accompaniment to the book linked above. The description reads:</p>
+<blockquote cite="https://wilkelab.org/SDS375/syllabus.html" class="blockquote">
+In this class, students will learn how to visualize data sets and how to reason about and communicate with data visualizations. A substantial component of this class will be dedicated to learning how to program in R. In addition, students will learn how to compile analyses and visualizations into reports, how to make the reports reproducible, and how to post reports on a website or blog.
+</blockquote>
+<p>It has wonderful sets of slides including this <a href="https://wilkelab.org/SDS375/slides/visualizing-uncertainty.html#1">delightful primer on visualizing uncertainty</a>, and accompnaying code that can be downloaded and worked through. Bonus: all of the slides are hosted on github such that you can see how they’re put together.</p>
+</section>
+<section id="the-ggplot2-bible" class="level3">
+<h3 class="anchored" data-anchor-id="the-ggplot2-bible">The ggplot2 bible</h3>
+<p>The definitive guide to <code>ggplot2</code>, <a href="https://ggplot2-book.org/index.html">The ggplot2 Book</a> is a fantastic resource for novices and experts alike. It is easy to navigate and has helpful examples with code used to create each figure. (I love to consult the section on <a href="https://ggplot2-book.org/annotations.html">annotations</a> as I never remember exactly how they work for some reason.)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ggplot2book.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">The ggplot2 book</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="other-great-viz-resources" class="level3">
+<h3 class="anchored" data-anchor-id="other-great-viz-resources">Other great viz resources</h3>
+<p>The <a href="https://www.storytellingwithdata.com/blog">Storytelling with Data</a> blog has an excellent selection of articles that give tips and tricks on how to design graphics that are easy to understand.</p>
+<p>Their <a href="https://www.storytellingwithdata.com/chart-guide">Chart Guide</a> is also a fantastic starting point for how to pick a chart.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/swd-guide.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">SWD Chart Guide</figcaption><p></p>
+</figure>
+</div>
+<p><a href="https://jtanwk.github.io/us-solar/">Jonathan Tan’s exploration of Household Solar Energy in the US</a> is an amazing data storytelling piece that shows all of the code required to create each figure. It makes great use of annotations to explain each component of the visualizations.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/jonathan-tan.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Jonathan Tan’s ggridge plot</figcaption><p></p>
+</figure>
+</div>
+<p><a href="https://www.r-graph-gallery.com/">The R Graph Gallery</a> is a useful website which showcases different kinds of visualizations and provides the code that you need to use to recreate the figure yourself.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/r-graph-gallery.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">R Graph Gallery</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+</div>
+<div class="panel">
+<p><span class="panel-name">Custom themes</span></p>
+<section id="for-style-that-is-consistent-and-graphics-that-are-clear" class="level1">
+<h1>For style that is consistent and graphics that are clear</h1>
+<p>If you want to create a style of graphics that communicate clearly to the general public (or are consistent across your organization), have a look at the <a href="https://bbc.github.io/rcookbook/">BBC Visual and Data Journalism cookbook for R graphics</a>. The guide is filled with fantastic examples of visualizations you might like to emulate, and code to do so. They also walk through customizing fonts, colours and annotations for consistency over time.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/bbc-cookbook.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">BBC style graphics</figcaption><p></p>
+</figure>
+</div>
+<p>If you want to create your own theme, Thomas Mock has <a href="https://themockup.blog/posts/2020-12-26-creating-and-using-custom-ggplot2-themes/">a lovely guide</a> on graphs that communicate well and look good.</p>
+<p>He walks through a great example of where adding custom images on the plot makes sense:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tom-mock-images.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">NFL team images example</figcaption><p></p>
+</figure>
+</div>
+</section>
+</div>
+<div class="panel">
+<p><span class="panel-name">Aesthetics</span></p>
+<section id="if-youre-interested-in-learning-more-about-how-to-make-your-charts-look-great." class="level1">
+<h1>If you’re interested in learning more about how to make your charts look great.</h1>
+<p><a href="https://www.youtube.com/watch?v=h5cTacaWE6I">William Chase’s talk on ‘The Glamour of Graphics’</a> is a fantastic resource on choosing colours and how to make your graphs pop.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/h5cTacaWE6I?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Stephen Tracy’s breakdown of <a href="https://analythical.com/blog/data-visualization-sins">DataViz Sins You Should Never Commit</a> is a walk-through on how not to confuse your audience. It explains the use of colour and secondary axes in Microsoft Excel plots.</p>
+<p>If you are interested in learning more about fonts, <a href="https://practicaltypography.com/typography-in-ten-minutes.html">Practical Typography</a> is a great place to start. If you’re interested in choosing a font for a website, have a look at <a href="https://fonts.google.com/specimen/Lato#standard-styles">Google’s free fonts here</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/google-fonts.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Lato is a free Google font</figcaption><p></p>
+</figure>
+</div>
+<p><a href="https://www.r-graph-gallery.com/38-rcolorbrewers-palettes.html">This page</a> from the <a href="https://www.r-graph-gallery.com/38-rcolorbrewers-palettes.html">R Graph Gallery</a> gives a breakdown of the <code>RcolorBrewer</code> package and when to use its different sets of palettes.</p>
+<p><img src="images/palettes.PNG" class="img-fluid"></p>
+<p><a href="https://colorbrewer2.org/#type=diverging&amp;scheme=PuOr&amp;n=4">The color brewer webpage</a> gives fantastic advice on how to choose colours for maps, using the same theory as the package above. It also gives you the hex codes for each colour that you may copy to use yourself.</p>
+<p><img src="images/colour-map.PNG" class="img-fluid"></p>
+<p><a href="https://www.youtube.com/watch?v=AiD6etOB6qI">This video on colour theory</a> is a useful primer on colour in data viz.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AiD6etOB6qI?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+</section>
+</div>
+<div class="panel">
+<p><span class="panel-name">Econometrics in R</span></p>
+<section id="if-youre-looking-to-implement-econometric-techqniques-in-r" class="level1">
+<h1>If you’re looking to implement econometric techqniques in R</h1>
+<p><a href="https://github.com/uo-ec607/lectures">Grant McDermott’s Data science for economists course</a> is a great place to start. He has <a href="https://raw.githack.com/uo-ec607/lectures/master/08-regression/08-regression.html">one lecture</a> on regression that is super useful.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/dat-sci-for-econ.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Grant McDermott</figcaption><p></p>
+</figure>
+</div>
+</section>
+</div>
+<div class="panel">
+<p><span class="panel-name">R Shiny</span></p>
+<section id="if-youre-looking-to-make-interactive-web-pages-with-r-and-r-markdown" class="level1">
+<h1>If you’re looking to make interactive web pages with R and R Markdown</h1>
+<p>The simplest way to get a quick and dirty interactive dashboard together is to use the <code>flexdashboard</code> package. <a href="https://pkgs.rstudio.com/flexdashboard/">Here is a link</a> to the package. One of the great advantages of <code>flexdashboard</code> is that you can get amazing interactivity with just <code>htmlwidgets</code>, you do not need to use a shiny-runtime. In other words, you can create and host a static html page anywhere, for example on <a href="https://pages.github.com/">GitHub Pages</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/flexdashboard.PNG" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Flexdashboard</figcaption><p></p>
+</figure>
+</div>
+<p>If you want more interactivity, David Robinson’s video on global crop yields shows a simple Shiny app, with code <a href="https://github.com/dgrtwo/data-screencasts/blob/master/crop-yields-shiny/app.Rmd">here</a>.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0uqAhIiK9Rc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>Another video example of R Shiny comes from <a href="https://www.youtube.com/watch?v=XoCgToAuzsU">Andrew Couch’s YouTube channel</a>.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XoCgToAuzsU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<p><a href="https://mastering-shiny.org/">Mastering Shiny</a> is a more advanced authoritative book on Shiny, written by Hadley Wickham. It’s a great place to get an understanding of the core of the package.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mastering-shiny.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Mastering Shiny</figcaption><p></p>
+</figure>
+</div>
+</section>
+</div>
+<div class="panel">
+<p><span class="panel-name">Recreating Published Figures</span></p>
+<section id="when-you-cant-get-the-authors-of-an-article-to-share-their-data" class="level1">
+<h1>When you can’t get the authors of an article to share their data</h1>
+<p>Sometimes you may want to recreate a figure for your own paper from a journal article, but the data is not publicly accessible.</p>
+<p>One option is to snip the image from the article and cite it in your own. The disadvantage of this is that the figure will not fit your colour scheme and may be horribly pixalated.</p>
+<p>An alternative is to recreate the figure yourself by extracting the data from the image.</p>
+<p>A truly fantastic free tool for this purpose is <a href="https://automeris.io/WebPlotDigitizer/">WebPlotDigitizer</a>. This web application allows you to upload a figure and grab the data from it.</p>
+<p>Have a look at a short video I made on how to use it here:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TVCFedRgg5Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+</section>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

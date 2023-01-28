@@ -2,7 +2,7 @@
 title: "Swedish trade in goods and exchange students"
 description: |
   I wanted to see if there was an association between the volume of trade between a country and Sweden, and the number of exchange students that have come to Lund Univesity from there, this semester.
-preview: images/reg_1.jpeg
+image: images/reg_1.jpg
 author:
   - name: Jonathan Jayes
 date: 02-20-2021
@@ -98,9 +98,9 @@ table <- read_html(url) %>%
   html_table()
 
 # processing
-table <- table[1] %>% as_tibble(.name_repair = "minimal") %>% unnest()
+table <- table[[1]] %>% as_tibble(.name_repair = "minimal") %>% unnest()
 
-table <- table$V1 %>% as_tibble() %>% janitor::clean_names()
+table <- table %>%  as_tibble() %>% janitor::clean_names()
 
 # cleaning names and formatting columns as numbers rather than characters
 table_df <- table %>% 

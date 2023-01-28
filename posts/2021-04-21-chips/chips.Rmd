@@ -4,7 +4,7 @@ description: |
   Scraping data from Wikipedia and recreating OWID's figure with ggplot2.
 author:
   - name: Jonathan Jayes
-preview: figures/Transistors_colour.jpeg
+image: figures/Transistors_colour.jpeg
 date: 04-08-2020
 output:
   distill::distill_article:
@@ -72,12 +72,10 @@ url <- "https://en.wikipedia.org/wiki/Transistor_count"
 
 html <- read_html(url)
 
-html_nodeset <- html %>% 
-  html_nodes("table")
+html_tables <- html %>% 
+  html_table()
 
-df_transistors <- html_nodeset[[2]] %>% 
-  html_table() %>% 
-  as_tibble()
+df_transistors <- html_tables[[4]]
 ```
 
 ## Data processing
@@ -89,7 +87,7 @@ In the chunk below I use readr's `parse_number` function to extract the numbers 
 df_transistors <- df_transistors %>% 
   janitor::clean_names() %>% 
   mutate(processor = str_squish(str_remove(processor, "\\(.*"))) %>% 
-  mutate_at(c("mos_transistor_count", "date_ofintroduction", "mos_process_nm", "area_mm2"), parse_number)
+  mutate_at(c("transistor_count", "date_ofintroduction", "process_nm", "area_mm2"), parse_number)
 ```
 
 ## Data viz preparation
@@ -126,12 +124,12 @@ Here I draw the graphic using ggplot2.
 #     res=1000)
 
 df_transistors %>% 
-  ggplot(aes(date_ofintroduction, mos_transistor_count)) +
+  ggplot(aes(date_ofintroduction, transistor_count)) +
   geom_smooth(group = 1, alpha = .1) +
   geom_point(aes(colour = designer, shape = designer), cex = 3) +
   geom_text_repel(data = df_transistors %>% 
                     filter(processor %in% processor_labels), 
-                  aes(date_ofintroduction, mos_transistor_count, label = processor),
+                  aes(date_ofintroduction, transistor_count, label = processor),
                   cex = 3, colour = "#505050") +
   scale_color_brewer(palette = "Dark2") +
   scale_shape_manual(values = seq(15,20, by = 1)) +

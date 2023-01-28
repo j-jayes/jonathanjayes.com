@@ -56,7 +56,7 @@ This produces a rather messy output. It includes both the regression specificati
 
 We can use the [**broom**](https://broom.tidymodels.org/) package to return a `tibble`, a neat data object that is easy to work with.
 
-```{r, layout="l-body-outset"}
+```{r}
 library(broom)
 
 tidy_reg <- df %>% 
@@ -72,7 +72,7 @@ Great! This output is much easier to deal with.
 
 Let's try and make a coefficient plot.
 
-```{r, echo = T, layout="l-body-outset"}
+```{r, echo = T}
 tidy_reg %>%
   filter(term != "(Intercept)") %>%
   # reorder the coefficients so that the largest is at the top of the plot
@@ -96,7 +96,7 @@ Further, male penguins weigh more than females.
 
 To get the error bars, we specify that we want a confidence interval when we use the `tidy` command from the **broom** package, like so: `tidy(conf.int = TRUE)`
 
-```{r, layout="l-body-outset"}
+```{r}
 tidy_reg_conf_int <- df %>% 
     lm(body_mass_g ~ bill_length_mm + bill_depth_mm + flipper_length_mm + species + sex, data = .) %>% 
     tidy(conf.int = TRUE)
@@ -108,7 +108,7 @@ Now in our `tibble` we get columns called `conf.low` and `conf.high`.
 
 To plot these, we use an additional geometry in our ggplot, called `geom_errorbarh`. Here the `h` at the end specifies we want it in the horizontal direction. We map the `conf.low` and `conf.high` variables to `xmin` and `xmax` respectively.
 
-```{r, layout="l-body-outset"}
+```{r}
 tidy_reg_conf_int %>%
   filter(term != "(Intercept)") %>%
   # reorder the coefficients so that the largest is at the top of the plot
@@ -133,7 +133,7 @@ Finally, let's facet the variables by type.
 
 We use the `case_when` command from **dplyr** to call any variable containing `mm` a numeric variable, and the others categorical. We colour our bars and points by variable type, and `facet_wrap` to make a small multiple chart. This makes it easy to differentiate between the different types of variables.
 
-```{r, layout="l-body-outset"}
+```{r}
 tidy_reg_conf_int %>%
   filter(term != "(Intercept)") %>%
   # create a type variable with case_when
