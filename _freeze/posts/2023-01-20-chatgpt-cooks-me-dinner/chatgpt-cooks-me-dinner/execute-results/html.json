@@ -1,0 +1,16 @@
+{
+  "hash": "f2bd49c1b1081a26db765ac9dd70a2c4",
+  "result": {
+    "markdown": "---\ntitle: \"ChatGPT cooks me dinner\"\ndescription: |\n  🍲 Master the kitchen like a pro with the help of ChatGPT! 🍴 I tried it out and the results will blow your mind! 🤯 Find out what happened when I asked a language model for recipe ideas and cooking instructions. 😲 You won't believe how delicious my Gammon and Vegetable Stew with Mint turned out! 🍽️ Don't miss out on this must-read blog post! 👀\nauthor:\n  - name: Jonathan Jayes\n    url:\n      interludeone.com: {}\ndate: 2023-01-20\nimage: \"images/preview.png\"\noutput:\n  distill::distill_article:\n    self_contained: false\n    code_folding: true\n    highlight: haddock\n    highlight_downlit: true\n    toc: true\n---\n\n\n\n\n### Intro\n\nI ask ChatGPT to help my cook dinner based on the ingredients I had in the fridge - it was a great success!\n\nHave a look below at how it went! \n\nI also asked it to write this blog post, the output for which I include below.\n\n### Process\n\n![](images/1.jpg)\n\n![](images/2.jpg)\n\n![](images/3.jpg)\n![](images/4.jpg)\n![](images/5.jpg)\n\n![](images/6.mov)\n\n![](images/7.jpg)\n\n![](images/8.jpg)\n\n![](images/9.jpg)\n\n![](images/10.jpg)\n\n![](images/11.jpg)\n\n![](images/12.jpg)\n\n![](images/13.jpg)\n\n![](images/14.jpg)\n\n![](images/15.mov)\n\n### Suggested blog post text\n\nCooking is always a fun and creative experience, but sometimes it can be challenging to come up with new and exciting recipes. That's why having a helpful tool like ChatGPT can make a big difference in the kitchen.\n\nRecently, I had the opportunity to put ChatGPT to the test as a cooking assistant. I provided a list of ingredients that I had on hand and asked for a recipe suggestion. ChatGPT quickly came up with a recipe for a Gammon and Vegetable Stew with Mint, along with detailed instructions for cooking the dish.\n\nI was impressed with the speed and accuracy of ChatGPT's suggestion, and even more impressed with the quality of the recipe. The stew turned out to be delicious, hearty, and comforting - exactly what I was looking for on a cold winter day.\n\nBut ChatGPT's assistance didn't stop there. I asked if I could add a splash of Chardonnay to the stew and ChatGPT not only gave me a positive response, but also provided instructions on when and how to add the wine, along with a reminder to use a good quality Chardonnay to enhance the overall taste of the dish.\n\nOverall, my experience with ChatGPT as a cooking assistant was extremely positive. It was able to provide me with a recipe and instructions that resulted in a delicious and satisfying meal. I was impressed with its speed, accuracy, and helpful suggestions, and I would definitely use ChatGPT again for recipe ideas and cooking instructions.\n\n### Conclusion\n\nWhat an amazing tool!\n",
+    "supporting": [
+      "chatgpt-cooks-me-dinner_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

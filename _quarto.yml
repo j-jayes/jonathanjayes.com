@@ -4,12 +4,13 @@ project:
   render:
     - "*.qmd"
     - "*.Rmd"
+    - "!posts/2021-07-28-spanish-flu-mortality/*.Rmd"
 
 website:
   favicon: assets/favicon.ico
   title: "Interlude One"
   navbar:
-    logo: assets/favicon_logo.com
+    logo: assets/favicon_logo.ico
     left:
       - href: index.qmd
         text: Home
@@ -18,14 +19,11 @@ website:
 
 format:
   html:
-    theme:
-    - flatly
-    - assets/custom.scss
-    css: assets/styles.css
+    css: assets/bootstrap_1.css
     toc: true
 
 execute:
   echo: false
   warning: false
   message: false
-  freeze: auto
+  freeze: true

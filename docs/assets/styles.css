@@ -1,326 +1,110 @@
+/* base variables */
 
-.navbar-brand-container {
-  margin-right: 0;
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:300, 300i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap');
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #2b8cbe;
+  --header-color:    #2b8cbe;                    /* edited */
+  --body-color:      #404040;                    /* edited */
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    "Noto Serif JP", sans-serif; /* edited */
+  --mono-font:       "IBM Plex Mono", monospace;  /* edited */
+  --body-font:       "Lato", sans-serif;          /* edited */
+  --navbar-font:     "Lato", sans-serif;          /* edited */
 }
 
-
-@media (min-width: 1020px) {
-.navbar-brand-container {
-  margin-right: 1em;
-}
-}
-
-
-
-@media (max-width: 1060px) and (min-width: 991.98px) {
-
-#navbarCollapse ul:last-of-type a.nav-link {
-  padding-left: .25em;
-  padding-right: .25em;
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.9rem;                      /* edited */
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.95rem;                     /* edited */
+  --body-color:      rgba(0, 0, 0, 0.8);
 }
 
-.navbar #quarto-search {
-  margin-left: .1em;
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
 }
 
-.navbar .bi-twitter,
-.navbar .bi-github,
-.navbar .bi-rss
- {
-  font-size: .8em;
-}
-}
-
-
-@media (min-width: 991.98px) {
-#quarto-header {
-  border-bottom: 1px solid #dee2e6;
-}
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.9rem;                    /* edited */
+  --text-color:      #1a162d;                   /* edited */
 }
 
-.navbar-brand > img {
-  max-height: 36px;
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       #1f1f1f;                   /* edited */
+  --text-size:        15px;
+  --hover-color:      #787878;                   /* edited */
+  --bkgd-color:       #fff;                      /* edited */
 }
 
-
-.platform-table td {
-  vertical-align: middle;
+.distill-site-footer {
+  --text-color:       #7e7b88;                   /* edited */
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #ca225e3d;                 /* edited */
 }
 
-.platform-table td > div.sourceCode {
-  margin-top: 0.3rem;
-  margin-bottom: 0.3rem;
+/*-- Additional custom styles --*/
+
+ul > li::marker {
+  color: #2b8cbe;
 }
 
-
-.document-example {
-  opacity: 0.9;
-  padding: 6px;
-  font-weight: 500;
-  margin-bottom: 1rem;
+.distill-site-header {
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.document-example div {
-  padding: 5px;
-}
-
-
-.document-example .citation {
-  color: blue;
-}
-
-.trademark {
-  font-size: 0.6rem;
-  display: inline-block;
-  margin-left: -3px;
-}
-
-.search-attribution {
-  margin-top: 20px;
-  padding-bottom: 20px;
-  height: 40px;
-}
-
-.download-button {
-  margin-top: 1em;
-}
-
-.download-table {
-  margin-bottom: 2em;
-}
-
-.download-table p {
-  margin-bottom: 0;
-}
-
-.download-table .checksum {
-  color: var(--bs-primary);
-  font-size: .775em;
-  cursor: pointer;
-  padding-top: 4px;
-}
-
-.download-button {
-  display:flex;
-  padding-bottom: 10px;
-  padding-top: 10px;
-}
-
-.download-button .secondary {
-  font-size: .775em;
-  margin-bottom: 0;
-}
-
-.download-button .container {
-  display: flex;
-  padding-left: 10px;
-  padding-right: 40px;
-}
-
-.download-button .icon-container {
-  fill: white;
-  width: 30px;
-  margin-right: 15px;
-}
-
-iframe.reveal-demo {
-  width: 100%;
-  height: 350px;
-  outline: none;
-}
-
-
-.slide-deck {
-  border: 3px solid #dee2e6;
-  width: 100%;
-  height: 475px;
-}
-
-@media only screen and (max-width: 600px) {
- .slide-deck {
-    height: 400px;
-  }
-}
-
-
-@media (max-width: 575px) {
-
-.link-cards .card {
-  margin-bottom: 20px;
-  margin-right: 35px;
-}
-
-}
-
-@media (min-width: 576px) {
-.link-cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.link-cards .card {
-  width: 190px;
-  margin: 0 20px 12px 0;
-}
-
-
-}
-
-
-.link-cards .card {
-  border: none;
-  padding: 0;
-}
-
-.link-cards .card-title h4 {
-  margin-top: 0;
-}
-
-.link-cards .card-title p {
-  margin-bottom: 0;
-}
-
-.link-cards .card-subtitle {
-  margin-bottom: 0.7rem;
-}
-
-.link-cards .card-body {
-  padding: 0.5rem;
-  padding-left: 0.1rem;
-}
-
-.link-cards .card-body ul {
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style-type: none;
-}
-
-.link-cards .card-body ul a {
-  text-decoration: none;
-}
-
-.link-cards .card-body ul li {
-  padding-bottom: 0.2rem;
-}
-
-
-.card .source-code {
-  margin-top: 3px;
-}
-
-.carousel.card {
-  font-size: 16px;
-  padding-top: 2em;
-}
-
-.carousel.card a {
-  text-decoration: none;
-}
-
-.carousel img {
-  width: 70%;
-  margin-bottom: 110px;
-}
-
-.carousel .carousel-control-prev-icon,
-.carousel .carousel-control-next-icon {
-  margin-bottom: 110px;
-}
-
-
-.gallery-category {
-  column-gap: 10px;
-}
-
-.btn-action-primary {
-  color: white;
-  background-color: #22458a !important;
-}
-
-.btn-action-primary:hover {
-  color: white;
-}
-
-.btn-action {
-  min-width: 165px;
-  border-radius: 30px;
-  border: none;
-}
-
-.panel-tabset[data-group="tools-tabset"] .choose-your-tool {
-  max-width: 90px;
-  margin-right: 25px;
-  margin-top: 30px;
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: 2px;
   font-weight: 300;
-  font-size: 1.3rem;
-  text-align: left;
-  vertical-align: center;
 }
 
-.panel-tabset[data-group="tools-tabset"] .tab-content {
-  border: none;
-  padding-left: 5px;
+.distill-site-header .logo img{
+  max-height: 40px; /* Makes logo bigger, default was 20px */
 }
 
-.panel-tabset[data-group="tools-tabset"] .nav-tabs {
-  border-bottom: none;
+.distill-site-header {
+  padding-top: 1rem;
 }
 
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link {
-  text-align: center;
-  margin-right: 10px;
-  margin-top: 10px;
-  color: inherit;
-  width: 102px;
-  font-size: 0.8em;
+d-title h1,
+d-article h2,
+.posts-list .description h2,
+.posts-list > h1 {
+    font-weight: 300;
 }
 
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link,
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link.active,
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-item.show .nav-link {
-  border: 1px solid  rgb(222, 226, 230);
-  border-radius: 10px;
-}
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link:hover {
-   border-color: rgb(80,146,221);
-   border-width: 1px;
-}
-
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link.active,
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-item.show .nav-link {
-  border-color: rgb(80,146,221);
-  border-width: 2px;
-}
-
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link img {
-  width: 65px;
-  height: 65px;
-  display: block;
-  margin-bottom: 2px;
-}
-
-/*
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link {
-  text-align: center;
-  margin-right: 10px;
-  margin-top: 10px;
-  color: inherit;
-  width: 102px;
-  font-size: 0.8em;
-}
-
-.panel-tabset[data-group="tools-tabset"] .nav-tabs .nav-link img {
-  width: 45px;
-  height: 45px;
-  margin-left: 10px;
-  display: block;
-  margin-bottom: 2px;
-}
-*/
-
-
-.download-text {
-  font-size: 1.1em;
-  font-weight: 500;
+d-appendix {
+  background-color: #deebf7;
+  border-top: none;
 }

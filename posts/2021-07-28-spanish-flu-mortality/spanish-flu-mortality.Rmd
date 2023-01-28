@@ -772,10 +772,6 @@ df_excess_mort_comp %>%
 ```{r}
 library(ggbump)
 
-custom_palette <- c(RColorBrewer::brewer.pal(9, "Set1"),
-                    RColorBrewer::brewer.pal(6, "Dark2")) %>% 
-  sample(n_distinct(df_bump$town))
-
 df_bump <- df_excess_mort_comp %>% 
     mutate(across(contains("perc"), ~ parse_number(str_remove(., " ")))) %>% 
     select(town, contains("perc")) %>% 
@@ -787,12 +783,17 @@ df_bump <- df_excess_mort_comp %>%
     mutate(name = factor(name),
            x = as.numeric(name))
 
-jpeg(
-    filename="images_bloom/12_11.jpeg",
-    width=8,
-    height=8,
-    units="in",
-    res=1500)
+
+custom_palette <- c(RColorBrewer::brewer.pal(9, "Set1"),
+                    RColorBrewer::brewer.pal(6, "Dark2")) %>% 
+  sample(n_distinct(df_bump$town))
+
+# jpeg(
+#     filename="images_bloom/12_11.jpeg",
+#     width=8,
+#     height=8,
+#     units="in",
+#     res=1500)
 
 
 df_bump %>%
@@ -846,7 +847,7 @@ df_bump %>%
     x = NULL
   )
 
-dev.off()
+# dev.off()
 ```
 
 
@@ -861,12 +862,12 @@ phillips <- read_rds("data/phillips-comparison-august.rds") %>%
     TRUE ~ "Estimates cited in Phillips"
   ))
 
-jpeg(
-    filename="images_bloom/12_13.jpeg",
-    width=6,
-    height=6,
-    units="in",
-    res=3000)
+# jpeg(
+#     filename="images_bloom/12_13.jpeg",
+#     width=6,
+#     height=6,
+#     units="in",
+#     res=3000)
 
 df_excess_mort_comp %>%
   select(!contains("perc")) %>%
@@ -891,7 +892,7 @@ df_excess_mort_comp %>%
        x = "Number of deaths") +
   guides(fill = guide_legend(nrow = 2))
 
-dev.off()
+# dev.off()
 ```
 
 Here we observe that in the districts with larger populations, the estimates cited in @Phillips1984 are greater than both the number of respiratory deaths, and the mean excess mortality calculated with the three methods detailed above. In contrast, in the smaller districts, from Fryburg to Riversdale, the number of deaths from respiratory illness recorded during the pandemic are greater than the estimates cited in @Phillips1984. This is potentially indicative of under counting on the part of the Commission of Inquiry in the smaller districts. 
@@ -953,12 +954,12 @@ df_infant %>%
 
 ```{r, infant-mortality,  fig.width = 8, fig.height=6, fig.cap="Infant mortality per 1000 children"}
 #| column: page
-jpeg(
-    filename="images_bloom/12_13.jpeg",
-    width=6,
-    height=6,
-    units="in",
-    res=3000)
+# jpeg(
+#     filename="images_bloom/12_13.jpeg",
+#     width=6,
+#     height=6,
+#     units="in",
+#     res=3000)
 
 df_infant %>% 
   mutate(town = reorder_within(town, infant_mort_rate, race)) %>% 
@@ -974,7 +975,7 @@ df_infant %>%
   labs(x = "Infant mortality per 1000 recorded births",
        y = NULL)
 
-dev.off()
+# dev.off()
 ```
 
 Figure \@ref(fig:infant-mort-scatter) shows the relationship between infant mortality rates (detailed above) and pandemic mortality rates, calculated by dividing the number of respiratory deaths from the Forms by the population of individuals by race in each district from the 1911 census (in the case of black and coloured individuals) and the 1918 census (in the case of white individuals, conducted just prior to the pandemic). The aggregation of black and coloured mortality rates is a function of the denominator (population) reported in the census in aggregate.
@@ -985,16 +986,16 @@ Figure \@ref(fig:infant-mort-scatter) evidences a strong linear correlation betw
 #| column: page
 infant_mortality <- read_rds("data/infant_mortality.rds")
 
-values <- hcl_palettes("sequential (single-hue)", n = 3, palette = "Grays", plot = TRUE)
+# values <- hcl_palettes("sequential (single-hue)", n = 3, palette = "Grays", plot = TRUE)
 
-values <- sequential_hcl(3, palette = "Grays")
+# values <- sequential_hcl(3, palette = "Grays")
 
-jpeg(
-    filename="images_bloom/12_14.jpeg",
-    width=6,
-    height=6,
-    units="in",
-    res=3000)
+# jpeg(
+#     filename="images_bloom/12_14.jpeg",
+#     width=6,
+#     height=6,
+#     units="in",
+#     res=3000)
 
 infant_mortality %>%
   filter(births > 5) %>%
@@ -1021,7 +1022,7 @@ infant_mortality %>%
     size = guide_legend(nrow = 3)
   )
 
-dev.off()
+# dev.off()
 
 
 lm_1 <- infant_mortality %>%
@@ -1114,12 +1115,12 @@ Figure \@ref(fig:child-mortality) shows that there is heterogeneity amongst the 
 
 child_mortality <- read_rds("data/child_mortality.rds")
 
-jpeg(
-    filename="images_bloom/12_15.jpeg",
-    width=6,
-    height=6,
-    units="in",
-    res=3000)
+# jpeg(
+#     filename="images_bloom/12_15.jpeg",
+#     width=6,
+#     height=6,
+#     units="in",
+#     res=3000)
 
 child_mortality %>% 
   filter(race != "Both groups") %>% 
@@ -1136,7 +1137,7 @@ child_mortality %>%
   labs(x = "Child mortality per 1000 children",
        y = NULL)
 
-dev.off()
+# dev.off()
 
 ```
 
@@ -1307,12 +1308,12 @@ Figure \@ref(fig:pneumonia-influenza-mort) shows that while the slopes separated
 #| column: page
 pneumonia_influenza_mort <- read_rds("data/pneumonia_infleunza_mort.rds")
 
-jpeg(
-    filename="images_bloom/12_16.jpeg",
-    width=6,
-    height=6,
-    units="in",
-    res=3000)
+# jpeg(
+#     filename="images_bloom/12_16.jpeg",
+#     width=6,
+#     height=6,
+#     units="in",
+#     res=3000)
 
 pneumonia_influenza_mort %>%
   ggplot(aes(pneumonia_influenza_mort, pandemic_mort_rate)) +
@@ -1332,7 +1333,7 @@ pneumonia_influenza_mort %>%
     size = "District population"
   )
 
-dev.off()
+# dev.off()
 
 lm_1 <- read_rds("data/influenza_mort.rds") %>% 
   lm(pandemic_mort_rate ~ influenza_mort + race, data = .)

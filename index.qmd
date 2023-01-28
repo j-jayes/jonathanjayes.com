@@ -1,9 +1,8 @@
 ---
+pagetitle: "Blog posts"
 listing:
   contents: posts
   sort:
     - "date desc"
     - "title desc"
 ---
-
-## Blog posts

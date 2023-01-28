@@ -1,0 +1,16 @@
+{
+  "hash": "6b2ce1c726370ef35e3f099e5455d1c1",
+  "result": {
+    "markdown": "---\ntitle: \"Welcome to Interlude One\"\ndescription: |\n  \"Like all good fruit, the balance of life is in the ripe and ruin\"\nimage: images/alt-j.jpg\nauthor:\n  - name: Jonathan Jayes\ndate: 03-13-2020\noutput:\n  distill::distill_article:\n    self_contained: false\n---\n\n\n\n\nThis is a line from Interlude One off of Alt-J's first album, An Awesome Wave. I like this lyric a great deal!\n\nI aspire to balance in my own life. This site is a space to share what I find interesting, and encourage me to keep learning and sharing. It includes exploratory data analyses, R tutorials, and answers to some data specific questions. I hope that you enjoy your look around.\n\n<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/gBArR3FJ2ow\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+    "supporting": [
+      "welcome_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

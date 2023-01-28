@@ -76,7 +76,8 @@ education %>%
   cols_label(
     logo = "",
     text = "",
-  )
+  ) %>% 
+  tab_options(column_labels.hidden = TRUE)
 ```
 
 ## Experience

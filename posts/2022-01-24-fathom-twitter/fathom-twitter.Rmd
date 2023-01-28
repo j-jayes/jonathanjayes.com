@@ -76,7 +76,7 @@ In the column chart below we can visualize the number of times the 12 most frequ
 
 [I've made use of the lovely `reorder_within` command in combination with the `scale_y_reordered` command, both from the `tidytext` package to reorder the hashtags by frequency within the type of tweet. This means that though the same terms appear across facets, they can be in a different order within each.]{.aside}
 
-```{r, layout = "l-body-outset", fig.cap= "Column chart of hashtag frequency by tweet type"}
+```{r, fig.cap= "Column chart of hashtag frequency by tweet type"}
 library(tidytext)
 # ggsci package for nice blue fill scale
 library(ggsci)
@@ -100,7 +100,7 @@ hashtags %>%
 
 Another way to compare these is the stacked column chart below, which shows the number of uses of hashtags for each language as a percentage of the total number of language tags. Rstats tags make us just less than half of the tweets posted to the Fathom Data account, but more than 90 percent of the retweet tags! Wow! It certainly seems like the person in charge of the twitter account enjoys sharing tweets about Rstats.
 
-```{r, layout = "l-body-outset", fig.height=4, fig.width=8, fig.cap="Stacked column chart comparing language hashtag frequency by tweet type"}
+```{r, fig.height=4, fig.width=8, fig.cap="Stacked column chart comparing language hashtag frequency by tweet type"}
 hashtags %>%
   filter(hashtags %in% c("rstats", "python", "sql", "css")) %>%
   mutate(hashtags = fct_reorder(hashtags, n),
@@ -118,7 +118,6 @@ hashtags %>%
   )
 ```
 
-<aside>
 
 Looking at text instead of hashtags we see that Rstats make up 79 percent share of the langauge mentions of Rstats and Python.
 
@@ -137,7 +136,6 @@ df %>%
     mutate(share = scales::percent(n / (496 + 134)))
 ```
 
-</aside>
 
 ## Who is being retweeted?
 
@@ -187,7 +185,7 @@ frequency <- tidy_tweets %>%
 frequency <- frequency %>% 
   select(screen_name, word, freq) %>% 
   pivot_wider(names_from = screen_name, values_from = freq) %>%
-  arrange(desc(datawookie, fathomdata))
+  arrange(desc(datawookie), fathomdata)
 
 
 ```
@@ -196,7 +194,7 @@ The visualization below shows the relative frequencies for terms used by both ac
 
 In the top right of the plot we can see that #datascience, data and #Rstats are used frequently by both accounts, and roughly in equal proportions. Terms like courses, #sql and keynote are more specific to the Fathom account, while #linux and binance are more specific to Andrew's tweets.
 
-```{r, layout = "l-body-outset", fig.cap= "Comparing the frequency of words used by the Fathom Data account and Andrew Collier"}
+```{r, fig.cap= "Comparing the frequency of words used by the Fathom Data account and Andrew Collier"}
 frequency %>% 
   ggplot(aes(datawookie, fathomdata)) +
   geom_jitter(alpha = 0.1, size = 2.5, width = 0.25, height = 0.25) +
@@ -211,7 +209,7 @@ frequency %>%
 
 Interestingly, standard bank stands out in the bottom right of the plot, highlighted in the version below. It seems that Andrew uses his personal account to call out poor customer service!
 
-```{r, layout = "l-body-outset", fig.cap = "Highlighting Standard Bank account mentions"}
+```{r, fig.cap = "Highlighting Standard Bank account mentions"}
 frequency %>% 
   mutate(highlight = word == "@standardbankza") %>% 
   ggplot(aes(datawookie, fathomdata)) +

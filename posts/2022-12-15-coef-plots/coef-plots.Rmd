@@ -2,6 +2,7 @@
 title: "Coefficient plots in `ggplot`"
 description: |
   Drawing coefficient plots in R and `ggplot`.
+image: Iter_penguines.png
 author:
   - name: Jonathan Jayes
     url:
