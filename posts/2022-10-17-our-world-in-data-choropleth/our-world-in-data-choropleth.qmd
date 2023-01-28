@@ -39,6 +39,32 @@ In this tutorial I want to walk through recreating one of their classic chart ty
 
 ![](https://github.com/j-jayes/img-repo/raw/5380886e25a9d85f26828c92e6d094483193d66d/images/owid_smokers.PNG)
 
+## Finished product
+
+Here is the finished product that we will create in the tutorial
+
+```{r}
+#| echo: false
+
+library(ggtext)
+library(ggiraph)
+library(tidyverse)
+
+g <- read_rds(here::here("posts/2022-10-17-our-world-in-data-choropleth/data/g_ggiraph.rds"))
+
+# customizing the CSS makes the hover box easier to read.
+tooltip_css <- "background-color:gray;color:white;padding:10px;border-radius:5px;text-align:center;"
+
+ggiraph(
+  ggobj = g,
+  options = list(
+    opts_tooltip(css = tooltip_css),
+    opts_sizing(width = 1)
+  )
+)
+```
+
+
 ## Context
 
 There is a lot of information about the OWID grapher tool. You can have a look at [their github repo](https://github.com/owid/owid-grapher/) and an older [reddit AMA](https://www.reddit.com/r/dataisbeautiful/comments/76yknx/comment/doicj1j/?utm_source=share&utm_medium=web2x&context=3) if you are interested. It's a custom system that allows for systematic changes across their website, drawing on data from a central database.
