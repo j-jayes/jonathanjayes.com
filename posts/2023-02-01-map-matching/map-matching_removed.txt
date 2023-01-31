@@ -1,0 +1,189 @@
+Now we want to write a function to look through our points and find if they intersect with a polygon in our NUTS 2 regions.
+
+```{r}
+nuts_index <- nuts_map_wgs_84 %>%
+  mutate(rn = row_number()) %>%
+  as_tibble() %>%
+  select(nuts_code, rn)
+
+get_intersection_number <- function(geom) {
+  message("Getting geometry for ", geom)
+  number_listed <- geom %>%
+    st_intersects(nuts_map_wgs_84)
+
+  number <- number_listed %>% unlist()
+  
+  return(number)
+}
+
+cities_wgs_84_nuts_match <- cities_wgs_84 %>% 
+  mutate(nuts_index_number = map(geometry, possibly(get_intersection_number, "failed")))
+
+cities_out_1 <- cities_wgs_84_nuts_match %>% 
+  unnest(nuts_index_number) %>% 
+  left_join(nuts_index, by = c("nuts_index_number" = "rn")) %>% 
+  rename(nin_1 = nuts_index_number,
+         nuts_code_1 = nuts_code)
+
+# Save out first pass
+cities_out_1 %>% 
+  write_rds(here::here("posts", "2023-02-01-map-matching", "data", "cities_out_1.rds"))
+```
+
+
+This process works mostly well. We get 1,861 matches of our 2,236 points.
+
+Who don't we get on this first pass??
+
+```{r}
+missed_pass_1 <- cities_wgs_84 %>% as_tibble() %>% 
+  anti_join(cities_out_1)
+
+missed_pass_1
+```
+
+Some of the countries aren't in the NUTS 2 regions dataset, for example Russia and Ukraine.
+
+```{r}
+missed_pass_1 %>% 
+  count(country, sort = T) %>% view()
+```
+
+Let's filter down to just the not matched cities that should be in our dataset.
+
+Where are the ones that remain? All along the coast.
+
+```{r}
+missed_pass_1 <- missed_pass_1 %>% 
+  filter(country %in% c(
+    "Italy",
+    "France",
+    "Portugal",
+    "Spain",
+    "UK",
+    "Netherlands",
+    "Greece",
+    "Denmark",
+    "Finland",
+    "Poland"
+  )) 
+
+ggplot() +
+  geom_sf(data = nuts_map_wgs_84) +
+  geom_sf(data = missed_pass_1, aes(geometry = geometry, colour = country), alpha = .5) 
+
+```
+
+For the remainders, we have a problem. If the point is a city on the coast, it can potentially not intersect with our polygon. For example, Aberdeen is in the sea according to our base map.
+
+```{r}
+ggplot() +
+  geom_sf(data = nuts_map_wgs_84) +
+  geom_sf(
+    data = cities_wgs_84 %>%
+      filter(city == "Aberdeen"),
+    aes(geometry = geometry, colour = country)
+  ) +
+  geom_sf_label(
+    data = cities_wgs_84 %>%
+      filter(city == "Aberdeen"),
+    aes(geometry = geometry, label = city),
+    hjust = -.5
+  ) +
+  theme(legend.position = "none") +
+  coord_sf(xlim = c(-2.09, -2.05), ylim = c(57.15, 57.19))
+```
+
+One solution would be to try and find a new shapefile that has more exact borders.
+
+We try that below.
+
+```{r}
+nuts_map_hi_res <- st_read(here::here("posts", "2023-02-01-map-matching", "data", "NUTS_RG_20M_2016_4326.shp")) %>% 
+  as_tibble() %>% 
+  janitor::clean_names() %>% 
+  st_as_sf() %>% 
+  st_transform(4326) %>% 
+  filter(levl_code == 2)
+```
+
+This might actually work! Aberdeen is now within the polygon and no longer in the sea.
+
+```{r}
+ggplot() +
+  geom_sf(data = nuts_map_hi_res) +
+  geom_sf(
+    data = cities_wgs_84 %>%
+      filter(city == "Aberdeen"),
+    aes(geometry = geometry, colour = country),
+    alpha = .5
+  ) +
+  geom_sf_label(
+    data = cities_wgs_84 %>%
+      filter(city == "Aberdeen"),
+    aes(geometry = geometry, label = city),
+    hjust = -.5
+  ) +
+  theme(legend.position = "none") +
+  coord_sf(xlim = c(-2.09, -2.05), ylim = c(57.15, 57.19))
+```
+
+
+```{r}
+nuts_index_2nd_pass <- nuts_map_hi_res %>%
+  mutate(rn = row_number()) %>%
+  as_tibble() %>%
+  select(nuts_id, rn)
+
+get_intersection_number_2nd_pass <- function(geom) {
+  message("Getting geometry for ", geom)
+  number_listed <- geom %>%
+    st_intersects(nuts_map_hi_res)
+
+  number <- number_listed %>% unlist()
+  
+  return(number)
+}
+
+cities_wgs_84_nuts_match_2nd_pass <- missed_pass_1 %>% 
+  mutate(nuts_index_number = map(geometry, possibly(get_intersection_number_2nd_pass, "failed")))
+
+cities_out_2 <- cities_wgs_84_nuts_match_2nd_pass %>%
+  unnest(nuts_index_number) %>%
+  left_join(nuts_index_2nd_pass, by = c("nuts_index_number" = "rn")) %>%
+  rename(
+    nin_2 = nuts_index_number,
+    nuts_code_2 = nuts_id
+  )
+
+# Save out second pass
+cities_out_2 %>% 
+  write_rds(here::here("posts", "2023-02-01-map-matching", "data", "cities_out_2.rds"))
+```
+
+For the 46 that remain, we can try finding the closest polygon to the point. That should work!
+
+```{r}
+missed_pass_1 %>% 
+  anti_join(cities_out_2)
+```
+
+```{r}
+test_point <- missed_pass_1 %>% 
+  anti_join(cities_out_2) %>% 
+  head(1) %>% 
+  st_as_sf() %>% 
+  st_transform(crs = 4326)
+
+nuts_map_wgs_84 %>%
+  st_distance(test_point) %>%
+  as_tibble() %>%
+  mutate(rn = row_number()) %>%
+  arrange(value)
+
+# This works!
+ggplot() +
+  geom_sf(data = nuts_map_wgs_84 %>%
+    filter(row_number() == 67)) +
+  geom_sf(data = test_point)
+```

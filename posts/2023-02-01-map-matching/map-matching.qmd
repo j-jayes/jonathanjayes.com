@@ -1,0 +1,183 @@
+---
+title: "Map matching"
+---
+
+```{r}
+library(tidyverse)
+```
+
+## Purpose
+
+Match coordinates of cities from an excel sheet to NUTS2 regions and then create a time series.
+
+```{r}
+df <- readxl::read_excel(here::here("posts", 
+                                    "2023-02-01-map-matching", 
+                                    "data", 
+                                    "European urban population, 700 - 2000.xlsx")) %>% 
+  janitor::clean_names()
+
+cities <- df %>% 
+  distinct(city, country, latitude_in_degrees, longitude_in_degrees)
+
+# Filter for reasonable coordinates and correct countries
+cities_filtered <- cities %>%
+  filter(
+    between(longitude_in_degrees, -90, 90),
+    between(latitude_in_degrees, -90, 90),
+    country %in% c(
+      "Austria",
+      "Belgium",
+      "Denmark",
+      "Finland",
+      "France",
+      "Germany",
+      "Ireland",
+      "Italy",
+      "Luxembourg",
+      "Netherlands",
+      "Norway",
+      "Portugal",
+      "Spain",
+      "Sweden",
+      "Switzerland",
+      "UK"
+    )
+  )
+
+cities_filtered
+```
+
+```{r}
+cities_wgs_84 <- st_as_sf(cities_filtered, coords = c("longitude_in_degrees", "latitude_in_degrees"), 
+                 crs = 4326)
+# find bounding box
+cities_wgs_84 %>% 
+  st_bbox()
+```
+
+Here is where our points are on a world map.
+
+```{r}
+library(rnaturalearth)
+
+world <- ne_countries(scale = "medium", returnclass = "sf", continent = c("europe", "africa", "asia"))
+
+world <- world %>%
+  as_tibble() %>%
+  st_sf()
+
+ggplot() +
+  geom_sf(data = world, aes(geometry = geometry)) +
+  geom_sf(data = cities_wgs_84, aes(geometry = geometry, colour = country), alpha = .5) +
+  coord_sf(xlim = c(-25.67, 60), ylim = c(28.10, 68.97)) +
+  theme(legend.position = "none")
+```
+
+### Does it intersect with a NUTS2 region?
+
+We get the map file for the NUTS 2 region [here](https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units/nuts).
+
+```{r}
+nuts_map <- read_rds(here::here("posts", "2023-02-01-map-matching", "data", "map_simple.rds"))
+
+# transform to WGS 84
+nuts_map_wgs_84 <- nuts_map %>% 
+  st_as_sf() %>% 
+  st_transform(4326)
+```
+
+Let's now plot the points on our NUTS2 map.
+
+```{r}
+ggplot() +
+  geom_sf(data = nuts_map_wgs_84) +
+  geom_sf(data = cities_wgs_84, aes(geometry = geometry, colour = country), alpha = .5) +
+  theme(legend.position = "none")
+```
+
+Function to find closest polygon
+
+```{r}
+nuts_index <- nuts_map_wgs_84 %>%
+  mutate(rn = row_number()) %>%
+  as_tibble() %>%
+  select(nuts_code, rn)
+
+get_closest_polygon_code <- function(geom) {
+  message("Getting closest polygon from ", geom)
+  row_number <- nuts_map_wgs_84 %>%
+    st_distance(geom) %>%
+    as_tibble() %>%
+    mutate(rn = row_number()) %>%
+    arrange(value) %>%
+    head(1) %>%
+    pull(rn)
+
+  code_out <- nuts_index %>%
+    filter(rn == row_number) %>%
+    pull(nuts_code)
+
+  return(code_out)
+}
+
+cities_wgs_84_matched <- cities_wgs_84 %>%
+  mutate(now_num = row_number()) %>%
+  nest(city:geometry) %>%
+  mutate(nuts_code = map(data, possibly(get_closest_polygon_code, "failed")))
+
+cities_out <- cities_wgs_84_matched %>%
+  unnest(nuts_code) %>%
+  unnest(data)
+
+cities_out %>%
+  write_rds(here::here(
+    "posts",
+    "2023-02-01-map-matching",
+    "data",
+    "cities_out_complete.rds"
+  ))
+```
+
+Did it work?
+
+```{r}
+cities_out_wgs_84 <- cities_out %>% 
+  st_as_sf() %>% 
+  st_transform(crs = 4326)
+
+ggplot() +
+  geom_sf(data = nuts_map_wgs_84) +
+  geom_sf(data = cities_out_wgs_84, aes(colour = country)) +
+  theme(legend.position = "none")
+```
+
+Looks like it!
+
+Lets do a better check.
+
+```{r}
+cities_out_wgs_84 %>%
+  mutate(nuts_code_chars = str_extract(nuts_code, "[A-Z]+")) %>%
+  count(country, nuts_code_chars) %>%
+  as_tibble() %>%
+  select(-geometry) %>% view()
+```
+
+
+### Calculate inhabitants by year
+
+```{r}
+cities_to_join <- cities_out %>% 
+  select(city, country, nuts_code)
+
+df_cities <- df %>% 
+  inner_join(cities_to_join)
+
+df_cities %>% 
+  group_by(year, nuts_code) %>% 
+  summarise(total_pop = sum(inhabitants_in_000_s)) %>% 
+  ungroup()
+```
+
+
