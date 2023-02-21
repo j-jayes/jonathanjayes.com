@@ -16,6 +16,7 @@ website:
         text: Home
       - href: about.qmd
         text: About
+      - href: content/consulting.qmd
       - href: content/teaching.qmd
       - href: content/publications.qmd
     right: 
