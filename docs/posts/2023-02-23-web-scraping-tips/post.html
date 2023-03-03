@@ -170,6 +170,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link" href="../../content/publications.html">
  <span class="menu-text">Publications</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../content/data.html">
+ <span class="menu-text">Data</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
@@ -216,6 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a></li>
   <li><a href="#problem" id="toc-problem" class="nav-link" data-scroll-target="#problem">Problem</a></li>
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
   </ul>
 </nav>
     </div>
@@ -287,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>The <strong>problem</strong> that we want to solve is how to preserve the structure of this information when we scrape the page. This is challenging, because the information that falls under each family branch is not of a uniform HTML class.</p>
-<p>As I show in the two images below, the information about the originator of the family branch is a paragraph (<code>&lt;p&gt;</code> tag in HTML), while the bullet points about the children are list elements (<code>&lt;li&gt;</code>) of an unordered list (<code>&lt;ul&gt;</code>). If we were to grab <strong>all of the paragraph elements and list elements from the web page</strong>, there would be no way to recover the structure, with Carl Leonard being the first son of Arvid, and Göran the first son of Joshua.</p>
+<p>As I show in the two images below, the information about the originator of the family branch is a paragraph (<code>&lt;p&gt;</code> tag in HTML), while the bullet points about the children are list elements (<code>&lt;li&gt;</code>) of an unordered list (<code>&lt;ul&gt;</code>).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -306,6 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<p>If we were to grab <strong>all of the paragraph elements and list elements from the web page</strong>, there would be no way to recover the structure, with Carl Leonard being the first son of Arvid, and Göran the first son of Joshua.</p>
 <p>I show this in the code chunk below that collects the paragraphs from the page.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -331,12 +337,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(<span class="at">column_labels.hidden =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="ueilzqhxby" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xhuxctgknj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#ueilzqhxby) .gt_table {
+:where(#xhuxctgknj) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -361,7 +367,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-:where(#ueilzqhxby) .gt_heading {
+:where(#xhuxctgknj) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -373,12 +379,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#ueilzqhxby) .gt_caption {
+:where(#xhuxctgknj) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#ueilzqhxby) .gt_title {
+:where(#xhuxctgknj) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -390,7 +396,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-:where(#ueilzqhxby) .gt_subtitle {
+:where(#xhuxctgknj) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -402,13 +408,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-:where(#ueilzqhxby) .gt_bottom_border {
+:where(#xhuxctgknj) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ueilzqhxby) .gt_col_headings {
+:where(#xhuxctgknj) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -423,7 +429,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#ueilzqhxby) .gt_col_heading {
+:where(#xhuxctgknj) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -443,7 +449,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-:where(#ueilzqhxby) .gt_column_spanner_outer {
+:where(#xhuxctgknj) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -455,15 +461,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-:where(#ueilzqhxby) .gt_column_spanner_outer:first-child {
+:where(#xhuxctgknj) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#ueilzqhxby) .gt_column_spanner_outer:last-child {
+:where(#xhuxctgknj) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#ueilzqhxby) .gt_column_spanner {
+:where(#xhuxctgknj) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -475,7 +481,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-:where(#ueilzqhxby) .gt_group_heading {
+:where(#xhuxctgknj) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -501,7 +507,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   text-align: left;
 }
 
-:where(#ueilzqhxby) .gt_empty_group_heading {
+:where(#xhuxctgknj) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -516,15 +522,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-:where(#ueilzqhxby) .gt_from_md > :first-child {
+:where(#xhuxctgknj) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#ueilzqhxby) .gt_from_md > :last-child {
+:where(#xhuxctgknj) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#ueilzqhxby) .gt_row {
+:where(#xhuxctgknj) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -543,7 +549,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-:where(#ueilzqhxby) .gt_stub {
+:where(#xhuxctgknj) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -556,7 +562,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#ueilzqhxby) .gt_stub_row_group {
+:where(#xhuxctgknj) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -570,11 +576,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-:where(#ueilzqhxby) .gt_row_group_first td {
+:where(#xhuxctgknj) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#ueilzqhxby) .gt_summary_row {
+:where(#xhuxctgknj) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -584,16 +590,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#ueilzqhxby) .gt_first_summary_row {
+:where(#xhuxctgknj) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#ueilzqhxby) .gt_first_summary_row.thick {
+:where(#xhuxctgknj) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#ueilzqhxby) .gt_last_summary_row {
+:where(#xhuxctgknj) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -603,7 +609,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ueilzqhxby) .gt_grand_summary_row {
+:where(#xhuxctgknj) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -613,7 +619,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#ueilzqhxby) .gt_first_grand_summary_row {
+:where(#xhuxctgknj) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -623,11 +629,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-:where(#ueilzqhxby) .gt_striped {
+:where(#xhuxctgknj) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#ueilzqhxby) .gt_table_body {
+:where(#xhuxctgknj) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -636,7 +642,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-:where(#ueilzqhxby) .gt_footnotes {
+:where(#xhuxctgknj) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -650,7 +656,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#ueilzqhxby) .gt_footnote {
+:where(#xhuxctgknj) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -659,7 +665,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#ueilzqhxby) .gt_sourcenotes {
+:where(#xhuxctgknj) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -673,7 +679,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#ueilzqhxby) .gt_sourcenote {
+:where(#xhuxctgknj) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -681,64 +687,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#ueilzqhxby) .gt_left {
+:where(#xhuxctgknj) .gt_left {
   text-align: left;
 }
 
-:where(#ueilzqhxby) .gt_center {
+:where(#xhuxctgknj) .gt_center {
   text-align: center;
 }
 
-:where(#ueilzqhxby) .gt_right {
+:where(#xhuxctgknj) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#ueilzqhxby) .gt_font_normal {
+:where(#xhuxctgknj) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#ueilzqhxby) .gt_font_bold {
+:where(#xhuxctgknj) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#ueilzqhxby) .gt_font_italic {
+:where(#xhuxctgknj) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#ueilzqhxby) .gt_super {
+:where(#xhuxctgknj) .gt_super {
   font-size: 65%;
 }
 
-:where(#ueilzqhxby) .gt_footnote_marks {
+:where(#xhuxctgknj) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#ueilzqhxby) .gt_asterisk {
+:where(#xhuxctgknj) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#ueilzqhxby) .gt_indent_1 {
+:where(#xhuxctgknj) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#ueilzqhxby) .gt_indent_2 {
+:where(#xhuxctgknj) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#ueilzqhxby) .gt_indent_3 {
+:where(#xhuxctgknj) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#ueilzqhxby) .gt_indent_4 {
+:where(#xhuxctgknj) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#ueilzqhxby) .gt_indent_5 {
+:where(#xhuxctgknj) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -763,6 +769,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+</section>
+<section id="solution" class="level2">
+<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<p>The solution is to use a specific xpath, that makes use of</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>html <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="at">xpath =</span> <span class="st">"//h2[contains(., 'Källor')]/following-sibling::*[self::p or self::ul]"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Gustaf Elgenstierna, Den introducerade svenska adelns ättartavlor. 1925-36."</code></pre>
+</div>
+</div>
+<p>This expression has two parts separated by a slash (/) symbol, indicating that we’re looking for an element that meets two conditions.</p>
+<p>The first part of the expression is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># //h2[contains(., 'Källor')]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This part selects any h2 element that contains the text “Källor”. The contains function checks if the text of the h2 element contains the substring ‘Källor’. The . (dot) represents the current node, which is the h2 element in this case. The double slash // at the beginning indicates that the h2 element can be anywhere in the document.</p>
+<p>The second part of the expression is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># /following-sibling::*[self::p or self::ul]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This part selects all the sibling elements that come after the h2 element we found in the first part, which satisfy the condition of being a p or ul element.</p>
+<p>The following-sibling axis selects all the sibling elements that come after the current node. The * (asterisk) selects all elements. The square brackets [self::p or self::ul] filter the selected elements to only include those that are either a p or a ul element.</p>
+<p>So, putting it all together, this XPath expression selects all the p and ul elements that come after any h2 element that contains the text “Källor” in the document.</p>
 
 
 </section>

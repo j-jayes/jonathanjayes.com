@@ -10,6 +10,8 @@ execute:
   echo: true
   warning: false
   message: false
+draft: true
+
 ---
 
 ## Purpose
@@ -97,7 +99,7 @@ This expression has two parts separated by a slash (/) symbol, indicating that w
 The first part of the expression is:
 
 ```{r}
-//h2[contains(., 'Källor')]
+# //h2[contains(., 'Källor')]
 ```
 
 This part selects any h2 element that contains the text "Källor". The contains function checks if the text of the h2 element contains the substring 'Källor'. The . (dot) represents the current node, which is the h2 element in this case. The double slash // at the beginning indicates that the h2 element can be anywhere in the document.
@@ -105,7 +107,7 @@ This part selects any h2 element that contains the text "Källor". The contains 
 The second part of the expression is:
 
 ```{r}
-/following-sibling::*[self::p or self::ul]
+# /following-sibling::*[self::p or self::ul]
 ```
 
 This part selects all the sibling elements that come after the h2 element we found in the first part, which satisfy the condition of being a p or ul element.
