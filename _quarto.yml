@@ -19,6 +19,8 @@ website:
       - href: content/consulting.qmd
       - href: content/teaching.qmd
       - href: content/publications.qmd
+      - href: content/data.qmd
+        text: Data
     right: 
       - text: "Web Apps"
         menu:

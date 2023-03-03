@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Interlude One - Academic Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/favicon_logo.ico" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Interlude One</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/consulting.html">
+ <span class="menu-text">Consulting</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/teaching.html">
+ <span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/publications.html">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../content/data.html" aria-current="page">
+ <span class="menu-text">Data</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web-apps" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Web Apps</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-web-apps">    
+        <li>
+    <a class="dropdown-item" href="http://jonathan-jayes.shinyapps.io/gumtree-price-explorer">
+ <span class="dropdown-text">Second Hand Car Price Comparison Tool</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/j-jayes/production-functions">
+ <span class="dropdown-text">Production Functions Shiny App</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/j-jayes/NBER-methods">
+ <span class="dropdown-text">Economics literature explorer</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP">
+ <span class="dropdown-text">Europe’s Regional Development Explorer</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/j-jayes/interlude-one">
+ <span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#available-data" id="toc-available-data" class="nav-link active" data-scroll-target="#available-data">Available data</a></li>
+  <li><a href="#academic-data-processing" id="toc-academic-data-processing" class="nav-link" data-scroll-target="#academic-data-processing">Academic data processing</a>
+  <ul class="collapse">
+  <li><a href="#scraping-a-genealogy-wiki-of-swedens-noble-families" id="toc-scraping-a-genealogy-wiki-of-swedens-noble-families" class="nav-link" data-scroll-target="#scraping-a-genealogy-wiki-of-swedens-noble-families">Scraping a genealogy wiki of Sweden’s noble families</a></li>
+  <li><a href="#scraping-tax-registers-from-the-stockholm-city-archive" id="toc-scraping-tax-registers-from-the-stockholm-city-archive" class="nav-link" data-scroll-target="#scraping-tax-registers-from-the-stockholm-city-archive">Scraping tax registers from the Stockholm City Archive</a></li>
+  <li><a href="#soil-suitability-calculation" id="toc-soil-suitability-calculation" class="nav-link" data-scroll-target="#soil-suitability-calculation">Soil suitability calculation</a></li>
+  <li><a href="#european-population-aggregations" id="toc-european-population-aggregations" class="nav-link" data-scroll-target="#european-population-aggregations">European population aggregations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Academic Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="available-data" class="level2">
+<h2 class="anchored" data-anchor-id="available-data">Available data</h2>
+<p>I have done a fair bit of web scraping to get data into usable formats.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="saqbyhxokw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#saqbyhxokw) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#saqbyhxokw) .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#saqbyhxokw) .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+:where(#saqbyhxokw) .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+:where(#saqbyhxokw) .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+:where(#saqbyhxokw) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#saqbyhxokw) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#saqbyhxokw) .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#saqbyhxokw) .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#saqbyhxokw) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#saqbyhxokw) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#saqbyhxokw) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#saqbyhxokw) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+:where(#saqbyhxokw) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#saqbyhxokw) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#saqbyhxokw) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#saqbyhxokw) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#saqbyhxokw) .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#saqbyhxokw) .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#saqbyhxokw) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#saqbyhxokw) .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#saqbyhxokw) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#saqbyhxokw) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#saqbyhxokw) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#saqbyhxokw) .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#saqbyhxokw) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#saqbyhxokw) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#saqbyhxokw) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#saqbyhxokw) .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#saqbyhxokw) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#saqbyhxokw) .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#saqbyhxokw) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#saqbyhxokw) .gt_left {
+  text-align: left;
+}
+
+:where(#saqbyhxokw) .gt_center {
+  text-align: center;
+}
+
+:where(#saqbyhxokw) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#saqbyhxokw) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#saqbyhxokw) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#saqbyhxokw) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#saqbyhxokw) .gt_super {
+  font-size: 65%;
+}
+
+:where(#saqbyhxokw) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#saqbyhxokw) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#saqbyhxokw) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#saqbyhxokw) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#saqbyhxokw) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#saqbyhxokw) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#saqbyhxokw) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <td colspan="2" class="gt_heading gt_title gt_font_normal" style=""><strong>Available Data</strong></td>
+    </tr>
+    <tr>
+      <td colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style=""><a href="https://github.com/j-jayes">From my GitHub repos</a></td>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Title and link">Title and link</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Description">Description</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="title" class="gt_row gt_left"><a href="https://github.com/j-jayes/car-scraper-za">
+Car Scraper ZA
+      </a></td>
+<td headers="description" class="gt_row gt_left" style="background-color: #191970; color: #FFFFFF;"><div class="gt_from_md"><p>An automated scraper that gets adverts for vehicles off of <a href="https://www.gumtree.co.za/">Gumtree in South Africa</a> every day and stores them on this GitHub repo. Have a look at <a href="https://jonathan-jayes.shinyapps.io/gumtree-price-explorer/">my Shiny App</a> to understand the kind of data collected.</p>
+</div></td></tr>
+    <tr><td headers="title" class="gt_row gt_left"><a href="https://github.com/j-jayes/bicycle_advert_scraper">
+Bicycle Advert Scraper
+      </a></td>
+<td headers="description" class="gt_row gt_left" style="background-color: #191970; color: #FFFFFF;"><div class="gt_from_md"><p>Similar to the car scraper, this repo autmotically scrapes adverts for bicycles from <a href="https://bikehub.co.za/">Bikehub</a> and <a href="https://www.gumtree.co.za/">Gumtree</a>.</p>
+</div></td></tr>
+    <tr><td headers="title" class="gt_row gt_left"><a href="https://github.com/j-jayes/job-tech-dev-se">
+Swedish Job adverts
+      </a></td>
+<td headers="description" class="gt_row gt_left" style="background-color: #191970; color: #FFFFFF;"><div class="gt_from_md"><p>This repo contains a one percent sample of the enriched jobtech data from <a href="jobtechdev.se">jobtechdev.se</a>. They provide a one percent sample of all jobs advertised in Sweden from 2016 to 2022Q2 to help you get to grips with the data. I simply put it into excel format from <code>json</code></p>
+</div></td></tr>
+    <tr><td headers="title" class="gt_row gt_left"><a href="https://github.com/j-jayes/animal-husbandry">
+Swedish Agriculture and Livestock
+      </a></td>
+<td headers="description" class="gt_row gt_left" style="background-color: #191970; color: #FFFFFF;"><div class="gt_from_md"><p>This repo is for the digitization of the SCB reports on Agriculture and Animal Husbandry. They span from 1865 to 1911. You can have a look at <a href="https://jonathan-jayes.shinyapps.io/Agriculture-and-Livestock-Management-Data-Explorer/">my Shiny app</a> to get a better understanding</p>
+</div></td></tr>
+    <tr><td headers="title" class="gt_row gt_left"><a href="https://github.com/j-jayes/swedish-patent-data">
+Swedish patent data
+      </a></td>
+<td headers="description" class="gt_row gt_left" style="background-color: #191970; color: #FFFFFF;"><div class="gt_from_md"><p>I have scraped Google Patents for 10,000 patents that were registered in Sweden, and collected PDF data from The Swedish Patent Registration Authority for further analysis.</p>
+</div></td></tr>
+    <tr><td headers="title" class="gt_row gt_left"><a href="https://github.com/j-jayes/WB-LinkedIn-Migration">
+Hot Jobs in Sweden from LinkedIn
+      </a></td>
+<td headers="description" class="gt_row gt_left" style="background-color: #191970; color: #FFFFFF;"><div class="gt_from_md"><p>This repo has a set of data from LinkedIn's collaboration with the World Bank on talent migration. I've written a short report on the data <a href="https://j-jayes.github.io/WB-LinkedIn-Migration/">here</a></p>
+</div></td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="academic-data-processing" class="level2">
+<h2 class="anchored" data-anchor-id="academic-data-processing">Academic data processing</h2>
+<p>I have been happy to help a number of my colleagues with scraping data from public websites or processing geographic data. I link these GitHub repositories here, in case you’re looking for inspiration on how to structure a scraping project, or perhaps want to access data on soil suitability or Europe’s urban populations.</p>
+<section id="scraping-a-genealogy-wiki-of-swedens-noble-families" class="level3">
+<h3 class="anchored" data-anchor-id="scraping-a-genealogy-wiki-of-swedens-noble-families">Scraping a genealogy wiki of Sweden’s noble families</h3>
+<p><a href="https://github.com/j-jayes/adelsvapen">Here</a> I scraped and structured a database of more than 120,000 individuals belonging to various branches of Sweden’s nobility.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://raw.githubusercontent.com/j-jayes/adelsvapen/main/images/example_data.PNG" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+<section id="scraping-tax-registers-from-the-stockholm-city-archive" class="level3">
+<h3 class="anchored" data-anchor-id="scraping-tax-registers-from-the-stockholm-city-archive">Scraping tax registers from the Stockholm City Archive</h3>
+<p><a href="https://github.com/j-jayes/mantalsregister-1909">Here</a> I scraped an index of records from 1800 to 1880 for residents of Sweden’s most populous city, Stockholm.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://raw.githubusercontent.com/j-jayes/mantalsregister-1909/main/README_files/figure-commonmark/unnamed-chunk-5-1.png" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+<section id="soil-suitability-calculation" class="level3">
+<h3 class="anchored" data-anchor-id="soil-suitability-calculation">Soil suitability calculation</h3>
+<p><a href="https://github.com/j-jayes/soil-suitability#purpose">In this project</a>, I helped acquire data on soil suitability for wheat cultivation across Europe, and aggregate the raster spatial data to NUTS 2 and NUT 3 regions for use as control variables in a study of persistence.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://raw.githubusercontent.com/j-jayes/soil-suitability/main/images/fao_interface.PNG" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+<section id="european-population-aggregations" class="level3">
+<h3 class="anchored" data-anchor-id="european-population-aggregations">European population aggregations</h3>
+<p><a href="https://github.com/j-jayes/european-population-aggregations#download-the-data">In this project</a>, I helped aggregate the population from cities across Europe to NUTS2 and NUTS3 regions, to show the growth of urban populations across time.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="https://raw.githubusercontent.com/j-jayes/european-population-aggregations/main/images/map-pop-1950.png" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

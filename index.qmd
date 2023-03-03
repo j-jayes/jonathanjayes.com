@@ -1,5 +1,5 @@
 ---
-pagetitle: "Blog posts"
+pagetitle: "Home - Interlude One"
 listing:
   contents: posts
   sort:

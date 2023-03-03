@@ -1,0 +1,115 @@
+---
+title: "Web scraping tips"
+description: |
+  Tips for preserving structure when web scraping with `rvest` and xpath
+image: preview.png
+author:
+  - name: Jonathan Jayes
+date: 2023-02-23
+execute: 
+  echo: true
+  warning: false
+  message: false
+---
+
+## Purpose
+
+I have been helping a colleague collect some genealogical data from a website about Swedish noble families.
+
+It involved a relatively complex web scraping problem due to the idiosyncratic nature of the web pages.
+
+I enjoyed solving the problem, and thought I would share my solution here.
+
+## Problem
+
+The website contains information about various branches of the Swedish noble families. For example, the page we will look at tells the history of the Adelcrantz family, who were designated nobility in 1719, and of the originator Josua Törnqvist, a chamber clerk who married Cecilia Andera, daughter of the vicar in Värmdö pastorate of Uppsala archdiocese, Petrus Anderus and Christina Samuelsdotter.
+
+```{r}
+#| echo: false
+#| fig-cap: "Information about the Adelcrantz family from [Adelsvapen.com](https://www.adelsvapen.com/genealogi/Adelcrantz_nr_1469)"
+
+knitr::include_graphics(here::here("posts", "2023-02-23-web-scraping-tips", "images", "adelsvapen_1.PNG"))
+```
+
+Further, we learn of the Forssenwald family branch, originated by Arvid Forssenwald, commissioner in the executive commission. Arvid had one child with first wife Charlotta Bergman, and four children with Anna Maria Köhnman.
+
+```{r}
+#| echo: false
+#| fig-cap: "Information about the Forssenwald family branch from [Adelsvapen.com](https://www.adelsvapen.com/genealogi/Adelcrantz_nr_1469)"
+
+knitr::include_graphics(here::here("posts", "2023-02-23-web-scraping-tips", "images", "adelsvapen_2.PNG"))
+```
+
+
+The **problem** that we want to solve is how to preserve the structure of this information when we scrape the page. This is challenging, because the information that falls under each family branch is not of a uniform HTML class.
+
+As I show in the two images below, the information about the originator of the family branch is a paragraph (`<p>` tag in HTML), while the bullet points about the children are list elements (`<li>`) of an unordered list (`<ul>`).
+
+```{r}
+#| echo: false
+#| fig-cap: "HTML tag type mismatch"
+
+knitr::include_graphics(here::here("posts", "2023-02-23-web-scraping-tips", "images", "adelsvapen_4.PNG"))
+knitr::include_graphics(here::here("posts", "2023-02-23-web-scraping-tips", "images", "adelsvapen_3.PNG"))
+
+```
+
+If we were to grab **all of the paragraph elements and list elements from the web page**, there would be no way to recover the structure, with Carl Leonard being the first son of Arvid, and Göran the first son of Joshua.
+
+I show this in the code chunk below that collects the paragraphs from the page.
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(gt)
+# save url
+url <- "https://www.adelsvapen.com/genealogi/Adelcrantz_nr_1469"
+# read html
+html <- read_html(url)
+
+# get paragraphs
+paragraphs <- html %>%
+  html_nodes("p") %>%
+  html_text2() %>%
+  str_squish() %>%
+  as_tibble() %>%
+  filter(!value %in% c("", "Barn:", "Barn:.")) %>% 
+  rename(paragraph = value)
+
+paragraphs %>% 
+  gt() %>% 
+  tab_header(title = md("**Example of paragraphs without structure**")) %>% 
+  tab_options(column_labels.hidden = TRUE)
+```
+
+## Solution
+
+The solution is to use a specific xpath, that makes use of 
+
+```{r}
+html %>%
+  html_node(xpath = "//h2[contains(., 'Källor')]/following-sibling::*[self::p or self::ul]") %>%
+  html_text2()
+```
+
+This expression has two parts separated by a slash (/) symbol, indicating that we're looking for an element that meets two conditions.
+
+The first part of the expression is:
+
+```{r}
+//h2[contains(., 'Källor')]
+```
+
+This part selects any h2 element that contains the text "Källor". The contains function checks if the text of the h2 element contains the substring 'Källor'. The . (dot) represents the current node, which is the h2 element in this case. The double slash // at the beginning indicates that the h2 element can be anywhere in the document.
+
+The second part of the expression is:
+
+```{r}
+/following-sibling::*[self::p or self::ul]
+```
+
+This part selects all the sibling elements that come after the h2 element we found in the first part, which satisfy the condition of being a p or ul element.
+
+The following-sibling axis selects all the sibling elements that come after the current node. The * (asterisk) selects all elements. The square brackets [self::p or self::ul] filter the selected elements to only include those that are either a p or a ul element.
+
+So, putting it all together, this XPath expression selects all the p and ul elements that come after any h2 element that contains the text "Källor" in the document.

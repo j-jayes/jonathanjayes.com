@@ -1,0 +1,107 @@
+---
+title: "Academic Data"
+---
+
+## Available data
+
+I have done a fair bit of web scraping to get data into usable formats.
+
+```{r}
+library(tidyverse)
+library(gt)
+
+tribble(
+  ~title, ~description, ~link,
+  # car scraper
+  "Car Scraper ZA", "An automated scraper that gets adverts for vehicles off of [Gumtree in South Africa](https://www.gumtree.co.za/) every day and stores them on this GitHub repo. Have a look at [my Shiny App](https://jonathan-jayes.shinyapps.io/gumtree-price-explorer/) to understand the kind of data collected.", "https://github.com/j-jayes/car-scraper-za",
+  # bike scraper
+  "Bicycle Advert Scraper", "Similar to the car scraper, this repo autmotically scrapes adverts for bicycles from [Bikehub](https://bikehub.co.za/) and [Gumtree](https://www.gumtree.co.za/).", "https://github.com/j-jayes/bicycle_advert_scraper",
+  # job tech dev
+  "Swedish Job adverts",  "This repo contains a one percent sample of the enriched jobtech data from [jobtechdev.se](jobtechdev.se). They provide a one percent sample of all jobs advertised in Sweden from 2016 to 2022Q2 to help you get to grips with the data. I simply put it into excel format from `json`", "https://github.com/j-jayes/job-tech-dev-se",
+  # animal husbandry
+  "Swedish Agriculture and Livestock", "This repo is for the digitization of the SCB reports on Agriculture and Animal Husbandry. They span from 1865 to 1911. You can have a look at [my Shiny app](https://jonathan-jayes.shinyapps.io/Agriculture-and-Livestock-Management-Data-Explorer/) to get a better understanding",
+  "https://github.com/j-jayes/animal-husbandry",
+  # swedish patents
+  "Swedish patent data", "I have scraped Google Patents for 10,000 patents that were registered in Sweden, and collected PDF data from The Swedish Patent Registration Authority for further analysis.", "https://github.com/j-jayes/swedish-patent-data",
+  # LinkedIn WorldBank data
+  "Hot Jobs in Sweden from LinkedIn", "This repo has a set of data from LinkedIn's collaboration with the World Bank on talent migration. I've written a short report on the data [here](https://j-jayes.github.io/WB-LinkedIn-Migration/)", "https://github.com/j-jayes/WB-LinkedIn-Migration"
+) %>% 
+  mutate(
+    title = glue::glue("<a href = {link}>
+                             {title}
+                                   </a>"),
+    title = purrr::map(title, gt::html)
+  ) %>%
+  # group_by(title) %>%
+  select(-link) %>%
+  gt() %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "#191970"),
+      cell_text(color = "white")
+    ),
+    locations = cells_body(columns = c("description"))
+  ) %>%
+  tab_header(
+    title = md("**Available Data**"),
+    subtitle = md("[From my GitHub repos](https://github.com/j-jayes)")
+  ) %>%
+  fmt_markdown(columns = description) %>% 
+  cols_align(columns = title, align = "left") %>%
+  cols_label(
+    title = "Title and link",
+    description = "Description"
+  )
+```
+
+
+## Academic data processing
+
+I have been happy to help a number of my colleagues with scraping data from public websites or processing geographic data. I link these GitHub repositories here, in case you're looking for inspiration on how to structure a scraping project, or perhaps want to access data on soil suitability or Europe's urban populations.
+
+### Scraping a genealogy wiki of Sweden's noble families
+
+[Here](https://github.com/j-jayes/adelsvapen) I scraped and structured a database of more than 120,000 individuals belonging to various branches of Sweden's nobility.
+
+```{r}
+#| out-width: "100%"
+#| fig-height: 8
+
+knitr::include_graphics(path = "https://raw.githubusercontent.com/j-jayes/adelsvapen/main/images/example_data.PNG")
+```
+
+
+### Scraping tax registers from the Stockholm City Archive
+
+[Here](https://github.com/j-jayes/mantalsregister-1909) I scraped an index of records from 1800 to 1880 for residents of Sweden's most populous city, Stockholm. 
+
+```{r}
+#| out-width: "100%"
+#| fig-height: 8
+
+knitr::include_graphics(path = "https://raw.githubusercontent.com/j-jayes/mantalsregister-1909/main/README_files/figure-commonmark/unnamed-chunk-5-1.png")
+```
+
+### Soil suitability calculation
+
+[In this project](https://github.com/j-jayes/soil-suitability#purpose), I helped acquire data on soil suitability for wheat cultivation across Europe, and aggregate the raster spatial data to NUTS 2 and NUT 3 regions for use as control variables in a study of persistence.
+
+```{r}
+#| out-width: "100%"
+#| fig-height: 8
+
+knitr::include_graphics(path = "https://raw.githubusercontent.com/j-jayes/soil-suitability/main/images/fao_interface.PNG")
+```
+
+### European population aggregations
+
+[In this project](https://github.com/j-jayes/european-population-aggregations#download-the-data), I helped aggregate the population from cities across Europe to NUTS2 and NUTS3 regions, to show the growth of urban populations across time.
+
+```{r}
+#| out-width: "100%"
+#| fig-height: 8
+
+knitr::include_graphics(path = "https://raw.githubusercontent.com/j-jayes/european-population-aggregations/main/images/map-pop-1950.png")
+```
+
+
