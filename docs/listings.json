@@ -1,5 +1,11 @@
 [
   {
+    "listing": "/content/research.html",
+    "items": [
+      "/content/research/Warwick-poster.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
       "/posts/2023-01-31-map-projections/Map-projections.html",

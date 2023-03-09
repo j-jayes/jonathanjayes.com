@@ -18,6 +18,8 @@ website:
         text: About
       - href: content/consulting.qmd
       - href: content/teaching.qmd
+      - href: content/research.qmd
+        text: Research
       - href: content/publications.qmd
       - href: content/data.qmd
         text: Data
