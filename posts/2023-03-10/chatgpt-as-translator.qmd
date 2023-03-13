@@ -190,6 +190,11 @@ occupations %>%
     plot.title.position = "plot",
     text = element_text(family = "ibm", size = 28)
   )
+```
+
+
+```{r}
+#| echo: false
 
 # ggsave(filename = here::here("posts", "2023-03-10", "images", "visualisation.jpeg"), width = 8, height = 5)
 ```
