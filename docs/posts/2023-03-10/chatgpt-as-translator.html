@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-03-10">
 <meta name="description" content="A post showing how ChatGPT can be used to create structred data from text.">
 
-<title>Interlude One - ChatGPT as Translator</title>
+<title>Interlude One - ChatGPT as translator and text wizard</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,6 +23,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -160,16 +223,25 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#the-problem" id="toc-the-problem" class="nav-link" data-scroll-target="#the-problem">The problem</a></li>
+  <li><a href="#a-typical-problem" id="toc-a-typical-problem" class="nav-link" data-scroll-target="#a-typical-problem">A typical problem</a></li>
+  <li><a href="#planning" id="toc-planning" class="nav-link" data-scroll-target="#planning">Planning</a></li>
+  <li><a href="#chatgpt-as-translator" id="toc-chatgpt-as-translator" class="nav-link" data-scroll-target="#chatgpt-as-translator">ChatGPT as translator</a></li>
+  <li><a href="#chatgpt-as-interpreter" id="toc-chatgpt-as-interpreter" class="nav-link" data-scroll-target="#chatgpt-as-interpreter">ChatGPT as interpreter</a></li>
+  <li><a href="#displaying-the-output" id="toc-displaying-the-output" class="nav-link" data-scroll-target="#displaying-the-output">Displaying the output</a>
+  <ul class="collapse">
+  <li><a href="#table" id="toc-table" class="nav-link" data-scroll-target="#table">Table</a></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ChatGPT as Translator</h1>
+<h1 class="title">ChatGPT as translator and text wizard</h1>
 </div>
 
 <div>
@@ -205,7 +277,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
-<p>Data is the lifeblood of modern economics. It courses through our models and charts the course of history. Yet data is often born unruly, its words jumbled and disorganized, its meaning buried under mountains of text. For the economic historian, this is an all too familiar challenge. We need to extract structure from chaos, to transform raw text into organized data that we can analyze.</p>
+<p>Data is the lifeblood of modern economic history. It courses through our models and charts the path of history. Yet data is often born unruly, its words jumbled and disorganized, its meaning buried under mountains of text. For the economic historian, this is an all too familiar challenge. We need to extract structure from chaos, to transform raw text into organized data that we can analyze.</p>
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:30%;">
@@ -217,10 +289,649 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p>But doing so by hand is a laborious and time-consuming task, one that demands hours of tedious work and a near-obsessive attention to detail. Luckily, we live in an age of powerful AI tools, such as ChatGPT, that can help us wrangle our data and make sense of the world.</p>
+<p>But doing so by hand is a laborious and time-consuming task, one that demands hours of tedious work and a heightened attention to detail. Luckily, we live in an age of powerful AI tools, such as ChatGPT, that can help us wrangle our data and make sense of the world.</p>
 </section>
-<section id="the-problem" class="level2">
-<h2 class="anchored" data-anchor-id="the-problem">The problem</h2>
+<section id="a-typical-problem" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="a-typical-problem">A typical problem</h2>
+<p>I am interested in a source of Swedish biographical data called <a href="http://runeberg.org/vemarvem/sthlm45/0018.html"><em>Vem är Vem?</em></a> (or Who is Who?), part of Projekt Runeberg, a volunteer effort to create free electronic editions of classic Scandinavian literature.</p>
+<p>In particular I am interested in the occupational trajectories of the individuals - what job titles do they hold through the course of their lives. By extracting information on the career paths of notable Swedes, we can gain insights into the labour market dynamics of Sweden and how they have evolved over time. With this structured data, economic historians can explore questions such as the influence of education and social networks on career trajectories, the impact of technological change on the labour market, and much more.</p>
+<p>Careful work by two librarians in Uppsala has resulted in a large selection of the source being scanned and digitized. Though the OCR engine is not perfect, the resulting text is largely legible. A typical example of the source is shown below.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">The city librarian in Uppsala Paul Harnesk was the initiator and chief editor of the work Who is Who? which was published in two editions, each comprising five parts. He died in 1965 and the work was completed by the first librarian at Uppsala University Library, associate professor Åke Davidsson.</span></div></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="images/source.pdf" style="width:100.0%" height="650"></p>
+<p></p><figcaption class="figure-caption">An example of the source, note the highlighted abbreviations wherein “f.” means “född” and “Med. kand.” means “medicine kandidat”.**</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="planning" class="level2">
+<h2 class="anchored" data-anchor-id="planning">Planning</h2>
+<p>Extracting occupational trajectories from the Swedish biographical source “Vem är Vem?” comprises a two-part process. The first part involves translating the Swedish text, which is full of abbreviations and contractions, into English using the natural language processing capabilities of ChatGPT. This step is crucial for making the data accessible and understandable to researchers who may not be familiar with Swedish (like myself!).</p>
+<p>Once the text has been translated, the second part of the process demands structuring the data into year and occupation pairs. This involves identifying mentions of job titles and dates in the text and extracting them in a structured format.</p>
+</section>
+<section id="chatgpt-as-translator" class="level2">
+<h2 class="anchored" data-anchor-id="chatgpt-as-translator">ChatGPT as translator</h2>
+<p>I simply ask ChatGPT:</p>
+<p><strong>Can you convert the following text from Swedish into English? There are many abbreviations, for instance, “f.” means “född” or born, “Med. kand.” means “medicine kandidat”.</strong></p>
+<p><strong>It is a biography about a man:</strong></p>
+<p>And I paste in the OCR output:</p>
+<p><strong>Abramson, Ernst Leopold, professor, Djursholm, f.&nbsp;i Grava, Värml. L, 12/3 /96 av godsäg. Hugo A. o. Anna Salén. Med. kand. Sthlm 18, med. lic. o. dr 27, doc. i fysiol. 27, labor. i fysiol. 30-38, prof. o. förest, v. statrs inst. f.&nbsp;folkhälsan fr. 38. Batalj :läk. i f alt-läk rkår. res. 27, lär. i fysiol, o. rörel-sefysiol. v. gymn. centr anst. 22-30, led. av arméförv :s sjukv rstyr. vetensk. råd 36, medl. av riksidr rförb. öv rstyr. 24-36, skolidr :förb. läk. 28, led. av direkt, öv. gymn. centr :inst. 33, ordf. där 36, led. o. sekr. i näringsråd. 36, ordf. i 36 års livsmedelslagstiftn :-sakk. Utg. ett 50-tal arb. särsk. rör. näringsfysiol., fysiol, mek., muskel-fysiol. RNO.</strong></p>
+<p>ChatGPT returns to me the translated text, free from abbreviations and contractions:</p>
+<blockquote class="blockquote">
+<p>Abramson, Ernst Leopold, professor, Djursholm, born in Grava, Värmland, on March 12, 1896, to estate owner Hugo A. and Anna Salén. He obtained a medicine kandidat degree in Stockholm in 1918, followed by a medical licentiate and doctorate in 1927. He was a docent in physiology in 1927 and worked as a laboratory assistant in physiology from 1930 to 1938. From 1938, he was a professor and director at the State Institute for Public Health. He served as a battalion doctor and reserve officer from 1927 and was a teacher in physiology and movement physiology at the Gymnastics Central Institute from 1922 to 1930. He was a member of the Army Medical Corps and Reserve Force from 1924 to 1936, a member of the Scientific Council of the Army Medical Service from 1936, and a member of the School Management Association of Doctors from 1928. He was also a member of the Directorate of the Gymnastics Central Institute from 1933, its chairman from 1936, and a member and secretary of the Nutrition Council from 1936. In addition, he was the chairman of the 1936 Food Legislation Committee. He authored around 50 works, primarily related to nutrition physiology, physiology, mechanics, and muscle physiology. He was awarded the Royal Order of the North Star (RNO).</p>
+</blockquote>
+<p>It surprises me that ChatGPT is able to extrapolate correctly from just “<strong>RNO</strong>” (an abbreviation of the Swedish <em>Nordstjärneorden</em>) in the final part of the description to:</p>
+<blockquote class="blockquote">
+<p>He was awarded the Royal Order of the North Star (RNO).</p>
+</blockquote>
+<p>Fantastic!</p>
+<p>Next I ask ChatGPT to return to us the occupational information in a structured format.</p>
+</section>
+<section id="chatgpt-as-interpreter" class="level2">
+<h2 class="anchored" data-anchor-id="chatgpt-as-interpreter">ChatGPT as interpreter</h2>
+<p>Strucutred data is our goal. Again I use a simple instruction to ask:</p>
+<p><strong>Great, thank you, can you extract the occupations he held and the dates for which he held them, and return the output in an R tibble with a column for start year, a column for end year (if any), a column for the Swedish description of the occupation, and a column for the English translation.</strong></p>
+<p>It returns the following R code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>occupations <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">start_year =</span> <span class="fu">c</span>(<span class="dv">1918</span>, <span class="dv">1927</span>, <span class="dv">1927</span>, <span class="dv">1930</span>, <span class="dv">1938</span>, <span class="dv">1927</span>, <span class="dv">1922</span>, <span class="dv">1924</span>, <span class="dv">1936</span>, <span class="dv">1928</span>, <span class="dv">1933</span>, <span class="dv">1936</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">end_year =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">1938</span>, <span class="cn">NA</span>, <span class="dv">1936</span>, <span class="dv">1930</span>, <span class="dv">1936</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">swedish_occupation =</span> <span class="fu">c</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Med. kand."</span>, <span class="st">"Med. lic. o. dr"</span>, <span class="st">"Docent i fysiol."</span>, <span class="st">"Labor. i fysiol."</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Prof. o. förest, v. stats inst. f. folkhälsan"</span>, <span class="st">"Batalj :läk. i f alt-läk rkår."</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Lär. i fysiol, o. rörel-sefysiol. v. gymn. centr anst."</span>, <span class="st">"Led. av arméförv :s sjukv rstyr."</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Medl. av riksidr rförb."</span>, <span class="st">"Skolidr :förb. läk."</span>, <span class="st">"Led. av direkt, öv. gymn. centr :inst."</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Ordf. i 36 års livsmedelslagstiftn :-sakk."</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">english_occupation =</span> <span class="fu">c</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Medicine kandidat"</span>, <span class="st">"Medical licentiate and doctorate"</span>, <span class="st">"Docent in physiology"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Laboratory assistant in physiology"</span>, <span class="st">"Professor and director at the State Institute for Public Health"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Battalion doctor and reserve officer"</span>, <span class="st">"Teacher in physiology and movement physiology at the Gymnastics Central Institute"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Member of the Army Medical Corps and Reserve Force"</span>, <span class="st">"Member of the Scientific Council of the Army Medical Service"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Member of the School Management Association of Doctors"</span>, <span class="st">"Member of the Directorate of the Gymnastics Central Institute"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Chairman of the 1936 Food Legislation Committee."</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="displaying-the-output" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="displaying-the-output">Displaying the output</h2>
+<section id="table" class="level3">
+<h3 class="anchored" data-anchor-id="table">Table</h3>
+<p>I can easily take this code and turn the output into a table with a hyperlink to the source:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>occupations <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(start_year) <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Ernst Leopold Abramson's career trajectory**"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">start_year =</span> <span class="fu">md</span>(<span class="st">"Start"</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">end_year =</span> <span class="fu">md</span>(<span class="st">"End"</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">swedish_occupation =</span> <span class="fu">md</span>(<span class="st">"Swedish"</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">english_occupation =</span> <span class="fu">md</span>(<span class="st">"English"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sub_missing</span>(<span class="at">columns =</span> end_year, <span class="at">missing_text =</span> <span class="st">""</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_spanner</span>(<span class="fu">md</span>(<span class="st">"**Duration**"</span>), <span class="at">columns =</span> <span class="fu">c</span>(start_year, end_year)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_spanner</span>(<span class="fu">md</span>(<span class="st">"**Occupation**"</span>), <span class="at">columns =</span> <span class="fu">c</span>(swedish_occupation, english_occupation)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"Data source: [Projekt Runeberg](http://runeberg.org/vemarvem/sthlm45/0018.html)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+
+<div id="sqznwesacw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+:where(#sqznwesacw) .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+:where(#sqznwesacw) .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#sqznwesacw) .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+:where(#sqznwesacw) .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+:where(#sqznwesacw) .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+:where(#sqznwesacw) .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#sqznwesacw) .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#sqznwesacw) .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+:where(#sqznwesacw) .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+:where(#sqznwesacw) .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+:where(#sqznwesacw) .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+:where(#sqznwesacw) .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+:where(#sqznwesacw) .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+:where(#sqznwesacw) .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+:where(#sqznwesacw) .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+:where(#sqznwesacw) .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+:where(#sqznwesacw) .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+:where(#sqznwesacw) .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#sqznwesacw) .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+:where(#sqznwesacw) .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+:where(#sqznwesacw) .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#sqznwesacw) .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+:where(#sqznwesacw) .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+:where(#sqznwesacw) .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#sqznwesacw) .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#sqznwesacw) .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+:where(#sqznwesacw) .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+:where(#sqznwesacw) .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+:where(#sqznwesacw) .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#sqznwesacw) .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#sqznwesacw) .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+:where(#sqznwesacw) .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+:where(#sqznwesacw) .gt_left {
+  text-align: left;
+}
+
+:where(#sqznwesacw) .gt_center {
+  text-align: center;
+}
+
+:where(#sqznwesacw) .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(#sqznwesacw) .gt_font_normal {
+  font-weight: normal;
+}
+
+:where(#sqznwesacw) .gt_font_bold {
+  font-weight: bold;
+}
+
+:where(#sqznwesacw) .gt_font_italic {
+  font-style: italic;
+}
+
+:where(#sqznwesacw) .gt_super {
+  font-size: 65%;
+}
+
+:where(#sqznwesacw) .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+:where(#sqznwesacw) .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+:where(#sqznwesacw) .gt_indent_1 {
+  text-indent: 5px;
+}
+
+:where(#sqznwesacw) .gt_indent_2 {
+  text-indent: 10px;
+}
+
+:where(#sqznwesacw) .gt_indent_3 {
+  text-indent: 15px;
+}
+
+:where(#sqznwesacw) .gt_indent_4 {
+  text-indent: 20px;
+}
+
+:where(#sqznwesacw) .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style=""><strong>Ernst Leopold Abramson's career trajectory</strong></td>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="<strong>Duration</strong>">
+        <span class="gt_column_spanner"><strong>Duration</strong></span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="<strong>Occupation</strong>">
+        <span class="gt_column_spanner"><strong>Occupation</strong></span>
+      </th>
+    </tr>
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Start">Start</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="End">End</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Swedish">Swedish</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="English">English</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="start_year" class="gt_row gt_right">1918</td>
+<td headers="end_year" class="gt_row gt_right"></td>
+<td headers="swedish_occupation" class="gt_row gt_left">Med. kand.</td>
+<td headers="english_occupation" class="gt_row gt_left">Medicine kandidat</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1922</td>
+<td headers="end_year" class="gt_row gt_right">1930</td>
+<td headers="swedish_occupation" class="gt_row gt_left">Lär. i fysiol, o. rörel-sefysiol. v. gymn. centr anst.</td>
+<td headers="english_occupation" class="gt_row gt_left">Teacher in physiology and movement physiology at the Gymnastics Central Institute</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1924</td>
+<td headers="end_year" class="gt_row gt_right">1936</td>
+<td headers="swedish_occupation" class="gt_row gt_left">Led. av arméförv :s sjukv rstyr.</td>
+<td headers="english_occupation" class="gt_row gt_left">Member of the Army Medical Corps and Reserve Force</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1927</td>
+<td headers="end_year" class="gt_row gt_right"></td>
+<td headers="swedish_occupation" class="gt_row gt_left">Med. lic. o. dr</td>
+<td headers="english_occupation" class="gt_row gt_left">Medical licentiate and doctorate</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1927</td>
+<td headers="end_year" class="gt_row gt_right"></td>
+<td headers="swedish_occupation" class="gt_row gt_left">Docent i fysiol.</td>
+<td headers="english_occupation" class="gt_row gt_left">Docent in physiology</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1927</td>
+<td headers="end_year" class="gt_row gt_right">1936</td>
+<td headers="swedish_occupation" class="gt_row gt_left">Batalj :läk. i f alt-läk rkår.</td>
+<td headers="english_occupation" class="gt_row gt_left">Battalion doctor and reserve officer</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1928</td>
+<td headers="end_year" class="gt_row gt_right"></td>
+<td headers="swedish_occupation" class="gt_row gt_left">Skolidr :förb. läk.</td>
+<td headers="english_occupation" class="gt_row gt_left">Member of the School Management Association of Doctors</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1930</td>
+<td headers="end_year" class="gt_row gt_right">1938</td>
+<td headers="swedish_occupation" class="gt_row gt_left">Labor. i fysiol.</td>
+<td headers="english_occupation" class="gt_row gt_left">Laboratory assistant in physiology</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1933</td>
+<td headers="end_year" class="gt_row gt_right"></td>
+<td headers="swedish_occupation" class="gt_row gt_left">Led. av direkt, öv. gymn. centr :inst.</td>
+<td headers="english_occupation" class="gt_row gt_left">Member of the Directorate of the Gymnastics Central Institute</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1936</td>
+<td headers="end_year" class="gt_row gt_right"></td>
+<td headers="swedish_occupation" class="gt_row gt_left">Medl. av riksidr rförb.</td>
+<td headers="english_occupation" class="gt_row gt_left">Member of the Scientific Council of the Army Medical Service</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1936</td>
+<td headers="end_year" class="gt_row gt_right"></td>
+<td headers="swedish_occupation" class="gt_row gt_left">Ordf. i 36 års livsmedelslagstiftn :-sakk.</td>
+<td headers="english_occupation" class="gt_row gt_left">Chairman of the 1936 Food Legislation Committee.</td></tr>
+    <tr><td headers="start_year" class="gt_row gt_right">1938</td>
+<td headers="end_year" class="gt_row gt_right"></td>
+<td headers="swedish_occupation" class="gt_row gt_left">Prof. o. förest, v. stats inst. f. folkhälsan</td>
+<td headers="english_occupation" class="gt_row gt_left">Professor and director at the State Institute for Public Health</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="4">Data source: <a href="http://runeberg.org/vemarvem/sthlm45/0018.html">Projekt Runeberg</a></td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="visualization" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="visualization">Visualization</h3>
+<p>And we can take the output and make it into a nice figure that visualizes Ernst’s career trajectory.</p>
+<div class="cell page-columns page-full">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>occupations <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(start_year) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">end_year_imputed =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(end_year) <span class="sc">~</span> <span class="fu">lead</span>(start_year),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(<span class="fu">lead</span>(start_year)) <span class="sc">~</span> start_year,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> end_year</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">english_occupation =</span> <span class="fu">str_squish</span>(<span class="fu">str_remove_all</span>(english_occupation, <span class="st">"[:punct:]"</span>)),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">english_occupation =</span> <span class="fu">fct_reorder</span>(english_occupation, start_year, <span class="at">.desc =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pivot_longer(c(start_year, end_year_imputed)) %&gt;%</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ggplot(aes(value, english_occupation, colour = name)) +</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> start_year, <span class="at">xmax =</span> end_year_imputed, <span class="at">y =</span> english_occupation)) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="at">colour =</span> <span class="st">"gray50"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> end_year_imputed), <span class="at">colour =</span> <span class="st">"#be5d2b"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> start_year), <span class="at">colour =</span> <span class="st">"#2B8CBE"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Ernst Leopold Abramson's career trajectory"</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Showing &lt;span style = 'color:#2B8CBE;'&gt;start dates&lt;/span&gt; and &lt;span style = 'color:#be5d2b;'&gt;end dates&lt;/span&gt; for his various roles"</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(),</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"ibm"</span>, <span class="at">size =</span> <span class="dv">28</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display column-page">
+<p><img src="chatgpt-as-translator_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="1152"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggsave(filename = here::here("posts", "2023-03-10", "images", "visualisation.jpeg"), width = 8, height = 5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Thank you for reading along. I have demonstrated how we can use unstructured text data to reconstruct career trajectories for notable Swedes, translating and structuring the biographical text data through the ChatGPT web interface.</p>
+<p>Next week I’ll share a post on how to take this process and scale it by leveraging OpenAI’s API.</p>
+<p>I hope that it might prove useful in your own research!</p>
 
 
 </section>

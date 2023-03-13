@@ -34,19 +34,35 @@ But doing so by hand is a laborious and time-consuming task, one that demands ho
 
 ## A typical problem
 
-I am interested in a source of Swedish biographical data called [Vem är Vem?](http://runeberg.org/vemarvem/sthlm45/0018.html) (or Who is Who?), part of Projekt Runeberg, a volunteer effort to create free electronic editions of classic Nordic (Scandinavian) literature.
+I am interested in a source of Swedish biographical data called [*Vem är Vem?*](http://runeberg.org/vemarvem/sthlm45/0018.html) (or Who is Who?), part of Projekt Runeberg, a volunteer effort to create free electronic editions of classic Scandinavian literature. 
 
-Careful work by two librarians in Uppsala has resulted in a large selection of the source being scanned and digitized. Though the OCR engine is not perfect, the resulting text is largely legible.
+In particular I am interested in the occupational trajectories of the individuals - what job titles do they hold through the course of their lives. By extracting information on the career paths of notable Swedes, we can gain insights into the labour market dynamics of Sweden and how they have evolved over time. With this structured data, economic historians can explore questions such as the influence of education and social networks on career trajectories, the impact of technological change on the labour market, and much more.
+
+Careful work by two librarians in Uppsala has resulted in a large selection of the source being scanned and digitized. Though the OCR engine is not perfect, the resulting text is largely legible. A typical example of the source is shown below.
 
 [The city librarian in Uppsala Paul Harnesk was the initiator and chief editor of the work Who is Who? which was published in two editions, each comprising five parts. He died in 1965 and the work was completed by the first librarian at Uppsala University Library, associate professor Åke Davidsson.]{.aside}
 
-## ChtGPT as translator
+![An example of the source, note the highlighted abbreviations wherein "f." means "född" and "Med. kand." means "medicine kandidat".**](images/source.pdf){width=100% height=650}
 
-Can you convert the following text from Swedish into English? There are many abbreviations, for instance, "f." means "född" or born, "Med. kand." means "medicine kandidat"
+## Planning
 
-It is a biography about a man:
+Extracting occupational trajectories from the Swedish biographical source "Vem är Vem?" comprises a two-part process. The first part involves translating the Swedish text, which is full of abbreviations and contractions, into English using the natural language processing capabilities of ChatGPT. This step is crucial for making the data accessible and understandable to researchers who may not be familiar with Swedish (like myself!).
 
-Abramson, Ernst Leopold, professor, Djursholm, f. i Grava, Värml. L, 12/3 /96 av godsäg. Hugo A. o. Anna Salén. Med. kand. Sthlm 18, med. lic. o. dr 27, doc. i fysiol. 27, labor. i fysiol. 30-38, prof. o. förest, v. statrs inst. f. folkhälsan fr. 38. Batalj :läk. i f alt-läk rkår. res. 27, lär. i fysiol, o. rörel-sefysiol. v. gymn. centr anst. 22-30, led. av arméförv :s sjukv rstyr. vetensk. råd 36, medl. av riksidr rförb. öv rstyr. 24-36, skolidr :förb. läk. 28, led. av direkt, öv. gymn. centr :inst. 33, ordf. där 36, led. o. sekr. i näringsråd. 36, ordf. i 36 års livsmedelslagstiftn :-sakk. Utg. ett 50-tal arb. särsk. rör. näringsfysiol., fysiol, mek., muskel-fysiol. RNO. 
+Once the text has been translated, the second part of the process demands structuring the data into year and occupation pairs. This involves identifying mentions of job titles and dates in the text and extracting them in a structured format. 
+
+## ChatGPT as translator
+
+I simply ask ChatGPT:
+
+**Can you convert the following text from Swedish into English? There are many abbreviations, for instance, "f." means "född" or born, "Med. kand." means "medicine kandidat".**
+
+**It is a biography about a man:**
+
+And I paste in the OCR output:
+
+**Abramson, Ernst Leopold, professor, Djursholm, f. i Grava, Värml. L, 12/3 /96 av godsäg. Hugo A. o. Anna Salén. Med. kand. Sthlm 18, med. lic. o. dr 27, doc. i fysiol. 27, labor. i fysiol. 30-38, prof. o. förest, v. statrs inst. f. folkhälsan fr. 38. Batalj :läk. i f alt-läk rkår. res. 27, lär. i fysiol, o. rörel-sefysiol. v. gymn. centr anst. 22-30, led. av arméförv :s sjukv rstyr. vetensk. råd 36, medl. av riksidr rförb. öv rstyr. 24-36, skolidr :förb. läk. 28, led. av direkt, öv. gymn. centr :inst. 33, ordf. där 36, led. o. sekr. i näringsråd. 36, ordf. i 36 års livsmedelslagstiftn :-sakk. Utg. ett 50-tal arb. särsk. rör. näringsfysiol., fysiol, mek., muskel-fysiol. RNO.**
+
+ChatGPT returns to me the translated text, free from abbreviations and contractions:
 
 <blockquote>
 
@@ -54,9 +70,25 @@ Abramson, Ernst Leopold, professor, Djursholm, born in Grava, Värmland, on Marc
 
 </blockquote>
 
-Great, thank you, can you extract the occupations he held and the dates for which he held them, and return the output in an R tibble with a column for start year, a column for end year (if any), a column for the Swedish description of the occupation, and a column for the English translation.
+It surprises me that ChatGPT is able to extrapolate correctly from just "**RNO**" (an abbreviation of the Swedish *Nordstjärneorden*) in the final part of the description to:
 
+<blockquote>
 
+He was awarded the Royal Order of the North Star (RNO).
+
+</blockquote>
+
+Fantastic!
+
+Next I ask ChatGPT to return to us the occupational information in a structured format.
+
+## ChatGPT as interpreter
+
+Strucutred data is our goal. Again I use a simple instruction to ask:
+
+**Great, thank you, can you extract the occupations he held and the dates for which he held them, and return the output in an R tibble with a column for start year, a column for end year (if any), a column for the Swedish description of the occupation, and a column for the English translation.**
+
+It returns the following R code:
 
 ```{r}
 library(tidyverse)
@@ -80,6 +112,54 @@ occupations <- tibble(
     "Chairman of the 1936 Food Legislation Committee."
   )
 )
+```
+
+## Displaying the output
+
+### Table
+
+I can easily take this code and turn the output into a table with a hyperlink to the source:
+
+```{r}
+#| code-fold: true
+library(gt)
+
+occupations %>%
+  arrange(start_year) %>%
+  gt() %>%
+  tab_header(title = md("**Ernst Leopold Abramson's career trajectory**")) %>%
+  cols_label(
+    start_year = md("Start"),
+    end_year = md("End"),
+    swedish_occupation = md("Swedish"),
+    english_occupation = md("English")
+  ) %>%
+  sub_missing(columns = end_year, missing_text = "") %>%
+  tab_spanner(md("**Duration**"), columns = c(start_year, end_year)) %>%
+  tab_spanner(md("**Occupation**"), columns = c(swedish_occupation, english_occupation)) %>%
+  tab_source_note(md("Data source: [Projekt Runeberg](http://runeberg.org/vemarvem/sthlm45/0018.html)"))
+
+```
+
+
+```{r}
+#| echo: false
+library(ggtext)
+theme_set(theme_light())
+library(showtext)
+font_add_google("IBM Plex Mono", "ibm")
+showtext_auto(enable = TRUE)
+```
+
+### Visualization
+
+And we can take the output and make it into a nice figure that visualizes Ernst's career trajectory.
+
+```{r}
+#| code-fold: true
+#| column: page
+#| fig-width: 12
+#| fig-height: 8
 
 occupations %>%
   arrange(start_year) %>%
@@ -92,9 +172,32 @@ occupations %>%
     english_occupation = str_squish(str_remove_all(english_occupation, "[:punct:]")),
     english_occupation = fct_reorder(english_occupation, start_year, .desc = TRUE)
   ) %>%
-  pivot_longer(c(start_year, end_year_imputed)) %>%
-  ggplot(aes(value, english_occupation, colour = name)) +
-  geom_point()
+  # pivot_longer(c(start_year, end_year_imputed)) %>%
+  # ggplot(aes(value, english_occupation, colour = name)) +
+  ggplot(aes(xmin = start_year, xmax = end_year_imputed, y = english_occupation)) +
+  geom_linerange(colour = "gray50", size = 2) +
+  geom_point(aes(x = end_year_imputed), colour = "#be5d2b", size = 4) +
+  geom_point(aes(x = start_year), colour = "#2B8CBE", size = 4) +
+  labs(
+    title = "Ernst Leopold Abramson's career trajectory",
+    subtitle = "Showing <span style = 'color:#2B8CBE;'>start dates</span> and <span style = 'color:#be5d2b;'>end dates</span> for his various roles",
+    x = NULL,
+    y = NULL
+  ) +
+  theme(
+    legend.position = "none",
+    plot.subtitle = element_markdown(),
+    plot.title.position = "plot",
+    text = element_text(family = "ibm", size = 28)
+  )
+
+# ggsave(filename = here::here("posts", "2023-03-10", "images", "visualisation.jpeg"), width = 8, height = 5)
 ```
 
+## Conclusion
 
+Thank you for reading along. I have demonstrated how we can use unstructured text data to reconstruct career trajectories for notable Swedes, translating and structuring the biographical text data through the ChatGPT web interface. 
+
+Next week I'll share a post on how to take this process and scale it by leveraging OpenAI's API.
+
+I hope that it might prove useful in your own research!
