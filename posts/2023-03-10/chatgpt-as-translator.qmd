@@ -62,6 +62,8 @@ And I paste in the OCR output:
 
 **Abramson, Ernst Leopold, professor, Djursholm, f. i Grava, Värml. L, 12/3 /96 av godsäg. Hugo A. o. Anna Salén. Med. kand. Sthlm 18, med. lic. o. dr 27, doc. i fysiol. 27, labor. i fysiol. 30-38, prof. o. förest, v. statrs inst. f. folkhälsan fr. 38. Batalj :läk. i f alt-läk rkår. res. 27, lär. i fysiol, o. rörel-sefysiol. v. gymn. centr anst. 22-30, led. av arméförv :s sjukv rstyr. vetensk. råd 36, medl. av riksidr rförb. öv rstyr. 24-36, skolidr :förb. läk. 28, led. av direkt, öv. gymn. centr :inst. 33, ordf. där 36, led. o. sekr. i näringsråd. 36, ordf. i 36 års livsmedelslagstiftn :-sakk. Utg. ett 50-tal arb. särsk. rör. näringsfysiol., fysiol, mek., muskel-fysiol. RNO.**
 
+![Screenshot of input](images/chatgpt_1.PNG)
+
 ChatGPT returns to me the translated text, free from abbreviations and contractions:
 
 <blockquote>
@@ -79,6 +81,9 @@ He was awarded the Royal Order of the North Star (RNO).
 </blockquote>
 
 Fantastic!
+
+![Screenshot of text output](images/chatgpt_2.PNG)
+
 
 Next I ask ChatGPT to return to us the occupational information in a structured format.
 
