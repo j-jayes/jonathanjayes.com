@@ -6,11 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Jonathan Jayes">
-<meta name="dcterms.date" content="2022-06-12">
-<meta name="description" content="I mine the transcripts of Anthony Fantano’s Youtube album reviews and use penalized regression to discover the words associated with particularly high and low scoring albums.">
 
-<title>Interlude One - What describes a good album?</title>
+<title>Interlude One - Banks: should they be big or small</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -164,10 +161,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#dont-bury-the-lede" id="toc-dont-bury-the-lede" class="nav-link" data-scroll-target="#dont-bury-the-lede">Don’t bury the lede</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
-  <li><a href="#process-if-youre-interested" id="toc-process-if-youre-interested" class="nav-link" data-scroll-target="#process-if-youre-interested">Process (if you’re interested)</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose">Purpose</a>
+  <ul class="collapse">
+  <li><a href="#what-do-i-think" id="toc-what-do-i-think" class="nav-link" data-scroll-target="#what-do-i-think">What do I think?</a></li>
+  <li><a href="#if-i-was-a-market-designer-what-would-i-want" id="toc-if-i-was-a-market-designer-what-would-i-want" class="nav-link" data-scroll-target="#if-i-was-a-market-designer-what-would-i-want">If I was a market designer, what would I want?</a></li>
+  <li><a href="#what-caused-this-situation" id="toc-what-caused-this-situation" class="nav-link" data-scroll-target="#what-caused-this-situation">What caused this situation?</a></li>
+  </ul></li>
+  <li><a href="#prompt" id="toc-prompt" class="nav-link" data-scroll-target="#prompt">Prompt</a>
+  <ul class="collapse">
+  <li><a href="#who-are-the-players" id="toc-who-are-the-players" class="nav-link" data-scroll-target="#who-are-the-players">Who are the players</a></li>
+  <li><a href="#strategies" id="toc-strategies" class="nav-link" data-scroll-target="#strategies">Strategies</a></li>
+  <li><a href="#payoffs" id="toc-payoffs" class="nav-link" data-scroll-target="#payoffs">Payoffs</a></li>
+  <li><a href="#sequence-of-the-game" id="toc-sequence-of-the-game" class="nav-link" data-scroll-target="#sequence-of-the-game">Sequence of the game</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -176,31 +182,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">What describes a good album?</h1>
+<h1 class="title">Banks: should they be big or small</h1>
 </div>
 
-<div>
-  <div class="description">
-    <p>I mine the transcripts of Anthony Fantano’s Youtube album reviews and use penalized regression to discover the words associated with particularly high and low scoring albums.</p>
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Jonathan Jayes </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 12, 2022</p>
-    </div>
-  </div>
   
     
   </div>
@@ -208,30 +197,73 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Anthony Fantano is <a href="https://www.youtube.com/watch?v=SCLwyNT25bU">the internet’s busiest music nerd</a>. He has been described <a href="https://www.nytimes.com/2020/09/30/arts/music/anthony-fantano-the-needle-drop.html">in the New York Times as</a>:</p>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
+<p>Put into a pay-off matrix for game theory the strategies for banks and depositors.</p>
+<p>Maybe my big argument is that technology has disrupted banking in at least two ways. First, large companies no longer require national presence as they did before. Where widget sellers needed bank branches in every market where they opened a new office, now technology companies don’t need this.</p>
+<p>My real question is, what does it mean for a small company with relatively few employees to have large deposits. If you have few employees you likely aren’t going to hire someone who has super intricate financial knowledge.</p>
+<p>Thoughts on how important you are to a bank.</p>
+<ul>
+<li>Sweden - they really didn’t want to open an account for me. They hate you.</li>
+<li>If you want to open a business bank account in Sweden there are fees. Not small.</li>
+<li>South Africa - there are costs involved.</li>
+</ul>
+<section id="what-do-i-think" class="level3">
+<h3 class="anchored" data-anchor-id="what-do-i-think">What do I think?</h3>
+<p>I think it is good for there to be both large banks and small banks in the market. Small banks with knowledge about local markets can provide loans to people that they know well in a way that lowers the cost of credit to these people. If there were no small banks, the large ones would not perfectly assess the creditworthiness of all the people who want to bank with them. This would stifle innovation.</p>
+</section>
+<section id="if-i-was-a-market-designer-what-would-i-want" class="level3">
+<h3 class="anchored" data-anchor-id="if-i-was-a-market-designer-what-would-i-want">If I was a market designer, what would I want?</h3>
+<p>At the end of this post, I want to have a mixed strategy NE whereby there are some small and some large banks. What levers do we have to pull to influence the mixture? We can change the regulatory burden and the FDIC premium. If we make he FDIC premium a two part fee, with one part fixed and one part proportional to revenue, then we can influence the proportion of of big banks and small banks.</p>
+<p>Do we want to have two types of consumer? They cannot choose what type they are. They can be a small company or a big company. It is perfectly observable what type of company they are.</p>
+<p>Maybe the real problem is that our system for thinking about banks didn’t match with the new types of technology businesses. For conventional companies (e.g.&nbsp;widget sellers), if you grow above a certain threshold, you need a bank with national coverage in order to serve the different arms of your operation across the country. Now that technology means you scale at marginal cost of close to zero, it changes the dynamics.</p>
+<p>How do we incorporate the fact that SVB lobbied for decreased regulatory burdens?</p>
+</section>
+<section id="what-caused-this-situation" class="level3">
+<h3 class="anchored" data-anchor-id="what-caused-this-situation">What caused this situation?</h3>
+<p>Consumers think of banks deposits in any bank that has a banking license as safe. The reason is twofold. First, chequeing accounts pay so little in interest that it feels like the bank is just keeping your money in a vault. Second, the default place for you to leave money that you can access all of the time is a chequeing account. Classic cognitive bias - low return and the default place to put money means it feels super safe.</p>
+<p>I think it is fine for a small company not to have to think about additional deposit insurance - you’re just trying to run the company, you aren’t necessarily good at understanding the financial system, as evidenced by the guy who tweeted about buying stock in the bank that he was causing a bank run on, in real time.</p>
+<p>I think that banks who receive deposits should lend them out to people to do real world business. The raising of FDIC deposit insurance threshold should come with additional regulation about what banks can do with the money that sits in a chequeing account.</p>
+<p>I don’t think that buying long dated treasury bonds was a silly thing to do. I think bonds are super safe. I don’t get why this was stupid?</p>
+<p>If the cost for raising the FDIC insurance threshold is increasing regulation, even on small banks, then it’s worth doing, and cross subsidizing with contributions from the large banks.</p>
 <blockquote class="blockquote">
-<p>The Only Music Critic Who Matters (if You’re Under 25)</p>
+<p>The rationale behind the deposit limit is that everyday Americans are low-information lenders — we put our money into a bank, unsecured, without doing a deep dive into the bank’s finances to make sure it’s sound. Knowing that deposits are backed by the FDIC obviates the need for every person to become a bank analyst.</p>
+<p><a href="https://www.axios.com/2023/03/20/why-some-argue-its-time-to-raise-the-fdic-deposit-cap">axios</a></p>
 </blockquote>
-<p>I love to watch his videos and share his penchant for albums that are cohesive, and tell a story. I eagerly awaited <a href="https://www.youtube.com/watch?v=gHQE7tULx6c">his review of the new Kendrick Lamar ablum, <em>Mr.&nbsp;Morale &amp; the Big Steppers</em></a> (which he gave a <strong>light eight out of ten</strong>).</p>
-<p>This got me wondering if I could measure how he describes an album that he enjoys, or particularly dislikes. I remember Chance the Rapper’s album The Big Day being describes as <a href="https://www.youtube.com/watch?v=RjriHA-MLPg">“a pile of slop”</a> and being given a rather vicious <strong>zero out of ten</strong>.</p>
-<p>This question can be framed as a regression problem – the score Fantano rates an album is the outcome variable, and the words that he uses in the review are predictors.</p>
 </section>
-<section id="dont-bury-the-lede" class="level2">
-<h2 class="anchored" data-anchor-id="dont-bury-the-lede">Don’t bury the lede</h2>
-<p>Here are the words I found that Fantano uses</p>
 </section>
-<section id="next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
-<p>I really want to create an interactive widget that lets you describe and album and provide some attributes and then predicts the score that Fantano would give.</p>
-<p>It would be really fun to use Shapley values as a way to highlight what variables are important in the prediction. I could perhaps use a huggingface transformer model instead of my simple logistic regression model?</p>
+<section id="prompt" class="level2">
+<h2 class="anchored" data-anchor-id="prompt">Prompt</h2>
+<p>Can you help me use game theory to map out the decision of a bank and a depositor who wants to engage in the financial system? Think about the payoff matrix for each player. We want to think about what happens when the FDIC deposit insurance limit is lowered by the regulator.</p>
+<section id="who-are-the-players" class="level3">
+<h3 class="anchored" data-anchor-id="who-are-the-players">Who are the players</h3>
+<p>The depositor.</p>
+<p>The bank.</p>
+<p>The regulator.</p>
 </section>
-<section id="process-if-youre-interested" class="level2">
-<h2 class="anchored" data-anchor-id="process-if-youre-interested">Process (if you’re interested)</h2>
-<p>The remainder of this post discusses how I collected the data and</p>
+<section id="strategies" class="level3">
+<h3 class="anchored" data-anchor-id="strategies">Strategies</h3>
+<p>The depositor chooses where to put their money, with a Big bank, or a Small bank.</p>
+<p>The bank chooses to be Big or to be Small.</p>
+<p>The regulator chooses whether to raise or lower the FDIC</p>
+</section>
+<section id="payoffs" class="level3">
+<h3 class="anchored" data-anchor-id="payoffs">Payoffs</h3>
+<p>The depositor gets a payoff for service quality and a payoff for stability. The depositor gets a high payoff for service quality and low for stability from a Small bank. The depositor gets a low payoff for service quality and high for stability from a Big bank.</p>
+<p>The bank gets a</p>
+</section>
+<section id="sequence-of-the-game" class="level3">
+<h3 class="anchored" data-anchor-id="sequence-of-the-game">Sequence of the game</h3>
+<p>The regulator sets the FDIC deposit insurance limit.</p>
+<p>The bank chooses to be big or small.</p>
+<p>The depositor chooses where to deposit their money.</p>
+<p>The depositor can either deposit their money at a big bank or a small bank. At a big bank, the depositor gets Poor Service, but it also gets High Confidence in the bank’s survival under a volatile macroeconomic environment. At the small bank, the depositor gets Good Service, but Low Confidence of their deposits’ survival under the case of a bank collapse, wherein only their deposits up to the level L of the FDIC deposit insurance limit are covered in the case of a bank collapse.</p>
+<p>What happens with the FDIC deposit insurance limit, L, is lowered and more of a depositors money is at risk?</p>
+<p>There is some information asymmetry.</p>
+<p>The depositor does not know if the</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

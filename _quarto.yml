@@ -9,6 +9,7 @@ project:
 website:
   favicon: assets/favicon.ico
   title: "Interlude One"
+  site-url: https://interludeone.com/
   navbar:
     logo: assets/favicon_logo.ico
     left:
@@ -36,6 +37,8 @@ website:
           href: https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP
       - text: "{{< fa brands github >}}"
         href: https://github.com/j-jayes/interlude-one
+      - icon: rss
+        href: index.xml
 
 
 format:

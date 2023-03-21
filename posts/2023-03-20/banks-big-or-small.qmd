@@ -1,0 +1,98 @@
+---
+title: "Banks: should they be big or small"
+draft: true
+---
+
+## Purpose
+
+Put into a pay-off matrix for game theory the strategies for banks and depositors.
+
+Maybe my big argument is that technology has disrupted banking in at least two ways. First, large companies no longer require national presence as they did before. Where widget sellers needed bank branches in every market where they opened a new office, now technology companies don't need this.
+
+My real question is, what does it mean for a small company with relatively few employees to have large deposits. If you have few employees you likely aren't going to hire someone who has super intricate financial knowledge.
+
+Thoughts on how important you are to a bank.
+
+  - Sweden - they really didn't want to open an account for me. They hate you.
+  - If you want to open a business bank account in Sweden there are fees. Not small. 
+  - South Africa - there are costs involved.
+  
+
+### What do I think? 
+
+I think it is good for there to be both large banks and small banks in the market. Small banks with knowledge about local markets can provide loans to people that they know well in a way that lowers the cost of credit to these people. If there were no small banks, the large ones would not perfectly assess the creditworthiness of all the people who want to bank with them. This would stifle innovation.
+
+### If I was a market designer, what would I want?
+
+At the end of this post, I want to have a mixed strategy NE whereby there are some small and some large banks. What levers do we have to pull to influence the mixture? We can change the regulatory burden and the FDIC premium. If we make he FDIC premium a two part fee, with one part fixed and one part proportional to revenue, then we can influence the proportion of of big banks and small banks.
+
+Do we want to have two types of consumer? They cannot choose what type they are. They can be a small company or a big company. It is perfectly observable what type of company they are.
+
+Maybe the real problem is that our system for thinking about banks didn't match with the new types of technology businesses. For conventional companies (e.g. widget sellers), if you grow above a certain threshold, you need a bank with national coverage in order to serve the different arms of your operation across the country. Now that technology means you scale at marginal cost of close to zero, it changes the dynamics.
+
+How do we incorporate the fact that SVB lobbied for decreased regulatory burdens?
+
+### What caused this situation?
+
+Consumers think of banks deposits in any bank that has a banking license as safe. The reason is twofold. First, chequeing accounts pay so little in interest that it feels like the bank is just keeping your money in a vault. Second, the default place for you to leave money that you can access all of the time is a chequeing account. Classic cognitive bias - low return and the default place to put money means it feels super safe.
+
+I think it is fine for a small company not to have to think about additional deposit insurance - you're just trying to run the company, you aren't necessarily good at understanding the financial system, as evidenced by the guy who tweeted about buying stock in the bank that he was causing a bank run on, in real time. 
+
+I think that banks who receive deposits should lend them out to people to do real world business. The raising of FDIC deposit insurance threshold should come with additional regulation about what banks can do with the money that sits in a chequeing account. 
+
+I don't think that buying long dated treasury bonds was a silly thing to do. I think bonds are super safe. I don't get why this was stupid?
+
+If the cost for raising the FDIC insurance threshold is increasing regulation, even on small banks, then it's worth doing, and cross subsidizing with contributions from the large banks.
+
+<blockquote>
+
+The rationale behind the deposit limit is that everyday Americans are low-information lenders — we put our money into a bank, unsecured, without doing a deep dive into the bank's finances to make sure it's sound. Knowing that deposits are backed by the FDIC obviates the need for every person to become a bank analyst.
+
+[axios](https://www.axios.com/2023/03/20/why-some-argue-its-time-to-raise-the-fdic-deposit-cap)
+
+</blockquote>
+
+## Prompt
+
+Can you help me use game theory to map out the decision of a bank and a depositor who wants to engage in the financial system? Think about the payoff matrix for each player. We want to think about what happens when the FDIC deposit insurance limit is lowered by the regulator.
+
+### Who are the players
+
+The depositor.
+
+The bank.
+
+The regulator.
+
+### Strategies
+
+The depositor chooses where to put their money, with a Big bank, or a Small bank.
+
+The bank chooses to be Big or to be Small.
+
+The regulator chooses whether to raise or lower the FDIC 
+
+### Payoffs
+
+The depositor gets a payoff for service quality and a payoff for stability. The depositor gets a high payoff for service quality and low for stability from a Small bank. The depositor gets a low payoff for service quality and high for stability from a Big bank. 
+
+The bank gets a 
+
+### Sequence of the game
+
+The regulator sets the FDIC deposit insurance limit.
+
+The bank chooses to be big or small.
+
+The depositor chooses where to deposit their money.
+
+
+
+
+The depositor can either deposit their money at a big bank or a small bank. At a big bank, the depositor gets Poor Service, but it also gets High Confidence in the bank's survival under a volatile macroeconomic environment. At the small bank, the depositor gets Good Service, but Low Confidence of their deposits' survival under the case of a bank collapse, wherein only their deposits up to the level L of the FDIC deposit insurance limit are covered in the case of a bank collapse. 
+
+What happens with the FDIC deposit insurance limit, L, is lowered and more of a depositors money is at risk?
+
+There is some information asymmetry. 
+
+The depositor does not know if the 

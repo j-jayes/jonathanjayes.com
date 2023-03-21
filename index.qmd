@@ -5,4 +5,5 @@ listing:
   sort:
     - "date desc"
     - "title desc"
+  feed: true
 ---
