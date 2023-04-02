@@ -6,13 +6,10 @@ image: "img/Slide1.JPG"
 
 I am delighted to present a poster at the EHS conference in Warwick this year!
 
-You can have have a look at the poster on this page below. I also include the slides for a presentation of the paper of the same name which I am writing along with my two supervisors, Kerstin Enflo and Jakob Molinder.
+You can have have a look at the poster on this page below. I also include the slides for a presentation of the paper on the same theme which I am writing along with my two supervisors, Kerstin Enflo and Jakob Molinder.
 
 ![](img/Poster-Shocking-Technology-Jayes.pdf){width=100% height=1150}
 
-<br>
-
-![](img/Slide1.JPG)
 
 <br>
 
