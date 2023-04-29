@@ -35,6 +35,10 @@ website:
           href: https://github.com/j-jayes/NBER-methods
         - text: "Europe's Regional Development Explorer"
           href: https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP
+      - text: "Fun stuff"
+        menu:
+        - text: "My personal cookbook"
+          href: "https://j-jayes.github.io/recipes/"
       - text: "{{< fa brands github >}}"
         href: https://github.com/j-jayes/interlude-one
       - icon: rss
