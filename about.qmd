@@ -37,6 +37,8 @@ library(tidyverse)
 education <- tribble(
   ~logo, ~link, ~institution, ~degree, ~date, ~grade_comment,
   # LU
+  "assets/education-images/lu.jfif", "https://ehl.lu.se/ekonomisk-historia", "Lund University", "PhD, Economic History", "2023-now", "Under prof. Kerstin Enflo",
+  # LU
   "assets/education-images/lu.jfif", "https://ehl.lu.se/ekonomisk-historia", "Lund University", "Master's degree, Economics", "2021", "Exchange semester",
   # SU
   "assets/education-images/su.jfif", "https://www.ekon.sun.ac.za/", "Stellenbosch University", "Master's degree, Economics", "2020", "Grade: <em>cum laude</em>",
@@ -81,6 +83,10 @@ education %>%
 ```
 
 ## Experience
+
+**Codera Analytics** | Data Science Intern at [Codera Analytics](https://www.linkedin.com/company/coderaanalytics/)| December 2023 - March 2023
+
+**Fathom Data** | Data Science Intern at [Fathom Data](https://www.linkedin.com/company/fathomdata/)| Feb 2022 - April 2022
 
 **Laboratory for the Economics of Africa's Past** | Researcher under [Prof Johan Fourie](https://www.johanfourie.com/)| January 2020 - July 2021
 
