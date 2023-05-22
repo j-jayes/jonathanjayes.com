@@ -1,9 +1,10 @@
 ---
 title: "What I want from the future of AI"
 format: html
+draft: true
 ---
 
-This post is about what I want to get from generative AI and search in the future. I have a well defined problem, one which should be super easy to solve, but I cannot do it with the tools that are available to me today. (I don't have ChatGPT plugins that would allow me to search).
+This post is about what I want to get from generative AI and search in the future. I have a well defined problem, one which should be super easy to solve, but I cannot do it with the tools that are available to me today. (I don't have ChatGPT plugins that would allow me to search the internet).
 
 I also want to be able to refer to it when I create a really nice interactive dashboard that you will all LOVE!
 
