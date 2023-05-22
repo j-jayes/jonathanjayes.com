@@ -53,7 +53,7 @@
     "href": "content/research.html",
     "title": "Interlude One",
     "section": "",
-    "text": "Warwick Poster\n\n\n\n\n\n\n\n\n\n\n\n\nMar 31, 2023\n\n\n\n\n\n\nNo matching items"
+    "text": "Ratio Seminar: Hur påverkar AI-utvecklingen jobben?\n\n\n\n\n\n\n\n\n\n\n\n\nMay 23, 2023\n\n\n\n\n\n\n  \n\n\n\n\nWired for Success: Sweden’s Electrical Innovators in the Age of Industrial Transformation\n\n\n\n\n\n\n\n\n\n\n\n\nMay 15, 2023\n\n\n\n\n\n\n  \n\n\n\n\nWarwick Poster\n\n\n\n\n\n\n\n\n\n\n\n\nMar 31, 2023\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "content/research/Warwick-poster.html",
@@ -481,5 +481,19 @@
     "title": "Welcome to Interlude One",
     "section": "",
     "text": "This is a line from Interlude One off of Alt-J’s first album, An Awesome Wave. I like this lyric a great deal!\nI aspire to balance in my own life. This site is a space to share what I find interesting, and encourage me to keep learning and sharing. It includes exploratory data analyses, R tutorials, and answers to some data specific questions. I hope that you enjoy your look around."
+  },
+  {
+    "objectID": "content/research/Ratio-seminar.html",
+    "href": "content/research/Ratio-seminar.html",
+    "title": "Ratio Seminar: Hur påverkar AI-utvecklingen jobben?",
+    "section": "",
+    "text": "I’m thrilled to present a summary of my research on the impact of electrification on the labour market at the Ratio seminar on May 23rd 2023. The seminar will look at the impact of AI on the labour market, and I am providing some context on a previous technological revolution. The prompt for the seminar is as follows:\nNu går det fort. Utvecklingen av AI rusar fram och med det dess effekter på arbetsmarknad och övrigt samhälle, och det går fortare än något tidigare. Vad betyder det? Vilka yrken kommer att påverkas mest – respektive minst av AI-utvecklingen? Och vad krävs för att de samhälleliga och socioekonomiska följderna av framtidens AI ska bli bra? Vad kan vi lära av historien?\nHave a look at my slides below."
+  },
+  {
+    "objectID": "content/research/Wired-for-success.html",
+    "href": "content/research/Wired-for-success.html",
+    "title": "Wired for Success: Sweden’s Electrical Innovators in the Age of Industrial Transformation",
+    "section": "",
+    "text": "I am working on a paper about the individuals who helped usher in an age of great technical progress and economic levelling in Sweden, by making use of new technology associated with electrification.\nIn the first half of the 20th century, electricity went from a luxury to an essential input into the production process. This new technology was used to power machines, light homes, and heat buildings. It was also used to power the new communications technology of the telephone and radio.\nThis new technology raised the marginal product of labour, and put workers in a better bargaining position to argue for higher wages and better working conditions. It resulted in higher incomes, a more equal income distribution, and the creation of new kinds of jobs in areas that electrified first.\nWhat I seek to do in this paper is trace the career paths of innovators and early adopters of electrification technology in Sweden. I want to know who they were, where they came from, and what they did. I want to know how they were connected to each other, and how they were connected to the rest of the world.\nTo accomplish this, I make use of a fun data source, an archive of biographical information from a series of books called Vem är vem? (Who is who?). These books were published in two editions in Sweden between 1945-1950 and 1962-1968, and contain biographical information about prominent Swedes. Eight of the ten volumes have been digitized and are available on the Projekt Runeberg website.\nI have scraped the biographical information from these books, and used it to create a database of biographical information about nearly 70,000 individuals. I plan to use this database to create a network of individuals, and to create a network of the places they were born, lived, travelled and worked. I will also use the database to create a network of the companies they worked for, and the industries they worked in.\nIt is still a work in progress, but you can see some slides about the project which I was glad to present at the CBS Strategy and Innovation Graduate Seminar in May 2023."
   }
 ]

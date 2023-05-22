@@ -1,0 +1,24 @@
+---
+title: "Wired for Success: Sweden’s Electrical Innovators in the Age of Industrial Transformation"
+format: html
+image: img/wired-for-success.png
+date: 2023-05-15
+---
+
+I am working on a paper about the individuals who helped usher in an age of great technical progress and economic levelling in Sweden, by making use of new technology associated with electrification. 
+
+In the first half of the 20th century, electricity went from a luxury to an essential input into the production process. This new technology was used to power machines, light homes, and heat buildings. It was also used to power the new communications technology of the telephone and radio.
+
+This new technology raised the marginal product of labour, and put workers in a better bargaining position to argue for higher wages and better working conditions. It resulted in higher incomes, a more equal income distribution, and the creation of new kinds of jobs in areas that electrified first.
+
+What I seek to do in this paper is trace the career paths of innovators and early adopters of electrification technology in Sweden. I want to know who they were, where they came from, and what they did. I want to know how they were connected to each other, and how they were connected to the rest of the world. 
+
+To accomplish this, I make use of a fun data source, an archive of biographical information from a series of books called *Vem är vem?* (Who is who?). These books were published in two editions in Sweden between 1945-1950 and 1962-1968, and contain biographical information about prominent Swedes. Eight of the ten volumes have been digitized and are available on the Projekt Runeberg website.
+
+I have scraped the biographical information from these books, and used it to create a database of biographical information about nearly 70,000 individuals. I plan to use this database to create a network of individuals, and to create a network of the places they were born, lived, travelled and worked. I will also use the database to create a network of the companies they worked for, and the industries they worked in.
+
+It is still a work in progress, but you can see some slides about the project which I was glad to present at the CBS Strategy and Innovation Graduate Seminar in May 2023.
+
+```{r}
+knitr::include_url("https://j-jayes.github.io/Who-is-who/#/title-slide")
+```
