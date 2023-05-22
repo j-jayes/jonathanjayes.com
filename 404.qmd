@@ -7,7 +7,7 @@ format: html
 
 ::: grid
 ::: g-col-6
-![Gustave Caillebotte - Sunflowers, Garden at Petit Gennevilliers, ca. 1885](404.png){fig-align="center"}
+![Gustave Caillebotte - Sunflowers, Garden at Petit Gennevilliers, ca. 1885](content/404.png){fig-align="center"}
 
 
 :::

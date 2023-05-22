@@ -1,0 +1,32 @@
+---
+title: "What I want from the future of AI"
+format: html
+---
+
+This post is about what I want to get from generative AI and search in the future. I have a well defined problem, one which should be super easy to solve, but I cannot do it with the tools that are available to me today. (I don't have ChatGPT plugins that would allow me to search).
+
+I also want to be able to refer to it when I create a really nice interactive dashboard that you will all LOVE!
+
+I have wanted for a while to create a dataset that includes different ways to get from European airports to the city centre of the city which the airport serves. This was prompted when i visited Vienna last summer. I want to create a table like the below:
+
+| Mode of Transport | Carrier | Duration of Travel | Cost | Hours of Operation | Carbon Footprint |
+| --- | --- | --- | --- | --- | --- |
+| Taxi | N/A | 20 minutes | €35 | 24/7 | 5.5 kg CO2 |
+| Train | CityJet Railways | 16 minutes | €11 | 6:30am - 11:30pm | 2.7 kg CO2 |
+| Bus | Vienna Airport Lines | 45 minutes | €8 | 6:00am - 11:00pm | 3.1 kg CO2 |
+
+-- Note that this information is fictional, I generated it with ChatGPT as an example --
+
+Much of this information is super common in blog posts and travel guides. They write a whole bunch of stuff about the city in the first half of the article in order to get you to see more ads, you scroll down, and then you read that there is a train, a bus and a taxi.
+
+The information is all there. It is just not in a format that is easy to use.
+
+For example, there is a great wikipedia page called [List of airport rail link systems](https://en.wikipedia.org/wiki/List_of_airport_rail_link_systems).
+
+The Vienna link is actually the image in this example!
+
+![](images/airport-rail-links.png)
+
+
+The problem is that the data is not in a format that is super easy to programatically ingest. This is the perfect place for an LLM with search capabilities.
+
