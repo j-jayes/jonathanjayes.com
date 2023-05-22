@@ -1,0 +1,24 @@
+---
+title: "404"
+format: html
+---
+
+
+
+::: grid
+::: g-col-6
+![Gustave Caillebotte - Sunflowers, Garden at Petit Gennevilliers, ca. 1885](404.png){fig-align="center"}
+
+
+:::
+
+::: g-col-6
+
+Sunflowers stand tall,
+
+Lost in Petit Gennevilliers,
+
+Page not found, recall.
+
+:::
+:::
