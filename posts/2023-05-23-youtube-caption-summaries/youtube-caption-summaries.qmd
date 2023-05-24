@@ -1,0 +1,120 @@
+---
+title: "Building a YouTube Video Transcript Summarizer (with some help)"
+description: |
+  A post on what it means to be a data scientist in the age of such capable generative AI.
+image: images/preview.png
+author:
+  - name: Jonathan Jayes
+date: 2023-05-23
+---
+
+## Introduction
+
+
+:::: {.columns}
+
+::: {.column width="65%"}
+In 2023, video content is king. The trouble is, videos are not always the most convenient format to search through information, especially if you're after a specific snippet of content. Scrubbing back and forth through a video isn't heaps of fun.
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="30%"}
+![An oil painting in the style of Franz Marc that depicts an automaton robot examining a spreadsheet](images/preview.png){width=80%}
+:::
+
+::::
+
+
+
+This week I wanted to condense the key points from an interesting video on AI and white collar jobs in Sweden. The [podcast episode](https://www.youtube.com/watch?v=AP-ocdDPRlk) in which Magnus Lodefalk and Erik Engberg discuss the coming dissemination of AI through the economy, and its consequences for the labourt market, is super interesting and I highly reccomend it. 
+
+::: {.column-margin}
+<iframe width="267" height="150" src="https://www.youtube.com/embed/AP-ocdDPRlk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+:::
+
+What I wanted was to create a tool to grab the English auto translated transcript of the podcast and summarize it, highlighting the most important takeaways. With the help of OpenAI's GPT-4, I was able to create the tool for the job in an afternoon.
+
+::: {.column-margin}
+I'm aware that the afternoon spent building the tool certainly took longer than rewatching the video and taking notes to summarize myself. However, I enjoyed making the tool, and I can now use it for any similar task in the future. I also learned a lot about how to interact with OpenAI's API, which is a valuable skill in itself. 
+:::
+
+You can have a look at my [github repo here](https://github.com/j-jayes/yt-caption-summaries), and you are welcome to use the tool yourself if you have your own OpenAI API key. The instructions are in the readme. The remainder of this post describes the tool and some thoughts about what it means to make these kinds of tools in the age of such capable generative AI.
+
+## How the Tool Works
+
+The YouTube Caption Summaries tool is a streamlined tool that condenses the key points from a Youtube video transcript. As an input, you provide a Youtube URL, and the tool returns a text file with the summary. It makes use of the [youtube-transcript-api](https://pypi.org/project/youtube-transcript-api/) to grab the transcript, and the [OpenAI API](https://beta.openai.com/) to summarize it, leveraging the GPT-3.5 turbo model.
+
+This tool isn't limited to English content. If you're dealing with a non-English video, you can specify the original language, and the tool will automatically grab the auto generated English transcript before summarizing it.
+
+```{mermaid}
+
+graph TB
+  A[Input YouTube URL] --> B[YouTube Data API: Get Transcript]
+  B --> C[OpenAI API: Summarize Transcript]
+  C --> D[Save Summary to Text File]
+
+```
+
+
+To illustrate, here's an example of the tool in action. The video in question is a 10 minute talk by Timothée Parrique titled "Best of #BeyondGrowth 2023". You can watch the video below.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vij3Q6bE6X4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+Here's the summary produced by the tool:
+
+<b>Here are the key points from Timothée Parrique's speech:
+
+- The concept of "green growth" is deeply ingrained in environmental strategies like SDG 8, the Paris Agreement, and the European Green Deal.
+
+- However, Parrique criticizes the concept, arguing that the notion of economic growth fully detached from nature is baseless and misleading.
+
+- He contends that truly sustainable economic growth requires absolute decoupling of production and consumption from all environmental pressures, done quickly and maintained over time.
+
+- He disputes the feasibility of green growth, using minor reductions in European countries' greenhouse gas emissions as evidence.
+
+- He suggests that achieving a 55 percent reduction in emissions by 2030 necessitates significant GDP "de-growth".
+
+- He warns that neglecting the ecological impact of consumption exacerbates the problem.
+
+- He introduces the idea of "de-growth" or a steady-state economy as a realistic strategy to reduce environmental stress and attain environmental targets, specifically in Europe.
+
+- The strategy aims at reducing production and consumption to prevent ecological overshoot and stabilize the economy within planetary limits without compromising living standards.
+
+- He advocates for high-income countries to decrease consumption to allow less affluent nations to sustainably grow and fulfill their needs.
+
+- This strategy's goal is to guarantee everyone's well-being within the boundaries of the planet.
+
+- The text criticizes the "coupling" narrative as dangerous, potentially inducing complacency by assuring people that everything is okay.
+
+- Parrique sees "green growth" as macroeconomic greenwashing, preventing essential radical changes.
+
+- He argues that precious time is being lost by making minor tweaks to the system instead of concentrating on the pressing need for transformation.
+
+- Parrique poses the question of whether the priority should be economic growth or nature preservation.</b>
+
+## Pros and Cons
+
+The captioning process on Youtube can be hit and miss, and the auto generated translations are not perfect either. There is a fantastic [99 % invisible epdisode](https://99percentinvisible.org/episode/craptions/) explaining the history of closed captioning on Youtube, as well as the various improvements that have been made over the years. It certainly isn't perfect, however, even if the transcription isn't 100% accurate, it's still a great starting point for a summary. When the transript is processed by the OpenAI API, the model is looking for the key points and can overcome transcription errors that are not crucial to the main message.
+
+Overall, I am pleased with the quality of the summaries, and in the future I might work on providing the title of the video and it's description as additional context for the summarization model.
+
+## Journey of Development
+
+The development of this tool is a testament to the power of AI. I did it in an afternoon, chatting with my virtual pair programming partner, GPT-4 offering up Python code based on my instructions.
+
+While I am not an expert python coder, I could have produced this tool from first principles a year ago (in the pre-generative pretrained model era). It could have required a couple days worth of work, familiarizing myself with the various APIs, putting together a python package structure. 
+
+## Implications
+
+This is the kind of project I would have used in a job interview to showcase my skills. Back in the day, being able to develop a tool like this would have been an undeniable testament to one's coding skills. However, given that I didn't code this from first principles, could I still do the same today? Is the product less impressive, knowing that a significant part of the coding was handled by an AI model?
+
+The answer, I believe, is that the landscape of software tooling is changing. What's important is not that the code was generated with AI assistance, but that the tool was developed effectively and solves a real problem. Coding from first principles will always have its place, but leveraging AI tools, just like any other tools, demonstrates practical problem-solving skills and adaptability. It's a recognition that we are moving into an era where working in partnership with AI will be an essential part of many jobs, not just in the tech industry.
+
+## Conclusion
+
+Technology is ever-evolving, and the way we interact with it changes alongside. The YouTube Transcript Summarizer is not just a practical tool for summarizing video content, but it's also a glimpse into the future of software development, a future where humans and AI work hand in hand to create solutions efficiently.
+
