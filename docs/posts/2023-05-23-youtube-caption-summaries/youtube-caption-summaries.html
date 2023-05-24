@@ -179,7 +179,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#how-the-tool-works" id="toc-how-the-tool-works" class="nav-link" data-scroll-target="#how-the-tool-works">How the Tool Works</a></li>
+  <li><a href="#how-the-tool-works" id="toc-how-the-tool-works" class="nav-link" data-scroll-target="#how-the-tool-works">How the Tool Works</a>
+  <ul class="collapse">
+  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An Example</a></li>
+  </ul></li>
   <li><a href="#performance-pros-and-cons" id="toc-performance-pros-and-cons" class="nav-link" data-scroll-target="#performance-pros-and-cons">Performance: Pros and Cons</a></li>
   <li><a href="#journey-of-development" id="toc-journey-of-development" class="nav-link" data-scroll-target="#journey-of-development">Journey of Development</a></li>
   <li><a href="#implications" id="toc-implications" class="nav-link" data-scroll-target="#implications">Implications</a></li>
@@ -272,6 +275,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<section id="an-example" class="level3">
+<h3 class="anchored" data-anchor-id="an-example">An Example</h3>
 <p>To illustrate, here’s an example of the tool in action. The video in question is a 10 minute talk by Timothée Parrique titled “Best of #BeyondGrowth 2023”. You can watch the video below.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/vij3Q6bE6X4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
 </iframe>
@@ -294,25 +299,27 @@ ul.task-list li input[type="checkbox"] {
 </b><li><b></b><p><b>Parrique poses the question of whether the priority should be economic growth or nature preservation.</b></p></li>
 </ul>
 </section>
+</section>
 <section id="performance-pros-and-cons" class="level2">
 <h2 class="anchored" data-anchor-id="performance-pros-and-cons">Performance: Pros and Cons</h2>
 <p>The summary above does a good job of capturing the main points that Parrique makes in his speech.</p>
-<p>One issue is the data being fed into the summariser. The captioning process on Youtube is optional - with many uploaders foregoing any captions. The auto generated translations are not perfect either. There is a fantastic <a href="https://99percentinvisible.org/episode/craptions/">99 % invisible epdisode</a> explaining the history of closed captioning on Youtube, as well as the various improvements that have been made over the years. It certainly isn’t perfect, however, even if the transcription isn’t 100% accurate, it’s still a great starting point for a summary. When the transript is processed by the OpenAI API, the model is looking for the key points and can overcome transcription errors that are not crucial to the main message.</p>
+<p>One issue is the quality of the data being fed into the summariser. The captioning process on Youtube is optional - with many uploaders foregoing any captions. The auto generated translations are not perfect either. There is a fantastic <a href="https://99percentinvisible.org/episode/craptions/">99 % invisible epdisode</a> explaining the history of closed captioning on Youtube, as well as the various improvements that have been made over the years. It certainly isn’t perfect, however, even if the transcription isn’t 100% accurate, it’s still a great starting point for a summary. When the transript is processed by the OpenAI API, the model is looking for the key points and can overcome transcription errors that are not crucial to the main message.</p>
 <p>Overall, I am pleased with the quality of the summaries, and in the future I might work on providing the title of the video and it’s description as additional context for the summarization model.</p>
 </section>
 <section id="journey-of-development" class="level2">
 <h2 class="anchored" data-anchor-id="journey-of-development">Journey of Development</h2>
-<p>The development of this tool is a testament to the power of AI. I did it in an afternoon, chatting with my virtual pair programming partner, GPT-4 offering up Python code based on my instructions.</p>
+<p>The development of this tool is a testament to the power of generative AI and a bit of curiosity. I did it in an afternoon, chatting with my virtual programming partner; GPT-4 offering up Python code based on my instructions.</p>
 <p>While I am not an expert python coder, I could have produced this tool from first principles a year ago (in the pre-generative pretrained model era). It could have required a couple days worth of work, familiarizing myself with the various APIs, putting together a python package structure.</p>
+<p>Instead, I could glue the different parts together in a couple of hours, and spend the rest of the time tweaking the code to get the best results.</p>
 </section>
 <section id="implications" class="level2">
 <h2 class="anchored" data-anchor-id="implications">Implications</h2>
-<p>This is the kind of project I would have used in a job interview to showcase my skills. Back in the day, being able to develop a tool like this would have been an undeniable testament to one’s coding skills. However, given that I didn’t code this from first principles, could I still do the same today? Is the product less impressive, knowing that a significant part of the coding was handled by an AI model?</p>
+<p>This is the kind of project I would have used in a job interview to showcase my skills. Back in the day, being able to develop a tool like this would have been a testament to one’s coding skills. However, given that I didn’t code this from first principles, could I still do the same today? Is the product less impressive, knowing that a significant part of the coding was handled by an AI model?</p>
 <p>The answer, I believe, is that the landscape of software tooling is changing. What’s important is not that the code was generated with AI assistance, but that the tool was developed effectively and solves a real problem. Coding from first principles will always have its place, but leveraging AI tools, just like any other tools, demonstrates practical problem-solving skills and adaptability. It’s a recognition that we are moving into an era where working in partnership with AI will be an essential part of many jobs, not just in the tech industry.</p>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>Technology is ever-evolving, and the way we interact with it changes alongside. The YouTube Transcript Summarizer is not just a practical tool for summarizing video content, but it’s also a glimpse into the future of software development, a future where humans and AI work hand in hand to create solutions efficiently.</p>
+<p>Solving little problems with a bit of code and a really cheap API call is a lot of fun. I’m looking forward to seeing what other tools I can build with the OpenAI API.</p>
 
 
 </section>

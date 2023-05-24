@@ -59,6 +59,7 @@ graph TB
 
 ```
 
+### An Example
 
 To illustrate, here's an example of the tool in action. The video in question is a 10 minute talk by Timothée Parrique titled "Best of #BeyondGrowth 2023". You can watch the video below.
 
@@ -100,23 +101,24 @@ Here's the summary produced by the tool:
 
 The summary above does a good job of capturing the main points that Parrique makes in his speech. 
 
-One issue is the data being fed into the summariser. The captioning process on Youtube is optional - with many uploaders foregoing any captions. The auto generated translations are not perfect either. There is a fantastic [99 % invisible epdisode](https://99percentinvisible.org/episode/craptions/) explaining the history of closed captioning on Youtube, as well as the various improvements that have been made over the years. It certainly isn't perfect, however, even if the transcription isn't 100% accurate, it's still a great starting point for a summary. When the transript is processed by the OpenAI API, the model is looking for the key points and can overcome transcription errors that are not crucial to the main message.
+One issue is the quality of the data being fed into the summariser. The captioning process on Youtube is optional - with many uploaders foregoing any captions. The auto generated translations are not perfect either. There is a fantastic [99 % invisible epdisode](https://99percentinvisible.org/episode/craptions/) explaining the history of closed captioning on Youtube, as well as the various improvements that have been made over the years. It certainly isn't perfect, however, even if the transcription isn't 100% accurate, it's still a great starting point for a summary. When the transript is processed by the OpenAI API, the model is looking for the key points and can overcome transcription errors that are not crucial to the main message.
 
 Overall, I am pleased with the quality of the summaries, and in the future I might work on providing the title of the video and it's description as additional context for the summarization model.
 
 ## Journey of Development
 
-The development of this tool is a testament to the power of AI. I did it in an afternoon, chatting with my virtual pair programming partner, GPT-4 offering up Python code based on my instructions.
+The development of this tool is a testament to the power of generative AI and a bit of curiosity. I did it in an afternoon, chatting with my virtual programming partner; GPT-4 offering up Python code based on my instructions.
 
 While I am not an expert python coder, I could have produced this tool from first principles a year ago (in the pre-generative pretrained model era). It could have required a couple days worth of work, familiarizing myself with the various APIs, putting together a python package structure. 
 
+Instead, I could glue the different parts together in a couple of hours, and spend the rest of the time tweaking the code to get the best results.
+
 ## Implications
 
-This is the kind of project I would have used in a job interview to showcase my skills. Back in the day, being able to develop a tool like this would have been an undeniable testament to one's coding skills. However, given that I didn't code this from first principles, could I still do the same today? Is the product less impressive, knowing that a significant part of the coding was handled by an AI model?
+This is the kind of project I would have used in a job interview to showcase my skills. Back in the day, being able to develop a tool like this would have been a testament to one's coding skills. However, given that I didn't code this from first principles, could I still do the same today? Is the product less impressive, knowing that a significant part of the coding was handled by an AI model?
 
 The answer, I believe, is that the landscape of software tooling is changing. What's important is not that the code was generated with AI assistance, but that the tool was developed effectively and solves a real problem. Coding from first principles will always have its place, but leveraging AI tools, just like any other tools, demonstrates practical problem-solving skills and adaptability. It's a recognition that we are moving into an era where working in partnership with AI will be an essential part of many jobs, not just in the tech industry.
 
 ## Conclusion
 
-Technology is ever-evolving, and the way we interact with it changes alongside. The YouTube Transcript Summarizer is not just a practical tool for summarizing video content, but it's also a glimpse into the future of software development, a future where humans and AI work hand in hand to create solutions efficiently.
-
+Solving little problems with a bit of code and a really cheap API call is a lot of fun. I'm looking forward to seeing what other tools I can build with the OpenAI API.
