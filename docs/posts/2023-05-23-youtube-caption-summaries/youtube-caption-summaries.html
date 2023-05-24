@@ -180,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#how-the-tool-works" id="toc-how-the-tool-works" class="nav-link" data-scroll-target="#how-the-tool-works">How the Tool Works</a></li>
-  <li><a href="#pros-and-cons" id="toc-pros-and-cons" class="nav-link" data-scroll-target="#pros-and-cons">Pros and Cons</a></li>
+  <li><a href="#performance-pros-and-cons" id="toc-performance-pros-and-cons" class="nav-link" data-scroll-target="#performance-pros-and-cons">Performance: Pros and Cons</a></li>
   <li><a href="#journey-of-development" id="toc-journey-of-development" class="nav-link" data-scroll-target="#journey-of-development">Journey of Development</a></li>
   <li><a href="#implications" id="toc-implications" class="nav-link" data-scroll-target="#implications">Implications</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
@@ -228,7 +228,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
-<p>In 2023, video content is king. The trouble is, videos are not always the most convenient format to search through information, especially if you’re after a specific snippet of content. Scrubbing back and forth through a video isn’t heaps of fun.</p>
+<p>In 2023, video content is king. The trouble is, videos are not always the most convenient format to search through for information, especially if you’re after a specific snippet of content. Scrubbing back and forth through a video isn’t heaps of fun.</p>
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:30%;">
@@ -294,9 +294,10 @@ ul.task-list li input[type="checkbox"] {
 </b><li><b></b><p><b>Parrique poses the question of whether the priority should be economic growth or nature preservation.</b></p></li>
 </ul>
 </section>
-<section id="pros-and-cons" class="level2">
-<h2 class="anchored" data-anchor-id="pros-and-cons">Pros and Cons</h2>
-<p>The captioning process on Youtube can be hit and miss, and the auto generated translations are not perfect either. There is a fantastic <a href="https://99percentinvisible.org/episode/craptions/">99 % invisible epdisode</a> explaining the history of closed captioning on Youtube, as well as the various improvements that have been made over the years. It certainly isn’t perfect, however, even if the transcription isn’t 100% accurate, it’s still a great starting point for a summary. When the transript is processed by the OpenAI API, the model is looking for the key points and can overcome transcription errors that are not crucial to the main message.</p>
+<section id="performance-pros-and-cons" class="level2">
+<h2 class="anchored" data-anchor-id="performance-pros-and-cons">Performance: Pros and Cons</h2>
+<p>The summary above does a good job of capturing the main points that Parrique makes in his speech.</p>
+<p>One issue is the data being fed into the summariser. The captioning process on Youtube is optional - with many uploaders foregoing any captions. The auto generated translations are not perfect either. There is a fantastic <a href="https://99percentinvisible.org/episode/craptions/">99 % invisible epdisode</a> explaining the history of closed captioning on Youtube, as well as the various improvements that have been made over the years. It certainly isn’t perfect, however, even if the transcription isn’t 100% accurate, it’s still a great starting point for a summary. When the transript is processed by the OpenAI API, the model is looking for the key points and can overcome transcription errors that are not crucial to the main message.</p>
 <p>Overall, I am pleased with the quality of the summaries, and in the future I might work on providing the title of the video and it’s description as additional context for the summarization model.</p>
 </section>
 <section id="journey-of-development" class="level2">

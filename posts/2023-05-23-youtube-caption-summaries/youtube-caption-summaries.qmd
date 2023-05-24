@@ -14,7 +14,7 @@ date: 2023-05-23
 :::: {.columns}
 
 ::: {.column width="65%"}
-In 2023, video content is king. The trouble is, videos are not always the most convenient format to search through information, especially if you're after a specific snippet of content. Scrubbing back and forth through a video isn't heaps of fun.
+In 2023, video content is king. The trouble is, videos are not always the most convenient format to search through for information, especially if you're after a specific snippet of content. Scrubbing back and forth through a video isn't heaps of fun.
 :::
 
 ::: {.column width="5%"}
@@ -96,9 +96,11 @@ Here's the summary produced by the tool:
 
 - Parrique poses the question of whether the priority should be economic growth or nature preservation.</b>
 
-## Pros and Cons
+## Performance: Pros and Cons
 
-The captioning process on Youtube can be hit and miss, and the auto generated translations are not perfect either. There is a fantastic [99 % invisible epdisode](https://99percentinvisible.org/episode/craptions/) explaining the history of closed captioning on Youtube, as well as the various improvements that have been made over the years. It certainly isn't perfect, however, even if the transcription isn't 100% accurate, it's still a great starting point for a summary. When the transript is processed by the OpenAI API, the model is looking for the key points and can overcome transcription errors that are not crucial to the main message.
+The summary above does a good job of capturing the main points that Parrique makes in his speech. 
+
+One issue is the data being fed into the summariser. The captioning process on Youtube is optional - with many uploaders foregoing any captions. The auto generated translations are not perfect either. There is a fantastic [99 % invisible epdisode](https://99percentinvisible.org/episode/craptions/) explaining the history of closed captioning on Youtube, as well as the various improvements that have been made over the years. It certainly isn't perfect, however, even if the transcription isn't 100% accurate, it's still a great starting point for a summary. When the transript is processed by the OpenAI API, the model is looking for the key points and can overcome transcription errors that are not crucial to the main message.
 
 Overall, I am pleased with the quality of the summaries, and in the future I might work on providing the title of the video and it's description as additional context for the summarization model.
 

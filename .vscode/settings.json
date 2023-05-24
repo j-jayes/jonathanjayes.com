@@ -1,4 +1,4 @@
 {
-    "editor.cursorSurroundingLines": 100,
+    "editor.cursorSurroundingLines": 10,
     "editor.cursorSurroundingLinesStyle": "all"
 }
