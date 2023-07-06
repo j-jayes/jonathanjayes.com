@@ -1,20 +1,85 @@
 ---
 title: "The Economics of Instant Hot Water: Quooker vs Kettle"
-format: html
-draft: true
+description: |
+  How long will it take for an instant hot water tap to save some money?
+image: images/preview.png
+author:
+  - name: Jonathan Jayes
+date: 2023-07-04
 ---
 
-I recently visited my cousin in the United Kingdom. In her house, there was, in addition to a standard tap in the kitchen sink, a tap that dispensed boiling water instantly. It was convenient, removing any delay between the thought of tea and the first sip. But is it economically sound compared to a simple electric kettle?
+I recently visited my cousin Robyn in the United Kingdom. In her house there was, in addition to a standard tap in the kitchen sink, a tap that dispensed boiling water instantly. It was convenient, removing almost entirely the delay between the thought of tea and the first sip. But is it economically sound compared to a simple electric kettle?
 
-The instant hot water tap has a small, vacuum sealed reservoir.
+TLDR: I calculated that it would take ${years_round} years for the instant hot water tap to be more cost-effective than a kettle. This is because the instant hot water tap is much more expensive than a kettle up-front, and the energy savings are minimal even under an improbable use case of ${cups_per_day} cups of tea per day.
 
-Factoring in both appliances' energy efficiencies, the Quooker uses about 0.303 kWh daily while maintaining a constant 110°C. Comparatively, an overfilled kettle, used for 4 cups of tea a day, uses roughly 0.297 kWh. While the difference is slight, over time, it adds up.
+Read on to see how I came to this conclusion, and play with the assumptions in order to calculate how long it would take for the Quooker to be more cost-effective than a kettle for your family.
 
-Coupled with a substantial upfront cost difference, with a Quooker priced much higher than a typical electric kettle, the overall expense of a Quooker is considerable. In a calculation with specific variables (90% efficiency, 4 cups a day, 150ml kettle overfill, a Quooker priced at 1000 units, kettle at 50, and electricity at 0.15 units/kWh), it takes an extraordinary 147 years for the Quooker to be a more cost-effective option.
+## What is an instant hot water tap?
 
-Remember, these results depend heavily on variables like usage patterns and energy prices. For a more personal evaluation, we've created an interactive widget on our page to adjust these variables to your lifestyle.
+The instant hot water tap system consists of a small, pressurised reservoir that is heated to 110 degrees Celsius and a tap to dispense the water. The system can be installed below a kitchen sink to minimise the distance and potential heat loss between the tap and the reservoir. Because the reservoir is pressurised, the water is unable to boil, even at 110 degrees Celsius. When the tap is opened, the pressure is released, and the water boils instantly.
 
-In conclusion, the Quooker brings unrivaled convenience but at a cost. Its long-term economic payoff may not suit all users, reaffirming the traditional kettle's place in most kitchens.
+For the remainder of the blog, I will refer to this system as a Quooker, a dutch brand which produces these taps, about which I could find the most information on the internet.
+
+![Overview of instant hot water tap installation](quooker.png){width=70%}
+
+## How does it compare to a kettle?
+
+Along with convenience, the Quooker also claims to be more energy efficient than a kettle by providing the exact amount of boiling water required for a cup of tea. This is in contrast to a kettle, which is often overfilled by the user, wasting energy and water.
+
+My goal was thus to calculate for how long these energy savings would have to accrue before the Quooker became more cost-effective than a kettle. To do this, I ask GPT-4 to help me calculate the energy consumption of both the Quooker and a standard electric kettle.
+
+## Calculating the energy consumption of the Quooker and a kettle
+
+### Assumptions
+
+First we pin down the scenarios under which the two systems are compared. My assumptions are:
+
+:::{.column-page}
+
+| Kettle Assumptions | Quooker Assumptions | Other Assumptions |
+| --- | --- | --- |
+| My plastic kettle is rather old, and I have no idea what its efficiency is. I assume that it is ${kettle_efficiency}\% efficient. | The Quooker is ${Quooker_efficiency}\% efficient. | I drink ${cups_per_day} cups of tea per day. |
+| I overfill my kettle by ${kettle_overfill} ml. | The Quooker is always on, maintaining the water at 110 degrees Celsius and using 10 Watts to do so. | The water in the kettle cools completely between each boil. |
+| The kettle costs € ${kettle_price}. | The Quooker costs € ${Quooker_price}. | Electricity costs € ${electricity_price} per kWh. |
+
+
+:::
+
+### Calculations
+
+We can then calculate the energy consumption of each system. The energy consumption of the kettle is calculated as follows:
+
+$q = mc\Delta T$
+where:
+
+- q is the heat energy required (in Joules),
+- m is the mass of the water (in kg),
+- c is the specific heat capacity of water (4200 J/kg°C), and
+- ΔT is the change in temperature (in °C).
+
+We then convert the energy from Joules to kWh, and multiply by the electricity price to get the cost of boiling the kettle.
+
+Energy (kWh) = Energy (Joules) / 3.6e6
+
+Cost = Energy (kWh) * Cost per kWh
+
+Plugging in the numbers, we get the following equation for the energy consumption of the kettle:
+
+Because of overfilling the kettle, we must raise the temperature of ${mass_kettle}g of water by ${T_change}°C each time we boil the kettle, even if we only use ${mass_tea}g of water in our tea. The kettle requires ${Math.round(Q_kettle) / 1000} kilojoules of energy, or ${Math.round(Q_kettle_kWh * 100) / 100} kWh each time we boil it. This is equivalent to € ${Math.round(kettle_cost_daily * 100) /100} per day at ${cups_per_day} cups of tea per day.
+
+For the Quooker, we get the following energy consumption: 
+
+Because the Quooker uses 10 Watts to maintain the water at 110 degrees Celsius, it uses 0.24 kWh per day in standby. This is equivalent to € ${Math.round(0.24 * electricity_price * 100)/100} per day. In addition, we have to heat ${mass_tea}g of water to 100 degrees Celsius, which requires ${Math.round(Q_Quooker) / 1000} kilojoules of energy, or ${Math.round(Q_Quooker_kWh * 100) / 100} kWh for each cup of tea. This is equivalent to € ${Math.round(Quooker_cost_daily * 100) / 100} per day at ${cups_per_day} cups of tea per day.
+
+
+So, the kettle uses € ${kettle_cost_yearly_round} per year, and the Quooker uses € ${Quooker_cost_yearly_round} per year under our assumptions.
+
+Given then price of the Quooker at € ${Quooker_price} and the price of the kettle at € ${kettle_price}, the Quooker will pay for itself in ${years_round} years.
+
+## Find out for yourself
+
+You can adjust any of these assumptions in the inputs below to see how they affect the result. The entire article is dynamic, so adjust the inputs and read it again from the top to see what the payoff period is in your case!^[If for instance, you drink 25 cups of tea per day, the Quooker will pay for itself in 12.5 years.]
+
 
 ```{ojs}
 import { aq, op } from '@uwdata/arquero'
@@ -33,7 +98,7 @@ viewof Quooker_efficiency= Inputs.range(
 )
 
 viewof cups_per_day= Inputs.range(
-  [0, 25], 
+  [0, 40], 
   {value: 8, step: 1, label: "Cups of tea per day:"}
 )
 
@@ -79,20 +144,22 @@ Quooker_cost_yearly = Quooker_cost_daily * 365
 
 kettle_cost_yearly_round = Math.round(kettle_cost_yearly * 100) / 100
 Quooker_cost_yearly_round = Math.round(Quooker_cost_yearly * 100) / 100
-```
 
+Q_kettle_wasted = (mass_overfill * c * T_change) / (kettle_efficiency / 100)
+Q_kettle_wasted_kWh = Q_kettle_wasted / (3.6 * Math.pow(10, 6))
+total_kettle_energy_wasted = Q_kettle_wasted_kWh * cups_per_day
+total_kettle_energy_wasted_round = Math.round(total_kettle_energy_wasted * 100) / 100
+total_kettle_energy_wasted_cost_round = Math.round(total_kettle_energy_wasted * electricity_price * 365)
+percentage_kettle_energy_wasted = Math.round(total_kettle_energy_wasted / total_kettle_energy * 100)
 
-The operating cost of the kettle is €${kettle_cost_yearly_round} per year.
+Q_Quooker_wasted = 0.24
+total_Quooker_energy_wasted_cost_round = Math.round(Q_Quooker_wasted * electricity_price * 365)
+percentage_Quooker_energy_wasted_round = Math.round(Q_Quooker_wasted / total_Quooker_energy * 100)
 
-The operating cost of the Quooker is €${Quooker_cost_yearly_round} per year.
-
-```{ojs}
 years = (Quooker_price - kettle_price) / (kettle_cost_yearly - Quooker_cost_yearly)
-
 years_round = Math.round(years * 100) / 100
 ```
 
-The Quooker will pay for itself in ${years_round} years.
 
 ```{ojs}
 
@@ -130,3 +197,55 @@ Plot.plot({
 
 ```
 
+
+## How much energy is lost by each system?
+
+:::{.column-page}
+
+| Waste Calculation | Kettle | Quooker |
+| --- | --- | --- |
+| Reason for waste | Due to overfilling | Due to heat loss |
+| kWh wasted per day | ${total_kettle_energy_wasted_round} kWh | ${Q_Quooker_wasted} kWh |
+| Percentage of total energy | ${percentage_kettle_energy_wasted}\% | ${percentage_Quooker_energy_wasted_round}\% |
+| Cost of waste per year | € ${total_kettle_energy_wasted_cost_round} | € ${total_Quooker_energy_wasted_cost_round} |
+
+:::
+
+## What else do we learn?
+
+As the number of cups of tea increases, the Quooker becomes more cost-effective than the kettle, as the wasted energy is a fixed amount, while the wasted energy of the kettle increases linearly with the number of cups of tea, assuming the overfilling remains constant.
+
+## Appendix
+
+I have assumed that the water in the kettle cools completely between each boil. This would require 2 hours between each boil, assuming an ambient temperature of 20 degrees Celsius and a cooling constant of 0.02. The cooling constant would change based on the specific kettle/environment. See the code below for the simulation.
+
+```{python}
+#| echo: true
+
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.integrate import odeint
+
+# Define the function to compute derivative
+def model(T, t):
+    T_ambient = 20  # Ambient temperature in degree Celsius
+    k = 0.02  # Cooling constant. This would change based on the specific kettle/environment
+    dTdt = -k * (T - T_ambient)
+    return dTdt
+
+T0 = 100  # Starting temperature of the water in degree Celsius
+
+t = np.linspace(0, 120, num=500)  # Time points in minutes. Here we simulate for 2 hours
+
+# Solve the ODE
+T = odeint(model, T0, t)
+
+# Plot the results
+plt.plot(t, T)
+plt.xlabel('Time (minutes)')
+plt.ylabel('Temperature (°C)')
+plt.title('Cooling of Boiled Water in a Kettle Over Time')
+plt.grid(True)
+plt.show()
+
+```

@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jonathan Jayes">
+<meta name="dcterms.date" content="2023-07-04">
+<meta name="description" content="How long will it take for an instant hot water tap to save some money?">
 
-<title>Interlude One - Untitled</title>
+<title>Interlude One - The Economics of Instant Hot Water: Quooker vs Kettle</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,6 +130,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -233,21 +237,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-an-instant-hot-water-tap" id="toc-what-is-an-instant-hot-water-tap" class="nav-link active" data-scroll-target="#what-is-an-instant-hot-water-tap">What is an instant hot water tap?</a></li>
+  <li><a href="#how-does-it-compare-to-a-kettle" id="toc-how-does-it-compare-to-a-kettle" class="nav-link" data-scroll-target="#how-does-it-compare-to-a-kettle">How does it compare to a kettle?</a></li>
+  <li><a href="#calculating-the-energy-consumption-of-the-quooker-and-a-kettle" id="toc-calculating-the-energy-consumption-of-the-quooker-and-a-kettle" class="nav-link" data-scroll-target="#calculating-the-energy-consumption-of-the-quooker-and-a-kettle">Calculating the energy consumption of the Quooker and a kettle</a>
+  <ul class="collapse">
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions">Assumptions</a></li>
+  <li><a href="#calculations" id="toc-calculations" class="nav-link" data-scroll-target="#calculations">Calculations</a></li>
+  </ul></li>
+  <li><a href="#find-out-for-yourself" id="toc-find-out-for-yourself" class="nav-link" data-scroll-target="#find-out-for-yourself">Find out for yourself</a></li>
+  <li><a href="#how-much-energy-is-lost-by-each-system" id="toc-how-much-energy-is-lost-by-each-system" class="nav-link" data-scroll-target="#how-much-energy-is-lost-by-each-system">How much energy is lost by each system?</a></li>
+  <li><a href="#what-else-do-we-learn" id="toc-what-else-do-we-learn" class="nav-link" data-scroll-target="#what-else-do-we-learn">What else do we learn?</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Untitled</h1>
+<h1 class="title">The Economics of Instant Hot Water: Quooker vs Kettle</h1>
 </div>
 
+<div>
+  <div class="description">
+    <p>How long will it take for an instant hot water tap to save some money?</p>
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jonathan Jayes </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 4, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -255,8 +292,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<p>I recently visited my cousin Robyn in the United Kingdom. In her house there was, in addition to a standard tap in the kitchen sink, a tap that dispensed boiling water instantly. It was convenient, removing almost entirely the delay between the thought of tea and the first sip. But is it economically sound compared to a simple electric kettle?</p>
+<p>TLDR: I calculated that it would take <span><span id="ojs-element-id-1"></span></span> years for the instant hot water tap to be more cost-effective than a kettle. This is because the instant hot water tap is much more expensive than a kettle up-front, and the energy savings are minimal even under an improbable use case of <span><span id="ojs-element-id-2"></span></span> cups of tea per day.</p>
+<p>Read on to see how I came to this conclusion, and play with the assumptions in order to calculate how long it would take for the Quooker to be more cost-effective than a kettle for your family.</p>
+<section id="what-is-an-instant-hot-water-tap" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-an-instant-hot-water-tap">What is an instant hot water tap?</h2>
+<p>The instant hot water tap system consists of a small, pressurised reservoir that is heated to 110 degrees Celsius and a tap to dispense the water. The system can be installed below a kitchen sink to minimise the distance and potential heat loss between the tap and the reservoir. Because the reservoir is pressurised, the water is unable to boil, even at 110 degrees Celsius. When the tap is opened, the pressure is released, and the water boils instantly.</p>
+<p>For the remainder of the blog, I will refer to this system as a Quooker, a dutch brand which produces these taps, about which I could find the most information on the internet.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="quooker.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption class="figure-caption">Overview of instant hot water tap installation</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="how-does-it-compare-to-a-kettle" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-it-compare-to-a-kettle">How does it compare to a kettle?</h2>
+<p>Along with convenience, the Quooker also claims to be more energy efficient than a kettle by providing the exact amount of boiling water required for a cup of tea. This is in contrast to a kettle, which is often overfilled by the user, wasting energy and water.</p>
+<p>My goal was thus to calculate for how long these energy savings would have to accrue before the Quooker became more cost-effective than a kettle. To do this, I ask GPT-4 to help me calculate the energy consumption of both the Quooker and a standard electric kettle.</p>
+</section>
+<section id="calculating-the-energy-consumption-of-the-quooker-and-a-kettle" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="calculating-the-energy-consumption-of-the-quooker-and-a-kettle">Calculating the energy consumption of the Quooker and a kettle</h2>
+<section id="assumptions" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="assumptions">Assumptions</h3>
+<p>First we pin down the scenarios under which the two systems are compared. My assumptions are:</p>
+<div class="column-page">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kettle Assumptions</th>
+<th>Quooker Assumptions</th>
+<th>Other Assumptions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>My plastic kettle is rather old, and I have no idea what its efficiency is. I assume that it is <span><span id="ojs-element-id-3"></span>%</span> efficient.</td>
+<td>The Quooker is <span><span id="ojs-element-id-4"></span>%</span> efficient.</td>
+<td>I drink <span><span id="ojs-element-id-5"></span></span> cups of tea per day.</td>
+</tr>
+<tr class="even">
+<td>I overfill my kettle by <span><span id="ojs-element-id-6"></span></span> ml.</td>
+<td>The Quooker is always on, maintaining the water at 110 degrees Celsius and using 10 Watts to do so.</td>
+<td>The water in the kettle cools completely between each boil.</td>
+</tr>
+<tr class="odd">
+<td>The kettle costs € <span><span id="ojs-element-id-7"></span>.</span></td>
+<td>The Quooker costs € <span><span id="ojs-element-id-8"></span>.</span></td>
+<td>Electricity costs € <span><span id="ojs-element-id-9"></span></span> per kWh.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="calculations" class="level3">
+<h3 class="anchored" data-anchor-id="calculations">Calculations</h3>
+<p>We can then calculate the energy consumption of each system. The energy consumption of the kettle is calculated as follows:</p>
+<p><span class="math inline">\(q = mc\Delta T\)</span> where:</p>
+<ul>
+<li>q is the heat energy required (in Joules),</li>
+<li>m is the mass of the water (in kg),</li>
+<li>c is the specific heat capacity of water (4200 J/kg°C), and</li>
+<li>ΔT is the change in temperature (in °C).</li>
+</ul>
+<p>We then convert the energy from Joules to kWh, and multiply by the electricity price to get the cost of boiling the kettle.</p>
+<p>Energy (kWh) = Energy (Joules) / 3.6e6</p>
+<p>Cost = Energy (kWh) * Cost per kWh</p>
+<p>Plugging in the numbers, we get the following equation for the energy consumption of the kettle:</p>
+<p>Because of overfilling the kettle, we must raise the temperature of <span><span id="ojs-element-id-10"></span>g</span> of water by <span><span id="ojs-element-id-11"></span>°C</span> each time we boil the kettle, even if we only use <span><span id="ojs-element-id-12"></span>g</span> of water in our tea. The kettle requires <span><span id="ojs-element-id-27"></span></span> kilojoules of energy, or <span><span id="ojs-element-id-28"></span></span> kWh each time we boil it. This is equivalent to € <span><span id="ojs-element-id-29"></span></span> per day at <span><span id="ojs-element-id-13"></span></span> cups of tea per day.</p>
+<p>For the Quooker, we get the following energy consumption:</p>
+<p>Because the Quooker uses 10 Watts to maintain the water at 110 degrees Celsius, it uses 0.24 kWh per day in standby. This is equivalent to € <span><span id="ojs-element-id-30"></span></span> per day. In addition, we have to heat <span><span id="ojs-element-id-14"></span>g</span> of water to 100 degrees Celsius, which requires <span><span id="ojs-element-id-31"></span></span> kilojoules of energy, or <span><span id="ojs-element-id-32"></span></span> kWh for each cup of tea. This is equivalent to € <span><span id="ojs-element-id-33"></span></span> per day at <span><span id="ojs-element-id-15"></span></span> cups of tea per day.</p>
+<p>So, the kettle uses € <span><span id="ojs-element-id-16"></span></span> per year, and the Quooker uses € <span><span id="ojs-element-id-17"></span></span> per year under our assumptions.</p>
+<p>Given then price of the Quooker at € <span><span id="ojs-element-id-18"></span></span> and the price of the kettle at € <span><span id="ojs-element-id-19"></span>,</span> the Quooker will pay for itself in <span><span id="ojs-element-id-20"></span></span> years.</p>
+</section>
+</section>
+<section id="find-out-for-yourself" class="level2">
+<h2 class="anchored" data-anchor-id="find-out-for-yourself">Find out for yourself</h2>
+<p>You can adjust any of these assumptions in the inputs below to see how they affect the result. The entire article is dynamic, so adjust the inputs and read it again from the top to see what the payoff period is in your case!<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="6" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 5;"><span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { aq<span class="op">,</span> op } <span class="im">from</span> <span class="st">'@uwdata/arquero'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="84" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 83;"><span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { aq<span class="op">,</span> op } <span class="im">from</span> <span class="st">'@uwdata/arquero'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
@@ -264,40 +383,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell panel-input card bg-light p-2">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="12" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 11;"><span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>viewof kettle_efficiency<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">50</span><span class="op">,</span> <span class="dv">100</span>]<span class="op">,</span> </span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">70</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Kettle efficiency:"</span>}</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>viewof Quooker_efficiency<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">50</span><span class="op">,</span> <span class="dv">100</span>]<span class="op">,</span> </span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">90</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Quooker efficiency:"</span>}</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>viewof cups_per_day<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="dv">25</span>]<span class="op">,</span> </span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">8</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Cups of tea per day:"</span>}</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>viewof kettle_overfill<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="dv">1000</span>]<span class="op">,</span> </span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">250</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"ml by which kettle is overfilled:"</span>}</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>viewof Quooker_price<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">50</span><span class="op">,</span> <span class="dv">2000</span>]<span class="op">,</span> </span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">1000</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Price of Quooker (Euro):"</span>}</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>viewof kettle_price<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">50</span><span class="op">,</span> <span class="dv">2000</span>]<span class="op">,</span> </span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Price of kettle (Euro):"</span>}</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>viewof electricity_price<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span> </span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="op">.</span><span class="dv">3</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Price of electricity per kWh (Euro):"</span>}</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="90" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 89;"><span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>viewof kettle_efficiency<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">50</span><span class="op">,</span> <span class="dv">100</span>]<span class="op">,</span> </span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">70</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Kettle efficiency:"</span>}</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>viewof Quooker_efficiency<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">50</span><span class="op">,</span> <span class="dv">100</span>]<span class="op">,</span> </span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">90</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Quooker efficiency:"</span>}</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>viewof cups_per_day<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="dv">40</span>]<span class="op">,</span> </span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">8</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Cups of tea per day:"</span>}</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>viewof kettle_overfill<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="dv">1000</span>]<span class="op">,</span> </span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">250</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"ml by which kettle is overfilled:"</span>}</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>viewof Quooker_price<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">50</span><span class="op">,</span> <span class="dv">2000</span>]<span class="op">,</span> </span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">1000</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Price of Quooker (Euro):"</span>}</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>viewof kettle_price<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">50</span><span class="op">,</span> <span class="dv">2000</span>]<span class="op">,</span> </span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Price of kettle (Euro):"</span>}</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>viewof electricity_price<span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span> </span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="op">.</span><span class="dv">3</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Price of electricity per kWh (Euro):"</span>}</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-2-1" data-nodetype="declaration">
@@ -349,26 +468,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="49" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 48;"><span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="fl">4.184</span>  <span class="co">// Specific heat capacity of water in J/g°C</span></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>T_change <span class="op">=</span> <span class="dv">80</span>  <span class="co">// Change in temperature for kettle (100°C - 20°C)</span></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>T_change_Quooker <span class="op">=</span> <span class="dv">90</span>  <span class="co">// Change in temperature for Quooker (110°C - 20°C)</span></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>water_density <span class="op">=</span> <span class="dv">1</span>  <span class="co">// Density of water in g/mL</span></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>mass_tea <span class="op">=</span> <span class="dv">250</span> <span class="op">*</span> water_density</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>mass_overfill <span class="op">=</span> kettle_overfill <span class="op">*</span> water_density</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>mass_kettle <span class="op">=</span> mass_tea <span class="op">+</span> mass_overfill</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>Q_kettle <span class="op">=</span> (mass_kettle <span class="op">*</span> c <span class="op">*</span> T_change) <span class="op">/</span> (kettle_efficiency <span class="op">/</span> <span class="dv">100</span>)  <span class="co">// Energy in joules</span></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>Q_kettle_kWh <span class="op">=</span> Q_kettle <span class="op">/</span> (<span class="fl">3.6</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">6</span>))  <span class="co">// Convert energy to kWh</span></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>total_kettle_energy <span class="op">=</span> Q_kettle_kWh <span class="op">*</span> cups_per_day <span class="co">// Total energy for kettle per day</span></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>Q_Quooker <span class="op">=</span> (mass_tea <span class="op">*</span> c <span class="op">*</span> T_change_Quooker) <span class="op">/</span> (Quooker_efficiency <span class="op">/</span> <span class="dv">100</span>)  <span class="co">// Energy in joules</span></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>Q_Quooker_kWh <span class="op">=</span> Q_Quooker <span class="op">/</span> (<span class="fl">3.6</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">6</span>))  <span class="co">// Convert energy to kWh</span></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>total_Quooker_energy <span class="op">=</span> (Q_Quooker_kWh <span class="op">*</span> cups_per_day) <span class="op">+</span> <span class="fl">0.24</span>  <span class="co">// Total energy for Quooker per day</span></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>kettle_cost_daily <span class="op">=</span> total_kettle_energy <span class="op">*</span> electricity_price</span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>Quooker_cost_daily <span class="op">=</span> total_Quooker_energy <span class="op">*</span> electricity_price</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>kettle_cost_yearly <span class="op">=</span> kettle_cost_daily <span class="op">*</span> <span class="dv">365</span></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>Quooker_cost_yearly <span class="op">=</span> Quooker_cost_daily <span class="op">*</span> <span class="dv">365</span></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>kettle_cost_yearly_round <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(kettle_cost_yearly <span class="op">*</span> <span class="dv">100</span>) <span class="op">/</span> <span class="dv">100</span></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>Quooker_cost_yearly_round <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(Quooker_cost_yearly <span class="op">*</span> <span class="dv">100</span>) <span class="op">/</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="127" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 126;"><span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="fl">4.184</span>  <span class="co">// Specific heat capacity of water in J/g°C</span></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>T_change <span class="op">=</span> <span class="dv">80</span>  <span class="co">// Change in temperature for kettle (100°C - 20°C)</span></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>T_change_Quooker <span class="op">=</span> <span class="dv">90</span>  <span class="co">// Change in temperature for Quooker (110°C - 20°C)</span></span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>water_density <span class="op">=</span> <span class="dv">1</span>  <span class="co">// Density of water in g/mL</span></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>mass_tea <span class="op">=</span> <span class="dv">250</span> <span class="op">*</span> water_density</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>mass_overfill <span class="op">=</span> kettle_overfill <span class="op">*</span> water_density</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>mass_kettle <span class="op">=</span> mass_tea <span class="op">+</span> mass_overfill</span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>Q_kettle <span class="op">=</span> (mass_kettle <span class="op">*</span> c <span class="op">*</span> T_change) <span class="op">/</span> (kettle_efficiency <span class="op">/</span> <span class="dv">100</span>)  <span class="co">// Energy in joules</span></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>Q_kettle_kWh <span class="op">=</span> Q_kettle <span class="op">/</span> (<span class="fl">3.6</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">6</span>))  <span class="co">// Convert energy to kWh</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>total_kettle_energy <span class="op">=</span> Q_kettle_kWh <span class="op">*</span> cups_per_day <span class="co">// Total energy for kettle per day</span></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>Q_Quooker <span class="op">=</span> (mass_tea <span class="op">*</span> c <span class="op">*</span> T_change_Quooker) <span class="op">/</span> (Quooker_efficiency <span class="op">/</span> <span class="dv">100</span>)  <span class="co">// Energy in joules</span></span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>Q_Quooker_kWh <span class="op">=</span> Q_Quooker <span class="op">/</span> (<span class="fl">3.6</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">6</span>))  <span class="co">// Convert energy to kWh</span></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>total_Quooker_energy <span class="op">=</span> (Q_Quooker_kWh <span class="op">*</span> cups_per_day) <span class="op">+</span> <span class="fl">0.24</span>  <span class="co">// Total energy for Quooker per day</span></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>kettle_cost_daily <span class="op">=</span> total_kettle_energy <span class="op">*</span> electricity_price</span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>Quooker_cost_daily <span class="op">=</span> total_Quooker_energy <span class="op">*</span> electricity_price</span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>kettle_cost_yearly <span class="op">=</span> kettle_cost_daily <span class="op">*</span> <span class="dv">365</span></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>Quooker_cost_yearly <span class="op">=</span> Quooker_cost_daily <span class="op">*</span> <span class="dv">365</span></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>kettle_cost_yearly_round <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(kettle_cost_yearly <span class="op">*</span> <span class="dv">100</span>) <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>Quooker_cost_yearly_round <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(Quooker_cost_yearly <span class="op">*</span> <span class="dv">100</span>) <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>Q_kettle_wasted <span class="op">=</span> (mass_overfill <span class="op">*</span> c <span class="op">*</span> T_change) <span class="op">/</span> (kettle_efficiency <span class="op">/</span> <span class="dv">100</span>)</span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>Q_kettle_wasted_kWh <span class="op">=</span> Q_kettle_wasted <span class="op">/</span> (<span class="fl">3.6</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">6</span>))</span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>total_kettle_energy_wasted <span class="op">=</span> Q_kettle_wasted_kWh <span class="op">*</span> cups_per_day</span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>total_kettle_energy_wasted_round <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(total_kettle_energy_wasted <span class="op">*</span> <span class="dv">100</span>) <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>total_kettle_energy_wasted_cost_round <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(total_kettle_energy_wasted <span class="op">*</span> electricity_price <span class="op">*</span> <span class="dv">365</span>)</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>percentage_kettle_energy_wasted <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(total_kettle_energy_wasted <span class="op">/</span> total_kettle_energy <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>Q_Quooker_wasted <span class="op">=</span> <span class="fl">0.24</span></span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>total_Quooker_energy_wasted_cost_round <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(Q_Quooker_wasted <span class="op">*</span> electricity_price <span class="op">*</span> <span class="dv">365</span>)</span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>percentage_Quooker_energy_wasted_round <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(Q_Quooker_wasted <span class="op">/</span> total_Quooker_energy <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> (Quooker_price <span class="op">-</span> kettle_price) <span class="op">/</span> (kettle_cost_yearly <span class="op">-</span> Quooker_cost_yearly)</span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>years_round <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(years <span class="op">*</span> <span class="dv">100</span>) <span class="op">/</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-3-1" data-nodetype="declaration">
@@ -502,13 +635,116 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-20" data-nodetype="declaration">
+
 </div>
-<p>The operating cost of the kettle is <span>€<span id="ojs-element-id-1"></span></span> per year.</p>
-<p>The operating cost of the Quooker is <span>€<span id="ojs-element-id-2"></span></span> per year.</p>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-21" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-22" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-23" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-24" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-25" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-26" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-27" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-28" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-29" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-30" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="77" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 76;"><span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> (Quooker_price <span class="op">-</span> kettle_price) <span class="op">/</span> (kettle_cost_yearly <span class="op">-</span> Quooker_cost_yearly)</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>years_round <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(years <span class="op">*</span> <span class="dv">100</span>) <span class="op">/</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="166" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 165;"><span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> aq<span class="op">.</span><span class="fu">table</span>({</span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>  <span class="dt">years</span><span class="op">:</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">200</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> i <span class="op">+</span> <span class="dv">1</span>)<span class="op">,</span></span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>  <span class="dt">kettle</span><span class="op">:</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">200</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> kettle_cost_yearly <span class="op">+</span> kettle_price</span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a>  })<span class="op">,</span></span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Quooker</span><span class="op">:</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">200</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> Quooker_cost_yearly <span class="op">+</span> Quooker_price</span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a><span class="co">// Prepare the data in a format suitable for Plot.line</span></span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> dt<span class="op">.</span><span class="fu">objects</span>()<span class="op">.</span><span class="fu">flatMap</span>(({years<span class="op">,</span> kettle<span class="op">,</span> Quooker}) <span class="kw">=&gt;</span> [</span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a>  {years<span class="op">,</span> <span class="dt">value</span><span class="op">:</span> kettle<span class="op">,</span> <span class="dt">key</span><span class="op">:</span> <span class="st">'Kettle'</span>}<span class="op">,</span></span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a>  {years<span class="op">,</span> <span class="dt">value</span><span class="op">:</span> Quooker<span class="op">,</span> <span class="dt">key</span><span class="op">:</span> <span class="st">'Quooker'</span>}</span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a>])<span class="op">;</span></span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Cumulative cost (Euro)'</span></span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Time (years)'</span></span>
+<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {</span>
+<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="st">"Kettle"</span><span class="op">,</span> <span class="st">"Quooker"</span>]<span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">type</span><span class="op">:</span> <span class="st">"categorical"</span><span class="op">,</span> <span class="dt">range</span><span class="op">:</span> [<span class="st">"#1f77b4"</span><span class="op">,</span> <span class="st">"#ff7f0e"</span>]</span>
+<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(data<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">'years'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">'value'</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">'key'</span>})</span>
+<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a>  ]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-4-1" data-nodetype="declaration">
@@ -523,78 +759,176 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-</div>
-<p>The Quooker will pay for itself in <span><span id="ojs-element-id-3"></span></span> years.</p>
-<div class="cell">
-<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="86" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 85;"><span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> aq<span class="op">.</span><span class="fu">table</span>({</span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>  <span class="dt">years</span><span class="op">:</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">200</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> i <span class="op">+</span> <span class="dv">1</span>)<span class="op">,</span></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>  <span class="dt">kettle</span><span class="op">:</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">200</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> kettle_cost_yearly <span class="op">+</span> kettle_price</span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>  })<span class="op">,</span></span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Quooker</span><span class="op">:</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> <span class="dv">200</span>}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> Quooker_cost_yearly <span class="op">+</span> Quooker_price</span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="co">// Prepare the data in a format suitable for Plot.line</span></span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> dt<span class="op">.</span><span class="fu">objects</span>()<span class="op">.</span><span class="fu">flatMap</span>(({years<span class="op">,</span> kettle<span class="op">,</span> Quooker}) <span class="kw">=&gt;</span> [</span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>  {years<span class="op">,</span> <span class="dt">value</span><span class="op">:</span> kettle<span class="op">,</span> <span class="dt">key</span><span class="op">:</span> <span class="st">'Kettle'</span>}<span class="op">,</span></span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>  {years<span class="op">,</span> <span class="dt">value</span><span class="op">:</span> Quooker<span class="op">,</span> <span class="dt">key</span><span class="op">:</span> <span class="st">'Quooker'</span>}</span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>])<span class="op">;</span></span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Cumulative cost (Euro)'</span></span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {</span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Time (years)'</span></span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {</span>
-<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="st">"Kettle"</span><span class="op">,</span> <span class="st">"Quooker"</span>]<span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">type</span><span class="op">:</span> <span class="st">"categorical"</span><span class="op">,</span> <span class="dt">range</span><span class="op">:</span> [<span class="st">"#1f77b4"</span><span class="op">,</span> <span class="st">"#ff7f0e"</span>]</span>
-<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">line</span>(data<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">'years'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">'value'</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">'key'</span>})</span>
-<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>  ]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-5-1" data-nodetype="declaration">
+<div id="ojs-cell-4-3" data-nodetype="expression">
 
 </div>
 </div>
 </div>
+</div>
+</section>
+<section id="how-much-energy-is-lost-by-each-system" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="how-much-energy-is-lost-by-each-system">How much energy is lost by each system?</h2>
+<div class="column-page">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Waste Calculation</th>
+<th>Kettle</th>
+<th>Quooker</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reason for waste</td>
+<td>Due to overfilling</td>
+<td>Due to heat loss</td>
+</tr>
+<tr class="even">
+<td>kWh wasted per day</td>
+<td><span><span id="ojs-element-id-21"></span></span> kWh</td>
+<td><span><span id="ojs-element-id-22"></span></span> kWh</td>
+</tr>
+<tr class="odd">
+<td>Percentage of total energy</td>
+<td><span><span id="ojs-element-id-23"></span>%</span></td>
+<td><span><span id="ojs-element-id-24"></span>%</span></td>
+</tr>
+<tr class="even">
+<td>Cost of waste per year</td>
+<td>€ <span><span id="ojs-element-id-25"></span></span></td>
+<td>€ <span><span id="ojs-element-id-26"></span></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="what-else-do-we-learn" class="level2">
+<h2 class="anchored" data-anchor-id="what-else-do-we-learn">What else do we learn?</h2>
+<p>As the number of cups of tea increases, the Quooker becomes more cost-effective than the kettle, as the wasted energy is a fixed amount, while the wasted energy of the kettle increases linearly with the number of cups of tea, assuming the overfilling remains constant.</p>
+</section>
+<section id="appendix" class="level2">
+<h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
+<p>I have assumed that the water in the kettle cools completely between each boil. This would require 2 hours between each boil, assuming an ambient temperature of 20 degrees Celsius and a cooling constant of 0.02. The cooling constant would change based on the specific kettle/environment. See the code below for the simulation.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> odeint</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the function to compute derivative</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> model(T, t):</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    T_ambient <span class="op">=</span> <span class="dv">20</span>  <span class="co"># Ambient temperature in degree Celsius</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> <span class="fl">0.02</span>  <span class="co"># Cooling constant. This would change based on the specific kettle/environment</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    dTdt <span class="op">=</span> <span class="op">-</span>k <span class="op">*</span> (T <span class="op">-</span> T_ambient)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dTdt</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>T0 <span class="op">=</span> <span class="dv">100</span>  <span class="co"># Starting temperature of the water in degree Celsius</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">120</span>, num<span class="op">=</span><span class="dv">500</span>)  <span class="co"># Time points in minutes. Here we simulate for 2 hours</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve the ODE</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> odeint(model, T0, t)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the results</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plt.plot(t, T)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time (minutes)'</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Cooling of Boiled Water in a Kettle Over Time'</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-5-2" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<div id="ojs-cell-5-3" data-nodetype="expression">
-
-</div>
-</div>
+<p><img src="app_files/figure-html/cell-2-output-1.png" width="593" height="442"></p>
 </div>
 </div>
 
 
 <script type="ojs-module-contents">
 {"contents":[
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${kettle_cost_yearly_round}</span>`", "cellName":"ojs-element-id-1"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${years_round}</span>`", "cellName":"ojs-element-id-1"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Quooker_cost_yearly_round}</span>`", "cellName":"ojs-element-id-2"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${cups_per_day}</span>`", "cellName":"ojs-element-id-2"}
 ,
-  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${years_round}</span>`", "cellName":"ojs-element-id-3"}
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${kettle_efficiency}</span>`", "cellName":"ojs-element-id-3"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Quooker_efficiency}</span>`", "cellName":"ojs-element-id-4"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${cups_per_day}</span>`", "cellName":"ojs-element-id-5"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${kettle_overfill}</span>`", "cellName":"ojs-element-id-6"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${kettle_price}</span>`", "cellName":"ojs-element-id-7"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Quooker_price}</span>`", "cellName":"ojs-element-id-8"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${electricity_price}</span>`", "cellName":"ojs-element-id-9"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${mass_kettle}</span>`", "cellName":"ojs-element-id-10"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${T_change}</span>`", "cellName":"ojs-element-id-11"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${mass_tea}</span>`", "cellName":"ojs-element-id-12"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${cups_per_day}</span>`", "cellName":"ojs-element-id-13"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${mass_tea}</span>`", "cellName":"ojs-element-id-14"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${cups_per_day}</span>`", "cellName":"ojs-element-id-15"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${kettle_cost_yearly_round}</span>`", "cellName":"ojs-element-id-16"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Quooker_cost_yearly_round}</span>`", "cellName":"ojs-element-id-17"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Quooker_price}</span>`", "cellName":"ojs-element-id-18"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${kettle_price}</span>`", "cellName":"ojs-element-id-19"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${years_round}</span>`", "cellName":"ojs-element-id-20"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${total_kettle_energy_wasted_round}</span>`", "cellName":"ojs-element-id-21"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Q_Quooker_wasted}</span>`", "cellName":"ojs-element-id-22"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${percentage_kettle_energy_wasted}</span>`", "cellName":"ojs-element-id-23"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${percentage_Quooker_energy_wasted_round}</span>`", "cellName":"ojs-element-id-24"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${total_kettle_energy_wasted_cost_round}</span>`", "cellName":"ojs-element-id-25"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${total_Quooker_energy_wasted_cost_round}</span>`", "cellName":"ojs-element-id-26"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Math.round(Q_kettle) / 1000}</span>`", "cellName":"ojs-element-id-27"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Math.round(Q_kettle_kWh * 100) / 100}</span>`", "cellName":"ojs-element-id-28"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Math.round(kettle_cost_daily * 100) /100}</span>`", "cellName":"ojs-element-id-29"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Math.round(0.24 * electricity_price * 100)/100}</span>`", "cellName":"ojs-element-id-30"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Math.round(Q_Quooker) / 1000}</span>`", "cellName":"ojs-element-id-31"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Math.round(Q_Quooker_kWh * 100) / 100}</span>`", "cellName":"ojs-element-id-32"}
+,
+  {"methodName":"interpret","inline":"true","source":"htl.html`<span>${Math.round(Quooker_cost_daily * 100) / 100}</span>`", "cellName":"ojs-element-id-33"}
 ]}
 </script>
+</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>If for instance, you drink 25 cups of tea per day, the Quooker will pay for itself in 12.5 years.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"import { aq, op } from '@uwdata/arquero'\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"viewof kettle_efficiency= Inputs.range(\n  [50, 100], \n  {value: 70, step: 5, label: \"Kettle efficiency:\"}\n)\n\nviewof Quooker_efficiency= Inputs.range(\n  [50, 100], \n  {value: 90, step: 5, label: \"Quooker efficiency:\"}\n)\n\nviewof cups_per_day= Inputs.range(\n  [0, 25], \n  {value: 8, step: 1, label: \"Cups of tea per day:\"}\n)\n\nviewof kettle_overfill= Inputs.range(\n  [0, 1000], \n  {value: 250, step: 50, label: \"ml by which kettle is overfilled:\"}\n)\n\nviewof Quooker_price= Inputs.range(\n  [50, 2000], \n  {value: 1000, step: 50, label: \"Price of Quooker (Euro):\"}\n)\n\nviewof kettle_price= Inputs.range(\n  [50, 2000], \n  {value: 50, step: 50, label: \"Price of kettle (Euro):\"}\n)\n\nviewof electricity_price= Inputs.range(\n  [0, 1], \n  {value: .3, step: 0.05, label: \"Price of electricity per kWh (Euro):\"}\n)\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"c = 4.184  // Specific heat capacity of water in J/g°C\nT_change = 80  // Change in temperature for kettle (100°C - 20°C)\nT_change_Quooker = 90  // Change in temperature for Quooker (110°C - 20°C)\nwater_density = 1  // Density of water in g/mL\nmass_tea = 250 * water_density\nmass_overfill = kettle_overfill * water_density\nmass_kettle = mass_tea + mass_overfill\nQ_kettle = (mass_kettle * c * T_change) / (kettle_efficiency / 100)  // Energy in joules\nQ_kettle_kWh = Q_kettle / (3.6 * Math.pow(10, 6))  // Convert energy to kWh\ntotal_kettle_energy = Q_kettle_kWh * cups_per_day // Total energy for kettle per day\nQ_Quooker = (mass_tea * c * T_change_Quooker) / (Quooker_efficiency / 100)  // Energy in joules\nQ_Quooker_kWh = Q_Quooker / (3.6 * Math.pow(10, 6))  // Convert energy to kWh\ntotal_Quooker_energy = (Q_Quooker_kWh * cups_per_day) + 0.24  // Total energy for Quooker per day\nkettle_cost_daily = total_kettle_energy * electricity_price\nQuooker_cost_daily = total_Quooker_energy * electricity_price\nkettle_cost_yearly = kettle_cost_daily * 365\nQuooker_cost_yearly = Quooker_cost_daily * 365\n\nkettle_cost_yearly_round = Math.round(kettle_cost_yearly * 100) / 100\nQuooker_cost_yearly_round = Math.round(Quooker_cost_yearly * 100) / 100\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"years = (Quooker_price - kettle_price) / (kettle_cost_yearly - Quooker_cost_yearly)\n\nyears_round = Math.round(years * 100) / 100\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"\ndt = aq.table({\n  years: Array.from({length: 200}, (_, i) => i + 1),\n  kettle: Array.from({length: 200}, (_, i) => {\n    return (i + 1) * kettle_cost_yearly + kettle_price\n  }),\n  Quooker: Array.from({length: 200}, (_, i) => {\n    return (i + 1) * Quooker_cost_yearly + Quooker_price\n  })\n})\n\n// Prepare the data in a format suitable for Plot.line\ndata = dt.objects().flatMap(({years, kettle, Quooker}) => [\n  {years, value: kettle, key: 'Kettle'},\n  {years, value: Quooker, key: 'Quooker'}\n]);\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: 'Cumulative cost (Euro)'\n  },\n  x: {\n    grid: true,\n    label: 'Time (years)'\n  },\n  color: {\n    domain: [\"Kettle\", \"Quooker\"], legend: true, type: \"categorical\", range: [\"#1f77b4\", \"#ff7f0e\"]\n  },\n  marks: [\n    Plot.line(data, {x: 'years', y: 'value', stroke: 'key'})\n  ]})\n\n"},{"methodName":"interpretQuiet","source":"shinyInput('kettle_efficiency')"},{"methodName":"interpretQuiet","source":"shinyInput('Quooker_efficiency')"},{"methodName":"interpretQuiet","source":"shinyInput('cups_per_day')"},{"methodName":"interpretQuiet","source":"shinyInput('kettle_overfill')"},{"methodName":"interpretQuiet","source":"shinyInput('Quooker_price')"},{"methodName":"interpretQuiet","source":"shinyInput('kettle_price')"},{"methodName":"interpretQuiet","source":"shinyInput('electricity_price')"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"import { aq, op } from '@uwdata/arquero'\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"viewof kettle_efficiency= Inputs.range(\n  [50, 100], \n  {value: 70, step: 5, label: \"Kettle efficiency:\"}\n)\n\nviewof Quooker_efficiency= Inputs.range(\n  [50, 100], \n  {value: 90, step: 5, label: \"Quooker efficiency:\"}\n)\n\nviewof cups_per_day= Inputs.range(\n  [0, 40], \n  {value: 8, step: 1, label: \"Cups of tea per day:\"}\n)\n\nviewof kettle_overfill= Inputs.range(\n  [0, 1000], \n  {value: 250, step: 50, label: \"ml by which kettle is overfilled:\"}\n)\n\nviewof Quooker_price= Inputs.range(\n  [50, 2000], \n  {value: 1000, step: 50, label: \"Price of Quooker (Euro):\"}\n)\n\nviewof kettle_price= Inputs.range(\n  [50, 2000], \n  {value: 50, step: 50, label: \"Price of kettle (Euro):\"}\n)\n\nviewof electricity_price= Inputs.range(\n  [0, 1], \n  {value: .3, step: 0.05, label: \"Price of electricity per kWh (Euro):\"}\n)\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"c = 4.184  // Specific heat capacity of water in J/g°C\nT_change = 80  // Change in temperature for kettle (100°C - 20°C)\nT_change_Quooker = 90  // Change in temperature for Quooker (110°C - 20°C)\nwater_density = 1  // Density of water in g/mL\nmass_tea = 250 * water_density\nmass_overfill = kettle_overfill * water_density\nmass_kettle = mass_tea + mass_overfill\nQ_kettle = (mass_kettle * c * T_change) / (kettle_efficiency / 100)  // Energy in joules\nQ_kettle_kWh = Q_kettle / (3.6 * Math.pow(10, 6))  // Convert energy to kWh\ntotal_kettle_energy = Q_kettle_kWh * cups_per_day // Total energy for kettle per day\nQ_Quooker = (mass_tea * c * T_change_Quooker) / (Quooker_efficiency / 100)  // Energy in joules\nQ_Quooker_kWh = Q_Quooker / (3.6 * Math.pow(10, 6))  // Convert energy to kWh\ntotal_Quooker_energy = (Q_Quooker_kWh * cups_per_day) + 0.24  // Total energy for Quooker per day\nkettle_cost_daily = total_kettle_energy * electricity_price\nQuooker_cost_daily = total_Quooker_energy * electricity_price\nkettle_cost_yearly = kettle_cost_daily * 365\nQuooker_cost_yearly = Quooker_cost_daily * 365\n\nkettle_cost_yearly_round = Math.round(kettle_cost_yearly * 100) / 100\nQuooker_cost_yearly_round = Math.round(Quooker_cost_yearly * 100) / 100\n\nQ_kettle_wasted = (mass_overfill * c * T_change) / (kettle_efficiency / 100)\nQ_kettle_wasted_kWh = Q_kettle_wasted / (3.6 * Math.pow(10, 6))\ntotal_kettle_energy_wasted = Q_kettle_wasted_kWh * cups_per_day\ntotal_kettle_energy_wasted_round = Math.round(total_kettle_energy_wasted * 100) / 100\ntotal_kettle_energy_wasted_cost_round = Math.round(total_kettle_energy_wasted * electricity_price * 365)\npercentage_kettle_energy_wasted = Math.round(total_kettle_energy_wasted / total_kettle_energy * 100)\n\nQ_Quooker_wasted = 0.24\ntotal_Quooker_energy_wasted_cost_round = Math.round(Q_Quooker_wasted * electricity_price * 365)\npercentage_Quooker_energy_wasted_round = Math.round(Q_Quooker_wasted / total_Quooker_energy * 100)\n\nyears = (Quooker_price - kettle_price) / (kettle_cost_yearly - Quooker_cost_yearly)\nyears_round = Math.round(years * 100) / 100\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"\ndt = aq.table({\n  years: Array.from({length: 200}, (_, i) => i + 1),\n  kettle: Array.from({length: 200}, (_, i) => {\n    return (i + 1) * kettle_cost_yearly + kettle_price\n  }),\n  Quooker: Array.from({length: 200}, (_, i) => {\n    return (i + 1) * Quooker_cost_yearly + Quooker_price\n  })\n})\n\n// Prepare the data in a format suitable for Plot.line\ndata = dt.objects().flatMap(({years, kettle, Quooker}) => [\n  {years, value: kettle, key: 'Kettle'},\n  {years, value: Quooker, key: 'Quooker'}\n]);\n\nPlot.plot({\n  y: {\n    grid: true,\n    label: 'Cumulative cost (Euro)'\n  },\n  x: {\n    grid: true,\n    label: 'Time (years)'\n  },\n  color: {\n    domain: [\"Kettle\", \"Quooker\"], legend: true, type: \"categorical\", range: [\"#1f77b4\", \"#ff7f0e\"]\n  },\n  marks: [\n    Plot.line(data, {x: 'years', y: 'value', stroke: 'key'})\n  ]})\n\n"},{"methodName":"interpretQuiet","source":"shinyInput('kettle_efficiency')"},{"methodName":"interpretQuiet","source":"shinyInput('Quooker_efficiency')"},{"methodName":"interpretQuiet","source":"shinyInput('cups_per_day')"},{"methodName":"interpretQuiet","source":"shinyInput('kettle_overfill')"},{"methodName":"interpretQuiet","source":"shinyInput('Quooker_price')"},{"methodName":"interpretQuiet","source":"shinyInput('kettle_price')"},{"methodName":"interpretQuiet","source":"shinyInput('electricity_price')"}]}
 </script>
 <script type="module">
 window._ojs.paths.runtimeToDoc = "../../posts/2023-07-04-hot-water-tap-efficiency";
