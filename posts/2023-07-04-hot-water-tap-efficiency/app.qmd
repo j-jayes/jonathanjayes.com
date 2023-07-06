@@ -1,0 +1,132 @@
+---
+title: "The Economics of Instant Hot Water: Quooker vs Kettle"
+format: html
+draft: true
+---
+
+I recently visited my cousin in the United Kingdom. In her house, there was, in addition to a standard tap in the kitchen sink, a tap that dispensed boiling water instantly. It was convenient, removing any delay between the thought of tea and the first sip. But is it economically sound compared to a simple electric kettle?
+
+The instant hot water tap has a small, vacuum sealed reservoir.
+
+Factoring in both appliances' energy efficiencies, the Quooker uses about 0.303 kWh daily while maintaining a constant 110°C. Comparatively, an overfilled kettle, used for 4 cups of tea a day, uses roughly 0.297 kWh. While the difference is slight, over time, it adds up.
+
+Coupled with a substantial upfront cost difference, with a Quooker priced much higher than a typical electric kettle, the overall expense of a Quooker is considerable. In a calculation with specific variables (90% efficiency, 4 cups a day, 150ml kettle overfill, a Quooker priced at 1000 units, kettle at 50, and electricity at 0.15 units/kWh), it takes an extraordinary 147 years for the Quooker to be a more cost-effective option.
+
+Remember, these results depend heavily on variables like usage patterns and energy prices. For a more personal evaluation, we've created an interactive widget on our page to adjust these variables to your lifestyle.
+
+In conclusion, the Quooker brings unrivaled convenience but at a cost. Its long-term economic payoff may not suit all users, reaffirming the traditional kettle's place in most kitchens.
+
+```{ojs}
+import { aq, op } from '@uwdata/arquero'
+```
+
+```{ojs}
+//| panel: input
+viewof kettle_efficiency= Inputs.range(
+  [50, 100], 
+  {value: 70, step: 5, label: "Kettle efficiency:"}
+)
+
+viewof Quooker_efficiency= Inputs.range(
+  [50, 100], 
+  {value: 90, step: 5, label: "Quooker efficiency:"}
+)
+
+viewof cups_per_day= Inputs.range(
+  [0, 25], 
+  {value: 8, step: 1, label: "Cups of tea per day:"}
+)
+
+viewof kettle_overfill= Inputs.range(
+  [0, 1000], 
+  {value: 250, step: 50, label: "ml by which kettle is overfilled:"}
+)
+
+viewof Quooker_price= Inputs.range(
+  [50, 2000], 
+  {value: 1000, step: 50, label: "Price of Quooker (Euro):"}
+)
+
+viewof kettle_price= Inputs.range(
+  [50, 2000], 
+  {value: 50, step: 50, label: "Price of kettle (Euro):"}
+)
+
+viewof electricity_price= Inputs.range(
+  [0, 1], 
+  {value: .3, step: 0.05, label: "Price of electricity per kWh (Euro):"}
+)
+```
+
+```{ojs}
+c = 4.184  // Specific heat capacity of water in J/g°C
+T_change = 80  // Change in temperature for kettle (100°C - 20°C)
+T_change_Quooker = 90  // Change in temperature for Quooker (110°C - 20°C)
+water_density = 1  // Density of water in g/mL
+mass_tea = 250 * water_density
+mass_overfill = kettle_overfill * water_density
+mass_kettle = mass_tea + mass_overfill
+Q_kettle = (mass_kettle * c * T_change) / (kettle_efficiency / 100)  // Energy in joules
+Q_kettle_kWh = Q_kettle / (3.6 * Math.pow(10, 6))  // Convert energy to kWh
+total_kettle_energy = Q_kettle_kWh * cups_per_day // Total energy for kettle per day
+Q_Quooker = (mass_tea * c * T_change_Quooker) / (Quooker_efficiency / 100)  // Energy in joules
+Q_Quooker_kWh = Q_Quooker / (3.6 * Math.pow(10, 6))  // Convert energy to kWh
+total_Quooker_energy = (Q_Quooker_kWh * cups_per_day) + 0.24  // Total energy for Quooker per day
+kettle_cost_daily = total_kettle_energy * electricity_price
+Quooker_cost_daily = total_Quooker_energy * electricity_price
+kettle_cost_yearly = kettle_cost_daily * 365
+Quooker_cost_yearly = Quooker_cost_daily * 365
+
+kettle_cost_yearly_round = Math.round(kettle_cost_yearly * 100) / 100
+Quooker_cost_yearly_round = Math.round(Quooker_cost_yearly * 100) / 100
+```
+
+
+The operating cost of the kettle is €${kettle_cost_yearly_round} per year.
+
+The operating cost of the Quooker is €${Quooker_cost_yearly_round} per year.
+
+```{ojs}
+years = (Quooker_price - kettle_price) / (kettle_cost_yearly - Quooker_cost_yearly)
+
+years_round = Math.round(years * 100) / 100
+```
+
+The Quooker will pay for itself in ${years_round} years.
+
+```{ojs}
+
+dt = aq.table({
+  years: Array.from({length: 200}, (_, i) => i + 1),
+  kettle: Array.from({length: 200}, (_, i) => {
+    return (i + 1) * kettle_cost_yearly + kettle_price
+  }),
+  Quooker: Array.from({length: 200}, (_, i) => {
+    return (i + 1) * Quooker_cost_yearly + Quooker_price
+  })
+})
+
+// Prepare the data in a format suitable for Plot.line
+data = dt.objects().flatMap(({years, kettle, Quooker}) => [
+  {years, value: kettle, key: 'Kettle'},
+  {years, value: Quooker, key: 'Quooker'}
+]);
+
+Plot.plot({
+  y: {
+    grid: true,
+    label: 'Cumulative cost (Euro)'
+  },
+  x: {
+    grid: true,
+    label: 'Time (years)'
+  },
+  color: {
+    domain: ["Kettle", "Quooker"], legend: true, type: "categorical", range: ["#1f77b4", "#ff7f0e"]
+  },
+  marks: [
+    Plot.line(data, {x: 'years', y: 'value', stroke: 'key'})
+  ]})
+
+```
+

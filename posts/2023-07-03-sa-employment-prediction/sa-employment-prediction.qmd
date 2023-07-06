@@ -1,0 +1,19 @@
+---
+title: "Predicting South Africa's youth employment"
+format: html
+draft: true
+---
+
+Predctive Insights is running a competition on Zindi to predict which young people will find employment. The competition uses data from Statistics South Africa's quartlery labour force survey. The data is available on the [Zindi website](https://zindi.africa/competitions/predictive-insights-youth-income-prediction-challenge).
+
+While the prediction problem is interesting, perhaps more interesting is the quirk of the data that I discovered while exploring it. 
+
+## My approach to the problem
+
+My approach to predictions problems is very formulaic. 
+
+1. draw a bunch of graphs
+2. run a lasso regression to get an idea of which variables are important
+3. run an ensemble of models including a random forest, a gradient boosting machine, and a neural network
+4. profit.
+

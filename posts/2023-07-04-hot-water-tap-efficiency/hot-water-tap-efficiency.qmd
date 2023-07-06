@@ -1,0 +1,227 @@
+---
+title: "Untitled"
+format: html
+---
+
+
+```{python}
+kettle_power = 1500  # in Watts
+time_to_boil_1_cup = 0.0667 / 4  # in hours
+kettle_energy_per_cup = kettle_power * time_to_boil_1_cup  # in Watt-hours
+kettle_cost_per_cup = kettle_energy_per_cup * 0.15 / 1000  # in USD
+
+tap_power = 0.5  # in Watts
+hours_per_day = 24  # 24 hours in a day
+
+# Standby cost for one day
+tap_standby_energy_per_day = tap_power * hours_per_day  # in Watt-hours
+tap_standby_cost_per_day = tap_standby_energy_per_day * 0.15 / 1000  # in USD
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+num_cups = np.arange(1, 31)  # an array from 1 to 30 cups
+
+kettle_costs = kettle_cost_per_cup * num_cups
+tap_costs = tap_standby_cost_per_day + np.zeros_like(num_cups)  # as the cost is fixed per day
+
+# As heating a cup of water is instantaneous, we neglect its cost
+tap_cost_per_cup = tap_standby_cost_per_day / num_cups  # in USD
+
+
+plt.plot(num_cups, kettle_costs, label='Kettle')
+plt.plot(num_cups, tap_costs, label='Instant hot water tap')
+plt.xlabel('Number of cups per day')
+plt.ylabel('Cost (USD)')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+```
+
+
+
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.integrate import odeint
+
+# Define the function to compute derivative
+def model(T, t):
+    T_ambient = 20  # Ambient temperature in degree Celsius
+    k = 0.02  # Cooling constant. This would change based on the specific kettle/environment
+    dTdt = -k * (T - T_ambient)
+    return dTdt
+
+T0 = 100  # Starting temperature of the water in degree Celsius
+
+t = np.linspace(0, 120, num=500)  # Time points in minutes. Here we simulate for 2 hours
+
+# Solve the ODE
+T = odeint(model, T0, t)
+
+# Plot the results
+plt.plot(t, T)
+plt.xlabel('Time (minutes)')
+plt.ylabel('Temperature (°C)')
+plt.title('Cooling of Boiled Water in a Kettle Over Time')
+plt.grid(True)
+plt.show()
+
+```
+
+
+
+```{python}
+def calculate_energy(Quooker_efficiency, kettle_efficiency, cups_per_day, kettle_overfill):
+    # Constants
+    c = 4.184  # Specific heat capacity of water in J/g°C
+    T_change = 80  # Change in temperature for kettle (100°C - 20°C)
+    T_change_Quooker = 90  # Change in temperature for Quooker (110°C - 20°C)
+    water_density = 1  # Density of water in g/mL
+
+    # Mass of water for one cup of tea (in grams)
+    mass_tea = 250 * water_density
+
+    # Extra water heated by kettle (in grams)
+    mass_overfill = kettle_overfill * water_density
+
+    # Total water heated by kettle (in grams)
+    mass_kettle = mass_tea + mass_overfill
+
+    # Calculate energy for kettle
+    Q_kettle = (mass_kettle * c * T_change) / (kettle_efficiency / 100)  # Energy in joules
+    Q_kettle_kWh = Q_kettle / (3.6 * 10**6)  # Convert energy to kWh
+    total_kettle_energy = Q_kettle_kWh * cups_per_day  # Total energy for kettle per day
+
+    # Calculate energy for Quooker
+    Q_Quooker = (mass_tea * c * T_change_Quooker) / (Quooker_efficiency / 100)  # Energy in joules
+    Q_Quooker_kWh = Q_Quooker / (3.6 * 10**6)  # Convert energy to kWh
+    total_Quooker_energy = (Q_Quooker_kWh * cups_per_day) + 0.24  # Total energy for Quooker per day
+
+    print(f'Total energy for kettle per day: {total_kettle_energy} kWh')
+    print(f'Total energy for Quooker per day: {total_Quooker_energy} kWh')
+
+
+calculate_energy(90, 80, 10, 250)
+
+```
+
+
+```{python}
+def calculate_energy_and_payoff(Quooker_efficiency, kettle_efficiency, cups_per_day, kettle_overfill, Quooker_price, kettle_price, electricity_price):
+    # Constants
+    c = 4.184  # Specific heat capacity of water in J/g°C
+    T_change = 80  # Change in temperature for kettle (100°C - 20°C)
+    T_change_Quooker = 90  # Change in temperature for Quooker (110°C - 20°C)
+    water_density = 1  # Density of water in g/mL
+
+    # Mass of water for one cup of tea (in grams)
+    mass_tea = 250 * water_density
+
+    # Extra water heated by kettle (in grams)
+    mass_overfill = kettle_overfill * water_density
+
+    # Total water heated by kettle (in grams)
+    mass_kettle = mass_tea + mass_overfill
+
+    # Calculate energy for kettle
+    Q_kettle = (mass_kettle * c * T_change) / (kettle_efficiency / 100)  # Energy in joules
+    Q_kettle_kWh = Q_kettle / (3.6 * 10**6)  # Convert energy to kWh
+    total_kettle_energy = Q_kettle_kWh * cups_per_day  # Total energy for kettle per day
+
+    # Calculate energy for Quooker
+    Q_Quooker = (mass_tea * c * T_change_Quooker) / (Quooker_efficiency / 100)  # Energy in joules
+    Q_Quooker_kWh = Q_Quooker / (3.6 * 10**6)  # Convert energy to kWh
+    total_Quooker_energy = (Q_Quooker_kWh * cups_per_day) + 0.24  # Total energy for Quooker per day
+
+    # Calculate costs for kettle and Quooker
+    kettle_cost = total_kettle_energy * electricity_price + kettle_price
+    Quooker_cost = total_Quooker_energy * electricity_price + Quooker_price
+
+    # Calculate payoff period
+    daily_savings = total_kettle_energy * electricity_price - total_Quooker_energy * electricity_price
+    payoff_days = (Quooker_price - kettle_price) / daily_savings
+
+    # convert payoff_days to months
+    payoff_months = payoff_days / 30
+
+    print(f'Total energy for kettle per day: {total_kettle_energy} kWh, cost: {kettle_cost} units')
+    print(f'Total energy for Quooker per day: {total_Quooker_energy} kWh, cost: {Quooker_cost} units')
+    print(f'Payoff period for Quooker: {payoff_months} months')
+
+calculate_energy_and_payoff(90, 80, 10, 250, 1000, 50, 0.15)
+
+```
+
+
+
+```{python}
+import matplotlib.pyplot as plt
+
+def calculate_daily_cost(Quooker_efficiency, kettle_efficiency, cups_per_day, kettle_overfill, Quooker_price, kettle_price, electricity_price):
+    c = 4.184  # Specific heat capacity of water in J/g°C
+    T_change = 80  # Change in temperature for kettle (100°C - 20°C)
+    T_change_Quooker = 90  # Change in temperature for Quooker (110°C - 20°C)
+    water_density = 1  # Density of water in g/mL
+
+    # Mass of water for one cup of tea (in grams)
+    mass_tea = 250 * water_density
+
+    # Extra water heated by kettle (in grams)
+    mass_overfill = kettle_overfill * water_density
+
+    # Total water heated by kettle (in grams)
+    mass_kettle = mass_tea + mass_overfill
+
+    # Calculate energy for kettle
+    Q_kettle = (mass_kettle * c * T_change) / (kettle_efficiency / 100)  # Energy in joules
+    Q_kettle_kWh = Q_kettle / (3.6 * 10**6)  # Convert energy to kWh
+    total_kettle_energy = Q_kettle_kWh * cups_per_day  # Total energy for kettle per day
+
+    # Calculate energy for Quooker
+    Q_Quooker = (mass_tea * c * T_change_Quooker) / (Quooker_efficiency / 100)  # Energy in joules
+    Q_Quooker_kWh = Q_Quooker / (3.6 * 10**6)  # Convert energy to kWh
+    total_Quooker_energy = (Q_Quooker_kWh * cups_per_day) + 0.24  # Total energy for Quooker per day
+
+    # Calculate costs for kettle and Quooker
+    kettle_cost = total_kettle_energy * electricity_price + kettle_price
+    Quooker_cost = total_Quooker_energy * electricity_price + Quooker_price
+
+    # Calculate payoff period
+    daily_savings = total_kettle_energy * electricity_price - total_Quooker_energy * electricity_price
+    payoff_days = (Quooker_price - kettle_price) / daily_savings
+
+    # convert payoff_days to months
+    payoff_months = payoff_days / 30
+
+    # Calculate daily costs for kettle and Quooker
+    kettle_cost_daily = total_kettle_energy * electricity_price
+    Quooker_cost_daily = total_Quooker_energy * electricity_price
+
+    return kettle_cost_daily, Quooker_cost_daily
+
+# Calculate daily costs
+kettle_cost_daily, Quooker_cost_daily = calculate_daily_cost(90, 70, 200, 250, 1000, 50, 0.15)
+
+kettle_price = 50
+Quooker_price = 1000
+
+# Calculate cumulative costs over a period of time (e.g., 5 years)
+time_period_days = 365 * 5
+time = list(range(1, time_period_days + 1))
+kettle_costs = [kettle_cost_daily * day + kettle_price for day in time]
+Quooker_costs = [Quooker_cost_daily * day + Quooker_price for day in time]
+
+# Plot costs
+plt.figure(figsize=(10, 6))
+plt.plot(time, kettle_costs, label='Kettle')
+plt.plot(time, Quooker_costs, label='Quooker')
+plt.xlabel('Time (days)')
+plt.ylabel('Cumulative cost (units)')
+plt.legend()
+plt.grid()
+plt.show()
+
+```

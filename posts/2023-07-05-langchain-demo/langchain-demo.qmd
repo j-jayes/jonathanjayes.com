@@ -1,0 +1,30 @@
+---
+title: "Untitled"
+format: html
+---
+
+# Blog post structure
+
+One claim about generative AI is that it will replace humans doing repetitive tasks. In this post, we will explore how to use generative AI to extract specific information from a set of PDF documents.
+
+The problem is quite simple, but laborious to do manually. We have a set of PDF documents that contain specific information, and we want to programatically access the information in order to update a table of summary statistics.
+
+The solution involves a clever tool called [LangChain](https://python.langchain.com/docs/get_started/introduction.html), a framework that allows us to connect a langauge model to other sources of data.
+
+## Problem
+
+The National Treasury in South Africa produces a fantastically informative budget each year, which is available as a PDF document. It includes headline figures like GDP growth, inflation, revenue and expenditure, as well as more detailed information about the budget for each government department.
+
+
+
+
+## 1. Introduction
+
+ChatGPT is fantastic for generating text. In the case that it does not have the answer in it's training data, in order for us to ask it a question and get a useful answer, we need to be able to give ChatGPT access to the information it needs to answer the question. While the context window that ChatGPT can have access to has increased in size recently to 16,000 tokens, this is often not enough to give it the information it needs to answer a question.
+
+In this post, we will explore how to extract information from a pdf document and use it to answer questions.
+
+## 2. Problem
+
+Say you have a set of PDF documents that contain specific infromation, and you want to programatically access the information in order to update a table of summary statistics.
+
