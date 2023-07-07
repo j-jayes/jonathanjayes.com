@@ -75,7 +75,7 @@ Because of overfilling the kettle, we must raise the temperature of ${mass_kettl
 
 For the Quooker, we get the following energy consumption: 
 
-Because the Quooker uses 10 Watts to maintain the water at 110 degrees Celsius, it uses 0.24 kWh per day in standby. This is equivalent to € ${Math.round(0.24 * electricity_price * 100)/100} per day. In addition, we have to heat ${mass_tea}g of water to 100 degrees Celsius, which requires ${Math.round(Q_Quooker) / 1000} kilojoules of energy, or ${Math.round(Q_Quooker_kWh * 100) / 100} kWh for each cup of tea. This is equivalent to € ${Math.round(Quooker_cost_daily * 100) / 100} per day at ${cups_per_day} cups of tea per day.
+Because the Quooker uses 10 Watts to maintain the water at 110 degrees Celsius, it uses 0.24 kWh per day in standby. This is equivalent to € ${Math.round(0.24 * electricity_price * 100)/100} per day. In addition, we have to heat ${mass_tea}g of water to 110 degrees Celsius, which requires ${Math.round(Q_Quooker) / 1000} kilojoules of energy, or ${Math.round(Q_Quooker_kWh * 100) / 100} kWh for each cup of tea. This is equivalent to € ${Math.round(Quooker_cost_daily * 100) / 100} per day at ${cups_per_day} cups of tea per day.
 
 
 So, the kettle uses € ${kettle_cost_yearly_round} per year, and the Quooker uses € ${Quooker_cost_yearly_round} per year under our assumptions.
