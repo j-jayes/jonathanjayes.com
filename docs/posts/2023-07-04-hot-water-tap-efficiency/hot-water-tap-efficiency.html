@@ -363,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We then convert the energy from Joules to kWh, and multiply by the electricity price to get the cost of boiling the kettle.</p>
 <p>Energy (kWh) = Energy (Joules) / 3.6e6</p>
 <p>Cost = Energy (kWh) * Cost per kWh</p>
-<p>Plugging in the numbers, we get the following equation for the energy consumption of the kettle:</p>
+<p>Plugging in the numbers, we get the following calculation for the energy consumption of the kettle:</p>
 <p>Because of overfilling the kettle, we must raise the temperature of <span><span id="ojs-element-id-10"></span>g</span> of water by <span><span id="ojs-element-id-11"></span>°C</span> each time we boil the kettle, even if we only use <span><span id="ojs-element-id-12"></span>g</span> of water in our tea. The kettle requires <span><span id="ojs-element-id-27"></span></span> kilojoules of energy, or <span><span id="ojs-element-id-28"></span></span> kWh each time we boil it. This is equivalent to € <span><span id="ojs-element-id-29"></span></span> per day at <span><span id="ojs-element-id-13"></span></span> cups of tea per day.</p>
 <p>For the Quooker, we get the following energy consumption:</p>
 <p>Because the Quooker uses 10 Watts to maintain the water at 110 degrees Celsius, it uses 0.24 kWh per day in standby. This is equivalent to € <span><span id="ojs-element-id-30"></span></span> per day. In addition, we have to heat <span><span id="ojs-element-id-14"></span>g</span> of water to 110 degrees Celsius, which requires <span><span id="ojs-element-id-31"></span></span> kilojoules of energy, or <span><span id="ojs-element-id-32"></span></span> kWh for each cup of tea. This is equivalent to € <span><span id="ojs-element-id-33"></span></span> per day at <span><span id="ojs-element-id-15"></span></span> cups of tea per day.</p>
@@ -812,6 +812,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="what-else-do-we-learn" class="level2">
 <h2 class="anchored" data-anchor-id="what-else-do-we-learn">What else do we learn?</h2>
 <p>As the number of cups of tea increases, the Quooker becomes more cost-effective than the kettle, as the wasted energy is a fixed amount, while the wasted energy of the kettle increases linearly with the number of cups of tea, assuming the overfilling remains constant.</p>
+<p>Reducing the amount by which we overfill the kettle decreases the energy loss and the cost of operating the kettle.</p>
 </section>
 <section id="appendix" class="level2">
 <h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
@@ -1195,7 +1196,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>Cost = Energy (kWh) * Cost per kWh</span>
 <span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>Plugging in the numbers, we get the following equation for the energy consumption of the kettle:</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>Plugging in the numbers, we get the following calculation for the energy consumption of the kettle:</span>
 <span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>Because of overfilling the kettle, we must raise the temperature of ${mass_kettle}g of water by ${T_change}°C each time we boil the kettle, even if we only use ${mass_tea}g of water in our tea. The kettle requires ${Math.round(Q_kettle) / 1000} kilojoules of energy, or ${Math.round(Q_kettle_kWh * 100) / 100} kWh each time we boil it. This is equivalent to € ${Math.round(kettle_cost_daily * 100) /100} per day at ${cups_per_day} cups of tea per day.</span>
 <span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
@@ -1346,40 +1347,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-228"><a href="#cb6-228" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-229"><a href="#cb6-229" aria-hidden="true" tabindex="-1"></a><span class="vs">As the number of cups of tea increases, the Quooker becomes more cost-effective than the kettle, as the wasted energy is a fixed amount, while the wasted energy of the kettle increases linearly with the number of cups of tea, assuming the overfilling remains constant.</span></span>
 <span id="cb6-230"><a href="#cb6-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-231"><a href="#cb6-231" aria-hidden="true" tabindex="-1"></a><span class="vs">## Appendix</span></span>
+<span id="cb6-231"><a href="#cb6-231" aria-hidden="true" tabindex="-1"></a><span class="vs">Reducing the amount by which we overfill the kettle decreases the energy loss and the cost of operating the kettle. </span></span>
 <span id="cb6-232"><a href="#cb6-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-233"><a href="#cb6-233" aria-hidden="true" tabindex="-1"></a><span class="vs">I have assumed that the water in the kettle cools completely between each boil. This would require 2 hours between each boil, assuming an ambient temperature of 20 degrees Celsius and a cooling constant of 0.02. The cooling constant would change based on the specific kettle/environment. See the code below for the simulation.</span></span>
+<span id="cb6-233"><a href="#cb6-233" aria-hidden="true" tabindex="-1"></a><span class="vs">## Appendix</span></span>
 <span id="cb6-234"><a href="#cb6-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-237"><a href="#cb6-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-238"><a href="#cb6-238" aria-hidden="true" tabindex="-1"></a>#<span class="op">|</span> echo<span class="op">:</span> <span class="kw">true</span></span>
-<span id="cb6-239"><a href="#cb6-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-240"><a href="#cb6-240" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib<span class="op">.</span><span class="at">pyplot</span> <span class="im">as</span> plt</span>
-<span id="cb6-241"><a href="#cb6-241" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-242"><a href="#cb6-242" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy<span class="op">.</span><span class="at">integrate</span> <span class="im">import</span> odeint</span>
-<span id="cb6-243"><a href="#cb6-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-244"><a href="#cb6-244" aria-hidden="true" tabindex="-1"></a># Define the <span class="kw">function</span> to compute derivative</span>
-<span id="cb6-245"><a href="#cb6-245" aria-hidden="true" tabindex="-1"></a>def <span class="fu">model</span>(T<span class="op">,</span> t)<span class="op">:</span></span>
-<span id="cb6-246"><a href="#cb6-246" aria-hidden="true" tabindex="-1"></a>    T_ambient <span class="op">=</span> <span class="dv">20</span>  # Ambient temperature <span class="kw">in</span> degree Celsius</span>
-<span id="cb6-247"><a href="#cb6-247" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> <span class="fl">0.02</span>  # Cooling constant<span class="op">.</span> <span class="at">This</span> would change based on the specific kettle<span class="op">/</span>environment</span>
-<span id="cb6-248"><a href="#cb6-248" aria-hidden="true" tabindex="-1"></a>    dTdt <span class="op">=</span> <span class="op">-</span>k <span class="op">*</span> (T <span class="op">-</span> T_ambient)</span>
-<span id="cb6-249"><a href="#cb6-249" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dTdt</span>
-<span id="cb6-250"><a href="#cb6-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-251"><a href="#cb6-251" aria-hidden="true" tabindex="-1"></a>T0 <span class="op">=</span> <span class="dv">100</span>  # Starting temperature <span class="kw">of</span> the water <span class="kw">in</span> degree Celsius</span>
+<span id="cb6-235"><a href="#cb6-235" aria-hidden="true" tabindex="-1"></a><span class="vs">I have assumed that the water in the kettle cools completely between each boil. This would require 2 hours between each boil, assuming an ambient temperature of 20 degrees Celsius and a cooling constant of 0.02. The cooling constant would change based on the specific kettle/environment. See the code below for the simulation.</span></span>
+<span id="cb6-236"><a href="#cb6-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-239"><a href="#cb6-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-240"><a href="#cb6-240" aria-hidden="true" tabindex="-1"></a>#<span class="op">|</span> echo<span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb6-241"><a href="#cb6-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-242"><a href="#cb6-242" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib<span class="op">.</span><span class="at">pyplot</span> <span class="im">as</span> plt</span>
+<span id="cb6-243"><a href="#cb6-243" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-244"><a href="#cb6-244" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy<span class="op">.</span><span class="at">integrate</span> <span class="im">import</span> odeint</span>
+<span id="cb6-245"><a href="#cb6-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-246"><a href="#cb6-246" aria-hidden="true" tabindex="-1"></a># Define the <span class="kw">function</span> to compute derivative</span>
+<span id="cb6-247"><a href="#cb6-247" aria-hidden="true" tabindex="-1"></a>def <span class="fu">model</span>(T<span class="op">,</span> t)<span class="op">:</span></span>
+<span id="cb6-248"><a href="#cb6-248" aria-hidden="true" tabindex="-1"></a>    T_ambient <span class="op">=</span> <span class="dv">20</span>  # Ambient temperature <span class="kw">in</span> degree Celsius</span>
+<span id="cb6-249"><a href="#cb6-249" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> <span class="fl">0.02</span>  # Cooling constant<span class="op">.</span> <span class="at">This</span> would change based on the specific kettle<span class="op">/</span>environment</span>
+<span id="cb6-250"><a href="#cb6-250" aria-hidden="true" tabindex="-1"></a>    dTdt <span class="op">=</span> <span class="op">-</span>k <span class="op">*</span> (T <span class="op">-</span> T_ambient)</span>
+<span id="cb6-251"><a href="#cb6-251" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dTdt</span>
 <span id="cb6-252"><a href="#cb6-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-253"><a href="#cb6-253" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np<span class="op">.</span><span class="fu">linspace</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">120</span><span class="op">,</span> num<span class="op">=</span><span class="dv">500</span>)  # Time points <span class="kw">in</span> minutes<span class="op">.</span> <span class="at">Here</span> we simulate <span class="cf">for</span> <span class="dv">2</span> hours</span>
+<span id="cb6-253"><a href="#cb6-253" aria-hidden="true" tabindex="-1"></a>T0 <span class="op">=</span> <span class="dv">100</span>  # Starting temperature <span class="kw">of</span> the water <span class="kw">in</span> degree Celsius</span>
 <span id="cb6-254"><a href="#cb6-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-255"><a href="#cb6-255" aria-hidden="true" tabindex="-1"></a># Solve the ODE</span>
-<span id="cb6-256"><a href="#cb6-256" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="fu">odeint</span>(model<span class="op">,</span> T0<span class="op">,</span> t)</span>
-<span id="cb6-257"><a href="#cb6-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-258"><a href="#cb6-258" aria-hidden="true" tabindex="-1"></a># Plot the results</span>
-<span id="cb6-259"><a href="#cb6-259" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">plot</span>(t<span class="op">,</span> T)</span>
-<span id="cb6-260"><a href="#cb6-260" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">xlabel</span>(<span class="st">'Time (minutes)'</span>)</span>
-<span id="cb6-261"><a href="#cb6-261" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">ylabel</span>(<span class="st">'Temperature (°C)'</span>)</span>
-<span id="cb6-262"><a href="#cb6-262" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">title</span>(<span class="st">'Cooling of Boiled Water in a Kettle Over Time'</span>)</span>
-<span id="cb6-263"><a href="#cb6-263" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">grid</span>(True)</span>
-<span id="cb6-264"><a href="#cb6-264" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">show</span>()</span>
-<span id="cb6-265"><a href="#cb6-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-266"><a href="#cb6-266" aria-hidden="true" tabindex="-1"></a><span class="vs">```</span></span>
+<span id="cb6-255"><a href="#cb6-255" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np<span class="op">.</span><span class="fu">linspace</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">120</span><span class="op">,</span> num<span class="op">=</span><span class="dv">500</span>)  # Time points <span class="kw">in</span> minutes<span class="op">.</span> <span class="at">Here</span> we simulate <span class="cf">for</span> <span class="dv">2</span> hours</span>
+<span id="cb6-256"><a href="#cb6-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-257"><a href="#cb6-257" aria-hidden="true" tabindex="-1"></a># Solve the ODE</span>
+<span id="cb6-258"><a href="#cb6-258" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="fu">odeint</span>(model<span class="op">,</span> T0<span class="op">,</span> t)</span>
+<span id="cb6-259"><a href="#cb6-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-260"><a href="#cb6-260" aria-hidden="true" tabindex="-1"></a># Plot the results</span>
+<span id="cb6-261"><a href="#cb6-261" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">plot</span>(t<span class="op">,</span> T)</span>
+<span id="cb6-262"><a href="#cb6-262" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">xlabel</span>(<span class="st">'Time (minutes)'</span>)</span>
+<span id="cb6-263"><a href="#cb6-263" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">ylabel</span>(<span class="st">'Temperature (°C)'</span>)</span>
+<span id="cb6-264"><a href="#cb6-264" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">title</span>(<span class="st">'Cooling of Boiled Water in a Kettle Over Time'</span>)</span>
+<span id="cb6-265"><a href="#cb6-265" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">grid</span>(True)</span>
+<span id="cb6-266"><a href="#cb6-266" aria-hidden="true" tabindex="-1"></a>plt<span class="op">.</span><span class="fu">show</span>()</span>
+<span id="cb6-267"><a href="#cb6-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-268"><a href="#cb6-268" aria-hidden="true" tabindex="-1"></a><span class="vs">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

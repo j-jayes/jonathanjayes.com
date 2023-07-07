@@ -69,7 +69,7 @@ Energy (kWh) = Energy (Joules) / 3.6e6
 
 Cost = Energy (kWh) * Cost per kWh
 
-Plugging in the numbers, we get the following equation for the energy consumption of the kettle:
+Plugging in the numbers, we get the following calculation for the energy consumption of the kettle:
 
 Because of overfilling the kettle, we must raise the temperature of ${mass_kettle}g of water by ${T_change}°C each time we boil the kettle, even if we only use ${mass_tea}g of water in our tea. The kettle requires ${Math.round(Q_kettle) / 1000} kilojoules of energy, or ${Math.round(Q_kettle_kWh * 100) / 100} kWh each time we boil it. This is equivalent to € ${Math.round(kettle_cost_daily * 100) /100} per day at ${cups_per_day} cups of tea per day.
 
@@ -220,6 +220,8 @@ Plot.plot({
 ## What else do we learn?
 
 As the number of cups of tea increases, the Quooker becomes more cost-effective than the kettle, as the wasted energy is a fixed amount, while the wasted energy of the kettle increases linearly with the number of cups of tea, assuming the overfilling remains constant.
+
+Reducing the amount by which we overfill the kettle decreases the energy loss and the cost of operating the kettle. 
 
 ## Appendix
 
