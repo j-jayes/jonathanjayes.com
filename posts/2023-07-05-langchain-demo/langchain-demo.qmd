@@ -112,11 +112,12 @@ df %>%
 
 ## Visualising the data
 
-We can also make a plot of our selected series:
+We can also make a plot of our selected series. Mouse over the points to see the exact values.
+
+:::{.column-page}
 
 ```{r}
-#| column: page
-#| fig-width: 10
+#| fig-width: 12
 #| fig-height: 6
 #| fig-align: center
 library(ggrepel)
@@ -138,13 +139,17 @@ g <- df %>%
     scale_colour_discrete(guide = guide_legend(reverse = TRUE)) +
     scale_y_continuous(labels = scales::percent_format(scale = 1)) +
     geom_text_repel_interactive(aes(label = value), show.legend = F) +
-    labs(title = "Selected series from Budget Reviews and Budget Speeches (2010-2022)",
+    labs(title = "Selected series from Budget Reviews and Budget Speeches",
+         subtitle = "2010-2022",
          caption = "Source: National Treasury of South Africa",
          x = NULL,
-         y = NULL) 
+         y = NULL) +
+    theme(legend.position = "bottom")
 
 ggiraph(ggobj = g)
 ```
+
+:::
 
 ## What do we learn?
 
