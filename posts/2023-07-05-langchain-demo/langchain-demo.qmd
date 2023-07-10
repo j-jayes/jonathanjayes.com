@@ -25,7 +25,7 @@ The National Treasury in South Africa produces a fantastically informative budge
 If we want to get specific information from these documents, we can read through them and extract the information manually, searching for specific terms with the control + F functionality. This is a time consuming process, and it's easy to make mistakes. What if we could ask a computer to do it for us?
 
 :::{.callout-note}
-There are, in addition to the PDF documents a series of excel files that National Treasury releases too. These files do contain the information that we want, but are not in an easily machine readable format[^There are ideosyncracies between each year that mean ingesting this data into a tidy format is time consuming]. Useful tools like [EconData](https://codera.co.za/econdata/) from [Codera Analytics](https://codera.co.za/) make it much easier to access this data programatically.
+There are, in addition to the PDF documents a series of excel files that National Treasury releases too. These files do contain the information that we want, but are not in an easily machine readable format.^[There are ideosyncracies between each year that mean ingesting this data into a tidy format is time consuming] Useful tools like [EconData](https://codera.co.za/econdata/) from [Codera Analytics](https://codera.co.za/) make it much easier to access this data programatically.
 
 :::
 
