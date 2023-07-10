@@ -130,6 +130,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
 <script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="../../site_libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+<script src="../../site_libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<script src="../../site_libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+<script src="../../site_libs/flatbush-4.0.0/flatbush.min.js"></script>
+<link href="../../site_libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
+<script src="../../site_libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script>
+<script src="../../site_libs/girafe-binding-0.8.6/girafe.js"></script>
 
 
 </head>
@@ -256,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Transforming National Budget Reviews into Queryable Knowledge: A Tutorial with LangChain</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Transforming National Budget Documents into Queryable Knowledge</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 <div>
@@ -288,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Imagine the power to query an entire country’s budget documents as easily as asking Alexa about the weather. This isn’t a futuristic fantasy. It’s here, now. Using a powerful tool named <a href="https://python.langchain.com/docs/get_started/introduction.html">LangChain</a>, a framework that allows us to connect a large language model to our own data, we’ve transformed the South African National Budget Review and Budget speech into an interactive, queryable knowledge base. In this article, we delve into the process of how we breathed life into hundreds of pages of PDFs, and how you can do the same with your own data. The output in this case is a table of summary statistics that would have taken a human hours to compile, but which we can now generate in seconds.</p>
+<p>Imagine the power to query an entire country’s budget documents as easily as asking Google about the weather. This isn’t a futuristic fantasy. It’s here, now. Using a powerful tool named <a href="https://python.langchain.com/docs/get_started/introduction.html">LangChain</a>, a framework that allows us to connect a large language model to our own data, we’ve transformed the South African National Budget Reviews and Budget Speeches into an interactive, queryable knowledge base. In this article, we delve into the process of how we breathed life into hundreds of pages of PDFs, and how you can do the same with your own data. The output in this case is a table of summary statistics that would have taken a human hours to compile, but which we can now generate in seconds.</p>
 <section id="the-challenge" class="level2">
 <h2 class="anchored" data-anchor-id="the-challenge">The challenge</h2>
 <p>One of the claims of generative AI is that it will free humans from labourious tasks which are currently tedious to do manually and challenging to automate. In this article, we’ll explore how we can use LangChain to automate the process of extracting information from PDF documents.</p>
@@ -323,13 +331,13 @@ Note
     D --&gt; E[Top-n Similar Chunks]
     E --&gt; F{Large Language &lt;br&gt;Model Context Window}
     F --&gt; G((Answer))
-    style A fill:#f9d,stroke:#333,stroke-width:2px
-    style B fill:#fc0,stroke:#333,stroke-width:2px
-    style C fill:#f9d,stroke:#333,stroke-width:2px
-    style D fill:#fc0,stroke:#333,stroke-width:2px
-    style E fill:#9cf,stroke:#333,stroke-width:2px
-    style F fill:#fc0,stroke:#333,stroke-width:2px
-    style G fill:#9cf,stroke:#333,stroke-width:2px
+    style A fill:#ece7f2,stroke:#333,stroke-width:2px
+    style B fill:#a6bddb,stroke:#333,stroke-width:2px
+    style C fill:#ece7f2,stroke:#333,stroke-width:2px
+    style D fill:#a6bddb,stroke:#333,stroke-width:2px
+    style E fill:#2b8cbe,stroke:#333,stroke-width:2px
+    style F fill:#a6bddb,stroke:#333,stroke-width:2px
+    style G fill:#2b8cbe,stroke:#333,stroke-width:2px
 
 </pre>
 <div id="mermaid-tooltip-1" class="mermaidTooltip">
@@ -396,12 +404,12 @@ Note
 <div class="cell page-columns page-full">
 <div class="cell-output-display column-page">
 
-<div id="guppmyznub" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="aarsvjmzrr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#guppmyznub) .gt_table {
+:where(#aarsvjmzrr) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -426,7 +434,7 @@ Note
   border-left-color: #D3D3D3;
 }
 
-:where(#guppmyznub) .gt_heading {
+:where(#aarsvjmzrr) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -438,12 +446,12 @@ Note
   border-right-color: #D3D3D3;
 }
 
-:where(#guppmyznub) .gt_caption {
+:where(#aarsvjmzrr) .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-:where(#guppmyznub) .gt_title {
+:where(#aarsvjmzrr) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -455,7 +463,7 @@ Note
   border-bottom-width: 0;
 }
 
-:where(#guppmyznub) .gt_subtitle {
+:where(#aarsvjmzrr) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -467,13 +475,13 @@ Note
   border-top-width: 0;
 }
 
-:where(#guppmyznub) .gt_bottom_border {
+:where(#aarsvjmzrr) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#guppmyznub) .gt_col_headings {
+:where(#aarsvjmzrr) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -488,7 +496,7 @@ Note
   border-right-color: #D3D3D3;
 }
 
-:where(#guppmyznub) .gt_col_heading {
+:where(#aarsvjmzrr) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -508,7 +516,7 @@ Note
   overflow-x: hidden;
 }
 
-:where(#guppmyznub) .gt_column_spanner_outer {
+:where(#aarsvjmzrr) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -520,15 +528,15 @@ Note
   padding-right: 4px;
 }
 
-:where(#guppmyznub) .gt_column_spanner_outer:first-child {
+:where(#aarsvjmzrr) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#guppmyznub) .gt_column_spanner_outer:last-child {
+:where(#aarsvjmzrr) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#guppmyznub) .gt_column_spanner {
+:where(#aarsvjmzrr) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -540,7 +548,7 @@ Note
   width: 100%;
 }
 
-:where(#guppmyznub) .gt_group_heading {
+:where(#aarsvjmzrr) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -566,7 +574,7 @@ Note
   text-align: left;
 }
 
-:where(#guppmyznub) .gt_empty_group_heading {
+:where(#aarsvjmzrr) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -581,15 +589,15 @@ Note
   vertical-align: middle;
 }
 
-:where(#guppmyznub) .gt_from_md > :first-child {
+:where(#aarsvjmzrr) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#guppmyznub) .gt_from_md > :last-child {
+:where(#aarsvjmzrr) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#guppmyznub) .gt_row {
+:where(#aarsvjmzrr) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -608,7 +616,7 @@ Note
   overflow-x: hidden;
 }
 
-:where(#guppmyznub) .gt_stub {
+:where(#aarsvjmzrr) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -621,7 +629,7 @@ Note
   padding-right: 5px;
 }
 
-:where(#guppmyznub) .gt_stub_row_group {
+:where(#aarsvjmzrr) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -635,11 +643,11 @@ Note
   vertical-align: top;
 }
 
-:where(#guppmyznub) .gt_row_group_first td {
+:where(#aarsvjmzrr) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#guppmyznub) .gt_summary_row {
+:where(#aarsvjmzrr) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -649,16 +657,16 @@ Note
   padding-right: 5px;
 }
 
-:where(#guppmyznub) .gt_first_summary_row {
+:where(#aarsvjmzrr) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#guppmyznub) .gt_first_summary_row.thick {
+:where(#aarsvjmzrr) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#guppmyznub) .gt_last_summary_row {
+:where(#aarsvjmzrr) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -668,7 +676,7 @@ Note
   border-bottom-color: #D3D3D3;
 }
 
-:where(#guppmyznub) .gt_grand_summary_row {
+:where(#aarsvjmzrr) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -678,7 +686,7 @@ Note
   padding-right: 5px;
 }
 
-:where(#guppmyznub) .gt_first_grand_summary_row {
+:where(#aarsvjmzrr) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -688,11 +696,11 @@ Note
   border-top-color: #D3D3D3;
 }
 
-:where(#guppmyznub) .gt_striped {
+:where(#aarsvjmzrr) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#guppmyznub) .gt_table_body {
+:where(#aarsvjmzrr) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -701,7 +709,7 @@ Note
   border-bottom-color: #D3D3D3;
 }
 
-:where(#guppmyznub) .gt_footnotes {
+:where(#aarsvjmzrr) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -715,7 +723,7 @@ Note
   border-right-color: #D3D3D3;
 }
 
-:where(#guppmyznub) .gt_footnote {
+:where(#aarsvjmzrr) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -724,7 +732,7 @@ Note
   padding-right: 5px;
 }
 
-:where(#guppmyznub) .gt_sourcenotes {
+:where(#aarsvjmzrr) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -738,7 +746,7 @@ Note
   border-right-color: #D3D3D3;
 }
 
-:where(#guppmyznub) .gt_sourcenote {
+:where(#aarsvjmzrr) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -746,64 +754,64 @@ Note
   padding-right: 5px;
 }
 
-:where(#guppmyznub) .gt_left {
+:where(#aarsvjmzrr) .gt_left {
   text-align: left;
 }
 
-:where(#guppmyznub) .gt_center {
+:where(#aarsvjmzrr) .gt_center {
   text-align: center;
 }
 
-:where(#guppmyznub) .gt_right {
+:where(#aarsvjmzrr) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#guppmyznub) .gt_font_normal {
+:where(#aarsvjmzrr) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#guppmyznub) .gt_font_bold {
+:where(#aarsvjmzrr) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#guppmyznub) .gt_font_italic {
+:where(#aarsvjmzrr) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#guppmyznub) .gt_super {
+:where(#aarsvjmzrr) .gt_super {
   font-size: 65%;
 }
 
-:where(#guppmyznub) .gt_footnote_marks {
+:where(#aarsvjmzrr) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#guppmyznub) .gt_asterisk {
+:where(#aarsvjmzrr) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#guppmyznub) .gt_indent_1 {
+:where(#aarsvjmzrr) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#guppmyznub) .gt_indent_2 {
+:where(#aarsvjmzrr) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#guppmyznub) .gt_indent_3 {
+:where(#aarsvjmzrr) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#guppmyznub) .gt_indent_4 {
+:where(#aarsvjmzrr) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#guppmyznub) .gt_indent_5 {
+:where(#aarsvjmzrr) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -948,11 +956,8 @@ Note
 <p>We can also make a plot of our selected series:</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="cell-output-display column-page">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="langchain-demo_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
+<div id="htmlwidget-f444b25084dcac855216" style="width:100%;height:390px;" class="girafe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f444b25084dcac855216">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='img' id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa' viewBox='0 0 432 360'>\n <defs id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_defs'>\n  <clipPath id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_c1'>\n   <rect x='0' y='0' width='432' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_c2'>\n   <rect x='28.03' y='23.18' width='177.68' height='304.63'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_c1)'>\n   <rect x='0' y='0' width='432' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n   <rect x='0' y='0' width='432' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n  <\/g>\n  <g clip-path='url(#svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_c2)'>\n   <rect x='28.03' y='23.18' width='177.68' height='304.63' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n   <polyline points='28.03,302.21 205.71,302.21' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='28.03,243.48 205.71,243.48' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='28.03,184.74 205.71,184.74' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='28.03,126.01 205.71,126.01' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='28.03,67.27 205.71,67.27' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.27' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='28.03,272.85 205.71,272.85' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='28.03,214.11 205.71,214.11' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='28.03,155.38 205.71,155.38' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='28.03,96.64 205.71,96.64' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='28.03,37.91 205.71,37.91' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='36.11,327.81 36.11,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='49.57,327.81 49.57,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='63.03,327.81 63.03,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='76.49,327.81 76.49,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='89.95,327.81 89.95,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='103.41,327.81 103.41,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='116.87,327.81 116.87,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='130.33,327.81 130.33,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='143.79,327.81 143.79,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='157.25,327.81 157.25,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='170.71,327.81 170.71,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='184.17,327.81 184.17,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='197.63,327.81 197.63,23.18' fill='none' stroke='#DEDEDE' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <line x1='28.03' y1='272.85' x2='205.71' y2='272.85' stroke='#BEBEBE' stroke-opacity='1' stroke-width='4.27' stroke-dasharray='20,20' stroke-linejoin='round' stroke-linecap='butt'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e1' cx='36.11' cy='288.41' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2010 was -5.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e2' cx='49.57' cy='286.94' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2011 was -4.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e3' cx='63.03' cy='257.58' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2012 was 5.2'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e4' cx='76.49' cy='284.59' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2013 was -4'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e5' cx='89.95' cy='284.3' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2014 was -3.9'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e6' cx='103.41' cy='284.3' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2015 was -3.9'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e7' cx='116.87' cy='282.83' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2016 was -3.4'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e8' cx='130.33' cy='285.48' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2017 was -4.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e9' cx='143.79' cy='283.71' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2018 was -3.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e10' cx='157.25' cy='291.35' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2019 was -6.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e11' cx='170.71' cy='313.96' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2020 was -14'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e12' cx='184.17' cy='289.59' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2021 was -5.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e13' cx='197.63' cy='285.18' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Budget balance (% of GDP) in 2022 was -4.2'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e14' cx='36.11' cy='262.86' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2010 was 3.4'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e15' cx='49.57' cy='263.74' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2011 was 3.1'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e16' cx='63.03' cy='265.51' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2012 was 2.5'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e17' cx='76.49' cy='267.56' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2013 was 1.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e18' cx='89.95' cy='268.74' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2014 was 1.4'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e19' cx='103.41' cy='269.03' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2015 was 1.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e20' cx='116.87' cy='271.38' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2016 was 0.5'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e21' cx='130.33' cy='272.82' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2017 was 0.01'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e22' cx='143.79' cy='270.79' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2018 was 0.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e23' cx='157.25' cy='271.97' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2019 was 0.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e24' cx='170.71' cy='293.99' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2020 was -7.2'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e25' cx='184.17' cy='258.75' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2021 was 4.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e26' cx='197.63' cy='265.51' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='GDP growth (%) in 2022 was 2.5'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e27' cx='36.11' cy='197.37' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2010 was 25.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e28' cx='49.57' cy='174.47' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2011 was 33.5'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e29' cx='63.03' cy='150.09' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2012 was 41.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e30' cx='76.49' cy='170.35' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2013 was 34.9'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e31' cx='89.95' cy='153.03' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2014 was 40.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e32' cx='103.41' cy='141.28' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2015 was 44.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e33' cx='116.87' cy='138.64' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2016 was 45.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e34' cx='130.33' cy='116.32' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2017 was 53.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e35' cx='143.79' cy='109.56' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2018 was 55.6'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e36' cx='157.25' cy='91.94' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2019 was 61.6'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e37' cx='170.71' cy='37.02' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2020 was 80.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e38' cx='184.17' cy='68.74' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2021 was 69.5'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e39' cx='197.63' cy='64.04' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government debt (% of GDP) in 2022 was 71.1'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e40' cx='36.11' cy='182.39' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2010 was 30.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e41' cx='49.57' cy='177.11' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2011 was 32.6'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e42' cx='63.03' cy='176.23' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2012 was 32.9'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e43' cx='76.49' cy='175.35' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2013 was 33.2'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e44' cx='89.95' cy='178.87' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2014 was 32'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e45' cx='103.41' cy='173.29' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2015 was 33.9'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e46' cx='116.87' cy='176.52' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2016 was 32.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e47' cx='130.33' cy='175.35' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2017 was 33.2'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e48' cx='143.79' cy='176.23' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2018 was 32.9'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e49' cx='157.25' cy='186.51' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2019 was 29.4'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e50' cx='170.71' cy='150.38' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2020 was 41.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e51' cx='184.17' cy='175.35' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2021 was 33.2'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e52' cx='197.63' cy='177.11' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government expenditure (% of GDP) in 2022 was 32.6'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e53' cx='36.11' cy='189.74' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2010 was 28.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e54' cx='49.57' cy='191.5' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2011 was 27.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e55' cx='63.03' cy='191.5' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2012 was 27.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e56' cx='76.49' cy='187.09' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2013 was 29.2'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e57' cx='89.95' cy='190.32' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2014 was 28.1'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e58' cx='103.41' cy='184.74' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2015 was 30'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e59' cx='116.87' cy='186.51' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2016 was 29.4'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e60' cx='130.33' cy='188.27' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2017 was 28.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e61' cx='143.79' cy='188.27' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2018 was 28.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e62' cx='157.25' cy='186.51' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2019 was 29.4'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e63' cx='170.71' cy='191.5' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2020 was 27.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e64' cx='184.17' cy='192.09' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2021 was 27.5'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e65' cx='197.63' cy='189.15' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='General government revenue (% of GDP) in 2022 was 28.5'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e66' cx='36.11' cy='260.22' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2010 was 4.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e67' cx='49.57' cy='258.16' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2011 was 5'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e68' cx='63.03' cy='256.99' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2012 was 5.4'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e69' cx='76.49' cy='256.11' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2013 was 5.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e70' cx='89.95' cy='257.28' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2014 was 5.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e71' cx='103.41' cy='259.34' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2015 was 4.6'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e72' cx='116.87' cy='254.05' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2016 was 6.4'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e73' cx='130.33' cy='257.28' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2017 was 5.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e74' cx='143.79' cy='259.04' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2018 was 4.7'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e75' cx='157.25' cy='260.81' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2019 was 4.1'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e76' cx='170.71' cy='263.16' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2020 was 3.3'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e77' cx='184.17' cy='258.75' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2021 was 4.8'/>\n   <circle id='svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_e78' cx='197.63' cy='252.58' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' title='Inflation (CPI) (%) in 2022 was 6.9'/>\n   <polyline points='36.11,288.41 49.57,286.94 63.03,257.58 76.49,284.59 89.95,284.30 103.41,284.30 116.87,282.83 130.33,285.48 143.79,283.71 157.25,291.35 170.71,313.96 184.17,289.59 197.63,285.18' fill='none' stroke='#F8766D' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='36.11,262.86 49.57,263.74 63.03,265.51 76.49,267.56 89.95,268.74 103.41,269.03 116.87,271.38 130.33,272.82 143.79,270.79 157.25,271.97 170.71,293.99 184.17,258.75 197.63,265.51' fill='none' stroke='#B79F00' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='36.11,260.22 49.57,258.16 63.03,256.99 76.49,256.11 89.95,257.28 103.41,259.34 116.87,254.05 130.33,257.28 143.79,259.04 157.25,260.81 170.71,263.16 184.17,258.75 197.63,252.58' fill='none' stroke='#00BA38' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='36.11,189.74 49.57,191.50 63.03,191.50 76.49,187.09 89.95,190.32 103.41,184.74 116.87,186.51 130.33,188.27 143.79,188.27 157.25,186.51 170.71,191.50 184.17,192.09 197.63,189.15' fill='none' stroke='#00BFC4' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='36.11,182.39 49.57,177.11 63.03,176.23 76.49,175.35 89.95,178.87 103.41,173.29 116.87,176.52 130.33,175.35 143.79,176.23 157.25,186.51 170.71,150.38 184.17,175.35 197.63,177.11' fill='none' stroke='#619CFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='36.11,197.37 49.57,174.47 63.03,150.09 76.49,170.35 89.95,153.03 103.41,141.28 116.87,138.64 130.33,116.32 143.79,109.56 157.25,91.94 170.71,37.02 184.17,68.74 197.63,64.04' fill='none' stroke='#F564E3' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <line x1='40.38' y1='302.31' x2='36.41' y2='289.39' stroke='#F8766D' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='64.81' y1='238.88' x2='63.13' y2='256.48' stroke='#F8766D' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='93.17' y1='302.55' x2='90.14' y2='285.36' stroke='#F8766D' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='119.41' y1='303.98' x2='117' y2='283.92' stroke='#F8766D' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='148.76' y1='294.27' x2='144.2' y2='284.58' stroke='#F8766D' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='156.91' y1='313.82' x2='157.23' y2='292.46' stroke='#F8766D' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='49.94' y1='275.45' x2='49.6' y2='264.85' stroke='#B79F00' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='65.48' y1='302.35' x2='63.1' y2='266.61' stroke='#B79F00' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='40.79' y1='209.48' x2='36.46' y2='198.3' stroke='#F564E3' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='47.75' y1='156.45' x2='49.46' y2='173.37' stroke='#F564E3' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='63.43' y1='141.4' x2='63.08' y2='148.99' stroke='#F564E3' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='76.16' y1='160.76' x2='76.45' y2='169.25' stroke='#F564E3' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='40.55' y1='171.59' x2='36.48' y2='181.49' stroke='#619CFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='175.25' y1='160.04' x2='183.72' y2='174.56' stroke='#619CFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='73.99' y1='211.39' x2='63.47' y2='192.3' stroke='#00BFC4' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='42.84' y1='235.44' x2='49.27' y2='257.18' stroke='#00BA38' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='92.74' y1='238.82' x2='90.11' y2='256.21' stroke='#00BA38' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='117.44' y1='239.15' x2='116.91' y2='252.95' stroke='#00BA38' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='148.35' y1='236.2' x2='144' y2='258' stroke='#00BA38' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='194.74' y1='240.81' x2='197.38' y2='251.56' stroke='#00BA38' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n   <text x='31.63' y='312' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-5.3<\/text>\n   <text x='53.82' y='296.92' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-4.8<\/text>\n   <text x='57.17' y='237.08' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>5.2<\/text>\n   <text x='80.37' y='297.09' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-4<\/text>\n   <text x='83.83' y='312.25' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-3.9<\/text>\n   <text x='97.3' y='296.98' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-3.9<\/text>\n   <text x='109.96' y='313.68' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-3.4<\/text>\n   <text x='118.86' y='298.51' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-4.3<\/text>\n   <text x='142.69' y='303.96' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-3.7<\/text>\n   <text x='136.1' y='319.15' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-6.3<\/text>\n   <text x='174.96' y='324.21' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-14<\/text>\n   <text x='183.1' y='302.38' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-5.7<\/text>\n   <text x='178.41' y='287.21' font-size='8.28pt' font-family='Arial' fill='#F8766D' fill-opacity='1'>-4.2<\/text>\n   <text x='31.63' y='276.36' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>3.4<\/text>\n   <text x='51.74' y='281.75' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>3.1<\/text>\n   <text x='57.83' y='312.05' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>2.5<\/text>\n   <text x='73.89' y='279.94' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>1.8<\/text>\n   <text x='87.67' y='281.34' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>1.4<\/text>\n   <text x='100.45' y='281.63' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>1.3<\/text>\n   <text x='107.6' y='266.58' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>0.5<\/text>\n   <text x='114.63' y='268.28' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>0.01<\/text>\n   <text x='129.54' y='283.43' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>0.7<\/text>\n   <text x='151.63' y='286.72' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>0.3<\/text>\n   <text x='162.96' y='309.09' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>-7.2<\/text>\n   <text x='173.51' y='271.35' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>4.8<\/text>\n   <text x='186.68' y='276.15' font-size='8.28pt' font-family='Arial' fill='#B79F00' fill-opacity='1'>2.5<\/text>\n   <text x='31.63' y='219.18' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>25.7<\/text>\n   <text x='36.98' y='154.65' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>33.5<\/text>\n   <text x='52.69' y='139.6' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>41.8<\/text>\n   <text x='65.43' y='158.96' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>34.9<\/text>\n   <text x='94.17' y='158.98' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>40.8<\/text>\n   <text x='81.37' y='136.56' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>44.8<\/text>\n   <text x='110' y='136.72' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>45.7<\/text>\n   <text x='116.02' y='126.51' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>53.3<\/text>\n   <text x='138.13' y='104.81' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>55.6<\/text>\n   <text x='141.44' y='87.28' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>61.6<\/text>\n   <text x='174.94' y='34.68' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>80.3<\/text>\n   <text x='178.53' y='81.43' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>69.5<\/text>\n   <text x='180.61' y='59.27' font-size='8.28pt' font-family='Arial' fill='#F564E3' fill-opacity='1'>71.1<\/text>\n   <text x='31.63' y='169.79' font-size='8.28pt' font-family='Arial' fill='#619CFF' fill-opacity='1'>30.8<\/text>\n   <text x='80.78' y='174.21' font-size='8.28pt' font-family='Arial' fill='#619CFF' fill-opacity='1'>32<\/text>\n   <text x='123.32' y='170.58' font-size='8.28pt' font-family='Arial' fill='#619CFF' fill-opacity='1'>32.9<\/text>\n   <text x='165.09' y='145.62' font-size='8.28pt' font-family='Arial' fill='#619CFF' fill-opacity='1'>41.7<\/text>\n   <text x='151.98' y='163.02' font-size='8.28pt' font-family='Arial' fill='#619CFF' fill-opacity='1'>33.2<\/text>\n   <text x='180.64' y='170.56' font-size='8.28pt' font-family='Arial' fill='#619CFF' fill-opacity='1'>32.6<\/text>\n   <text x='32.02' y='187.02' font-size='8.28pt' font-family='Arial' fill='#00BFC4' fill-opacity='1'>28.3<\/text>\n   <text x='47.25' y='204.13' font-size='8.28pt' font-family='Arial' fill='#00BFC4' fill-opacity='1'>27.7<\/text>\n   <text x='75.79' y='216.15' font-size='8.28pt' font-family='Arial' fill='#00BFC4' fill-opacity='1'>27.7<\/text>\n   <text x='100.36' y='197.43' font-size='8.28pt' font-family='Arial' fill='#00BFC4' fill-opacity='1'>30<\/text>\n   <text x='123.09' y='200.82' font-size='8.28pt' font-family='Arial' fill='#00BFC4' fill-opacity='1'>28.8<\/text>\n   <text x='151.87' y='204.14' font-size='8.28pt' font-family='Arial' fill='#00BFC4' fill-opacity='1'>27.7<\/text>\n   <text x='180.52' y='204.68' font-size='8.28pt' font-family='Arial' fill='#00BFC4' fill-opacity='1'>27.5<\/text>\n   <text x='179.26' y='187.86' font-size='8.28pt' font-family='Arial' fill='#00BFC4' fill-opacity='1'>28.5<\/text>\n   <text x='31.63' y='253.54' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>4.3<\/text>\n   <text x='34.9' y='238.29' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>5<\/text>\n   <text x='48.25' y='252.24' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>5.4<\/text>\n   <text x='75.88' y='252.22' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>5.7<\/text>\n   <text x='85.17' y='237.02' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>5.3<\/text>\n   <text x='93.9' y='252.39' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>4.6<\/text>\n   <text x='109.77' y='237.35' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>6.4<\/text>\n   <text x='127.68' y='252.45' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>5.3<\/text>\n   <text x='150.15' y='238.92' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>4.7<\/text>\n   <text x='148.04' y='255.93' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>4.1<\/text>\n   <text x='158.68' y='274.64' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>3.3<\/text>\n   <text x='166.63' y='254' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>4.8<\/text>\n   <text x='186.77' y='239.01' font-size='8.28pt' font-family='Arial' fill='#00BA38' fill-opacity='1'>6.9<\/text>\n   <rect x='28.03' y='23.18' width='177.68' height='304.63' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n  <\/g>\n  <g clip-path='url(#svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa_c1)'>\n   <text x='10.38' y='276' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>0%<\/text>\n   <text x='5.48' y='217.26' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>20%<\/text>\n   <text x='5.48' y='158.53' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>40%<\/text>\n   <text x='5.48' y='99.79' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>60%<\/text>\n   <text x='5.48' y='41.06' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>80%<\/text>\n   <polyline points='25.29,272.85 28.03,272.85' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='25.29,214.11 28.03,214.11' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='25.29,155.38 28.03,155.38' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='25.29,96.64 28.03,96.64' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='25.29,37.91 28.03,37.91' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='36.11,330.55 36.11,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='49.57,330.55 49.57,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='63.03,330.55 63.03,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='76.49,330.55 76.49,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='89.95,330.55 89.95,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='103.41,330.55 103.41,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='116.87,330.55 116.87,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='130.33,330.55 130.33,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='143.79,330.55 143.79,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='157.25,330.55 157.25,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='170.71,330.55 170.71,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='184.17,330.55 184.17,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='197.63,330.55 197.63,327.81' fill='none' stroke='#B3B3B3' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='26.31' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2010<\/text>\n   <text x='40.1' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2011<\/text>\n   <text x='53.23' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2012<\/text>\n   <text x='66.7' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2013<\/text>\n   <text x='80.16' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2014<\/text>\n   <text x='93.62' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2015<\/text>\n   <text x='107.08' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2016<\/text>\n   <text x='120.54' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2017<\/text>\n   <text x='134' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2018<\/text>\n   <text x='147.46' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2019<\/text>\n   <text x='160.92' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2020<\/text>\n   <text x='174.38' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2021<\/text>\n   <text x='187.84' y='339.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>2022<\/text>\n   <rect x='216.67' y='110.34' width='209.85' height='130.31' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n   <text x='222.15' y='124.85' font-size='8.25pt' font-family='Arial'>Key<\/text>\n   <rect x='222.15' y='131.49' width='17.28' height='17.28' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n   <circle cx='230.79' cy='140.13' r='2.67pt' fill='#F564E3' fill-opacity='1' stroke='#F564E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='223.88' y1='140.13' x2='237.7' y2='140.13' stroke='#F564E3' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='222.15' y='148.77' width='17.28' height='17.28' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n   <circle cx='230.79' cy='157.41' r='2.67pt' fill='#619CFF' fill-opacity='1' stroke='#619CFF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='223.88' y1='157.41' x2='237.7' y2='157.41' stroke='#619CFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='222.15' y='166.05' width='17.28' height='17.28' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n   <circle cx='230.79' cy='174.69' r='2.67pt' fill='#00BFC4' fill-opacity='1' stroke='#00BFC4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='223.88' y1='174.69' x2='237.7' y2='174.69' stroke='#00BFC4' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='222.15' y='183.33' width='17.28' height='17.28' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n   <circle cx='230.79' cy='191.97' r='2.67pt' fill='#00BA38' fill-opacity='1' stroke='#00BA38' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='223.88' y1='191.97' x2='237.7' y2='191.97' stroke='#00BA38' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='222.15' y='200.61' width='17.28' height='17.28' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n   <circle cx='230.79' cy='209.25' r='2.67pt' fill='#B79F00' fill-opacity='1' stroke='#B79F00' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='223.88' y1='209.25' x2='237.7' y2='209.25' stroke='#B79F00' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect x='222.15' y='217.89' width='17.28' height='17.28' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n   <circle cx='230.79' cy='226.53' r='2.67pt' fill='#F8766D' fill-opacity='1' stroke='#F8766D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round'/>\n   <line x1='223.88' y1='226.53' x2='237.7' y2='226.53' stroke='#F8766D' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='244.91' y='143.28' font-size='6.6pt' font-family='Arial'>General government debt (% of GDP)<\/text>\n   <text x='244.91' y='160.56' font-size='6.6pt' font-family='Arial'>General government expenditure (% of GDP)<\/text>\n   <text x='244.91' y='177.84' font-size='6.6pt' font-family='Arial'>General government revenue (% of GDP)<\/text>\n   <text x='244.91' y='195.12' font-size='6.6pt' font-family='Arial'>Inflation (CPI) (%)<\/text>\n   <text x='244.91' y='212.4' font-size='6.6pt' font-family='Arial'>GDP growth (%)<\/text>\n   <text x='244.91' y='229.68' font-size='6.6pt' font-family='Arial'>Budget balance (% of GDP)<\/text>\n   <text x='28.03' y='14.93' font-size='9.9pt' font-family='Arial'>Selected series from Budget Reviews and Budget Speeches (2010-2022)<\/text>\n   <text x='44.26' y='352.67' font-size='6.6pt' font-family='Arial'>Source: National Treasury of South Africa<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_bfd459f3_f60f_4f3c_9702_9b2a3d6df7fa","ratio":1.2,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px 2px 2px 2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":0,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:gray; }","reactive":false,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:gray; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"top","pngname":"diagram","tooltips":null,"hidden":"saveaspng","delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":0.75}}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -1172,7 +1177,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Imagine the power to query an entire country's budget documents as easily as asking Alexa about the weather. This isn't a futuristic fantasy. It's here, now. Using a powerful tool named <span class="co">[</span><span class="ot">LangChain</span><span class="co">](https://python.langchain.com/docs/get_started/introduction.html)</span>, a framework that allows us to connect a large language model to our own data, we've transformed the South African National Budget Review and Budget speech into an interactive, queryable knowledge base. In this article, we delve into the process of how we breathed life into hundreds of pages of PDFs, and how you can do the same with your own data. The output in this case is a table of summary statistics that would have taken a human hours to compile, but which we can now generate in seconds.</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Imagine the power to query an entire country's budget documents as easily as asking Google about the weather. This isn't a futuristic fantasy. It's here, now. Using a powerful tool named <span class="co">[</span><span class="ot">LangChain</span><span class="co">](https://python.langchain.com/docs/get_started/introduction.html)</span>, a framework that allows us to connect a large language model to our own data, we've transformed the South African National Budget Reviews and Budget Speeches into an interactive, queryable knowledge base. In this article, we delve into the process of how we breathed life into hundreds of pages of PDFs, and how you can do the same with your own data. The output in this case is a table of summary statistics that would have taken a human hours to compile, but which we can now generate in seconds.</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## The challenge</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
@@ -1202,13 +1207,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    D --&gt; E[Top-n Similar Chunks]</span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    E --&gt; F{Large Language &lt;br&gt;Model Context Window}</span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    F --&gt; G((Answer))</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    style A fill:<span class="co">#f9d,stroke:#333,stroke-width:2px</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    style B fill:<span class="co">#fc0,stroke:#333,stroke-width:2px</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    style C fill:<span class="co">#f9d,stroke:#333,stroke-width:2px</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    style D fill:<span class="co">#fc0,stroke:#333,stroke-width:2px</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    style E fill:<span class="co">#9cf,stroke:#333,stroke-width:2px</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    style F fill:<span class="co">#fc0,stroke:#333,stroke-width:2px</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    style G fill:<span class="co">#9cf,stroke:#333,stroke-width:2px</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    style A fill:<span class="co">#ece7f2,stroke:#333,stroke-width:2px</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    style B fill:<span class="co">#a6bddb,stroke:#333,stroke-width:2px</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    style C fill:<span class="co">#ece7f2,stroke:#333,stroke-width:2px</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    style D fill:<span class="co">#a6bddb,stroke:#333,stroke-width:2px</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    style E fill:<span class="co">#2b8cbe,stroke:#333,stroke-width:2px</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    style F fill:<span class="co">#a6bddb,stroke:#333,stroke-width:2px</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    style G fill:<span class="co">#2b8cbe,stroke:#333,stroke-width:2px</span></span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
@@ -1278,39 +1283,43 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 6</span></span>
 <span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
 <span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_light</span>())</span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>legend_order <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Key, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(value) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Key)</span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Key, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Key =</span> <span class="fu">factor</span>(Key, <span class="at">levels =</span> legend_order)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, value, <span class="at">colour =</span> Key, <span class="at">group =</span> Key)) <span class="sc">+</span></span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey"</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">cex =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reverse legend order</span></span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">scale =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> value), <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Selected series from Budget Reviews and Budget Speeches (2010-2022)"</span>,</span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>         <span class="at">caption =</span> <span class="st">"Source: National Treasury of South Africa"</span>,</span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="cn">NULL</span>) </span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="fu">## What do we learn?</span></span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>There are some missing values, particularly in the series <span class="in">`GDP (current ZAR[billions])`</span> and <span class="in">`Budget balance (% of GDP)`</span>.</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggiraph)</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_light</span>())</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>legend_order <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Key, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(value) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Key)</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Key, <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Key =</span> <span class="fu">factor</span>(Key, <span class="at">levels =</span> legend_order)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Key <span class="sc">!=</span> <span class="st">"GDP (current ZAR[billions])"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(year, value, <span class="at">colour =</span> Key, <span class="at">group =</span> Key)) <span class="sc">+</span></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey"</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">cex =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point_interactive</span>(<span class="fu">aes</span>(<span class="at">tooltip =</span> <span class="fu">str_c</span>(Key, <span class="st">" in "</span>, year, <span class="st">" was "</span>, value)), <span class="at">cex =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line_interactive</span>() <span class="sc">+</span></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reverse legend order</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_legend</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">scale =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text_repel_interactive</span>(<span class="fu">aes</span>(<span class="at">label =</span> value), <span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Selected series from Budget Reviews and Budget Speeches (2010-2022)"</span>,</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>         <span class="at">caption =</span> <span class="st">"Source: National Treasury of South Africa"</span>,</span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="cn">NULL</span>) </span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a><span class="fu">ggiraph</span>(<span class="at">ggobj =</span> g)</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>In addition, in 2019, the government expenditure figure is incorectly plucked from the PDF document as 29.40% of GDP, when in reality, this was 35.70% of GDP. This is a significant error, and it is not clear why this happened. It is possible that the PDF document was not correctly parsed, or that the OpenAI API made an error extracting this value from the text chunk.</span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a><span class="fu">## What do we learn?</span></span>
 <span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>In order to overcome these kinds of errors, experimenting with multiple pipelines and chunk sizes is probably the best way to go. This was just a demonstration, and there is certainly a possiblity to make the pipline more robust and less error prone. </span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>There are some missing values, particularly in the series <span class="in">`GDP (current ZAR[billions])`</span> and <span class="in">`Budget balance (% of GDP)`</span>.</span>
 <span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>In addition, in 2019, the government expenditure figure is incorectly plucked from the PDF document as 29.40% of GDP, when in reality, this was 35.70% of GDP. This is a significant error, and it is not clear why this happened. It is possible that the PDF document was not correctly parsed, or that the OpenAI API made an error extracting this value from the text chunk.</span>
 <span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>Though we have used budget data from South Africa in this case, the same approach can be used for any kind of data. LangChain has document loaders for text, PDF, and HTML, and can be used to extract information from many kinds of document.</span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>In order to overcome these kinds of errors, experimenting with multiple pipelines and chunk sizes is probably the best way to go. This was just a demonstration, and there is certainly a possiblity to make the pipline more robust and less error prone. </span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>Though we have used budget data from South Africa in this case, the same approach can be used for any kind of data. LangChain has document loaders for text, PDF, and HTML, and can be used to extract information from many kinds of document.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

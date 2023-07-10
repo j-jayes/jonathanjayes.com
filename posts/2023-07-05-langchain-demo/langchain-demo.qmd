@@ -14,7 +14,7 @@ format:
 
 ---
 
-Imagine the power to query an entire country's budget documents as easily as asking Alexa about the weather. This isn't a futuristic fantasy. It's here, now. Using a powerful tool named [LangChain](https://python.langchain.com/docs/get_started/introduction.html), a framework that allows us to connect a large language model to our own data, we've transformed the South African National Budget Review and Budget speech into an interactive, queryable knowledge base. In this article, we delve into the process of how we breathed life into hundreds of pages of PDFs, and how you can do the same with your own data. The output in this case is a table of summary statistics that would have taken a human hours to compile, but which we can now generate in seconds.
+Imagine the power to query an entire country's budget documents as easily as asking Google about the weather. This isn't a futuristic fantasy. It's here, now. Using a powerful tool named [LangChain](https://python.langchain.com/docs/get_started/introduction.html), a framework that allows us to connect a large language model to our own data, we've transformed the South African National Budget Reviews and Budget Speeches into an interactive, queryable knowledge base. In this article, we delve into the process of how we breathed life into hundreds of pages of PDFs, and how you can do the same with your own data. The output in this case is a table of summary statistics that would have taken a human hours to compile, but which we can now generate in seconds.
 
 ## The challenge
 
@@ -44,13 +44,13 @@ graph LR
     D --> E[Top-n Similar Chunks]
     E --> F{Large Language <br>Model Context Window}
     F --> G((Answer))
-    style A fill:#f9d,stroke:#333,stroke-width:2px
-    style B fill:#fc0,stroke:#333,stroke-width:2px
-    style C fill:#f9d,stroke:#333,stroke-width:2px
-    style D fill:#fc0,stroke:#333,stroke-width:2px
-    style E fill:#9cf,stroke:#333,stroke-width:2px
-    style F fill:#fc0,stroke:#333,stroke-width:2px
-    style G fill:#9cf,stroke:#333,stroke-width:2px
+    style A fill:#ece7f2,stroke:#333,stroke-width:2px
+    style B fill:#a6bddb,stroke:#333,stroke-width:2px
+    style C fill:#ece7f2,stroke:#333,stroke-width:2px
+    style D fill:#a6bddb,stroke:#333,stroke-width:2px
+    style E fill:#2b8cbe,stroke:#333,stroke-width:2px
+    style F fill:#a6bddb,stroke:#333,stroke-width:2px
+    style G fill:#2b8cbe,stroke:#333,stroke-width:2px
 
 ```
 
@@ -120,26 +120,30 @@ We can also make a plot of our selected series:
 #| fig-height: 6
 #| fig-align: center
 library(ggrepel)
+library(ggiraph)
 theme_set(theme_light())
 
 legend_order = df %>% 
     pivot_longer(cols = -Key, names_to = "year", values_to = "value") %>% filter(year == max(year)) %>% arrange(value) %>% pull(Key)
 
-df %>%
+g <- df %>%
     pivot_longer(cols = -Key, names_to = "year", values_to = "value") %>%
     mutate(Key = factor(Key, levels = legend_order)) %>%
+    filter(Key != "GDP (current ZAR[billions])") %>%
     ggplot(aes(year, value, colour = Key, group = Key)) +
     geom_hline(yintercept = 0, colour = "grey", lty = 2, cex = 2) +
-    geom_point() +
-    geom_line() +
+    geom_point_interactive(aes(tooltip = str_c(Key, " in ", year, " was ", value)), cex = 3) +
+    geom_line_interactive() +
     # reverse legend order
     scale_colour_discrete(guide = guide_legend(reverse = TRUE)) +
     scale_y_continuous(labels = scales::percent_format(scale = 1)) +
-    geom_text_repel(aes(label = value), show.legend = F) +
+    geom_text_repel_interactive(aes(label = value), show.legend = F) +
     labs(title = "Selected series from Budget Reviews and Budget Speeches (2010-2022)",
          caption = "Source: National Treasury of South Africa",
          x = NULL,
          y = NULL) 
+
+ggiraph(ggobj = g)
 ```
 
 ## What do we learn?
