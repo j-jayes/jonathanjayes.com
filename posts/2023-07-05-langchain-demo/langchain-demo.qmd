@@ -1,31 +1,155 @@
 ---
-title: "Untitled"
-format: html
-draft: true
+title: "Transforming National Budget Documents into Queryable Knowledge"
+description: |
+  A post about automating the data retrieval process from PDF documents using LangChain and the OpenAI API.
+image: preview.png
+author:
+  - name: Jonathan Jayes
+date: 2023-07-05
+format:
+  html:
+    toc: true
+    code-tools: true
+    page-layout: full
+
 ---
 
-# Blog post structure
+Imagine the power to query an entire country's budget documents as easily as asking Alexa about the weather. This isn't a futuristic fantasy. It's here, now. Using a powerful tool named [LangChain](https://python.langchain.com/docs/get_started/introduction.html), a framework that allows us to connect a large language model to our own data, we've transformed the South African National Budget Review and Budget speech into an interactive, queryable knowledge base. In this article, we delve into the process of how we breathed life into hundreds of pages of PDFs, and how you can do the same with your own data. The output in this case is a table of summary statistics that would have taken a human hours to compile, but which we can now generate in seconds.
 
-One claim about generative AI is that it will replace humans doing repetitive tasks. In this post, we will explore how to use generative AI to extract specific information from a set of PDF documents.
+## The challenge
 
-The problem is quite simple, but laborious to do manually. We have a set of PDF documents that contain specific information, and we want to programatically access the information in order to update a table of summary statistics.
+One of the claims of generative AI is that it will free humans from labourious tasks which are currently tedious to do manually and challenging to automate. In this article, we'll explore how we can use LangChain to automate the process of extracting information from PDF documents.
 
-The solution involves a clever tool called [LangChain](https://python.langchain.com/docs/get_started/introduction.html), a framework that allows us to connect a langauge model to other sources of data.
+The National Treasury in South Africa produces a fantastically informative budget review each year. It includes headline figures like GDP growth, inflation, revenue and expenditure, as well as more detailed information about the budget for each government department. In addition, the budget speech is delivered by the Minister of Finance, and contains a wealth of information about the budget, including the government's priorities for the year, and the reasoning behind the budget allocations. 
 
-## Problem
+If we want to get specific information from these documents, we can read through them and extract the information manually, searching for specific terms with the control + F functionality. This is a time consuming process, and it's easy to make mistakes. What if we could ask a computer to do it for us?
 
-The National Treasury in South Africa produces a fantastically informative budget each year, which is available as a PDF document. It includes headline figures like GDP growth, inflation, revenue and expenditure, as well as more detailed information about the budget for each government department.
+:::{.callout-note}
+There are, in addition to the PDF documents a series of excel files that National Treasury releases too. These files do contain the information that we want, but are not in an easily machine readable format[^There are ideosyncracies between each year that mean ingesting this data into a tidy format is time consuming]. Useful tools like [EconData](https://codera.co.za/econdata/) from [Codera Analytics](https://codera.co.za/) make it much easier to access this data programatically.
+
+:::
+
+## The solution: a vector database and a Large Language Model
+
+In essence, to transform budget documents into a queryable database, we read in the PDFs, segment them into chunks, and store the text in a database. To query this database, we use a simple similarity calculation to find the most relevant chunks of text, which are then fed to a large language model to answer our questions.
+
+Here is a diagram of the process:
+
+:::{.column-page}
+
+```{mermaid}
+graph LR
+    A((Budget Documents PDF)) -->|Chunking<br>Vectorization| B{Chroma DB}
+    C[User Query] -->|Vectorization| D{Chroma DB}
+    D --> E[Top-n Similar Chunks]
+    E --> F{Large Language <br>Model Context Window}
+    F --> G((Answer))
+    style A fill:#f9d,stroke:#333,stroke-width:2px
+    style B fill:#fc0,stroke:#333,stroke-width:2px
+    style C fill:#f9d,stroke:#333,stroke-width:2px
+    style D fill:#fc0,stroke:#333,stroke-width:2px
+    style E fill:#9cf,stroke:#333,stroke-width:2px
+    style F fill:#fc0,stroke:#333,stroke-width:2px
+    style G fill:#9cf,stroke:#333,stroke-width:2px
+
+```
+
+:::
+
+## An example: What was Consumer Price Inflation in 2022?
+
+Say for instance that we want to know what Consumer Price Inflation was in 2022 in South Africa. We can ask the question in a natural language query, and the system will return the answer. Here is the query and the answer, along with the source documents that the system used to answer the question:
+
+| Query                           | Result | Source documents                                                                                                                                                                                                                                                                                                                                                                                      |
+|---------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| What was Consumer Price Inflation inflation in 2022? | 6.9%   | Document(page_content=to moderate in 2023, before rising gradually over the medium term . \nInflation  \nHeadline inflation peaked in the third quarter and averaged 6.9  per cent during 2022 . \nInflation is projected  is estimated  to ease to 5.3 per cent in 2023. Global crude oil and \ndomestic food prices remain sources of inflationary pressure. Electricity prices have been \nrevised up by 4.6 per cent over the medium term compared to the 2022 MTBPS and are', metadata={'source': 'c:\\Users\\User\\Documents\\Recon\\langchain-budget-speech-demo\\budget-documents\\budget-review-2023.pdf', 'page': 39}),
+|                                 |        | Document(page_content='CHAPTER 1 NAVIGATING AN UNEVEN ECONOMIC RECOVERY Real percentage growth 2022 2023 2024 2025 Estimate Forecast Household consumption 2.8 1.0 1.5 1.8 Gross fixed-capital formation 4.2 1.3 3.8 3.5 Exports 8.8 1.0 2.2 2.9 Imports 14.0 1.1 2.3 2.9 Real GDP growth 2.5 0.9 1.5 1.8 Consumer price index (CPI) inflation 6.9 5.3 4.9 4.7 Current account balance (% of GDP) -0.4 -1.8 -2.0 -2.1 ', metadata={'source': 'c:\\Users\\User\\Documents\\Recon\\langchain-budget-speech-demo\\budget-documents\\budget-review-2023.pdf', 'page': 27}), |
+
+In the table above, we can see two of the chunks of text that are most similar in terms of content to our query. The first chunk is from page 39 of the budget review, and the second chunk is from page 27. Both of these chunks contain the information that we are looking for, and the system has correctly identified them as the most relevant chunks.
+
+These chunks are then passed to the OpenAI GPT-3.5 large language model, which is able to take in the question and the context, and then return to us the answer. In this case, the answer is 6.9%, which is correct, as we can see in the table from the budget review below (which is the same as the second source document in the markdown table above).
+
+![Screenshot of table from 2023 Budget Review](macro_outlook.png)
+
+## What is going on in the background?
+
+You can have a look at my [GitHub repository](https://github.com/j-jayes/langchain-budget-speech-demo/blob/main/langchain-budget-documents-demo.ipynb) for the full code, but I'll walk through the main steps here.
+
+1. **Set Up:**  The first step is to set up LangChain using an OpenAI key. This example uses OpenAI for both the language model and the embeddings. 
+2. **Load Documents:**  LangChain can load multiple documents at once. In this example, PDF files containing the 2023 budget review and 2023 budget speech are loaded.
+3. **Split Data:**  The data is then split into chunks. Each chunk corresponds to a portion of information from a specific page of the budget documents. 
+4. **Create a Database:**  A vector store database is created to store and index the document embeddings, which are vector representations of the text chunks. The embeddings are generated using OpenAI and stored in a database using a tool named ChromaDB. 
+5. **Retrieve Relevant Documents:**  A retriever is then set up to query the vector database and return relevant documents. The number of documents returned can be adjusted according to the user's needs. In this case, I used fewer chunks with larger number of tokens per chunk compared to the default as it worked best.
+6. **Language Model Chain:**  After setting up the retriever, a retrieval-question-answering chain is created using OpenAI. This chain is capable of answering queries based on the contents of the chunks that are passed to it, depending on the words in the query.
+7. **Format Output:**  A function is created to present the results and source documents neatly. This is what we show in the markdown table above.
+8. **Querying:**  The system is now ready for queries. A query is input and the system returns the most relevant response based on the indexed documents. In this case, we worked through each years' budget documents from 2010 to 2022 to find values for seven data series.
+
+Have a look at the output in the table below.
 
 
+```{r}
+#| column: page
+#| echo: false
+library(tidyverse)
+library(gt)
 
+df = readxl::read_xlsx(here::here("posts", "2023-07-05-langchain-demo", "demo-table.xlsx"))
 
-## 1. Introduction
+df <- df %>% 
+    # mutate across not Key column readr::parse_number
+    mutate(across(!Key, readr::parse_number)) %>%
+    # round to 2 decimal place
+    mutate(across(!Key, round, 2))
 
-ChatGPT is fantastic for generating text. In the case that it does not have the answer in it's training data, in order for us to ask it a question and get a useful answer, we need to be able to give ChatGPT access to the information it needs to answer the question. While the context window that ChatGPT can have access to has increased in size recently to 16,000 tokens, this is often not enough to give it the information it needs to answer a question.
+df %>%
+    gt() %>%
+    # missing values as ""
+    sub_missing(missing_text = "") %>%
+    tab_header(title = "Selected series from Budget Reviews and Budget Speeches (2010-2022)") %>%
+    tab_source_note("Source: National Treasury of South Africa")
 
-In this post, we will explore how to extract information from a pdf document and use it to answer questions.
+```
 
-## 2. Problem
+## Visualising the data
 
-Say you have a set of PDF documents that contain specific infromation, and you want to programatically access the information in order to update a table of summary statistics.
+We can also make a plot of our selected series:
 
+```{r}
+#| column: page
+#| fig-width: 10
+#| fig-height: 6
+#| fig-align: center
+library(ggrepel)
+theme_set(theme_light())
+
+legend_order = df %>% 
+    pivot_longer(cols = -Key, names_to = "year", values_to = "value") %>% filter(year == max(year)) %>% arrange(value) %>% pull(Key)
+
+df %>%
+    pivot_longer(cols = -Key, names_to = "year", values_to = "value") %>%
+    mutate(Key = factor(Key, levels = legend_order)) %>%
+    ggplot(aes(year, value, colour = Key, group = Key)) +
+    geom_hline(yintercept = 0, colour = "grey", lty = 2, cex = 2) +
+    geom_point() +
+    geom_line() +
+    # reverse legend order
+    scale_colour_discrete(guide = guide_legend(reverse = TRUE)) +
+    scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+    geom_text_repel(aes(label = value), show.legend = F) +
+    labs(title = "Selected series from Budget Reviews and Budget Speeches (2010-2022)",
+         caption = "Source: National Treasury of South Africa",
+         x = NULL,
+         y = NULL) 
+```
+
+## What do we learn?
+
+There are some missing values, particularly in the series `GDP (current ZAR[billions])` and `Budget balance (% of GDP)`.
+
+In addition, in 2019, the government expenditure figure is incorectly plucked from the PDF document as 29.40% of GDP, when in reality, this was 35.70% of GDP. This is a significant error, and it is not clear why this happened. It is possible that the PDF document was not correctly parsed, or that the OpenAI API made an error extracting this value from the text chunk.
+
+In order to overcome these kinds of errors, experimenting with multiple pipelines and chunk sizes is probably the best way to go. This was just a demonstration, and there is certainly a possiblity to make the pipline more robust and less error prone. 
+
+## Conclusion
+
+Though we have used budget data from South Africa in this case, the same approach can be used for any kind of data. LangChain has document loaders for text, PDF, and HTML, and can be used to extract information from many kinds of document.
