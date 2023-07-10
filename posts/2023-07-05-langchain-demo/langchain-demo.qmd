@@ -56,7 +56,7 @@ graph LR
 
 :::
 
-## An example: What was Consumer Price Inflation in 2022?
+## An example: what was Consumer Price Inflation in 2022?
 
 Say for instance that we want to know what Consumer Price Inflation was in 2022 in South Africa. We can ask the question in a natural language query, and the system will return the answer. Here is the query and the answer, along with the source documents that the system used to answer the question:
 
