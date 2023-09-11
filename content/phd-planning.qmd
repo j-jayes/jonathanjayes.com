@@ -1,0 +1,95 @@
+---
+title: "PhD planning"
+---
+
+I need to commit to more structure and deadlines in order to complete my PhD on time.
+
+My PhD consists of four papers and coursework.
+
+## Papers
+
+1. [Shocked by Electricity](https://j-jayes.github.io/shocked-by-electricity/#/title-slide): The impact of new technology on individuals and local labour markets. Co authored with Kerstin Enflo and Jakob Molinder
+
+2. [Wired for Success](https://interludeone.com/content/research/wired-for-success-abstract): Sweden’s Electrical Innovators in the Age of Industrial Transformation
+
+Here is a chart showing the remaining time in my PhD and what is left to do.
+
+:::{.column-page}
+
+
+```{mermaid}
+
+gantt
+    dateFormat  YYYY-MM-DD
+    title       Paper Timeline
+    excludes    weekends
+
+    section Paper Drafts
+    Complete draft of first paper          :active, 2023-09-11, 19d
+    Complete draft of second paper         :        2023-09-30, 2023-12-16
+    Complete draft of third paper          :        2024-01-17, 2024-04-15
+    Complete draft of fourth paper         :        2024-08-16, 2024-12-16
+    
+    section Paper Revisions
+    Revise second paper                    :        2024-04-16, 2024-05-16
+    Revise third paper                     :        2024-05-17, 2024-06-15    
+    Revise fourth paper                    :        2025-01-24, 2025-03-15    
+
+
+    section Seminars & Submission
+    Midway seminar                         :crit,     2024-01-24, 1d
+    Final seminar                          :crit,     2025-04-01, 1d
+    Intense working on the Kappa           :          2025-05-01, 2025-06-30
+    Submit Ph.D. for typesetting           :milestone,2025-07-01, 0d
+
+    section Defense
+    Defend thesis                          :milestone, 2025-10-01, 0d
+
+```
+
+:::
+
+### Upcoming deadlines and feedback
+
+Present *Wired for Success* data processing and initial results at Swedish Economic History Meeting on 29th of September.
+
+Complete draft of *Shocked by Electricity* on 2 October 2023.
+
+## Coursework
+
+**Mandatory courses (52.5 credit points):**  
+
+1. EHEH001 Designing a PhD dissertation: **Completed**  - 7.5 credits. 
+
+2. EHEH002 Foundations of Economic History: **1/3 papers done** . Assuming linear progression and that each paper is worth an equal amount of credits, I've completed 1/3 of 15 credits = 5 credits. 
+
+3. EEH002F research seminars: **Ongoing** . 0 credits for the purpose of this calculation.
+
+4. Philosophy of Science: **Not chosen yet**  - 0 credits. 
+
+5. Research Ethics: **Not chosen yet**  - 0 credits. 
+
+6. Quantitative course (SDU Summer School): **Complete**  - 7.5 credits. 
+
+7. Qualitative Course (Archives, Primary Sources, Dataset - EEH033F): **Complete**  - 4.5 credits.
+
+**Total for Mandatory** : 7.5 + 5 + 0 + 0 + 0 + 7.5 + 4.5 = **24.5 credits** 
+
+**Optional courses (22.5 credit points):**  
+1. EEH005F Economic Growth over Time and Space: **Completed**  - 7.5 credits.
+
+**Total for Optional** : **7.5 credits** 
+
+In summary: 
+- I've completed **24.5 credits**  of the mandatory coursework. 
+- I've completed **7.5 credits**  of the optional coursework.
+
+This means I've completed a total of **32 credits**  out of the 75 credits I need.
+
+## Conferences and presentations
+
+EHS Conference 2023: Warwick
+
+EHES Conference 2023: Vienna
+
+SEHM 2023: Lund

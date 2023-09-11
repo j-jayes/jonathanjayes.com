@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.313">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,9 +20,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -49,43 +50,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -124,7 +95,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -145,86 +117,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <span class="navbar-title">Interlude One</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/consulting.html">
- <span class="menu-text">Consulting</span></a>
+    <a class="nav-link" href="../../content/phd-planning.html" rel="" target="">
+ <span class="menu-text">PhD planning</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/teaching.html">
+    <a class="nav-link" href="../../content/teaching.html" rel="" target="">
  <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/research.html">
+    <a class="nav-link" href="../../content/research.html" rel="" target="">
  <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/publications.html">
+    <a class="nav-link" href="../../content/publications.html" rel="" target="">
  <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/data.html">
+    <a class="nav-link" href="../../content/data.html" rel="" target="">
  <span class="menu-text">Data</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web-apps" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web-apps" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Web Apps</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-web-apps">    
         <li>
-    <a class="dropdown-item" href="http://jonathan-jayes.shinyapps.io/gumtree-price-explorer">
+    <a class="dropdown-item" href="http://jonathan-jayes.shinyapps.io/gumtree-price-explorer" rel="" target="">
  <span class="dropdown-text">Second Hand Car Price Comparison Tool</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/production-functions">
+    <a class="dropdown-item" href="https://github.com/j-jayes/production-functions" rel="" target="">
  <span class="dropdown-text">Production Functions Shiny App</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/NBER-methods">
+    <a class="dropdown-item" href="https://github.com/j-jayes/NBER-methods" rel="" target="">
  <span class="dropdown-text">Economics literature explorer</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP">
+    <a class="dropdown-item" href="https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP" rel="" target="">
  <span class="dropdown-text">Europe’s Regional Development Explorer</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-fun-stuff" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-fun-stuff" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Fun stuff</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-fun-stuff">    
         <li>
-    <a class="dropdown-item" href="https://j-jayes.github.io/recipes/">
+    <a class="dropdown-item" href="https://j-jayes.github.io/recipes/" rel="" target="">
  <span class="dropdown-text">My personal cookbook</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/j-jayes/interlude-one">
+    <a class="nav-link" href="https://github.com/j-jayes/interlude-one" rel="" target="">
  <span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -265,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Jonathan Jayes </p>
+             <p><a href="true">Jonathan Jayes</a> </p>
           </div>
   </div>
     
@@ -292,7 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/linkedin_education.PNG" class="img-fluid figure-img" style="width:50.0%"></p>
-<p></p><figcaption class="figure-caption">LinkedIn screenshot</figcaption><p></p>
+<figcaption class="figure-caption">LinkedIn screenshot</figcaption>
 </figure>
 </div>
 </div>
@@ -381,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#szstnnmraa) .gt_table {
+#szstnnmraa .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -406,7 +380,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-:where(#szstnnmraa) .gt_heading {
+#szstnnmraa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -418,7 +392,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#szstnnmraa) .gt_title {
+#szstnnmraa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -430,7 +404,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-:where(#szstnnmraa) .gt_subtitle {
+#szstnnmraa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -442,13 +416,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-:where(#szstnnmraa) .gt_bottom_border {
+#szstnnmraa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#szstnnmraa) .gt_col_headings {
+#szstnnmraa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -463,7 +437,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#szstnnmraa) .gt_col_heading {
+#szstnnmraa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -483,7 +457,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-:where(#szstnnmraa) .gt_column_spanner_outer {
+#szstnnmraa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -495,15 +469,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-:where(#szstnnmraa) .gt_column_spanner_outer:first-child {
+#szstnnmraa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#szstnnmraa) .gt_column_spanner_outer:last-child {
+#szstnnmraa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#szstnnmraa) .gt_column_spanner {
+#szstnnmraa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -515,7 +489,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-:where(#szstnnmraa) .gt_group_heading {
+#szstnnmraa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -540,7 +514,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-:where(#szstnnmraa) .gt_empty_group_heading {
+#szstnnmraa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -555,15 +529,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-:where(#szstnnmraa) .gt_from_md > :first-child {
+#szstnnmraa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#szstnnmraa) .gt_from_md > :last-child {
+#szstnnmraa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#szstnnmraa) .gt_row {
+#szstnnmraa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -582,7 +556,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-:where(#szstnnmraa) .gt_stub {
+#szstnnmraa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -595,7 +569,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#szstnnmraa) .gt_stub_row_group {
+#szstnnmraa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -609,11 +583,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-:where(#szstnnmraa) .gt_row_group_first td {
+#szstnnmraa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#szstnnmraa) .gt_summary_row {
+#szstnnmraa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -623,16 +597,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#szstnnmraa) .gt_first_summary_row {
+#szstnnmraa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-:where(#szstnnmraa) .gt_first_summary_row.thick {
+#szstnnmraa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#szstnnmraa) .gt_last_summary_row {
+#szstnnmraa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -642,7 +616,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-:where(#szstnnmraa) .gt_grand_summary_row {
+#szstnnmraa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -652,7 +626,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#szstnnmraa) .gt_first_grand_summary_row {
+#szstnnmraa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -662,11 +636,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-:where(#szstnnmraa) .gt_striped {
+#szstnnmraa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#szstnnmraa) .gt_table_body {
+#szstnnmraa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -675,7 +649,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-:where(#szstnnmraa) .gt_footnotes {
+#szstnnmraa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -689,7 +663,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#szstnnmraa) .gt_footnote {
+#szstnnmraa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -698,7 +672,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#szstnnmraa) .gt_sourcenotes {
+#szstnnmraa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -712,7 +686,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-:where(#szstnnmraa) .gt_sourcenote {
+#szstnnmraa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -720,96 +694,111 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-:where(#szstnnmraa) .gt_left {
+#szstnnmraa .gt_left {
   text-align: left;
 }
 
-:where(#szstnnmraa) .gt_center {
+#szstnnmraa .gt_center {
   text-align: center;
 }
 
-:where(#szstnnmraa) .gt_right {
+#szstnnmraa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#szstnnmraa) .gt_font_normal {
+#szstnnmraa .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#szstnnmraa) .gt_font_bold {
+#szstnnmraa .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#szstnnmraa) .gt_font_italic {
+#szstnnmraa .gt_font_italic {
   font-style: italic;
 }
 
-:where(#szstnnmraa) .gt_super {
+#szstnnmraa .gt_super {
   font-size: 65%;
 }
 
-:where(#szstnnmraa) .gt_footnote_marks {
+#szstnnmraa .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#szstnnmraa) .gt_asterisk {
+#szstnnmraa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#szstnnmraa) .gt_indent_1 {
+#szstnnmraa .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#szstnnmraa) .gt_indent_2 {
+#szstnnmraa .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#szstnnmraa) .gt_indent_3 {
+#szstnnmraa .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#szstnnmraa) .gt_indent_4 {
+#szstnnmraa .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#szstnnmraa) .gt_indent_5 {
+#szstnnmraa .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">logo</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">text</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_center"><a href="https://ehl.lu.se/ekonomisk-historia">
-  <img src="images/lu.jfif" width="50" height="50">
-</a></td>
-<td class="gt_row gt_center"><b>Lund University</b><br>Master's degree, Economics<br><span style="opacity: .7;"> 2021 </span><br><span style="opacity: .7;"> Exchange semester </span></td></tr>
-    <tr><td class="gt_row gt_center"><a href="https://www.ekon.sun.ac.za/">
-  <img src="images/su.jfif" width="50" height="50">
-</a></td>
-<td class="gt_row gt_center"><b>Stellenbosch University</b><br>Master's degree, Economics<br><span style="opacity: .7;"> 2020 </span><br><span style="opacity: .7;"> Grade: <em>cum laude</em> </span></td></tr>
-    <tr><td class="gt_row gt_center"><a href="http://www.economics.uct.ac.za/">
-  <img src="images/uct.jfif" width="50" height="50">
-</a></td>
-<td class="gt_row gt_center"><b>University of Cape Town</b><br>Honours degree, Economics<br><span style="opacity: .7;"> 2018 </span><br><span style="opacity: .7;"> Grade: 2:1 </span></td></tr>
-    <tr><td class="gt_row gt_center"><a href="http://www.economics.uct.ac.za/">
-  <img src="images/uct.jfif" width="50" height="50">
-</a></td>
-<td class="gt_row gt_center"><b>University of Cape Town</b><br>Bachelor's degree, Economics and Economic History<br><span style="opacity: .7;"> 2015-2017 </span><br><span style="opacity: .7;"> Grade: 2:1 </span></td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead class="gt_col_headings">
+<tr class="header">
+<th class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">logo</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">text</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center"><a href="https://ehl.lu.se/ekonomisk-historia"><img src="images/lu.jfif" width="50" height="50"></a></td>
+<td class="gt_row gt_center"><strong>Lund University</strong><br>
+Master's degree, Economics<br>
+<span style="opacity: .7;"> 2021 </span><br>
+<span style="opacity: .7;"> Exchange semester </span></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center"><a href="https://www.ekon.sun.ac.za/"><img src="images/su.jfif" width="50" height="50"></a></td>
+<td class="gt_row gt_center"><strong>Stellenbosch University</strong><br>
+Master's degree, Economics<br>
+<span style="opacity: .7;"> 2020 </span><br>
+<span style="opacity: .7;"> Grade: <em>cum laude</em> </span></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center"><a href="http://www.economics.uct.ac.za/"><img src="images/uct.jfif" width="50" height="50"></a></td>
+<td class="gt_row gt_center"><strong>University of Cape Town</strong><br>
+Honours degree, Economics<br>
+<span style="opacity: .7;"> 2018 </span><br>
+<span style="opacity: .7;"> Grade: 2:1 </span></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center"><a href="http://www.economics.uct.ac.za/"><img src="images/uct.jfif" width="50" height="50"></a></td>
+<td class="gt_row gt_center"><strong>University of Cape Town</strong><br>
+Bachelor's degree, Economics and Economic History<br>
+<span style="opacity: .7;"> 2015-2017 </span><br>
+<span style="opacity: .7;"> Grade: 2:1 </span></td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1316,9 +1305,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1383,6 +1386,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

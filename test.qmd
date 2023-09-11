@@ -1,0 +1,28 @@
+---
+title: "Untitled"
+format: html
+---
+
+
+```{mermaid}
+gantt
+dateFormat  YYYY-MM-DD
+title Cooking Butter Chicken Curry
+excludes weekdays 2023-07-11
+
+section Gathering and Preparing Ingredients
+Gather Ingredients from Cupboard and Fridge: done, gather, 2023-07-11, 2023-07-11
+Marinate Chicken on Chopping Board: active, marinate, 2023-07-11, 2h
+Chop Onions, Garlic and Ginger on Chopping Board: chop, after marinate, 1h
+
+section Cooking Process
+Fry Chicken in Frying Pan on Stove: fry, after chop, 1h
+Make Sauce in Saucepan on Stove: sauce, after fry, 1h
+Add Fried Chicken to Sauce in Saucepan: combine, after sauce, 10m
+Simmer the Curry in Saucepan on Stove: simmer, after combine, 1h
+
+section Serving
+Serve the Curry with Rice or Naan on Dinner Table: serve, after simmer, 10m
+
+
+```
