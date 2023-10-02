@@ -1,0 +1,77 @@
+---
+title: "Conference Planning"
+format: html
+draft: true
+---
+
+The 15th Swedish Economic History Meeting just took place in Lund, in collaboration with the 4th Annual Conference of the Scandinavian Society for Economic and Social History.
+
+I was on the organizing committee. 
+
+When I took on this role, I didn't have a clear idea of what it would entail. I had been to a few conferences, but I had never been involved in the planning.
+
+I learned a lot from the experience, and I thought I would share some of my thoughts here. My hope is that this guide might be useful for others who are planning a conference for the first time. I also share a template for a conference website built in [quarto]](https://quarto.org/).
+
+## The components of an acamdeic conference
+
+
+```{mermaid}
+graph TD
+    A(Start)
+    B(Organizing Committee)
+    C(Dates & Venues)
+    D(Conference Content)
+    E(Attendees Management)
+    F(Finance & Budgeting)
+    G(Communication & Marketing)
+    H(Special Events & Social Activities)
+    I(End)
+
+    A --> B
+    A --> C
+    A --> D
+    A --> E
+    A --> F
+    A --> G
+    A --> H
+    
+    B -->|Decide on organizing committee and roles| B1(Committee Formation)
+    
+    C -->|Decide on dates| C1(Date Selection)
+    C -->|Get quotes for venues| C2(Venue Quotation)
+    C -->|Liase with hotels for discounts| C3(Hotel Liaison)
+    
+    D -->|Invite guest speakers and arrange travel & accomodation| D1(Guest Speakers)
+    D -->|Call for sessions & papers, collect and group them| D2(Call for Content)
+    D -->|Assign sessions to venues and order them| D3(Session Assignment)
+    
+    E -->|Email people for registration and payment| E1(Registration & Payment)
+    E -->|Print program and name badges| E2(Printing & Badges)
+    
+    F -->|Create a budget, decide on funding & manage payments| F1(Budget & Funding)
+    
+    G -->|Build a website and market the conference| G1(Website & Marketing)
+    G -->|Handle communication with attendees & reminders| G2(Attendee Communication)
+    
+    H -->|Plan and manage special sessions and social events| H1(Special Sessions & Events)
+    H -->|Arrange conference swag and other materials| H2(Swag & Materials)
+
+
+
+```
+
+## The organizing committee
+
+## Dates & Venues
+
+## Conference content
+
+## Attendees management
+
+## Finance & Budgeting
+
+## Communication & Marketing
+
+## Special Events & Social Activities
+
+## Conference website

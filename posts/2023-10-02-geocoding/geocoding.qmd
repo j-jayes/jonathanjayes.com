@@ -1,0 +1,160 @@
+---
+title: "Geocoding"
+format: html
+---
+
+```{r, include=FALSE}
+setwd(here::here("posts", "2023-10-02-geocoding"))
+```
+
+Locating places of interest on a map is an important task in many economic history projects. This tutorial will show you how to geocode a list of addresses using the Google Maps API.
+
+I will use both R and python to show you how to do this, depending on your preference.
+
+## Getting started
+
+There are many engines that you can use to geocode place names or addresses to coordinates.
+
+I use the `tidygeocoder` package in R, which is free, and the Google Maps Geocoding API in python, which is also free (up to some threshold), but requires an API key.
+
+You can read about getting an API key [here](https://developers.google.com/maps/documentation/geocoding/get-api-key).
+
+## Data
+
+For the purpose of this tutorial, I have generated some place names to geocode and a column of arbitrary values for visualization.
+
+They are stored in an excel file at "data/data_to_geocode.xlsx".
+
+| Place Name       | Arbitrary Value |
+|------------------|-----------------|
+| Stockholm        | 35              |
+| Gothenburg       | 12              |
+| Malmö            | 27              |
+| Uppsala          | 19              |
+| Västerås         | 22              |
+| Örebro           | 15              |
+| Linköping        | 20              |
+| Helsingborg      | 24              |
+| Norrköping       | 28              |
+| Jönköping        | 17              |
+| Lund             | 23              |
+| Umeå             | 10              |
+| Gävle            | 18              |
+| Borås            | 14              |
+| Eskilstuna       | 16              |
+| Södertälje       | 13              |
+| Karlstad         | 21              |
+| Täby             | 29              |
+| Växjö            | 11              |
+| Halmstad         | 26              |
+
+
+## R and tidygeocoder
+
+Jesse Cambin has kindly made a package called `tidygeocoder` available on [github](https://jessecambon.github.io/tidygeocoder/).
+
+You can install it on your computer using the following code:
+
+```{r}
+#| eval: false
+install.packages('tidygeocoder')
+```
+
+```{r}
+#| eval: false
+library(tidyverse) # for data manipulation
+library(tidygeocoder) # for geocoding
+
+# Read in data
+library(readxl) # for reading excel files
+places <- read_excel("data/data_to_geocode.xlsx")
+
+# Geocode places
+places_geocoded <- places %>%
+  geocode(place_name, method = 'osm', lat = latitude , long = longitude)
+
+```
+
+```{r}
+#| echo: false
+
+library(tidyverse) # for data manipulation
+
+# write out file to csv
+# places_geocoded %>% write_excel_csv("data/places_geocoded.csv")
+
+# read in file from csv
+places_geocoded <- read_csv("data/places_geocoded.csv")
+```
+
+
+
+<blockquote>
+Passing 20 addresses to the Nominatim single address geocoder
+[===================================] 20/20 (100%) Elapsed: 20s Remaining:  0s
+</blockquote>
+
+
+```{r}
+# Find bounds to trim map
+bounds <- places_geocoded %>%
+    summarise(
+        xmin = min(longitude),
+        xmax = max(longitude),
+        ymin = min(latitude),
+        ymax = max(latitude)
+    )
+
+# Plot places
+ggplot(places_geocoded, aes(longitude, latitude), color = "grey99") +
+    borders() +
+    geom_point(aes(size = arbitrary_value), colour = "midnightblue") +
+    ggrepel::geom_label_repel(aes(label = place_name)) +
+    theme_void() +
+    coord_cartesian(xlim = c(bounds$xmin, bounds$xmax), 
+                    ylim = c(bounds$ymin, bounds$ymax)) +
+    labs(size = "Arbitrary value")
+```
+
+
+
+
+```{python}
+import pandas as pd
+import requests
+
+# Read in DataFrame from file
+place_county_unique_merged = pd.read_csv(root / "data/clark data/marriage_locations_unique.csv")
+
+# add columns latitude and longitude and make them NaN
+place_county_unique_merged['latitude'] = pd.Series(dtype='float64')
+place_county_unique_merged['longitude'] = pd.Series(dtype='float64')
+
+# Define function to geocode using Google Maps Geocoding API
+def geocode(address, api_key):
+    url = 'https://maps.googleapis.com/maps/api/geocode/json'
+    params = {'address': address, 'key': api_key}
+    response = requests.get(url, params=params)
+    data = response.json()
+    if data['status'] == 'OK':
+        lat = data['results'][0]['geometry']['location']['lat']
+        lng = data['results'][0]['geometry']['location']['lng']
+        return lat, lng
+    else:
+        return None, None
+
+# Set API key
+api_key = 'AIzaSyDgTudiozsfXYEC3Pf7qHVaz_kBX0YDoHU'
+
+# Loop over DataFrame and geocode missing values
+for i, row in place_county_unique_merged.iterrows():
+    if pd.isna(row['latitude']) or pd.isna(row['longitude']):
+        address = f"{row['place_county']}"
+        lat, lng = geocode(address, api_key)
+        place_county_unique_merged.at[i, 'latitude'] = lat
+        place_county_unique_merged.at[i, 'longitude'] = lng
+        print(f"Geocoded {address} to ({lat}, {lng})")
+
+# Write DataFrame to file
+place_county_unique_merged.to_csv(root / "data/clark data/marriage_locations_unique_geocoded.csv", index=False)
+```
