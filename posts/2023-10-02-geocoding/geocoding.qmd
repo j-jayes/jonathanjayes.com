@@ -1,5 +1,11 @@
 ---
 title: "Geocoding: two ways"
+description: |
+  A post about geocoding place names using R and python to access the OSM and Google Maps geocoding APIs.
+image: preview.png
+author:
+  - name: Jonathan Jayes
+date: 2023-10-02
 format: html
 execute: 
   echo: true
