@@ -11,6 +11,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2023-11-07-q-and-a/q-and-a.html",
       "/posts/2023-10-02-geocoding/geocoding.html",
       "/posts/2023-07-05-langchain-demo/langchain-demo.html",
       "/posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html",

@@ -1,0 +1,74 @@
+---
+title: "A modern question and answer site: SCB Users Group"
+description: |
+  A post about creating a question and answer site for users of Statistics Sweden data
+image: preview.png
+author:
+  - name: Jonathan Jayes
+date: 2023-11-07
+format: html
+execute: 
+  echo: true
+---
+
+## Introduction
+
+:::: {.columns}
+
+::: {.column width="65%"}
+Emails limits knowledge to the sender and receivers. Researchers grappling with Statistics Sweden (SCB) datasets often exchange insights that vanish into inboxes. We are building the SCB Users Group to change that. It's a platform where shared questions yield communal answers, accessible to everyone online.
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="30%"}
+![Digital artwork by ChatGPT with DALL·E 3, depicting a lively forum discussion, inspired by the detail-oriented style of painter Gustave Caillebotte.](preview.png){width=80%}
+:::
+
+::::
+
+### Our Approach
+The concept is simple: think StackOverflow, but with a focus on SCB data. Researchers ask, answer, and, in the process, craft a self-sustaining knowledge base.
+
+We have built an alpha version and are looking to get a small amount of money for a custom domain and hosting costs.
+
+The current version of the site is accessible [here](https://spiffy-nougat-02da4f.netlify.app). I include a screenshot of the homepage below.
+
+![Homepage](images/home.png)
+
+### Technical Underpinnings
+We chose Google Firebase Firestore for its simple storage and Firebase for authentication. The upshot? A secure, efficient backend without the headache of password management or the risk of exposing passwords inadvertently. There is also a generous free tier offered for storage on Firebase.
+
+The Firestore nosql database has a simple set up with a collection for users with a unique id, usernames and emails. The questions collection has a unique id for each question, the information pertaining to each question like title and body and date, as well as a subcollection for the number of upvotes and id of the user who upvoted to prevent multiple upvotes from the same user. Each answer to the question belongs to a sub collection of the question called 'answers' in the nosql database.
+
+### Frontend Innovation
+SvelteKit powers our frontend; its dynamic nature is perfect for crafting reactive user interfaces. [SvelteFire](https://sveltefire.fireship.io) slots let us tailor content based on user status, enhancing interaction without clutter.
+
+For example, compare the below in which logged in users can upvote questions and answers and add the their own answers with the view of logged out users who can just view the content.
+
+::: {#fig-compare layout-ncol=2 .column-page}
+
+![Logged in](images/question_logged_in.png){#fig-loggedin}
+
+![Logged out](images/question_logged_out.png){#fig-loggedout}
+
+Question page.
+:::
+
+### User-Centric Design
+The interface is intuitive. If you're logged in, you're part of the conversation. If not, you're still in the know.
+
+### Deployment Strategy
+Netlify hosts our site, chosen for its scalability and future-proofing abilities. It's a platform that grows with us, promising smooth custom domain integration down the line.
+
+### Next Steps
+Markdown rendering is next on our list. It's about enriching the discourse with equations, links, and well-formatted content.
+
+### A Note on Development
+Our secret weapon during development? ChatGPT-4 with vision. It's like a tireless coding partner, turning visual and textual prompts into Svelte components that click into place.
+
+### Contribute
+
+The project is public on GitHub in [this repo](https://github.com/j-jayes/scb-users-group). Feel free to add a comment in the [discussions tab](https://github.com/j-jayes/scb-users-group/discussions) with a suggestion about how we can improve before launch.
