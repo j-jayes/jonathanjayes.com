@@ -16,7 +16,7 @@ execute:
 :::: {.columns}
 
 ::: {.column width="65%"}
-Emails limits knowledge to the sender and receivers. Researchers grappling with Statistics Sweden (SCB) datasets often exchange insights that vanish into inboxes. We are building the SCB Users Group to change that. It's a platform where shared questions yield communal answers, accessible to everyone online.
+Long email chains are a mess to search through. Researchers grappling with Statistics Sweden (SCB) datasets often exchange insights that vanish into inboxes only accessible to those in the email chain. We are building the SCB Users Group to change that. It's a platform where shared questions yield communal answers, accessible to everyone online.
 :::
 
 ::: {.column width="5%"}
@@ -67,7 +67,7 @@ Netlify hosts our site, chosen for its scalability and future-proofing abilities
 Markdown rendering is next on our list. It's about enriching the discourse with equations, links, and well-formatted content.
 
 ### A Note on Development
-Our secret weapon during development? ChatGPT-4 with vision. It's like a tireless coding partner, turning visual and textual prompts into Svelte components that click into place.
+Our secret weapon during development? ChatGPT-4 vision. It's a tireless coding partner, turning visual and textual prompts into Svelte components that click into place. Iterating is swift.
 
 ### Contribute
 
