@@ -1,14 +1,5 @@
 [
   {
-    "listing": "/content/research.html",
-    "items": [
-      "/content/research/Wired-for-success-abstract.html",
-      "/content/research/Ratio-seminar.html",
-      "/content/research/Wired-for-success.html",
-      "/content/research/Warwick-poster.html"
-    ]
-  },
-  {
     "listing": "/index.html",
     "items": [
       "/posts/2023-11-07-q-and-a/q-and-a.html",
@@ -39,8 +30,13 @@
     ]
   },
   {
-    "listing": "/content/generative-ai-articles/generative-ai-articles-listing.html",
-    "items": []
+    "listing": "/content/research.html",
+    "items": [
+      "/content/research/Wired-for-success-abstract.html",
+      "/content/research/Ratio-seminar.html",
+      "/content/research/Wired-for-success.html",
+      "/content/research/Warwick-poster.html"
+    ]
   },
   {
     "listing": "/content/generative-ai-articles-listing.html",
