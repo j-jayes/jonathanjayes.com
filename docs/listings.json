@@ -37,5 +37,15 @@
       "/posts/2021-04-21-chips/chips.html",
       "/posts/welcome/welcome.html"
     ]
+  },
+  {
+    "listing": "/content/generative-ai-articles/generative-ai-articles-listing.html",
+    "items": []
+  },
+  {
+    "listing": "/content/generative-ai-articles-listing.html",
+    "items": [
+      "/content/generative-ai-articles/uk-china-shipping-forecast.html"
+    ]
   }
 ]

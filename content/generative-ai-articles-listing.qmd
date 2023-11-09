@@ -1,0 +1,9 @@
+---
+pagetitle: "Generative AI Articles"
+listing:
+  contents: generative-ai-articles
+  sort:
+    - "date desc"
+    - "title desc"
+---
+

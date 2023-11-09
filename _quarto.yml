@@ -39,6 +39,8 @@ website:
         menu:
         - text: "My personal cookbook"
           href: "https://j-jayes.github.io/recipes/"
+        - text: "Generative AI reports"
+          href: "content/generative-ai-articles-listing.qmd"
       - text: "{{< fa brands github >}}"
         href: https://github.com/j-jayes/interlude-one
       - icon: rss
