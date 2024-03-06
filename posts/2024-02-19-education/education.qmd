@@ -1,0 +1,130 @@
+---
+title: "Education"
+format: html
+eval: false
+draft: true
+---
+
+
+```{r}
+library(tidyverse)
+set.seed(2024)
+
+country_a <- rnorm(2500, mean = 100, sd = 10) %>% as_tibble() %>% rename(score = value) %>% mutate(country = "A")
+
+country_b <- rnorm(2500, mean = 130, sd = 20) %>% as_tibble() %>% rename(score = value) %>% mutate(country = "B")
+
+countries_tbl <- bind_rows(country_a, country_b)
+
+# count the observations by bind and by country
+bins <- seq(0, 200, by = 10)
+counts_tbl <- countries_tbl %>% count(country, score = cut(score, bins))
+
+counts_tbl %>% 
+ggplot(aes(x = score, y = n, fill = country)) +
+geom_col(position = "dodge") +
+theme_minimal() +
+facet_wrap(~country, nrow = 2)
+
+
+counts_tbl %>%
+    ggplot(aes(x = score, y = n, fill = country)) +
+    geom_col(alpha = 0.5) +
+    theme_minimal()
+
+
+
+
+countries_tbl %>%
+    ggplot(aes(x = score, fill = country)) +
+    geom_histogram(alpha = 0.5, bins = 15) +
+    theme_minimal() +
+    facet_wrap(~country, nrow = 2)
+
+countries_tbl %>%
+    ggplot(aes(x = score, fill = country)) +
+    geom_histogram(alpha = 0.5, bins = 15, position = "stack") +
+    theme_minimal()
+
+countries_tbl %>%
+    ggplot(aes(x = score)) +
+    geom_histogram(alpha = 0.5, bins = 15, fill = "midnightblue") +
+    theme_minimal()
+
+
+countries_tbl %>%
+    ggplot(aes(x = score)) +
+    geom_density(alpha = 0.5) +
+    theme_minimal()
+
+
+countries_tbl = countries_tbl %>% 
+mutate(log_score = log(score))
+
+countries_tbl %>% 
+    ggplot(aes(x = log_score, fill = country)) +
+    geom_density(alpha = 0.5) +
+    theme_minimal()
+
+log_norms = rlnorm(2000, log(10), log(2.5)) %>% as_tibble() %>% rename(log_norms = value)
+
+
+log_norms %>% 
+    ggplot(aes(x = log_norms)) +
+    geom_density(alpha = 0.5) +
+    theme_minimal()
+```
+
+
+
+
+
+```{r}
+set.seed(2024)
+
+country_a <- rnorm(2500, mean = 6.8, sd = 2) %>% as_tibble() %>% rename(score = value) %>% mutate(country = "A")
+
+country_b <- rnorm(1000, mean = 13.3, sd = 3) %>% as_tibble() %>% rename(score = value) %>% mutate(country = "B")
+
+countries_tbl <- bind_rows(country_a, country_b)
+
+# count the observations by bind and by country
+bins <- seq(-10, 40, by = 1)
+counts_tbl <- countries_tbl %>% count(country, score = cut(score, bins))
+
+
+
+counts_tbl %>% 
+ggplot(aes(x = score, y = n, fill = country)) +
+geom_col(position = "dodge") +
+theme_minimal() +
+facet_wrap(~country, nrow = 2)
+
+
+counts_tbl %>%
+    ggplot(aes(x = score, y = n, fill = country)) +
+    geom_col(alpha = 0.5) +
+    theme_minimal()
+
+
+
+
+countries_tbl %>%
+    ggplot(aes(x = score, fill = country)) +
+    geom_histogram(alpha = 0.5, bins = 20) +
+    theme_minimal() +
+    facet_wrap(~country, nrow = 2)
+
+countries_tbl %>%
+    ggplot(aes(x = score, fill = country)) +
+    geom_histogram(alpha = 0.5, bins = 20) +
+    theme_minimal()
+
+countries_tbl %>%
+    ggplot(aes(x = score)) +
+    geom_histogram(alpha = 0.5, bins = 20, fill = "midnightblue") +
+    theme_minimal()
+```
+
+
+

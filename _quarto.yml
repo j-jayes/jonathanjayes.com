@@ -51,6 +51,10 @@ format:
   html:
     theme: assets/custom.scss
     toc: true
+    include-in-header:
+      - text: |
+          <script data-goatcounter="https://j0nathan.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
 
 execute:
   echo: false
