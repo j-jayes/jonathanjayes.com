@@ -1,0 +1,30 @@
+# .gitignore for SvelteKit project
+
+# Node modules
+node_modules/
+
+# Build output
+build/
+.svelte-kit/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# SvelteKit specific
+.svelte-kit/
+
+# IDE specific
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
