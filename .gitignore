@@ -6,3 +6,10 @@
 /.quarto/
 
 /.luarc.json
+
+
+.env
+
+.venv/*
+
+posts/2024-05-17-two-thirds-of-the-avg/.env

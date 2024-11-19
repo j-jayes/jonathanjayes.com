@@ -1,0 +1,65 @@
+---
+title: "How long will it take me to payback my solar system?"
+format: html
+draft: true
+---
+
+The purpose of this post is to demonstrate the features of quarto's support for interactive calculations, and to show you how much it will cost to install a solar system in your home in South Africa and understand how long it will take to pay back the cost of the system.
+
+The idea was sparked when we went to go and visit my aunt and uncle on the South Coast of KZN. They do not have a solar system installed, and their water system is unreliable so they have an electric pump that pumps water into the house. When the power is out, it is frustrating. 
+
+Solving their water problem is surprisingly difficult, despite people saying "well the cost of solar is falling all the time" - which is true [insert graph here].
+
+### Electricity is a problem in South Africa
+
+- Load shedding
+- Electricity prices are too low
+- South Africa is too dependent on coal. Bad for the environment
+
+### Options to get through load shedding.
+
+- Buy a generator
+- Buy a solar system
+- Buy a battery only system
+
+For many people who work from home, not having power is a real problem. Hence it kind of doesn't matter how much the system costs and how long it takes to pay off, it is just needed.
+
+Calculating the cost of electricity in your municipality:
+
+Nersa guidelines are quite complicated. 
+
+If you're a domestic consumer, 
+
+
+In Knysna, for instance, these are the fees for a small scale embedded generation:
+
+SMALL SCALE EMBEDDED GENERATION (SSEG)
+| Charge Type                                | Unit   | Amount   |
+|--------------------------------------------|--------|----------|
+| Basic Charge (no buy-back by municipality) | R/month| 110.90   |
+| Basic Charge (buy-back by municipality)    | R/month| 258.78   |
+| Power Charge                               | R/amp  | 11.83    |
+| Buy-back rate                              | c/kWh  | 74.00    |
+
+So you need to generate 350 additional kWh per month to sell back to the municipality for the pleasure of having a solar system.
+
+### How do we make the calculation?
+
+First you need to decide what kind of system you want to implement. 
+
+Do you want to just make it thourh load shedding? Then you need a battery system - add costing in here.
+
+Then if you want to get a solar system you need to know a few things. 
+
+- How much electricity do you use per month?
+- Can you shift your usage to the time when you're generating the most power?
+
+General questions:
+
+- What is the current cost of electricity in your municipality? What do you spend on power per month?
+    then back calculate how much power you use per month.
+- What is the cost of power going to be in the future?
+    Here we have to do some research into requested tariff increases and how much NERSA grants the municipality to increase the price of electricity. Then we can extrapolate the cost of electricity in the future.
+    My understanding is that electricity in South Africa is too cheap - that's why we are short of power and hence the load shedding. So if we expect Eskom to eventually become self supporting in generation, then we can expect the price of electricity to go up at above CPI.
+
+I would quite like to ingest the NERSA tariff setting document and then make a nice interactive map where you can see electricity prices by what type you are and how much you're using. 

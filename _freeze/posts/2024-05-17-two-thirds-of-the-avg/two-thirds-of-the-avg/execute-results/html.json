@@ -1,0 +1,12 @@
+{
+  "hash": "3f7c9cd84f65709f9bd3decc3d29fa90",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Two Thirds of the Average Game\"\nformat: html\ndraft: true\nexecute:\n    eval: false\nauthors:\n    - Jonas Kreutzer\n    - Jonathan Jayes\n---\n\n\n\n\n\n## Setup\n\n\n\n### Prompt construction\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "supporting": [
+      "two-thirds-of-the-avg_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

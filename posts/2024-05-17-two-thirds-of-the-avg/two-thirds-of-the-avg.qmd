@@ -1,0 +1,205 @@
+---
+title: "Two Thirds of the Average Game"
+format: html
+draft: true
+execute:
+    eval: false
+authors:
+    - Jonas Kreutzer
+    - Jonathan Jayes
+---
+
+
+## Setup
+
+```{python}
+# from dotenv import load_dotenv
+# import pathlib
+
+# # Get the root path
+# root = pathlib.Path().cwd().parent.parent
+
+# # Load .env file
+# load_dotenv(dotenv_path=root / '.env')
+
+# # Now you can access the variables using os.getenv
+# import os
+# key = os.getenv("unifi_esg_extraction_key")
+
+# print(key)
+
+key = "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"
+```
+
+
+### Prompt construction
+
+
+```{python}
+params = {
+    "player_type": [
+        "AIs",
+        "members of the general public",
+        "undergraduate statistics students",
+        "experts in game theory",
+    ],
+    "model_type": ["gpt-3.5-turbo-0125", "gpt-4o-2024-05-13"],
+}
+
+rules = """
+You are playing the 'guess two thirds of the average' game.
+
+Rules:
+1. Every player must write a whole number between 0 and 100 on this sheet.
+2. The winner of the game will be the player whose number is closest to 2/3 of the average of all the numbers written by all the players.
+"""
+
+for model_type in params["model_type"]:
+    for player_type in params["player_type"]:
+        competition = f"You are playing against other players who are {player_type}."
+        self_info = f"You are a {model_type}."
+        output_prompt = "I want you to play the game. Provide your best guess for the number that will be closest to 2/3 of the average of all guesses in JSON format, with a key for `guess` and `motivation`, which is a one sentence explanation of your guess."
+        prompt = f"{rules} {competition} {self_info} {output_prompt}"
+        print(prompt)
+```
+
+
+
+
+```{python}
+from openai import OpenAI
+import matplotlib.pyplot as plt
+import json
+
+client = OpenAI(
+    # This is the default and can be omitted
+    api_key=key,
+)
+
+params = {
+    "player_type": [
+        "AIs",
+        "members of the general public",
+        "undergraduate statistics students",
+        "experts in game theory",
+    ],
+    "model_type": ["gpt-3.5-turbo-0125"],
+}
+
+rules = """
+You are playing the 'guess two thirds of the average' game.
+
+Rules:
+1. Every player must write a whole number between 0 and 100 on this sheet.
+2. The winner of the game will be the player whose number is closest to 2/3 of the average of all the numbers written by all the players.
+"""
+
+import json
+
+
+def play_two_thirds_average_game(model_type, player_type):
+    competition = f"You are playing against other players who are {player_type}."
+    self_info = f"You are a {model_type}."
+    output_prompt = (
+        "I want you to play the game. Provide your best guess for the number that will be closest to 2/3 of the average of all guesses in JSON format, "
+        "with a key for `guess` and `motivation`, which is a one sentence explanation of your guess."
+    )
+    prompt = f"{rules} {competition} {self_info} {output_prompt}"
+
+    response = client.chat.completions.create(
+        model=model_type,
+        messages=[
+            {"role": "system", "content": rules},
+            {"role": "assistant", "content": self_info},
+            {"role": "assistant", "content": competition},
+            {"role": "user", "content": output_prompt},
+        ],
+        max_tokens=50,
+    )
+
+    result = response.choices[0].message.content
+
+    # Strip out markdown code blocks if they exist
+    if result.startswith("```json"):
+        result = result.strip("```json").strip("```").strip()
+
+    result_json = json.loads(result)
+
+    return result_json
+```
+
+
+```{python}
+def play_multiple_games(n_games):
+    result_dict = {}
+    for model_type in params["model_type"]:
+        result_dict[model_type] = {}
+        for player_type in params["player_type"]:
+            if player_type == "AIs":
+                player_type = f"AIs running {model_type}"
+            result_dict[model_type][player_type] = []
+            for _ in range(n_games):
+                ai_response = play_two_thirds_average_game(model_type, player_type)
+                ai_guess = None
+
+                try:
+                    # Using json.loads instead of eval for safer parsing
+                    ai_guess = json.loads(ai_response).get("guess")
+                except Exception as e:
+                    print(f"Error processing AI response: {e}")
+
+                result_dict[model_type][player_type].append(ai_response)
+
+    return result_dict
+
+```
+
+
+```{python}
+import json
+
+# create a function that saves the JSON results to a file
+def save_results_to_file(results, filename):
+    with open(filename, "w") as file:
+        json.dump(results, file)
+
+# Play 50 games and store the results
+results = play_multiple_games(100)
+
+# Save results to a file
+save_results_to_file(results, 'two_thirds_average_game_results.json')
+
+```
+
+```{python}
+result_dict = {}
+for p in [1,2]:
+    result_dict[p] = {}
+    for m in [1,2]:
+        result_dict[p][m] = {}
+        results = []
+        for i in range(3):
+            results.append(i)
+        result_dict[p][m] = results
+result_dict
+```
+
+
+
+```{python}
+def visualize_results(results):
+    for model_type in params["model_type"]:
+        for player_type in params["player_type"]:
+            ai_guesses = [ai for mt, pt, ai in results if mt == model_type and pt == player_type and ai is not None]
+
+            plt.figure(figsize=(10, 6))
+            plt.scatter(range(len(ai_guesses)), ai_guesses, c='blue', label='AI Guesses')
+            plt.xlabel('Game Instance')
+            plt.ylabel('AI Guess')
+            plt.title(f'2/3 of the Average Game Guesses\nModel: {model_type}, Player Type: {player_type}')
+            plt.legend()
+            plt.grid(True)
+            plt.show()
+```
+
+

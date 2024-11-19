@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2021-04-08">
 <meta name="description" content="In this post I walk through scraping data on cargo ships from Wikipedia as part of a series on shipping. I make use of R, the rvest package for webscraping and the SelectorGadget tool for CSS selection.">
 
-<title>Interlude One - Shipping and Scraping - Part 1 in a Series on Shipping</title>
+<title>Shipping and Scraping - Part 1 in a Series on Shipping – Interlude One</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -36,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -85,7 +85,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -94,12 +100,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
-
 <link href="../../site_libs/panelset-0.2.6/panelset.css" rel="stylesheet">
 <script src="../../site_libs/panelset-0.2.6/panelset.js"></script>
 <script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
@@ -115,6 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="../../site_libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="../../site_libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
+<script data-goatcounter="https://j0nathan.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
 
 </head>
@@ -123,9 +130,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../assets/favicon_logo.ico" alt="" class="navbar-logo">
     </a>
@@ -134,92 +141,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/phd-planning.html" rel="" target="">
- <span class="menu-text">PhD planning</span></a>
+    <a class="nav-link" href="../../content/phd-planning.html"> 
+<span class="menu-text">PhD planning</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/teaching.html" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="../../content/teaching.html"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/research.html" rel="" target="">
- <span class="menu-text">Research</span></a>
+    <a class="nav-link" href="../../content/research.html"> 
+<span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/publications.html" rel="" target="">
- <span class="menu-text">Publications</span></a>
+    <a class="nav-link" href="../../content/publications.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/data.html" rel="" target="">
- <span class="menu-text">Data</span></a>
+    <a class="nav-link" href="../../content/data.html"> 
+<span class="menu-text">Data</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web-apps" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web-apps" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Web Apps</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-web-apps">    
         <li>
-    <a class="dropdown-item" href="http://jonathan-jayes.shinyapps.io/gumtree-price-explorer" rel="" target="">
+    <a class="dropdown-item" href="http://jonathan-jayes.shinyapps.io/gumtree-price-explorer">
  <span class="dropdown-text">Second Hand Car Price Comparison Tool</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/production-functions" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/j-jayes/production-functions">
  <span class="dropdown-text">Production Functions Shiny App</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/NBER-methods" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/j-jayes/NBER-methods">
  <span class="dropdown-text">Economics literature explorer</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP">
  <span class="dropdown-text">Europe’s Regional Development Explorer</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-fun-stuff" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-fun-stuff" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Fun stuff</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-fun-stuff">    
         <li>
-    <a class="dropdown-item" href="https://j-jayes.github.io/recipes/" rel="" target="">
+    <a class="dropdown-item" href="https://j-jayes.github.io/recipes/">
  <span class="dropdown-text">My personal cookbook</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../content/generative-ai-articles-listing.html" rel="" target="">
+    <a class="dropdown-item" href="../../content/generative-ai-articles-listing.html">
  <span class="dropdown-text">Generative AI reports</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/j-jayes/interlude-one" rel="" target="">
- <span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i></span></a>
+    <a class="nav-link" href="https://github.com/j-jayes/interlude-one"> 
+<span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -283,7 +290,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <section id="another-one" class="level1 page-columns page-full">
 <h1>Another one?</h1>
@@ -293,20 +302,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-have-cargo-ships-increased-in-size" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="how-have-cargo-ships-increased-in-size">How have cargo ships increased in size?</h3>
 <p>The small multiples plot below shows the evolution of cargo ship size from 1870 to today. On the x-axis is the length of the average cargo ship per decade from Wikipedia’s list of cargo ships<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. On the y-axis is the average ship beam, or width at the widest point. The colour of the rectangle shows the deadweight tonnage of the average ship, or amount of cargo that the ship can carry.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Deadweight tonnage or tons deadweight is a measure of how much weight a ship can carry. It is the sum of the weights of cargo, fuel, fresh water, ballast water, provisions, passengers, and crew.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">Deadweight tonnage or tons deadweight is a measure of how much weight a ship can carry. It is the sum of the weights of cargo, fuel, fresh water, ballast water, provisions, passengers, and crew.</span></div></div>
 <div class="cell page-columns page-full">
-<div class="cell-output-display column-page">
-<p><img src="container-ships_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="960"></p>
+<div class="cell-output-display page-columns page-full">
+<div class="page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="container-ships_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img column-page" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Cargo ships have increased dramatically in size over time! The oldest ship in our dataset is the <em>R. J. Hackett</em>, one of the first Great Lakes freighters. It was just 63m long and 10m wide, with a wooden hull. According to historian Mark Thompson, the <em>R. J. Hackett’s</em> boxy hull, hatch-lined deck, and placement of the deckhouses meant the ship was ideally suited for moving cargo through inland waterways. This steamer greatly influenced the development of cargo ships which followed.</p>
 <p>Today, container ships like the <em>Ever Given</em> are nearly 400m long, 60m wide, and can carry more than 20,000 twenty-foot containers. That’s enough space for 745 million bananas!</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">TEUs, or twenty-foot equivalent units, is the measure that shipping companies use to compare volume. A TEU is 6.1m long, 2.4m wide and usually 2.6m high. Source: <a href="https://en.wikipedia.org/wiki/Twenty-foot_equivalent_unit">Wikipedia</a></span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">TEUs, or twenty-foot equivalent units, is the measure that shipping companies use to compare volume. A TEU is 6.1m long, 2.4m wide and usually 2.6m high. Source: <a href="https://en.wikipedia.org/wiki/Twenty-foot_equivalent_unit">Wikipedia</a></span></div></div>
 </section>
 <section id="increasing-size-of-container-ships-by-length-width-and-tonnage." class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="increasing-size-of-container-ships-by-length-width-and-tonnage.">Increasing size of container ships by length, width and tonnage.</h3>
 <p>In the plots below we focus only on container ships built after 1970. This era saw the construction of the first ships purpose built to carry ISO containers, which could be loaded and unloaded rapidly at port, repacked and shipped onward on any compatible ship, truck or train. The ISO standard container transformed the shipping industry and replaced the prior status quo of break bulk carriers. One of the consequences was a dramatic reduction in demand for “stevedores” or “longshoremen”; workers who would manually unload cargo from break bulk carriers.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If you’re interested in containerization, I highly reccomend <a href="https://www.tradetalkspodcast.com/podcast/133-how-one-man-and-some-metal-boxes-revolutionized-global-trade/">this episode</a> from the podcast Trade Talks, and <a href="https://cms.megaphone.fm/channel/PPY8156500299?selected=PPY1876923489">this eight-part series</a> from Alexis Madrigal.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">If you’re interested in containerization, I highly reccomend <a href="https://www.tradetalkspodcast.com/podcast/133-how-one-man-and-some-metal-boxes-revolutionized-global-trade/">this episode</a> from the podcast Trade Talks, and <a href="https://cms.megaphone.fm/channel/PPY8156500299?selected=PPY1876923489">this eight-part series</a> from Alexis Madrigal.</span></div></div>
 </section>
 <div class="panelset">
 <section id="tonnage-over-time" class="level2 panel-name panel">
@@ -347,15 +360,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="birfucation-in-cargo-ship-capacity.">Birfucation in cargo ship capacity.</h3>
 <p>So it certainly seems that cargo ships have been becoming larger over time. Interestingly, it appears that while the largest container ships continue to get larger and carry more cargo, there is still a need for relatively small ships. There are a significant number of container ships that can carry less than 50 000 tons launched since 2010, shown in the density plot below. We could say that there has been a bifurcation in ship capacity, with a few enormous ships, and a greater number of smaller ships operating in tandem today.</p>
 <div class="cell page-columns page-full">
-<div class="cell-output-display column-page">
-<p><img src="container-ships_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="768"></p>
+<div class="cell-output-display page-columns page-full">
+<div class="page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="container-ships_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img column-page" width="768"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 <section id="why-have-container-ships-become-so-large" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="why-have-container-ships-become-so-large">Why have container ships become so large?</h3>
 <p><a href="https://en.wikipedia.org/wiki/Economies_of_scale">Economies of scale</a> describes a decrease in the per unit cost as scale of an operation increases. This perfectly fits the shipping industry’s relentless path towards upsizing ships, cranes and ports. One of the reasons has to do with fluid dynamics. <a href="https://ijmt.ir/article-1-428-en.pdf">Hull resistance</a> is one of the key factors impacting fuel consumption. For vessels in water, drag loss is less than proportional to increasing cargo carried. In other words, making a ship larger usually results in less fuel consumption per ton of cargo, holding all else constant. As we have seen in the figures above, container ships have become larger and larger as they carry more cargo per ship, in an effort to save fuel.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Other methods of drag reduction include improved hull design, injecting air around the hull surface and reducing hull roughness from slime and weeds. See <a href="https://www.usna.edu/NAOE/_files/documents/Courses/EN400/02.07%20Chapter%207.pdf">Resistence and powering of ships</a> <img src="images/hull-design.PNG" id="id" class="class" style="width:60.0%;height:60.0%" alt="Improved hull design"></span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">Other methods of drag reduction include improved hull design, injecting air around the hull surface and reducing hull roughness from slime and weeds. See <a href="https://www.usna.edu/NAOE/_files/documents/Courses/EN400/02.07%20Chapter%207.pdf">Resistence and powering of ships</a> <img src="images/hull-design.PNG" id="id" class="class" style="width:60.0%;height:60.0%" alt="Improved hull design"></span></div></div>
 <p>According to Marc Levinson, author of <a href="https://press.princeton.edu/books/paperback/9780691170817/the-box">The Box: How the Shipping Container Made the World Smaller and the World Economy Bigger</a>, the shippers applied this idea to every element of the industry. He says:</p>
 <blockquote cite="https://press.princeton.edu/books/paperback/9780691170817/the-box" class="blockquote">
 Bigger ships lowered the cost of carrying each container. Bigger ports with bigger cranes lowered the cost of handling each ship. Bigger containers — the 20-foot box, shippers’ favorite in the early 1970s, was yielding to the 40-footer — cut down on crane movements and reduced the time needed to turn a vessel around in port, making more efficient use of capital. A virtuous circle had developed: lower costs per container permitted lower rates, which drew more freight, which supported yet more investments in order to lower unit costs even more. If ever there was a business in which economies of scale mattered, container shipping was it.
@@ -369,12 +386,12 @@ Bigger ships lowered the cost of carrying each container. Bigger ports with bigg
 <h1>Scraping Wikipedia’s list of cargo ships.</h1>
 <p>Now that we have had a look at the data, I want to walk through how it can easily be collected and processed for visualizing with R.</p>
 <p>The source of the pre-1970 data is Wikipedia’s list of cargo ships, a screenshot of which I include below. The plan to get the data involves collecting a list of links to each page and then scraping the information about each ship from it’s page. The code chunks below show the process of scraping the data and you can access the scripts on my <a href="https://github.com/j-jayes/container-ships">GitHub repository</a>.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If you want to follow along with a video of the scraping process, I highly recommend <a href="https://youtu.be/tCa2di7aEP4">this video on ramen reviews</a> from David Robinson.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">If you want to follow along with a video of the scraping process, I highly recommend <a href="https://youtu.be/tCa2di7aEP4">this video on ramen reviews</a> from David Robinson.</span></div></div>
 <center>
 <div id="id" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/wikipedia_list_of_cargo_ships.png" class="class figure-img" style="width:80.0%;height:80.0%"></p>
-<figcaption class="figure-caption">List of cargo ships</figcaption>
+<figcaption>List of cargo ships</figcaption>
 </figure>
 </div>
 <p>Screenshot of the <a href="https://en.wikipedia.org/wiki/List_of_cargo_ships">list</a></p>
@@ -385,7 +402,7 @@ Bigger ships lowered the cost of carrying each container. Bigger ports with bigg
 <div id="id" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/selector-gadget.png" class="class figure-img" style="width:80.0%;height:80.0%"></p>
-<figcaption class="figure-caption">SelectorGadget interface</figcaption>
+<figcaption>SelectorGadget interface</figcaption>
 </figure>
 </div>
 <p>Screenshot showing <a href="https://selectorgadget.com/">SelectorGadget interface</a></p>
@@ -467,7 +484,7 @@ Bigger ships lowered the cost of carrying each container. Bigger ports with bigg
 <div id="id" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/algo-steel.png" class="class figure-img" style="width:80.0%;height:80.0%"></p>
-<figcaption class="figure-caption">Algosteel</figcaption>
+<figcaption>Algosteel</figcaption>
 </figure>
 </div>
 <p>Screenshot showing page for ship called <a href="https://en.wikipedia.org/wiki/Algosteel">Algosteel</a></p>
@@ -477,7 +494,7 @@ Bigger ships lowered the cost of carrying each container. Bigger ports with bigg
 <div id="id" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/info-box.png" class="class figure-img" style="width:80.0%;height:80.0%"></p>
-<figcaption class="figure-caption">Algosteel infobox</figcaption>
+<figcaption>Algosteel infobox</figcaption>
 </figure>
 </div>
 <p>Screenshot the infobox selection for the <a href="https://en.wikipedia.org/wiki/Algosteel">Algosteel</a></p>
@@ -540,7 +557,7 @@ Bigger ships lowered the cost of carrying each container. Bigger ports with bigg
 <section id="scraping-each-page" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="scraping-each-page">Scraping each page</h3>
 <p>The code below iterates through the list of links and returns the information in the infobox from each page. The <code>possibly</code> statement is a helpful function from the <code>purrr</code> package that allows us to return a message if the operation fails, in this case a string that just says “failed”.</p>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">For more about the usefulness of <code>purrr</code>’s safely functions see <a href="https://r4ds.had.co.nz/iteration.html?q=dealing%20with%20#dealing-with-failure">Dealing with failure</a> in <em>R for Data Science</em> by Hadley Wickham and Garrett Grolemund.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">For more about the usefulness of <code>purrr</code>’s safely functions see <a href="https://r4ds.had.co.nz/iteration.html?q=dealing%20with%20#dealing-with-failure">Dealing with failure</a> in <em>R for Data Science</em> by Hadley Wickham and Garrett Grolemund.</span></div></div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mapping through each url</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> list_of_links <span class="sc">%&gt;%</span></span>
@@ -581,7 +598,6 @@ Bigger ships lowered the cost of carrying each container. Bigger ports with bigg
 <p>Here is the output! Easy as that. We can put it in a nice table and then hyperlink the article in the url column.</p>
 <div class="cell">
 <div class="cell-output-display">
-
 <div id="htmlwidget-e875c35f2315e3bf6d76" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-e875c35f2315e3bf6d76">{"x":{"filter":"none","vertical":false,"caption":"<caption>Data scraped from Wikipedia's list of cargo ships<\/caption>","data":[["R. J. Hackett","SS Asiatic (1871-1873) SS Ambriz (1873-1895)","Tropic (1871–1873) Federico (1873–)","Gaelic","SS Belgic (1873-1883) SS Goefredo (1883-1884)","Ohio","SS Bandırma (1910) ex Panderma (1894) ex Kymi (1883) ex Trocadero (1878)","Onoko","Belgic (1885 - 1899)Mohawk (1899 - 1903)","Cufic (1888–1896) Nuestra Señora de Guadalupe (1896–1898) Cufic (1898–1901) Manxman (1901–)","Florida","Francis Hinton","Runic (1889–1895) Tampican (1895–1912) Imo (1912–1920) Guvernøren (1920–1921)","W. H. Gilcher","Western Reserve","SS Nomadic (1891-1904) SS Cornishman (1904-1926)","Tauric (1891–1903) Welshman (1903–)","SS Bovic (1892–1922) SS Colonian (1922–1928)","Naronic","Thomas Wilson","L.R. Doty","American (1895-1904) Cufic (1904-1924)","Georgic","European (1896-1904) Tropic (1904-1924)","SS Afric","Medic","Runic (1900–1930) New Sevilla (1930–1940)","Suevic","Thomas W. Lawson","J.B. Ford","R.E. Schuck","Amasa Stone","SS Argus","Frank C. Ball 1905-1931J.R. Sensibar 1931-1981Conallison 1981-1984","Daniel J. Morrell","Henry A. Hawgood 1906-1912 C. Russel Hubbard 1915-1937 W.W. Holloway 1937-1986","Henry B. Smith","St. Marys Challenger","Regina","Thomas F. Cole","Howard M. Hanna Jr. (1908-1915) Glenshee (1915-1926) 'Marquette (1926-1926) Goderich (1926-1963) Agawa (1963-1968) Lionel Parsons (1968-1983)","John A. McGean","Benjamin Noble","Isaac M. Scott","SS Charles S. Price","Emperor","William C. Moreland, 1910-1910 Sir Trevor Dawson, 1916–1920 Charles L. Hutchinson, 1920–1951 Gene C. Hutchinson, 1951–1962 Parkdale, 1962–1970","Willis L. King 1911–1952 C.L. Austin 1952–1984","Desabla","Belgic (1916-23) Belgenland (1923-35) Columbia (1935-36)","Belgic (1916-23) Belgenland (1923-35) Columbia (1935-36)","William H. Donner","Louis W. Hill (1917–c.1955) Valley Camp (c.1955–)","SS Vedic","USS Bali","War Icarus (1918—1919)Mesaba (1919—1925)Delphic (1925—1933)Clan Farquhar (1933—1948)","SS War Argus (October 1918 – August 1919) SS Gallic (August 1919 – October 1933)","William G. Mather","Carl D. Bradley","SS Eaglescliffe Hall","MV Acavus","MV Alexia","MV Amastra","MV Ancylus","Gadila","Macoma","Altmark","MV Adula","G. H. Corliss Adhara","Robert T. Lincoln Aludra","Daniel Boone","Noah H. Swayne Arided","Empire MacCabe","Empire MacColl","Empire MacKay","Empire MacMahon","John G. Nicolay Albireo","J. S. Cullinan Alderamin","William G. Sumner","Increase A. Lapham","James Rowan Allioth","John A. Logan Alnitah","George C. Yount","Mary Patten","Ideal X, ex-Potrero Hills, ex-Capt. John D.P., ex-Elemir[1]","Van Lear Black Allegan","A.J. Cassatt Appanoose","Warren Stone Arkab","SS Bessemer Victory","Olga Maersk","Golfito","Sitakund","SS Arthur M. Anderson","John J. Boland (1953–1999) Saginaw (1999–present)","William Clay Ford (1953–1985) US 266029 (1985–1987)","Antenor (1956-1970) Glenlochy (1970-1972) Dymas (1972-1973) Kaiyun (1973-1983)","TSS Camito","Esmeralda","SS Edmund Fitzgerald","SS Torrey Canyon","Edward L. Ryerson (1960 –1998) Str. Edward L. Ryerson (1998 –present)","Montrealais","Quebecois","MV Maplecliffe Hall (1966–1988) MV Le Moyne (1988–1994) MV Canadian Miner (1994–2011)[1] MV Miner (2011–present)[2]","A.S. Glossbrenner (1966–1987) Algogulf (1987–1990) Algosteel (1990–2018) Oste (2018–2018)","Richelieu (1967–1994) Algocape (1994–2012) Goc (2012)","Demeterton (1967–1975) St. Lawrence Navigator (1975–1979) Canadian Navigator (1979–2011) Algoma Navigator (2011–2016) Navi (2016)","Algorail","Senneville Algoville Tim S. Dool","Canadian Progress (1968–2011) Algoma Progress (2011–2014)","1969–1981: MS Star Clipper 1981–1986: Star Lanao","Annie Johnson (1969–1986) Regent Moon (1986–1988) Alexandra (1988–1992) Costa Allegra (1992–2012) Santa Cruise (2012)","Axel Johnson (1969–1986) Regent Sun (1986) Italia (1987) Costa Marina (1988–2011) Harmony Princess (2011–2012) Club Harmony (2012–2014) Harmony 1 (2014)","Sea Sovereign (1969–1977) South Sun (1977–1979) Salem (1979–1980)","Atlantic Causeway","Atlantic Conveyor","Stolt Surf","Sugar Islander (1973–1996) Islander (1996) Judy Litrico (1996–2006) Tina Litrico (2006–2011) Tecumseh (2011–present)","William R. Roesch (1973-1995) David Z. Norton (1995-2007) David Z. (2007-2008) Calumet (2008-present)","Amoco Milford Haven MT Haven","Charles E. Wilson","Akebono Maru No.28","Amoco Cadiz","Appleleaf","MV Sam Laud","Algolake (1977–2018) Gola (2018)","MV Walter J. McCarthy Jr.","MV American Courage","MV American Integrity","MV Buffalo","Algobay (1978–1994) Atlantic Trader (1994–1997) Algobay (1997–2012) Radcliffe R. Latimer (2012–present)","MV American Mariner","MV Edwin H. Gott","MV Indiana Harbor","MV Burns Harbor","Ranga","MV American Century","Paul R. Tregurtha","Tampa Barber Tampa","MV Capt Steven L. Bennett TNT Express","MV Delight","Oriental Nicety","MV Biscaglia","Hansa Carrier","MSC Sabrina","MSC Napoli","MV Chekov[1]","Sea Empress","MT Sidsel Knutsen","Torben Spirit","Federal Rideau","Limburg (2000–2003) Maritime Jewel (2003–2018)","Axel Maersk","MOL Enterprise","MT Stolt Valor","Star Osakana (2004-09) Osakana (since 2009)","COSCO Guangzhou","Houston Express","Conti Cortesia","MSC Pamela","Colombo Express","MV Stolt Strength","CMA CGM Medea","Emma Maersk","Estelle Mærsk","Histria Agata","Histria Coral","MSC Geneva","NYK Vega","Osaka Express","Xin Los Angeles","Edith Maersk","Histria Azure","MCP Altona","MSC Monterey","Avenue Star","MV Cristina A.","Southern Lily","CMA CGM Thalassa","CMA CGM Vela","MSC Nuria","Sirius Star","Ultra Colonsay[1]","Algoma Equinox","Aranui 3","Baie Comeau","Baie St. Paul","Histria Crown","Gudrun Maersk","MSC Carmen","MSC Carouge","MSC Cordoba","MSC Leigh","MSC Rosaria","Algoma Mariner","MV H. Lee White","SS Fatima","SS Fredericksburg","James B. Colgate","James C. Carruthers","Kamloops","William B. Davock","Thunder Bay","U-Sea Saskatchewan","Whitefish Bay"],[1869,1870,1871,1872,1873,1875,1878,1882,1885,1888,1889,1889,1889,1890,1890,1891,1891,1892,1892,1892,1893,1895,1895,1896,1898,1898,1900,1900,1902,1903,1903,1905,1905,1905,1906,1906,1906,1906,1907,1907,1908,1908,1909,1909,1910,1910,1910,1910,1913,1914,1914,1914,1917,1917,1917,1918,1918,1925,1927,1928,1934,1934,1934,1934,1934,1935,1937,1937,1942,1942,1942,1942,1943,1943,1943,1943,1943,1943,1943,1943,1943,1943,1943,1943,1944,1944,1944,1944,1945,1948,1948,1951,1952,1953,1953,1956,1956,1957,1958,1958,1960,1961,1962,1965,1966,1966,1967,1967,1967,1968,1968,1969,1969,1969,1969,1969,1970,1972,1973,1973,1973,1974,1974,1975,1975,1976,1977,1978,1978,1978,1978,1979,1979,1979,1980,1980,1981,1981,1983,1984,1985,1986,1986,1988,1988,1991,1992,1992,1993,1994,1999,1999,2003,2003,2003,2004,2005,2005,2005,2005,2005,2005,2006,2006,2006,2006,2006,2006,2006,2006,2006,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2011,2012,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],["749","2 121","2 122","2 658","2 652","1 102","192","2 164","4 212","4 639","2 103","417","5 043","2 415","2 392","5 749","5 727","6 583","6 594","1 713",null,"8 249","10 077","8 249","11 948","11 985","12 482","12 531","5 218",null,"4 713","6 282","4 707","6 909","7 239","6 839","6 631",null,"1 956","7 268","5 905","5 100",null,"6 372","6 322","4 641","7 514","7 568","6 047","28 132","28 132","6 311",null,"9 332","6 694","8 002","7 914","8 662","10 028","1 900",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"16 460",null,null,null,null,"9 950","8 687",null,"26 525","12 557","11 590","7 965","8 502","26 947","13 632","61 263","12 170","17 647","17 646","17 831","17 955","17 822","14 636","16 157","18 845","21 436","16 532","16 289","25 500","96 228","14 946","14 946","23 299","18 049","10 344","233 690","13 862","516","233 690",null,"11 619","22 851","35 923","11 688","35 652","11 619","22 465","15 396","35 592","35 923","35 652","1 586","35 923","14 497","39 900","29 223","25 768","214 861",null,"18 037","35 598","53 409","3 972","147 273","22 617","57 486","20 659","299 364","109 000","53 096","25 269","36 700","107 000","94 483","90 465","107 849","93 750","20 059","107 711","170 794","170 794","40 439","25 804","54 549","97 825","93 750","107 200","156 907","40 439",null,"54 549",null,"17 687","6 245","130 700","131 831","54 549","162 252","34 778","23 895","7 325","24 430","24 430","164 004","115 700","54 549","54 549","54 549","54 549","54 549","24 535","14 449",null,"21 901","1 713","7 862","2 402","4 468","24 300","34 795","24 300"],[63,99,99,113,113,62,48,92,128,131,82,46,131,92,91,140,null,143,143,94,95,145,170,145,168,168,168,172,145,134,133,166,133,168,184,168,166,168,76,185,152,132,73,160,160,160,183,183,128,212,212,160,168,140,128,137,142,188,195,77,142,141,142,142,141,141,178,142,134,134,134,134,141,141,140,141,134,134,134,134,134,134,134,134,160,134,134,134,139,138,137,184,197,195,197,150,137,null,222,297,223,222,222,222,222,222,197,195,222,222,172,174,174,316,null,212,169,195,192,334,207,56,334,171,193,222,305,193,305,193,222,223,306,305,305,97,305,309,262,209,190,301,null,176,243,276,90,274,163,245,200,332,352,293,null,199,350,332,334,337,334,null,350,397,397,180,180,275,338,335,337,397,180,117,275,152,178,100,346,347,275,332,200,226,117,226,226,298,367,275,275,275,275,275,226,215,null,198,94,168,76,128,226,199,226],[10,11,11,11,11,11,null,12,14,14,12,9,14,12,12,15,null,16,null,12,12,17,18,17,19,19,19,19,15,15,15,17,15,17,18,17,17,17,13,18,16,16,12,16,16,17,18,18,17,24,24,16,18,18,16,18,18,19,20,13,18,18,18,18,18,18,22,18,17,17,17,17,19,19,18,19,17,17,17,17,17,17,17,17,9,17,17,17,19,19,null,24,21,22,21,19,null,null,23,38,23,23,23,23,23,23,23,22,23,23,26,26,26,49,null,28,25,24,21,51,24,11,51,26,21,23,32,21,32,21,23,24,32,32,32,15,32,32,32,30,30,51,null,28,32,37,17,43,23,41,24,58,43,32,null,32,43,43,43,46,42,null,43,56,56,32,32,32,44,43,46,56,32,6,32,21,24,21,43,45,32,60,32,24,18,24,24,46,43,32,32,32,32,32,24,24,null,31,12,18,13,16,24,null,24],[null,null,null,null,null,null,"Demolished",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"wreck","In the Process of Being Scrapped",null,null,null,null,null,null,null,"In operation, same capacity, as Articulated Barge (ATB).","Located in the Sanilac Shores Underwater Preserve","Scrapped",null,null,null,null,null,null,null,null,null,null,null,"Crane ship","Museum ship",null,null,null,null,"Museum ship",null,null,null,null,null,null,null,null,null,null,"Sold for scrapping, 26 October 1971",null,"sold for scrapping, 26 October 1971, removed, 6 January 1972","Sold for scrapping, 7 August 1962, completed, 7 March 1963",null,null,null,null,"Sold for commercial use, 22 August 1947",null,"Sold for scrapping, 4 March 1947, removed from fleet, 12 March 1947","sold for scrapping, 26 October 1971, delivered, 26 January 1972",null,"delivered for dismantling, 12 April 1961","sold for scrapping, 7 July 1964, withdrawn, 27 July 1964","sold for scrapping, 12 September 1972, removed 8 December 1972",null,"sold to Japanese breakers, arrived Osaka, 30 June 1969, for scrapping","sold to Japanese breakers - arrived Yokosuka about 23 December 1964",null,null,null,null,null,"In Service","In active service",null,null,null,null,"Wreck",null,"Laid up in Superior, Wisconsin.[3] Located at .mw-parser-output .geo-default,.mw-parser-output .geo-dms,.mw-parser-output .geo-dec{display:inline}.mw-parser-output .geo-nondefault,.mw-parser-output .geo-multi-punct{display:none}.mw-parser-output .longitude,.mw-parser-output .latitude{white-space:nowrap}46°44′18″N 92°06′14″W﻿ / ﻿46.73822°N 92.10375°W﻿ / 46.73822; -92.10375Coordinates: 46°44′18″N 92°06′14″W﻿ / ﻿46.73822°N 92.10375°W﻿ / 46.73822; -92.10375",null,null,null,null,null,null,"retired","In active service",null,null,null,null,null,null,null,null,"Laid up pending scrap sale","In service, 2012",null,"In active service 2015",null,null,null,"In service as of 2020",null,"In service as of 2020","In active service","In service as of 2018","In service as of 2019","in active service","In service as of 2015","In service as of 2019","In service as of 2019","In service as of 2019",null,"In service as of 2018","In active service",null,null,null,null,null,null,"In service",null,null,null,null,null,"in service",null,"Currently in service",null,null,"In service","In service","In active service",null,"In service","Operational",null,"In service","In service","Operational",null,null,"in service","Operational","in active service","Operational","Currently in service",null,"Active","in service",null,"In service","In service","Currently in service","Currently in service","in service","In service","Active","In active service","In service","in active service","in active service","Active","in service","in service","in service","in service","in service","in service","in active service","In service as of 2015",null,null,null,null,null,null,"in active service","Active","in active service"],["<a href=https://en.wikipedia.org//wiki/SS_R.J._Hackett>R. J. Hackett<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Asiatic_(1870)>SS Asiatic (1871-1873) SS Ambriz (1873-1895)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Tropic_(1871)>Tropic (1871–1873) Federico (1873–)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Gaelic_(1872)>Gaelic<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Belgic_(1873)>SS Belgic (1873-1883) SS Goefredo (1883-1884)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Ohio_(1875)>Ohio<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Band%C4%B1rma>SS Bandırma (1910) ex Panderma (1894) ex Kymi (1883) ex Trocadero (1878)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Onoko>Onoko<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Belgic_(1885)>Belgic (1885 - 1899)Mohawk (1899 - 1903)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Cufic_(1888)>Cufic (1888–1896) Nuestra Señora de Guadalupe (1896–1898) Cufic (1898–1901) Manxman (1901–)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Florida>Florida<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Francis_Hinton>Francis Hinton<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Runic_(1889)>Runic (1889–1895) Tampican (1895–1912) Imo (1912–1920) Guvernøren (1920–1921)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_W.H._Gilcher>W. H. Gilcher<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Western_Reserve>Western Reserve<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Nomadic_(1891)>SS Nomadic (1891-1904) SS Cornishman (1904-1926)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Tauric>Tauric (1891–1903) Welshman (1903–)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Bovic>SS Bovic (1892–1922) SS Colonian (1922–1928)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Naronic>Naronic<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Thomas_Wilson>Thomas Wilson<\/a>","<a href=https://en.wikipedia.org//wiki/SS_L.R._Doty>L.R. Doty<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Cufic_(1904)>American (1895-1904) Cufic (1904-1924)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Georgic>Georgic<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Tropic_(1904)>European (1896-1904) Tropic (1904-1924)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Afric>SS Afric<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Medic>Medic<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Runic_(1900)>Runic (1900–1930) New Sevilla (1930–1940)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Suevic>Suevic<\/a>","<a href=https://en.wikipedia.org//wiki/Thomas_W._Lawson_(ship)>Thomas W. Lawson<\/a>","<a href=https://en.wikipedia.org//wiki/J._B._Ford>J.B. Ford<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Hydrus>R.E. Schuck<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Amasa_Stone>Amasa Stone<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Argus>SS Argus<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Frank_C._Ball>Frank C. Ball 1905-1931J.R. Sensibar 1931-1981Conallison 1981-1984<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Daniel_J._Morrell>Daniel J. Morrell<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Henry_A._Hawgood>Henry A. Hawgood 1906-1912 C. Russel Hubbard 1915-1937 W.W. Holloway 1937-1986<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Henry_B._Smith>Henry B. Smith<\/a>","<a href=https://en.wikipedia.org//wiki/SS_St._Marys_Challenger>St. Marys Challenger<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Regina_(1907)>Regina<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Thomas_F._Cole>Thomas F. Cole<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Howard_M._Hanna_Jr.>Howard M. Hanna Jr. (1908-1915) Glenshee (1915-1926) 'Marquette (1926-1926) Goderich (1926-1963) Agawa (1963-1968) Lionel Parsons (1968-1983)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_John_A._McGean>John A. McGean<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Benjamin_Noble>Benjamin Noble<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Isaac_M._Scott>Isaac M. Scott<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Charles_S._Price>SS Charles S. Price<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Emperor>Emperor<\/a>","<a href=https://en.wikipedia.org//wiki/SS_William_C._Moreland>William C. Moreland, 1910-1910 Sir Trevor Dawson, 1916–1920 Charles L. Hutchinson, 1920–1951 Gene C. Hutchinson, 1951–1962 Parkdale, 1962–1970<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Willis_L._King>Willis L. King 1911–1952 C.L. Austin 1952–1984<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Desabla>Desabla<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Belgenland_(1914)>Belgic (1916-23) Belgenland (1923-35) Columbia (1935-36)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Belgic_(1911)>Belgic (1916-23) Belgenland (1923-35) Columbia (1935-36)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_William_H._Donner>William H. Donner<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Valley_Camp>Louis W. Hill (1917–c.1955) Valley Camp (c.1955–)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Vedic>SS Vedic<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Bali_(ID-2483)>USS Bali<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Delphic_(1925)>War Icarus (1918—1919)Mesaba (1919—1925)Delphic (1925—1933)Clan Farquhar (1933—1948)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Gallic_(1918)>SS War Argus (October 1918 – August 1919) SS Gallic (August 1919 – October 1933)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_William_G._Mather_(1925)>William G. Mather<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Carl_D._Bradley>Carl D. Bradley<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Eaglescliffe_Hall>SS Eaglescliffe Hall<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Acavus>MV Acavus<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Alexia>MV Alexia<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Amastra>MV Amastra<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Ancylus>MV Ancylus<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Gadila>Gadila<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Macoma>Macoma<\/a>","<a href=https://en.wikipedia.org//wiki/German_tanker_Altmark>Altmark<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Adula>MV Adula<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Adhara_(AK-71)>G. H. Corliss Adhara<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Aludra_(AK-72)>Robert T. Lincoln Aludra<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Ara_(AK-136)>Daniel Boone<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Arided_(AK-73)>Noah H. Swayne Arided<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Empire_MacCabe>Empire MacCabe<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Empire_MacColl>Empire MacColl<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Empire_MacKay>Empire MacKay<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Empire_MacMahon>Empire MacMahon<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Albireo_(AK-90)>John G. Nicolay Albireo<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Alderamin_(AK-116)>J. S. Cullinan Alderamin<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Alkaid_(AK-114)>William G. Sumner<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Alkes_(AK-110)>Increase A. Lapham<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Allioth_(AK-109)>James Rowan Allioth<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Alnitah_(AK-127)>John A. Logan Alnitah<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Ascella_(AK-137)>George C. Yount<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Azimech_(AK-124)>Mary Patten<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Ideal_X>Ideal X, ex-Potrero Hills, ex-Capt. John D.P., ex-Elemir[1]<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Allegan_(AK-225)>Van Lear Black Allegan<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Appanoose_(AK-226)>A.J. Cassatt Appanoose<\/a>","<a href=https://en.wikipedia.org//wiki/USS_Arkab_(AK-130)>Warren Stone Arkab<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Bessemer_Victory>SS Bessemer Victory<\/a>","<a href=https://en.wikipedia.org//wiki/Olga_M%C3%A6rsk_(1948)>Olga Maersk<\/a>","<a href=https://en.wikipedia.org//wiki/TSS_Golfito>Golfito<\/a>","<a href=https://en.wikipedia.org//wiki/Sitakund>Sitakund<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Arthur_M._Anderson>SS Arthur M. Anderson<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Saginaw>John J. Boland (1953–1999) Saginaw (1999–present)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_William_Clay_Ford>William Clay Ford (1953–1985) US 266029 (1985–1987)<\/a>","<a href=https://en.wikipedia.org//wiki/MS_Antenor_(1957)>Antenor (1956-1970) Glenlochy (1970-1972) Dymas (1972-1973) Kaiyun (1973-1983)<\/a>","<a href=https://en.wikipedia.org//wiki/TSS_Camito>TSS Camito<\/a>","<a href=https://en.wikipedia.org//wiki/Astron_(ship)>Esmeralda<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Edmund_Fitzgerald>SS Edmund Fitzgerald<\/a>","<a href=https://en.wikipedia.org//wiki/Torrey_Canyon>SS Torrey Canyon<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Edward_L._Ryerson>Edward L. Ryerson (1960 –1998) Str. Edward L. Ryerson (1998 –present)<\/a>","<a href=https://en.wikipedia.org//wiki/Algoma_Montrealais>Montrealais<\/a>","<a href=https://en.wikipedia.org//wiki/Algoma_Quebecois>Quebecois<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Canadian_Miner>MV Maplecliffe Hall (1966–1988) MV Le Moyne (1988–1994) MV Canadian Miner (1994–2011)[1] MV Miner (2011–present)[2]<\/a>","<a href=https://en.wikipedia.org//wiki/Algosteel>A.S. Glossbrenner (1966–1987) Algogulf (1987–1990) Algosteel (1990–2018) Oste (2018–2018)<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Algocape>Richelieu (1967–1994) Algocape (1994–2012) Goc (2012)<\/a>","<a href=https://en.wikipedia.org//wiki/Algoma_Navigator>Demeterton (1967–1975) St. Lawrence Navigator (1975–1979) Canadian Navigator (1979–2011) Algoma Navigator (2011–2016) Navi (2016)<\/a>","<a href=https://en.wikipedia.org//wiki/Algorail>Algorail<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Tim_S._Dool>Senneville Algoville Tim S. Dool<\/a>","<a href=https://en.wikipedia.org//wiki/Algoma_Progress>Canadian Progress (1968–2011) Algoma Progress (2011–2014)<\/a>","<a href=https://en.wikipedia.org//wiki/MS_Star_Clipper>1969–1981: MS Star Clipper 1981–1986: Star Lanao<\/a>","<a href=https://en.wikipedia.org//wiki/MS_Costa_Allegra>Annie Johnson (1969–1986) Regent Moon (1986–1988) Alexandra (1988–1992) Costa Allegra (1992–2012) Santa Cruise (2012)<\/a>","<a href=https://en.wikipedia.org//wiki/MsCostaMarina>Axel Johnson (1969–1986) Regent Sun (1986) Italia (1987) Costa Marina (1988–2011) Harmony Princess (2011–2012) Club Harmony (2012–2014) Harmony 1 (2014)<\/a>","<a href=https://en.wikipedia.org//wiki/Salem_(supertanker)>Sea Sovereign (1969–1977) South Sun (1977–1979) Salem (1979–1980)<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Atlantic_Causeway>Atlantic Causeway<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Atlantic_Conveyor>Atlantic Conveyor<\/a>","<a href=https://en.wikipedia.org//wiki/MS_Stolt_Surf>Stolt Surf<\/a>","<a href=https://en.wikipedia.org//wiki/Tecumseh_(lake_freighter)>Sugar Islander (1973–1996) Islander (1996) Judy Litrico (1996–2006) Tina Litrico (2006–2011) Tecumseh (2011–present)<\/a>","<a href=https://en.wikipedia.org//wiki/Calumet_(1973_ship)>William R. Roesch (1973-1995) David Z. Norton (1995-2007) David Z. (2007-2008) Calumet (2008-present)<\/a>","<a href=https://en.wikipedia.org//wiki/MT_Haven>Amoco Milford Haven MT Haven<\/a>","<a href=https://en.wikipedia.org//wiki/MV_John_J._Boland>Charles E. Wilson<\/a>","<a href=https://en.wikipedia.org//wiki/Akebono_Maru>Akebono Maru No.28<\/a>","<a href=https://en.wikipedia.org//wiki/Amoco_Cadiz>Amoco Cadiz<\/a>","<a href=https://en.wikipedia.org//wiki/Hudson_Cavalier>Appleleaf<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Sam_Laud>MV Sam Laud<\/a>","<a href=https://en.wikipedia.org//wiki/Algolake>Algolake (1977–2018) Gola (2018)<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Walter_J._McCarthy_Jr.>MV Walter J. McCarthy Jr.<\/a>","<a href=https://en.wikipedia.org//wiki/MV_American_Courage>MV American Courage<\/a>","<a href=https://en.wikipedia.org//wiki/MV_American_Integrity>MV American Integrity<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Buffalo>MV Buffalo<\/a>","<a href=https://en.wikipedia.org//wiki/Radcliffe_R._Latimer>Algobay (1978–1994) Atlantic Trader (1994–1997) Algobay (1997–2012) Radcliffe R. Latimer (2012–present)<\/a>","<a href=https://en.wikipedia.org//wiki/MV_American_Mariner>MV American Mariner<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Edwin_H._Gott>MV Edwin H. Gott<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Indiana_Harbor>MV Indiana Harbor<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Burns_Harbor>MV Burns Harbor<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Ranga>Ranga<\/a>","<a href=https://en.wikipedia.org//wiki/MV_American_Century>MV American Century<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Paul_R._Tregurtha>Paul R. Tregurtha<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Tampa>Tampa Barber Tampa<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Capt._Steven_L._Bennett_(T-AK-4296)>MV Capt Steven L. Bennett TNT Express<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Delight>MV Delight<\/a>","<a href=https://en.wikipedia.org//wiki/Exxon_Valdez>Oriental Nicety<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Biscaglia>MV Biscaglia<\/a>","<a href=https://en.wikipedia.org//wiki/Hansa_Carrier>Hansa Carrier<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Sabrina>MSC Sabrina<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Napoli>MSC Napoli<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Ascension>MV Chekov[1]<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Sea_Empress>Sea Empress<\/a>","<a href=https://en.wikipedia.org//wiki/MT_Sidsel_Knutsen>MT Sidsel Knutsen<\/a>","<a href=https://en.wikipedia.org//wiki/Torben_Spirit>Torben Spirit<\/a>","<a href=https://en.wikipedia.org//wiki/Federal_Rideau>Federal Rideau<\/a>","<a href=https://en.wikipedia.org//wiki/Maritime_Jewel>Limburg (2000–2003) Maritime Jewel (2003–2018)<\/a>","<a href=https://en.wikipedia.org//wiki/Axel_M%C3%A6rsk>Axel Maersk<\/a>","<a href=https://en.wikipedia.org//wiki/MOL_Enterprise>MOL Enterprise<\/a>","<a href=https://en.wikipedia.org//wiki/MT_Stolt_Valor>MT Stolt Valor<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Star_Osakana>Star Osakana (2004-09) Osakana (since 2009)<\/a>","<a href=https://en.wikipedia.org//wiki/COSCO_Guangzhou>COSCO Guangzhou<\/a>","<a href=https://en.wikipedia.org//wiki/Houston_Express_(ship)>Houston Express<\/a>","<a href=https://en.wikipedia.org//wiki/LT_Cortesia>Conti Cortesia<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Pamela>MSC Pamela<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Colombo_Express>Colombo Express<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Stolt_Strength>MV Stolt Strength<\/a>","<a href=https://en.wikipedia.org//wiki/CMA_CGM_Medea>CMA CGM Medea<\/a>","<a href=https://en.wikipedia.org//wiki/Emma_M%C3%A6rsk>Emma Maersk<\/a>","<a href=https://en.wikipedia.org//wiki/Estelle_M%C3%A6rsk>Estelle Mærsk<\/a>","<a href=https://en.wikipedia.org//wiki/Histria_Agata>Histria Agata<\/a>","<a href=https://en.wikipedia.org//wiki/Histria_Coral>Histria Coral<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Geneva>MSC Geneva<\/a>","<a href=https://en.wikipedia.org//wiki/NYK_Vega>NYK Vega<\/a>","<a href=https://en.wikipedia.org//wiki/Osaka_Express>Osaka Express<\/a>","<a href=https://en.wikipedia.org//wiki/Xin_Los_Angeles>Xin Los Angeles<\/a>","<a href=https://en.wikipedia.org//wiki/Edith_M%C3%A6rsk>Edith Maersk<\/a>","<a href=https://en.wikipedia.org//wiki/Histria_Azure>Histria Azure<\/a>","<a href=https://en.wikipedia.org//wiki/MCP_Altona>MCP Altona<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Monterey>MSC Monterey<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Avenue_Star>Avenue Star<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Cristina_A>MV Cristina A.<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Southern_Lily>Southern Lily<\/a>","<a href=https://en.wikipedia.org//wiki/CMA_CGM_Thalassa>CMA CGM Thalassa<\/a>","<a href=https://en.wikipedia.org//wiki/CMA_CGM_Vela>CMA CGM Vela<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Nuria>MSC Nuria<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Sirius_Star>Sirius Star<\/a>","<a href=https://en.wikipedia.org//wiki/U-Sea_Colonsay>Ultra Colonsay[1]<\/a>","<a href=https://en.wikipedia.org//wiki/Algoma_Equinox>Algoma Equinox<\/a>","<a href=https://en.wikipedia.org//wiki/Aranui_3>Aranui 3<\/a>","<a href=https://en.wikipedia.org//wiki/Baie_Comeau_(2013_ship)>Baie Comeau<\/a>","<a href=https://en.wikipedia.org//wiki/Baie_St._Paul_(2012_ship)>Baie St. Paul<\/a>","<a href=https://en.wikipedia.org//wiki/Biruin%C5%A3a_(ship)>Histria Crown<\/a>","<a href=https://en.wikipedia.org//wiki/Gudrun_M%C3%A6rsk>Gudrun Maersk<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Carmen>MSC Carmen<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Carouge>MSC Carouge<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Cordoba>MSC Cordoba<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Leigh>MSC Leigh<\/a>","<a href=https://en.wikipedia.org//wiki/MSC_Rosaria>MSC Rosaria<\/a>","<a href=https://en.wikipedia.org//wiki/MV_Algoma_Mariner>Algoma Mariner<\/a>","<a href=https://en.wikipedia.org//wiki/MV_H._Lee_White>MV H. Lee White<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Fatima>SS Fatima<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Fredericksburg_(1958)>SS Fredericksburg<\/a>","<a href=https://en.wikipedia.org//wiki/SS_James_B._Colgate>James B. Colgate<\/a>","<a href=https://en.wikipedia.org//wiki/SS_James_Carruthers>James C. Carruthers<\/a>","<a href=https://en.wikipedia.org//wiki/SS_Kamloops>Kamloops<\/a>","<a href=https://en.wikipedia.org//wiki/SS_William_B._Davock>William B. Davock<\/a>","<a href=https://en.wikipedia.org//wiki/Thunder_Bay_(ship)>Thunder Bay<\/a>","<a href=https://en.wikipedia.org//wiki/U-Sea_Saskatchewan>U-Sea Saskatchewan<\/a>","<a href=https://en.wikipedia.org//wiki/Whitefish_Bay_(2013_ship)>Whitefish Bay<\/a>"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Name<\/th>\n      <th>Launched<\/th>\n      <th>Tonnage<\/th>\n      <th>Length<\/th>\n      <th>Beam<\/th>\n      <th>Status<\/th>\n      <th>Url<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,3,4]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
@@ -635,18 +651,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -678,11 +683,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/interludeone\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -692,8 +736,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -705,7 +758,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -749,6 +925,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -774,6 +951,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -834,6 +1037,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

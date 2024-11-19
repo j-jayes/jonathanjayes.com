@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Home - Interlude One</title>
+<title>Home - Interlude One – Interlude One</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,7 +50,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -59,6 +65,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -75,7 +82,8 @@ ul.task-list li input[type="checkbox"] {
 
     const options = {
       valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
+      page: 25,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
       searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
     };
 
@@ -95,18 +103,45 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <script data-goatcounter="https://j0nathan.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="alternate" type="application/rss+xml" title="Interlude One" href="index.xml"></head>
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="alternate" type="application/rss+xml" title="Interlude One" href="index.xml" data-external="1"></head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     <img src="./assets/favicon_logo.ico" alt="" class="navbar-logo">
     </a>
@@ -115,92 +150,92 @@ ul.task-list li input[type="checkbox"] {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./content/phd-planning.html" rel="" target="">
- <span class="menu-text">PhD planning</span></a>
+    <a class="nav-link" href="./content/phd-planning.html"> 
+<span class="menu-text">PhD planning</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./content/teaching.html" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="./content/teaching.html"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./content/research.html" rel="" target="">
- <span class="menu-text">Research</span></a>
+    <a class="nav-link" href="./content/research.html"> 
+<span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./content/publications.html" rel="" target="">
- <span class="menu-text">Publications</span></a>
+    <a class="nav-link" href="./content/publications.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./content/data.html" rel="" target="">
- <span class="menu-text">Data</span></a>
+    <a class="nav-link" href="./content/data.html"> 
+<span class="menu-text">Data</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web-apps" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web-apps" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Web Apps</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-web-apps">    
         <li>
-    <a class="dropdown-item" href="http://jonathan-jayes.shinyapps.io/gumtree-price-explorer" rel="" target="">
+    <a class="dropdown-item" href="http://jonathan-jayes.shinyapps.io/gumtree-price-explorer">
  <span class="dropdown-text">Second Hand Car Price Comparison Tool</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/production-functions" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/j-jayes/production-functions">
  <span class="dropdown-text">Production Functions Shiny App</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/NBER-methods" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/j-jayes/NBER-methods">
  <span class="dropdown-text">Economics literature explorer</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP">
  <span class="dropdown-text">Europe’s Regional Development Explorer</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-fun-stuff" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-fun-stuff" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Fun stuff</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-fun-stuff">    
         <li>
-    <a class="dropdown-item" href="https://j-jayes.github.io/recipes/" rel="" target="">
+    <a class="dropdown-item" href="https://j-jayes.github.io/recipes/">
  <span class="dropdown-text">My personal cookbook</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./content/generative-ai-articles-listing.html" rel="" target="">
+    <a class="dropdown-item" href="./content/generative-ai-articles-listing.html">
  <span class="dropdown-text">Generative AI reports</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/j-jayes/interlude-one" rel="" target="">
- <span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i></span></a>
+    <a class="nav-link" href="https://github.com/j-jayes/interlude-one"> 
+<span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="./index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -208,7 +243,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
@@ -220,27 +255,56 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1699311600000" data-listing-file-modified-sort="1699367540568" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1731970800000" data-listing-file-modified-sort="1732036190124" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1923">
 <div class="thumbnail">
-<p><a href="./posts/2023-11-07-q-and-a/q-and-a.html"> <img src="./posts/2023-11-07-q-and-a/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2024-11-19-grey-couches/greg-couches.html" class="no-external"></a></p><a href="./posts/2024-11-19-grey-couches/greg-couches.html" class="no-external">
+<p class="card-img-top"><img src="posts/2024-11-19-grey-couches/greg-couches_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/2024-11-19-grey-couches/greg-couches.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-11-07-q-and-a/q-and-a.html">
 <h3 class="no-anchor listing-title">
-A modern question and answer site: SCB Users Group
+<a href="./posts/2024-11-19-grey-couches/greg-couches.html" class="no-external">NeverTooSmall Couch Colours</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2024-11-19-grey-couches/greg-couches.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A post about creating a question and answer site for users of Statistics Sweden data</p>
+<a href="./posts/2024-11-19-grey-couches/greg-couches.html" class="no-external">I really enjoy watching the YouTube channel NeverTooSmall, which showcases cleverly designed small spaces from around the world.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/2024-11-19-grey-couches/greg-couches.html" class="no-external">
+<div class="listing-date">
+Nov 19, 2024
+</div>
+<div class="listing-author">
+Jonathan Jayes
 </div>
 </a>
 </div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1699311600000" data-listing-file-modified-sort="1699367540568" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="470">
+<div class="thumbnail">
+<p><a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external"></a></p><a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external">
+<p><img loading="lazy" src="./posts/2023-11-07-q-and-a/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external">A modern question and answer site: SCB Users Group</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external">A post about creating a question and answer site for users of Statistics Sweden data </a>
+</div>
+</div>
 <div class="metadata">
-<a href="./posts/2023-11-07-q-and-a/q-and-a.html">
+<a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external">
 <div class="listing-date">
 Nov 7, 2023
 </div>
@@ -250,25 +314,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1696197600000" data-listing-file-modified-sort="1699353373404" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1696197600000" data-listing-file-modified-sort="1699353373404" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1947">
 <div class="thumbnail">
-<p><a href="./posts/2023-10-02-geocoding/geocoding.html"> <img src="./posts/2023-10-02-geocoding/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external"></a></p><a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external">
+<p><img loading="lazy" src="./posts/2023-10-02-geocoding/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-10-02-geocoding/geocoding.html">
 <h3 class="no-anchor listing-title">
-Geocoding: two ways
+<a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external">Geocoding: two ways</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A post about geocoding place names using R and python to access the OSM and Google Maps geocoding APIs.</p>
+<a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external">A post about geocoding place names using R and python to access the OSM and Google Maps geocoding APIs. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2023-10-02-geocoding/geocoding.html">
+<a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external">
 <div class="listing-date">
 Oct 2, 2023
 </div>
@@ -278,25 +342,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1688508000000" data-listing-file-modified-sort="1699353373400" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1688508000000" data-listing-file-modified-sort="1699353373400" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2129">
 <div class="thumbnail">
-<p><a href="./posts/2023-07-05-langchain-demo/langchain-demo.html"> <img src="./posts/2023-07-05-langchain-demo/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external"></a></p><a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external">
+<p><img loading="lazy" src="./posts/2023-07-05-langchain-demo/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-07-05-langchain-demo/langchain-demo.html">
 <h3 class="no-anchor listing-title">
-Transforming National Budget Documents into Queryable Knowledge
+<a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external">Transforming National Budget Documents into Queryable Knowledge</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A post about automating the data retrieval process from PDF documents using LangChain and the OpenAI API.</p>
+<a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external">A post about automating the data retrieval process from PDF documents using LangChain and the OpenAI API. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2023-07-05-langchain-demo/langchain-demo.html">
+<a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external">
 <div class="listing-date">
 Jul 5, 2023
 </div>
@@ -306,25 +370,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1688421600000" data-listing-file-modified-sort="1699353373396" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1688421600000" data-listing-file-modified-sort="1699353373396" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1719">
 <div class="thumbnail">
-<p><a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html"> <img src="./posts/2023-07-04-hot-water-tap-efficiency/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external"></a></p><a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external">
+<p><img loading="lazy" src="./posts/2023-07-04-hot-water-tap-efficiency/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html">
 <h3 class="no-anchor listing-title">
-The Economics of Instant Hot Water: Quooker vs Kettle
+<a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external">The Economics of Instant Hot Water: Quooker vs Kettle</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>How long will it take for an instant hot water tap to save some money?</p>
+<a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external">How long will it take for an instant hot water tap to save some money? </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html">
+<a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external">
 <div class="listing-date">
 Jul 4, 2023
 </div>
@@ -334,25 +398,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1684792800000" data-listing-file-modified-sort="1699353373396" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1684792800000" data-listing-file-modified-sort="1699353373396" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1229">
 <div class="thumbnail">
-<p><a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html"> <img src="./posts/2023-05-23-youtube-caption-summaries/images/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external"></a></p><a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external">
+<p><img loading="lazy" src="./posts/2023-05-23-youtube-caption-summaries/images/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html">
 <h3 class="no-anchor listing-title">
-Building a YouTube Video Transcript Summarizer (with some help)
+<a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external">Building a YouTube Video Transcript Summarizer (with some help)</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A post on what it means to be a data scientist in the age of such capable generative AI.</p>
+<a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external">A post on what it means to be a data scientist in the age of such capable generative AI. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html">
+<a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external">
 <div class="listing-date">
 May 23, 2023
 </div>
@@ -362,25 +426,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1678402800000" data-listing-file-modified-sort="1699353373386" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1678402800000" data-listing-file-modified-sort="1699353373386" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1599">
 <div class="thumbnail">
-<p><a href="./posts/2023-03-10/chatgpt-as-translator.html"> <img src="./posts/2023-03-10/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external"></a></p><a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external">
+<p><img loading="lazy" src="./posts/2023-03-10/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-03-10/chatgpt-as-translator.html">
 <h3 class="no-anchor listing-title">
-ChatGPT as translator and text wizard
+<a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external">ChatGPT as translator and text wizard</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A post showing how ChatGPT can be used to create structred data from text.</p>
+<a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external">A post showing how ChatGPT can be used to create structred data from text. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2023-03-10/chatgpt-as-translator.html">
+<a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external">
 <div class="listing-date">
 Mar 10, 2023
 </div>
@@ -390,25 +454,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1675119600000" data-listing-file-modified-sort="1699353373311" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1675119600000" data-listing-file-modified-sort="1699353373311" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="994">
 <div class="thumbnail">
-<p><a href="./posts/2023-01-31-map-projections/Map-projections.html"> <img src="./posts/2023-01-31-map-projections/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external"></a></p><a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external">
+<p><img loading="lazy" src="./posts/2023-01-31-map-projections/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-01-31-map-projections/Map-projections.html">
 <h3 class="no-anchor listing-title">
-Map projections in R
+<a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external">Map projections in R</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A post on how to change projections for mapping and save out the new shapefiles.</p>
+<a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external">A post on how to change projections for mapping and save out the new shapefiles. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2023-01-31-map-projections/Map-projections.html">
+<a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external">
 <div class="listing-date">
 Jan 31, 2023
 </div>
@@ -418,25 +482,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1675033200000" data-listing-file-modified-sort="1699353373307" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1675033200000" data-listing-file-modified-sort="1699353373307" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1460">
 <div class="thumbnail">
-<p><a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html"> <img src="./posts/2023-01-29-electricity-generation-per-capita/images/Asia_ranking.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external"></a></p><a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external">
+<p><img loading="lazy" src="./posts/2023-01-29-electricity-generation-per-capita/images/Asia_ranking.jpeg" class="thumbnail-image"></p>
+</a><p><a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html">
 <h3 class="no-anchor listing-title">
-Electricity generation per capita
+<a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external">Electricity generation per capita</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A post on electricity generation per capita across the world since 2000.</p>
+<a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external">A post on electricity generation per capita across the world since 2000. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html">
+<a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external">
 <div class="listing-date">
 Jan 30, 2023
 </div>
@@ -446,25 +510,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1674946800000" data-listing-file-modified-sort="1699353373282" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15">
+<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1674946800000" data-listing-file-modified-sort="1699353373282" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2993">
 <div class="thumbnail">
-<p><a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html"> <img src="https://github.com/j-jayes/img-repo/raw/1f154af0b081a6423c73c6fe453c93ea16c891c2/images/owid_smokers.PNG" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external"></a></p><a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external">
+<p><img loading="lazy" src="https://github.com/j-jayes/img-repo/raw/1f154af0b081a6423c73c6fe453c93ea16c891c2/images/owid_smokers.PNG" class="thumbnail-image"></p>
+</a><p><a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html">
 <h3 class="no-anchor listing-title">
-Our World In Data choropleth
+<a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external">Our World In Data choropleth</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A post on how recreate the Our World In Data characteristic choropleth in R.</p>
+<a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external">A post on how recreate the Our World In Data characteristic choropleth in R. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html">
+<a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external">
 <div class="listing-date">
 Jan 29, 2023
 </div>
@@ -474,25 +538,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1699353373294" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="10" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1699353373294" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="302">
 <div class="thumbnail">
-<p><a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html"> <img src="./posts/2023-01-20-chatgpt-cooks-me-dinner/images/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external"></a></p><a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external">
+<p><img loading="lazy" src="./posts/2023-01-20-chatgpt-cooks-me-dinner/images/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html">
 <h3 class="no-anchor listing-title">
-ChatGPT cooks me dinner
+<a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external">ChatGPT cooks me dinner</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>🍲 Master the kitchen like a pro with the help of ChatGPT! 🍴 I tried it out and the results will blow your mind! 🤯 Find out what happened when I asked a language model for recipe ideas and cooking instructions. 😲 You won’t believe how delicious my Gammon and Vegetable Stew with Mint turned out! 🍽️ Don’t miss out on this must-read blog post! 👀</p>
+<a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external">🍲 Master the kitchen like a pro with the help of ChatGPT! 🍴 I tried it out and the results will blow your mind! 🤯 Find out what happened when I asked a language model for recipe ideas and cooking instructions. 😲 You won’t believe how delicious my Gammon and Vegetable Stew with Mint turned out! 🍽️ Don’t miss out on this must-read blog post! 👀 </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html">
+<a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external">
 <div class="listing-date">
 Jan 20, 2023
 </div>
@@ -502,25 +566,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-listing-date-sort="1671490800000" data-listing-file-modified-sort="1699353373290" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="11" data-listing-date-sort="1671490800000" data-listing-file-modified-sort="1699353373290" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="835">
 <div class="thumbnail">
-<p><a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html"> <img src="./posts/2022-12-20-gpt-chat-blog-post-author/images/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external"></a></p><a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external">
+<p><img loading="lazy" src="./posts/2022-12-20-gpt-chat-blog-post-author/images/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html">
 <h3 class="no-anchor listing-title">
-ChatGPT fills in for me as a blog post author
+<a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external">ChatGPT fills in for me as a blog post author</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>I ask ChatGPT to write a blog post in the same manner as one I wrote last week. The results will amaze you!</p>
+<a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external">I ask ChatGPT to write a blog post in the same manner as one I wrote last week. The results will amaze you! </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html">
+<a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external">
 <div class="listing-date">
 Dec 20, 2022
 </div>
@@ -530,25 +594,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-listing-date-sort="1671058800000" data-listing-file-modified-sort="1699353373285" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="12" data-listing-date-sort="1671058800000" data-listing-file-modified-sort="1699353373285" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="936">
 <div class="thumbnail">
-<p><a href="./posts/2022-12-15-coef-plots/coef-plots.html"> <img src="./posts/2022-12-15-coef-plots/lter_penguins.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external"></a></p><a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external">
+<p><img loading="lazy" src="./posts/2022-12-15-coef-plots/lter_penguins.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2022-12-15-coef-plots/coef-plots.html">
 <h3 class="no-anchor listing-title">
-Coefficient plots in <code>ggplot</code>
+<a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external">Coefficient plots in <code>ggplot</code></a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Drawing coefficient plots in R and <code>ggplot</code>.</p>
+<a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external">Drawing coefficient plots in R and <code>ggplot</code>. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2022-12-15-coef-plots/coef-plots.html">
+<a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external">
 <div class="listing-date">
 Dec 15, 2022
 </div>
@@ -558,25 +622,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-listing-date-sort="1652997600000" data-listing-file-modified-sort="1699353373188" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="13" data-listing-date-sort="1652997600000" data-listing-file-modified-sort="1699353373188" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="670">
 <div class="thumbnail">
-<p><a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html"> <img src="https://raw.githubusercontent.com/j-jayes/jjayes_distill/main/_posts/2022-06-01-linkedin-style-about-info/images/gt_educ.PNG" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external"></a></p><a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external">
+<p><img loading="lazy" src="https://raw.githubusercontent.com/j-jayes/jjayes_distill/main/_posts/2022-06-01-linkedin-style-about-info/images/gt_educ.PNG" class="thumbnail-image"></p>
+</a><p><a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html">
 <h3 class="no-anchor listing-title">
-LinkedIn style tables for personal websites
+<a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external">LinkedIn style tables for personal websites</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A post on how to us the {gt} table package to make tables for the about page of a pesonal website or blog.</p>
+<a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external">A post on how to us the {gt} table package to make tables for the about page of a pesonal website or blog. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html">
+<a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external">
 <div class="listing-date">
 May 20, 2022
 </div>
@@ -586,25 +650,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-listing-date-sort="1646348400000" data-listing-file-modified-sort="1699353373180" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="14" data-listing-date-sort="1646348400000" data-listing-file-modified-sort="1699353373180" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1216">
 <div class="thumbnail">
-<p><a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html"> <img src="https://raw.githubusercontent.com/j-jayes/Monday-Munch/main/images/cover.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external"></a></p><a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external">
+<p><img loading="lazy" src="https://raw.githubusercontent.com/j-jayes/Monday-Munch/main/images/cover.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html">
 <h3 class="no-anchor listing-title">
-Programmatically generate tabs in Rmarkdown
+<a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external">Programmatically generate tabs in Rmarkdown</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A walk-though for writing code that writes it’s own code.</p>
+<a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external">A walk-though for writing code that writes it’s own code. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html">
+<a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external">
 <div class="listing-date">
 Mar 4, 2022
 </div>
@@ -614,25 +678,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-listing-date-sort="1644879600000" data-listing-file-modified-sort="1699353373161" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17">
+<div class="quarto-post image-right" data-index="15" data-listing-date-sort="1644879600000" data-listing-file-modified-sort="1699353373161" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3394">
 <div class="thumbnail">
-<p><a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html"> <img src="./posts/2022-01-17-flavours-of-cocoa/images/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external"></a></p><a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external">
+<p><img loading="lazy" src="./posts/2022-01-17-flavours-of-cocoa/images/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html">
 <h3 class="no-anchor listing-title">
-Flavours of cocoa
+<a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external">Flavours of cocoa</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>An exploration of chocolate bar reviews</p>
+<a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external">An exploration of chocolate bar reviews </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html">
+<a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external">
 <div class="listing-date">
 Feb 15, 2022
 </div>
@@ -642,25 +706,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-listing-date-sort="1642374000000" data-listing-file-modified-sort="1699353373174" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="16" data-listing-date-sort="1642374000000" data-listing-file-modified-sort="1699353373174" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1394">
 <div class="thumbnail">
-<p><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html"> <img src="./posts/2022-01-24-fathom-twitter/images/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external"></a></p><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external">
+<p><img loading="lazy" src="./posts/2022-01-24-fathom-twitter/images/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html">
 <h3 class="no-anchor listing-title">
-R vs Python? R &amp; Python!
+<a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external">R vs Python? R &amp; Python!</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Mining the twitter archive of <span>Fathom Data</span></p>
+<a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external">Mining the twitter archive of <span>Fathom Data</span> </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html">
+<a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external">
 <div class="listing-date">
 Jan 17, 2022
 </div>
@@ -670,25 +734,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-listing-date-sort="1625522400000" data-listing-file-modified-sort="1699353372840" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19">
+<div class="quarto-post image-right" data-index="17" data-listing-date-sort="1625522400000" data-listing-file-modified-sort="1699353372840" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3723">
 <div class="thumbnail">
-<p><a href="./posts/2021-07-06-students-speak/students-speak.html"> <img src="./posts/2021-07-06-students-speak/images/preview.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external"></a></p><a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-07-06-students-speak/images/preview.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-07-06-students-speak/students-speak.html">
 <h3 class="no-anchor listing-title">
-Students Speak
+<a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external">Students Speak</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Text analysis of students’ diary entries during the Covid-19 lockdown in South Africa</p>
+<a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external">Text analysis of students’ diary entries during the Covid-19 lockdown in South Africa </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-07-06-students-speak/students-speak.html">
+<a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external">
 <div class="listing-date">
 Jul 6, 2021
 </div>
@@ -698,25 +762,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-listing-date-sort="1621548000000" data-listing-file-modified-sort="1699353372796" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="quarto-post image-right" data-index="18" data-listing-date-sort="1621548000000" data-listing-file-modified-sort="1699353372796" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2045">
 <div class="thumbnail">
-<p><a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html"> <img src="./posts/2021-05-21-ggplot-resources/images/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external"></a></p><a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-05-21-ggplot-resources/images/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html">
 <h3 class="no-anchor listing-title">
-Resources for Learning R and Mastering ggplot
+<a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external">Resources for Learning R and Mastering ggplot</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>A collection of videos and resources to get you started using R and the tidyverse for exploratory data analysis and visualization.</p>
+<a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external">A collection of videos and resources to get you started using R and the tidyverse for exploratory data analysis and visualization. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html">
+<a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external">
 <div class="listing-date">
 May 21, 2021
 </div>
@@ -726,25 +790,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-listing-date-sort="1620252000000" data-listing-file-modified-sort="1699353372796" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="19" data-listing-date-sort="1620252000000" data-listing-file-modified-sort="1699353372796" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
 <div class="thumbnail">
-<p><a href="./posts/2021-05-06-swedenmap/swedenmap.html"> <img src="./posts/2021-05-06-swedenmap/images/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external"></a></p><a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-05-06-swedenmap/images/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-05-06-swedenmap/swedenmap.html">
 <h3 class="no-anchor listing-title">
-Mapping Sweden’s Regional GDP
+<a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external">Mapping Sweden’s Regional GDP</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Visualizing the relationship between population and regional GDP share in 1571, based on data from Enflo and Missiaia (2018).</p>
+<a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external">Visualizing the relationship between population and regional GDP share in 1571, based on data from Enflo and Missiaia (2018). </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-05-06-swedenmap/swedenmap.html">
+<a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external">
 <div class="listing-date">
 May 6, 2021
 </div>
@@ -754,25 +818,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="19" data-listing-date-sort="1617832800000" data-listing-file-modified-sort="1699353372447" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16">
+<div class="quarto-post image-right" data-index="20" data-listing-date-sort="1617832800000" data-listing-file-modified-sort="1699353372447" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3163">
 <div class="thumbnail">
-<p><a href="./posts/2021-04-03-container-ships/container-ships.html"> <img src="./posts/2021-04-03-container-ships/images/preview_ship_linkedin.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external"></a></p><a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-04-03-container-ships/images/preview_ship_linkedin.jpeg" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-04-03-container-ships/container-ships.html">
 <h3 class="no-anchor listing-title">
-Shipping and Scraping - Part 1 in a Series on Shipping
+<a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external">Shipping and Scraping - Part 1 in a Series on Shipping</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>In this post I walk through scraping data on cargo ships from Wikipedia as part of a series on shipping. I make use of R, the rvest package for webscraping and the SelectorGadget tool for CSS selection.</p>
+<a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external">In this post I walk through scraping data on cargo ships from Wikipedia as part of a series on shipping. I make use of R, the rvest package for webscraping and the SelectorGadget tool for CSS selection. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-04-03-container-ships/container-ships.html">
+<a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external">
 <div class="listing-date">
 Apr 8, 2021
 </div>
@@ -782,25 +846,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="20" data-listing-date-sort="1613775600000" data-listing-file-modified-sort="1699353372438" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
+<div class="quarto-post image-right" data-index="21" data-listing-date-sort="1613775600000" data-listing-file-modified-sort="1699353372438" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1613">
 <div class="thumbnail">
-<p><a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html"> <img src="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/images/reg_1.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external"></a></p><a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/images/reg_1.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html">
 <h3 class="no-anchor listing-title">
-Swedish trade in goods and exchange students
+<a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external">Swedish trade in goods and exchange students</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>I wanted to see if there was an association between the volume of trade between a country and Sweden, and the number of exchange students that have come to Lund Univesity from there, this semester.</p>
+<a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external">I wanted to see if there was an association between the volume of trade between a country and Sweden, and the number of exchange students that have come to Lund Univesity from there, this semester. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html">
+<a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external">
 <div class="listing-date">
 Feb 20, 2021
 </div>
@@ -810,25 +874,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="21" data-listing-date-sort="1606172400000" data-listing-file-modified-sort="1699353372416" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="22" data-listing-date-sort="1606172400000" data-listing-file-modified-sort="1721392444919" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1595">
 <div class="thumbnail">
-<p><a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html"> <img src="./posts/2021-03-13-south-africa-car-colour-exploration/images/stacked_area.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external"></a></p><a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-03-13-south-africa-car-colour-exploration/images/stacked_area.jpeg" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html">
 <h3 class="no-anchor listing-title">
-South African Car Colour Exploration
+<a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external">South African Car Colour Exploration</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>In this document I walk through creating a stacked area chart showing the evolution of car colour over time in South Africa. The data comes from nearly 45,000 adverts for cars that I scraped from Gumtree.</p>
+<a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external">In this document I walk through creating a stacked area chart showing the evolution of car colour over time in South Africa. The data comes from nearly 45,000 adverts for cars that I scraped from Gumtree. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html">
+<a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external">
 <div class="listing-date">
 Nov 24, 2020
 </div>
@@ -838,25 +902,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="22" data-listing-date-sort="1602280800000" data-listing-file-modified-sort="1699353372446" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="23" data-listing-date-sort="1602280800000" data-listing-file-modified-sort="1699353372446" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="115">
 <div class="thumbnail">
-<p><a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html"> <img src="./posts/2021-03-18-car-price-explorer/images/preview.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external"></a></p><a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-03-18-car-price-explorer/images/preview.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html">
 <h3 class="no-anchor listing-title">
-Car Price Comparison Tool
+<a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external">Car Price Comparison Tool</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>This web app helps South Africans gauge the median price for a second hand car. You can compare price by odometer reading, make and model, and province. Ad links are included in a table beside the output.</p>
+<a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external">This web app helps South Africans gauge the median price for a second hand car. You can compare price by odometer reading, make and model, and province. Ad links are included in a table beside the output. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html">
+<a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external">
 <div class="listing-date">
 Oct 10, 2020
 </div>
@@ -866,25 +930,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="23" data-listing-date-sort="1586296800000" data-listing-file-modified-sort="1699353372462" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="24" data-listing-date-sort="1586296800000" data-listing-file-modified-sort="1699353372462" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="718">
 <div class="thumbnail">
-<p><a href="./posts/2021-04-21-chips/chips.html"> <img src="./posts/2021-04-21-chips/figures/Transistors_colour.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/2021-04-21-chips/chips.html" class="no-external"></a></p><a href="./posts/2021-04-21-chips/chips.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-04-21-chips/figures/Transistors_colour.jpeg" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-04-21-chips/chips.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-04-21-chips/chips.html">
 <h3 class="no-anchor listing-title">
-Recreating Our World In Data’s Beautiful Transistor Count Graphic
+<a href="./posts/2021-04-21-chips/chips.html" class="no-external">Recreating Our World In Data’s Beautiful Transistor Count Graphic</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-04-21-chips/chips.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>Scraping data from Wikipedia and recreating OWID’s figure with ggplot2.</p>
+<a href="./posts/2021-04-21-chips/chips.html" class="no-external">Scraping data from Wikipedia and recreating OWID’s figure with ggplot2. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-04-21-chips/chips.html">
+<a href="./posts/2021-04-21-chips/chips.html" class="no-external">
 <div class="listing-date">
 Apr 8, 2020
 </div>
@@ -894,25 +958,25 @@ Jonathan Jayes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="24" data-listing-date-sort="1584054000000" data-listing-file-modified-sort="1699353373406" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="25" data-listing-date-sort="1584054000000" data-listing-file-modified-sort="1699353373406" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="86">
 <div class="thumbnail">
-<p><a href="./posts/welcome/welcome.html"> <img src="./posts/welcome/images/alt-j.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/welcome/welcome.html" class="no-external"></a></p><a href="./posts/welcome/welcome.html" class="no-external">
+<p><img loading="lazy" data-src="./posts/welcome/images/alt-j.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/welcome/welcome.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/welcome/welcome.html">
 <h3 class="no-anchor listing-title">
-Welcome to Interlude One
+<a href="./posts/welcome/welcome.html" class="no-external">Welcome to Interlude One</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/welcome/welcome.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<p>“Like all good fruit, the balance of life is in the ripe and ruin”</p>
+<a href="./posts/welcome/welcome.html" class="no-external">“Like all good fruit, the balance of life is in the ripe and ruin” </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/welcome/welcome.html">
+<a href="./posts/welcome/welcome.html" class="no-external">
 <div class="listing-date">
 Mar 13, 2020
 </div>
@@ -926,6 +990,9 @@ Jonathan Jayes
 <div class="listing-no-matching d-none">
 No matching items
 </div>
+<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -962,18 +1029,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1005,11 +1061,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/interludeone\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1019,8 +1114,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1032,7 +1136,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1076,6 +1303,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1101,6 +1329,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1161,6 +1415,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

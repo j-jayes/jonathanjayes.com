@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2021-02-20">
 <meta name="description" content="I wanted to see if there was an association between the volume of trade between a country and Sweden, and the number of exchange students that have come to Lund Univesity from there, this semester.">
 
-<title>Interlude One - Swedish trade in goods and exchange students</title>
+<title>Swedish trade in goods and exchange students – Interlude One</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -36,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -85,7 +85,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -94,12 +100,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
-
 <script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="../../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="../../site_libs/datatables-binding-0.26/datatables.js"></script>
@@ -113,6 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<script data-goatcounter="https://j0nathan.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
 
 </head>
@@ -121,9 +128,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../assets/favicon_logo.ico" alt="" class="navbar-logo">
     </a>
@@ -132,92 +139,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/phd-planning.html" rel="" target="">
- <span class="menu-text">PhD planning</span></a>
+    <a class="nav-link" href="../../content/phd-planning.html"> 
+<span class="menu-text">PhD planning</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/teaching.html" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="../../content/teaching.html"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/research.html" rel="" target="">
- <span class="menu-text">Research</span></a>
+    <a class="nav-link" href="../../content/research.html"> 
+<span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/publications.html" rel="" target="">
- <span class="menu-text">Publications</span></a>
+    <a class="nav-link" href="../../content/publications.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../content/data.html" rel="" target="">
- <span class="menu-text">Data</span></a>
+    <a class="nav-link" href="../../content/data.html"> 
+<span class="menu-text">Data</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web-apps" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web-apps" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Web Apps</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-web-apps">    
         <li>
-    <a class="dropdown-item" href="http://jonathan-jayes.shinyapps.io/gumtree-price-explorer" rel="" target="">
+    <a class="dropdown-item" href="http://jonathan-jayes.shinyapps.io/gumtree-price-explorer">
  <span class="dropdown-text">Second Hand Car Price Comparison Tool</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/production-functions" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/j-jayes/production-functions">
  <span class="dropdown-text">Production Functions Shiny App</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/NBER-methods" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/j-jayes/NBER-methods">
  <span class="dropdown-text">Economics literature explorer</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP" rel="" target="">
+    <a class="dropdown-item" href="https://github.com/j-jayes/Roses-Wolf-database-on-regional-GDP">
  <span class="dropdown-text">Europe’s Regional Development Explorer</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-fun-stuff" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-fun-stuff" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Fun stuff</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-fun-stuff">    
         <li>
-    <a class="dropdown-item" href="https://j-jayes.github.io/recipes/" rel="" target="">
+    <a class="dropdown-item" href="https://j-jayes.github.io/recipes/">
  <span class="dropdown-text">My personal cookbook</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../content/generative-ai-articles-listing.html" rel="" target="">
+    <a class="dropdown-item" href="../../content/generative-ai-articles-listing.html">
  <span class="dropdown-text">Generative AI reports</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/j-jayes/interlude-one" rel="" target="">
- <span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i></span></a>
+    <a class="nav-link" href="https://github.com/j-jayes/interlude-one"> 
+<span class="menu-text"><i class="fa-brands fa-github" aria-label="github"></i></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -278,7 +285,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <section id="purpose" class="level2">
 <h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
@@ -306,7 +315,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="swedish-trade-in-goods-and-exchange-students_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="swedish-trade-in-goods-and-exchange-students_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The most populous European nations of Germany and France lead the rankings, with 46 and 37 exchange students respectively. The largest non-European senders are China and India, followed by the United States. South Africa has the largest representation for Africa, with 4 students.</p>
@@ -322,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="id" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="data/Sweden_trade_exchange/tree_map.png" class="class figure-img" style="width:50.0%;height:50.0%"></p>
-<figcaption class="figure-caption">Tree Map</figcaption>
+<figcaption>Tree Map</figcaption>
 </figure>
 </div>
 <p>The tree map shows the origins of Sweden’s imports by value in 2018. Sweden cares about limiting carbon emissions, and so it makes sense that the majority of their imports are sourced within Europe.</p>
@@ -360,7 +373,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display table</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(table_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
 <div id="htmlwidget-5a74e8e4428f5c7391ba" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-5a74e8e4428f5c7391ba">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240"],["Afghanistan","Albania","Algeria","American Samoa","Andorra","Angola","Anguilla","Antarctica","Antigua and Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","British Indian Ocean Territory","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central African Republic","Chad","Chile","China","Christmas Island","Cocos Islands","Colombia","Comoros","Cook Islands","Costa Rica","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Democratic Republic of the Congo","Denmark","Djibouti","Dominica","Dominican Republic","East Timor","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Ivory Coast","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mayotte","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Niue","North Korea","Northern Mariana Islands","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Pitcairn","Poland","Portugal","Puerto Rico","Qatar","Republic of the Congo","Reunion","Romania","Russia","Rwanda","Saint Barthelemy","Saint Helena","Saint Kitts and Nevis","Saint Lucia","Saint Martin","Saint Pierre and Miquelon","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Sint Maarten","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Svalbard and Jan Mayen","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Togo","Tokelau","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Turks and Caicos Islands","Tuvalu","U.S. Virgin Islands","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican","Venezuela","Vietnam","Wallis and Futuna","Western Sahara","Yemen","Zambia","Zimbabwe"],["93","355","213","1-684","376","244","1-264","672","1-268","54","374","297","61","43","994","1-242","973","880","1-246","375","32","501","229","1-441","975","591","387","267","55","246","1-284","673","359","226","257","855","237","1","238","1-345","236","235","56","86","61","61","57","269","682","506","385","53","599","357","420","243","45","253","1-767","1-809, 1-829, 1-849","670","593","20","503","240","291","372","251","500","298","679","358","33","689","241","220","995","49","233","350","30","299","1-473","1-671","502","44-1481","224","245","592","509","504","852","36","354","91","62","98","964","353","44-1624","972","39","225","1-876","81","44-1534","962","7","254","686","383","965","996","856","371","961","266","231","218","423","370","352","853","389","261","265","60","960","223","356","692","222","230","262","52","691","373","377","976","382","1-664","212","258","95","264","674","977","31","599","687","64","505","227","234","683","850","1-670","47","968","92","680","970","507","675","595","51","63","64","48","351","1-787, 1-939","974","242","262","40","7","250","590","290","1-869","1-758","590","508","1-784","685","378","239","966","221","381","248","232","65","1-721","421","386","677","252","27","82","211","34","94","249","597","47","268","46","41","963","886","992","255","66","228","690","676","1-868","216","90","993","1-649","688","1-340","256","380","971","44","1","598","998","678","379","58","84","681","212","967","260","263"],["AF / AFG","AL / ALB","DZ / DZA","AS / ASM","AD / AND","AO / AGO","AI / AIA","AQ / ATA","AG / ATG","AR / ARG","AM / ARM","AW / ABW","AU / AUS","AT / AUT","AZ / AZE","BS / BHS","BH / BHR","BD / BGD","BB / BRB","BY / BLR","BE / BEL","BZ / BLZ","BJ / BEN","BM / BMU","BT / BTN","BO / BOL","BA / BIH","BW / BWA","BR / BRA","IO / IOT","VG / VGB","BN / BRN","BG / BGR","BF / BFA","BI / BDI","KH / KHM","CM / CMR","CA / CAN","CV / CPV","KY / CYM","CF / CAF","TD / TCD","CL / CHL","CN / CHN","CX / CXR","CC / CCK","CO / COL","KM / COM","CK / COK","CR / CRI","HR / HRV","CU / CUB","CW / CUW","CY / CYP","CZ / CZE","CD / COD","DK / DNK","DJ / DJI","DM / DMA","DO / DOM","TL / TLS","EC / ECU","EG / EGY","SV / SLV","GQ / GNQ","ER / ERI","EE / EST","ET / ETH","FK / FLK","FO / FRO","FJ / FJI","FI / FIN","FR / FRA","PF / PYF","GA / GAB","GM / GMB","GE / GEO","DE / DEU","GH / GHA","GI / GIB","GR / GRC","GL / GRL","GD / GRD","GU / GUM","GT / GTM","GG / GGY","GN / GIN","GW / GNB","GY / GUY","HT / HTI","HN / HND","HK / HKG","HU / HUN","IS / ISL","IN / IND","ID / IDN","IR / IRN","IQ / IRQ","IE / IRL","IM / IMN","IL / ISR","IT / ITA","CI / CIV","JM / JAM","JP / JPN","JE / JEY","JO / JOR","KZ / KAZ","KE / KEN","KI / KIR","XK / XKX","KW / KWT","KG / KGZ","LA / LAO","LV / LVA","LB / LBN","LS / LSO","LR / LBR","LY / LBY","LI / LIE","LT / LTU","LU / LUX","MO / MAC","MK / MKD","MG / MDG","MW / MWI","MY / MYS","MV / MDV","ML / MLI","MT / MLT","MH / MHL","MR / MRT","MU / MUS","YT / MYT","MX / MEX","FM / FSM","MD / MDA","MC / MCO","MN / MNG","ME / MNE","MS / MSR","MA / MAR","MZ / MOZ","MM / MMR","NA / NAM","NR / NRU","NP / NPL","NL / NLD","AN / ANT","NC / NCL","NZ / NZL","NI / NIC","NE / NER","NG / NGA","NU / NIU","KP / PRK","MP / MNP","NO / NOR","OM / OMN","PK / PAK","PW / PLW","PS / PSE","PA / PAN","PG / PNG","PY / PRY","PE / PER","PH / PHL","PN / PCN","PL / POL","PT / PRT","PR / PRI","QA / QAT","CG / COG","RE / REU","RO / ROU","RU / RUS","RW / RWA","BL / BLM","SH / SHN","KN / KNA","LC / LCA","MF / MAF","PM / SPM","VC / VCT","WS / WSM","SM / SMR","ST / STP","SA / SAU","SN / SEN","RS / SRB","SC / SYC","SL / SLE","SG / SGP","SX / SXM","SK / SVK","SI / SVN","SB / SLB","SO / SOM","ZA / ZAF","KR / KOR","SS / SSD","ES / ESP","LK / LKA","SD / SDN","SR / SUR","SJ / SJM","SZ / SWZ","SE / SWE","CH / CHE","SY / SYR","TW / TWN","TJ / TJK","TZ / TZA","TH / THA","TG / TGO","TK / TKL","TO / TON","TT / TTO","TN / TUN","TR / TUR","TM / TKM","TC / TCA","TV / TUV","VI / VIR","UG / UGA","UA / UKR","AE / ARE","GB / GBR","US / USA","UY / URY","UZ / UZB","VU / VUT","VA / VAT","VE / VEN","VN / VNM","WF / WLF","EH / ESH","YE / YEM","ZM / ZMB","ZW / ZWE"],[29121286,2986952,34586184,57881,84000,13068161,13254,0,86754,41343201,2968000,71566,21515754,8205000,8303512,301790,738004,156118464,285653,9685000,10403000,314522,9056010,65365,699847,9947418,4590000,2029307,201103330,4000,21730,395027,7148785,16241811,9863117,14453680,19294149,33679000,508659,44270,4844927,10543464,16746491,1330044000,1500,628,47790000,773407,21388,4516220,4491000,11423000,141766,1102677,10476000,70916439,5484000,740528,72813,9823821,1154625,14790608,80471869,6052064,1014999,5792984,1291170,88013491,2638,48228,875983,5244000,64768389,270485,1545255,1593256,4630000,81802257,24339838,27884,11000000,56375,107818,159358,13550440,65228,10324025,1565126,748486,9648924,7989415,6898686,9982000,308910,1173108018,242968342,76923300,29671605,4622917,75049,7353985,60340328,21058798,2847232,127288000,90812,6407085,15340000,40046566,92533,1800000,2789132,5508626,6368162,2217969,4125247,1919552,3685076,6461454,35000,2944459,497538,449198,2062294,21281844,15447500,28274729,395650,13796354,403000,65859,3205060,1294104,159042,112468855,107708,4324000,32965,3086918,666730,9341,31627428,22061451,53414374,2128471,10065,28951852,16645000,136197,216494,4252277,5995928,15878271,154000000,2166,22912177,53883,5009150,2967717,184404791,19907,3800000,3410676,6064515,6375830,29907003,99900177,46,38500000,10676000,3916632,840926,3039126,776948,21959278,140702000,11055976,8450,7460,51134,160922,35925,7012,104217,192001,31477,175808,25731776,12323252,7344847,88340,5245695,4701069,37429,5455000,2007000,559198,10112453,49000000,48422644,8260490,46505963,21513990,35000000,492829,2550,1354051,9555893,7581000,22198110,22894384,7487489,41892895,67089500,6587239,1466,122580,1228691,10589025,77804122,4940916,20556,10472,108708,33398682,45415596,4975593,62348447,310232863,3477000,27865738,221552,921,27223228,89571130,16025,273008,23495361,13460305,11651858],[647500,28748,2381740,199,468,1246700,102,14000000,443,2766890,29800,193,7686850,83858,86600,13940,665,144000,431,207600,30510,22966,112620,53,47000,1098580,51129,600370,8511965,60,153,5770,110910,274200,27830,181040,475440,9984670,4033,262,622984,1284000,756950,9596960,135,14,1138910,2170,240,51100,56542,110860,444,9250,78866,2345410,43094,23000,754,48730,15007,283560,1001450,21040,28051,121320,45226,1127127,12173,1399,18270,337030,547030,4167,267667,11300,69700,357021,239460,7,131940,2166086,344,549,108890,78,245857,36120,214970,27750,112090,1092,93030,103000,3287590,1919440,1648000,437072,70280,572,20770,301230,322460,10991,377835,116,92300,2717300,582650,811,10887,17820,198500,236800,64589,10400,30355,111370,1759540,160,65200,2586,254,25333,587040,118480,329750,300,1240000,316,181,1030700,2040,374,1972550,702,33843,2,1565000,14026,102,446550,801590,678500,825418,21,140800,41526,960,19060,268680,129494,1267000,923768,260,120540,477,324220,212460,803940,458,5970,78200,462840,406750,1285220,300000,47,312685,92391,9104,11437,342000,2517,237500,17100000,26338,21,410,261,616,53,242,389,2944,61,1001,1960582,196190,88361,455,71740,693,34,48845,20273,28450,637657,1219912,98480,644329,504782,65610,1861484,163270,62049,17363,449964,41290,185180,35980,143100,945087,514000,56785,10,748,5128,163610,780580,488100,430,26,352,236040,603700,82880,244820,9629091,176220,447400,12200,0,912050,329560,274,266000,527970,752614,390580],[206500000000,128000000000,2157000000000,4622000000000,48000000000,1240000000000,1754000000000,null,12200000000,4846000000000,104400000000,25160000000,14880000000,4179000000000,760100000000,83730000000,283600000000,1402000000000,42620000000,692400000000,5074000000000,16370000000,83590000000,56000000000,21330000000,307900000000,188700000000,155300000000,21900000000,null,10950000000,165600000000,537000000000,121300000000,26760000000,156400000000,278800000000,18250000000,19550000000,22500000000,20500000000,135900000000,2817000000000,93300000000,null,null,3692000000000,6580000000000,1832000000000,485100000000,591400000000,723000000000,56000000000,217800000000,1948000000000,185600000000,3243000000000,14590000000,4950000000000,592700000000,61290000000,914100000000,2620000000000,246700000000,170800000000,34380000000,242800000000,473400000000,1645000000000,23200000000,42180000000,2596000000000,27390000000,56500000000,199700000000,8960000000000,159500000000,35930000000,455500000000,11060000000,2433000000000,21600000000,8110000000000,46000000000,539000000000,27420000000,65440000000,8800000000000,30200000000,82870000000,188800000000,2721000000000,1306000000000,145900000000,16700000000,8675000000000,4119000000000,2218000000000,2209000000000,40760000000,2727000000000,20680000000,282800000000,143900000000,50070000000,51000000000,340800000000,2249000000000,453100000000,1730000000000,71500000000,1795000000000,72340000000,101000000000,303800000000,434900000000,24570000000,19770000000,709200000000,51130000000,467100000000,605400000000,516800000000,106500000000,105300000000,36830000000,3124000000000,22700000000,113700000000,95410000000,1930000000000,41830000000,119000000000,null,13270000000,3390000000000,79320000000,57480000000,111400000000,45180000000,null,1048000000000,146700000000,594300000000,123000000000,null,193400000000,7223000000000,null,92800000000,1811000000000,112600000000,73040000000,5020000000000,100100000000,280000000000,7330000000000,5158000000000,819500000000,2365000000000,2210000000000,66410000000,406200000000,161000000000,305600000000,2103000000000,2722000000000,null,5139000000000,2193000000000,935200000000,2131000000000,142500000000,null,1889000000000,21130000000,77000000000,null,null,7670000000000,13770000000,5615000000000,2153000000000,7420000000000,7050000000000,18660000000,3110000000000,7185000000000,153600000000,436800000000,12710000000,46070000000,2957000000000,7947000000000,969600000000,468200000000,10990000000,23720000000,3539000000000,11980000000,117700000000,13560000000,651200000000,525000000000,50090000000,null,38070000000,5520000000000,6462000000000,647000000000,4847000000000,85130000000,319400000000,4009000000000,42990000000,null,4770000000000,271300000000,483800000000,8218000000000,405600000000,null,380000000000,null,226000000000,1755000000000,3900000000000,24900000000,167200000000,571100000000,551800000000,8280000000000,null,3675000000000,1700000000000,null,null,438900000000,222400000000,104800000000]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>country<\/th>\n      <th>country_code<\/th>\n      <th>iso_codes<\/th>\n      <th>population<\/th>\n      <th>area_km2<\/th>\n      <th>gdp_usd<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
@@ -431,7 +443,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
 <div id="htmlwidget-61454e6f0c14e2cd9949" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-61454e6f0c14e2cd9949">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53"],["SE","DE","FR","ES","IT","CN","GB","IN","NL","AT","FI","CH","IE","US","BE","CZ","NG","PL","ZA","BR","GR","ID","LB","PK","RU","TR","AZ","BA","BG","HU","IQ","SI","UA","ZM","ZW","AE","AL","AR","CA","CL","CM","CO","DK","EE","EG","KE","LK","LT","LV","LY","PT","SK","VE"],[81,46,37,21,20,19,10,9,9,8,7,6,6,6,4,4,4,4,4,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],["Sweden","Germany","France","Spain","Italy","China","United Kingdom","India","Netherlands","Austria","Finland","Switzerland","Ireland","United States","Belgium","Czechia","Nigeria","Poland","South Africa","Brazil","Greece","Indonesia","Lebanon","Pakistan","Russia","Turkey","Azerbaijan","Bosnia &amp; Herzegovina","Bulgaria","Hungary","Iraq","Slovenia","Ukraine","Zambia","Zimbabwe","United Arab Emirates","Albania","Argentina","Canada","Chile","Cameroon","Colombia","Denmark","Estonia","Egypt","Kenya","Sri Lanka","Lithuania","Latvia","Libya","Portugal","Slovakia","Venezuela"],["SWE","DEU","FRA","ESP","ITA","CHN","GBR","IND","NLD","AUT","FIN","CHE","IRL","USA","BEL","CZE","NGA","POL","ZAF","BRA","GRC","IDN","LBN","PAK","RUS","TUR","AZE","BIH","BGR","HUN","IRQ","SVN","UKR","ZMB","ZWE","ARE","ALB","ARG","CAN","CHL","CMR","COL","DNK","EST","EGY","KEN","LKA","LTU","LVA","LBY","PRT","SVK","VEN"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>region<\/th>\n      <th>n<\/th>\n      <th>name<\/th>\n      <th>iso_a3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":2},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
@@ -455,7 +466,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Number of exchange students"</span>,</span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Continent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="swedish-trade-in-goods-and-exchange-students_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="swedish-trade-in-goods-and-exchange-students_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -564,18 +579,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -607,11 +611,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/interludeone\.com\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -621,8 +664,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -634,7 +686,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -678,6 +853,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -703,6 +879,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -763,6 +965,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

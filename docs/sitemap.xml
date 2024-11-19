@@ -1,159 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://interludeone.com/posts/welcome/welcome.html</loc>
-    <lastmod>2023-11-09T09:39:47.076Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html</loc>
-    <lastmod>2023-11-09T09:39:46.529Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html</loc>
-    <lastmod>2023-11-09T09:39:44.766Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html</loc>
-    <lastmod>2023-11-09T09:39:43.645Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2021-05-06-swedenmap/swedenmap.html</loc>
-    <lastmod>2023-11-09T09:39:42.195Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2021-04-21-chips/chips.html</loc>
-    <lastmod>2023-11-09T09:39:41.205Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2021-03-18-car-price-explorer/car-price-explorer.html</loc>
-    <lastmod>2023-11-09T09:39:39.939Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html</loc>
-    <lastmod>2023-11-09T09:39:38.841Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2023-10-02-geocoding/geocoding.html</loc>
-    <lastmod>2023-11-09T09:39:37.706Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2023-07-05-langchain-demo/langchain-demo.html</loc>
-    <lastmod>2023-11-09T09:39:36.863Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2023-03-10/chatgpt-as-translator.html</loc>
-    <lastmod>2023-11-09T09:39:33.725Z</lastmod>
+    <loc>https://interludeone.com/posts/2021-07-06-students-speak/students-speak.html</loc>
+    <lastmod>2023-11-07T10:36:12.840Z</lastmod>
   </url>
   <url>
     <loc>https://interludeone.com/posts/2023-01-31-map-projections/Map-projections.html</loc>
-    <lastmod>2023-11-09T09:39:32.633Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html</loc>
-    <lastmod>2023-11-09T09:39:31.817Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/index.html</loc>
-    <lastmod>2024-03-06T16:00:29.342Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/content/research/Wired-for-success.html</loc>
-    <lastmod>2023-11-09T09:39:20.124Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/content/research/Ratio-seminar.html</loc>
-    <lastmod>2023-11-09T09:39:18.823Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/content/research.html</loc>
-    <lastmod>2023-11-09T09:39:18.315Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/content/phd-planning.html</loc>
-    <lastmod>2023-11-09T09:39:17.711Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/content/generative-ai-articles-listing.html</loc>
-    <lastmod>2023-11-09T09:39:17.042Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/content/consulting.html</loc>
-    <lastmod>2023-11-09T09:39:16.457Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/about.html</loc>
-    <lastmod>2023-11-09T09:39:16.208Z</lastmod>
+    <lastmod>2023-11-07T10:36:13.311Z</lastmod>
   </url>
   <url>
     <loc>https://interludeone.com/content/data.html</loc>
-    <lastmod>2023-11-09T09:39:16.756Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/content/generative-ai-articles/uk-china-shipping-forecast.html</loc>
-    <lastmod>2023-11-09T09:39:17.426Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/content/publications.html</loc>
-    <lastmod>2023-11-09T09:39:17.940Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/content/research/Warwick-poster.html</loc>
-    <lastmod>2023-11-09T09:39:19.085Z</lastmod>
-  </url>
-  <url>
-    <loc>https://interludeone.com/content/research/Wired-for-success-abstract.html</loc>
-    <lastmod>2023-11-09T09:39:19.846Z</lastmod>
+    <lastmod>2023-11-07T10:36:11.737Z</lastmod>
   </url>
   <url>
     <loc>https://interludeone.com/content/teaching.html</loc>
-    <lastmod>2023-11-09T09:39:20.370Z</lastmod>
+    <lastmod>2023-11-07T10:36:11.763Z</lastmod>
   </url>
   <url>
-    <loc>https://interludeone.com/posts/2021-07-06-students-speak/students-speak.html</loc>
-    <lastmod>2023-11-09T09:39:22.132Z</lastmod>
+    <loc>https://interludeone.com/content/research/Wired-for-success.html</loc>
+    <lastmod>2023-11-07T10:36:11.738Z</lastmod>
   </url>
   <url>
-    <loc>https://interludeone.com/posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html</loc>
-    <lastmod>2023-11-09T09:39:32.151Z</lastmod>
+    <loc>https://interludeone.com/content/phd-planning.html</loc>
+    <lastmod>2023-11-07T10:36:11.737Z</lastmod>
   </url>
   <url>
-    <loc>https://interludeone.com/posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html</loc>
-    <lastmod>2023-11-09T09:39:34.758Z</lastmod>
+    <loc>https://interludeone.com/content/research/Wired-for-success-abstract.html</loc>
+    <lastmod>2023-11-07T10:36:11.738Z</lastmod>
   </url>
   <url>
-    <loc>https://interludeone.com/posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html</loc>
-    <lastmod>2023-11-09T09:39:36.096Z</lastmod>
+    <loc>https://interludeone.com/content/generative-ai-articles/uk-china-shipping-forecast.html</loc>
+    <lastmod>2023-11-09T09:36:32.597Z</lastmod>
   </url>
   <url>
-    <loc>https://interludeone.com/posts/2023-11-07-q-and-a/q-and-a.html</loc>
-    <lastmod>2023-11-09T09:39:38.007Z</lastmod>
+    <loc>https://interludeone.com/content/consulting.html</loc>
+    <lastmod>2023-11-07T10:36:11.737Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/welcome/welcome.html</loc>
+    <lastmod>2023-11-07T10:36:13.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html</loc>
+    <lastmod>2023-11-07T10:36:13.290Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html</loc>
+    <lastmod>2023-11-07T10:36:13.180Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html</loc>
+    <lastmod>2023-11-07T10:36:13.161Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2021-05-06-swedenmap/swedenmap.html</loc>
+    <lastmod>2023-11-07T10:36:12.796Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2021-04-21-chips/chips.html</loc>
+    <lastmod>2023-11-07T10:36:12.462Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2021-03-18-car-price-explorer/car-price-explorer.html</loc>
+    <lastmod>2023-11-07T10:36:12.446Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html</loc>
+    <lastmod>2024-07-19T12:34:04.919Z</lastmod>
   </url>
   <url>
     <loc>https://interludeone.com/posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html</loc>
-    <lastmod>2023-11-09T09:39:39.667Z</lastmod>
+    <lastmod>2023-11-07T10:36:12.438Z</lastmod>
   </url>
   <url>
     <loc>https://interludeone.com/posts/2021-04-03-container-ships/container-ships.html</loc>
-    <lastmod>2023-11-09T09:39:40.721Z</lastmod>
+    <lastmod>2023-11-07T10:36:12.447Z</lastmod>
   </url>
   <url>
     <loc>https://interludeone.com/posts/2021-05-21-ggplot-resources/ggplot-resources.html</loc>
-    <lastmod>2023-11-09T09:39:42.773Z</lastmod>
+    <lastmod>2023-11-07T10:36:12.796Z</lastmod>
   </url>
   <url>
     <loc>https://interludeone.com/posts/2022-01-24-fathom-twitter/fathom-twitter.html</loc>
-    <lastmod>2023-11-09T09:39:44.257Z</lastmod>
+    <lastmod>2023-11-07T10:36:13.174Z</lastmod>
   </url>
   <url>
     <loc>https://interludeone.com/posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html</loc>
-    <lastmod>2023-11-09T09:39:45.312Z</lastmod>
+    <lastmod>2023-11-07T10:36:13.188Z</lastmod>
   </url>
   <url>
     <loc>https://interludeone.com/posts/2022-12-15-coef-plots/coef-plots.html</loc>
-    <lastmod>2023-11-09T09:39:46.045Z</lastmod>
+    <lastmod>2023-11-07T10:36:13.285Z</lastmod>
   </url>
   <url>
     <loc>https://interludeone.com/posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html</loc>
-    <lastmod>2023-11-09T09:39:46.832Z</lastmod>
+    <lastmod>2023-11-07T10:36:13.294Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/content/generative-ai-articles-listing.html</loc>
+    <lastmod>2023-11-09T09:37:31.031Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/content/research.html</loc>
+    <lastmod>2023-11-07T10:36:11.737Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/content/research/Warwick-poster.html</loc>
+    <lastmod>2023-11-07T10:36:11.737Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/index.html</loc>
+    <lastmod>2024-03-06T15:59:02.560Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2023-11-07-q-and-a/q-and-a.html</loc>
+    <lastmod>2023-11-07T14:32:20.568Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/about.html</loc>
+    <lastmod>2023-11-07T10:36:11.722Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/content/research/Ratio-seminar.html</loc>
+    <lastmod>2023-11-07T10:36:11.737Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html</loc>
+    <lastmod>2023-11-07T10:36:13.396Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/content/publications.html</loc>
+    <lastmod>2023-11-07T10:36:11.737Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2023-07-05-langchain-demo/langchain-demo.html</loc>
+    <lastmod>2023-11-07T10:36:13.400Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html</loc>
+    <lastmod>2023-11-07T10:36:13.396Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2024-11-19-grey-couches/greg-couches.html</loc>
+    <lastmod>2024-11-19T17:09:50.124Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2023-03-10/chatgpt-as-translator.html</loc>
+    <lastmod>2023-11-07T10:36:13.386Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html</loc>
+    <lastmod>2023-11-07T10:36:13.307Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2023-10-02-geocoding/geocoding.html</loc>
+    <lastmod>2023-11-07T10:36:13.404Z</lastmod>
+  </url>
+  <url>
+    <loc>https://interludeone.com/posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html</loc>
+    <lastmod>2023-11-07T10:36:13.282Z</lastmod>
   </url>
 </urlset>

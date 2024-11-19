@@ -31,6 +31,8 @@ theme_set(theme_light())
 
 df <- read_rds("data/spanish_flu_data.rds")
 
+
+df %>% colnames()
 ```
 
 

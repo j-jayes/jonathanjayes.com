@@ -1,0 +1,47 @@
+---
+title: "Creating an Accessible API Wrapper for Historical Texts Using Streamlit"
+format: html
+draft: true
+---
+
+Part of the economic history pipeline is gathering data and putting it into a format in which it can be analyzed. Often the data comes from historical archives. Sometimes, some kind person has put together a website through which the source can be searched and accessed. Even better, sometimes the archive has an API that can be accessed programmatically. This is the case with the Old Bailey Online, a collection of court records from London from 1674 to 1913. The Old Bailey Online has an API that can be accessed to search for and return court records.
+
+While the API is powerful, it can be difficult to use for those who are not familiar with programming. To make the data more accessible, I created a Streamlit app that allows users to search for and download court records from the Old Bailey Online. The app is available at [this link](https://old-bailey-records-wrapper-v1.streamlit.app).
+
+In the remainder of the post, I will describe the process of creating the app, including the code and the steps taken to create it.
+
+In the digital age, the accessibility of historical texts can greatly enhance research and education by allowing a wider audience to explore and utilize these resources. Recently, I collaborated on an exciting project to develop a user-friendly API wrapper for the Old Bailey API, which houses extensive records of court cases in England from 1600 to 1910. Our goal was to create a tool that makes these historical texts easily searchable and downloadable, even for users without programming skills. Here's how we achieved this using Streamlit, a powerful framework that simplifies building and deploying interactive apps.
+
+#### Why Streamlit?
+
+Streamlit is an open-source Python framework that turns data scripts into shareable web apps in minutes. It is particularly suited for rapid development of data applications with minimal front-end coding, making it an ideal choice for data scientists and historians without a background in web development. One of Streamlit's greatest strengths is its simplicity in creating interactive UI elements like sliders, buttons, and text inputs.
+
+#### Project Overview
+
+The project involved two main tasks: interfacing with the Old Bailey API to fetch data based on user queries, and providing a means to download this data in a user-friendly format. We designed the application in two main parts:
+
+1. **Search Interface**: Users start by entering search keywords related to specific court cases. The app queries the API and retrieves initial results, which include basic information about each case.
+
+2. **Detailed Data Retrieval**: From the initial results, users can select specific records to fetch more detailed information. This data is then displayed and can be downloaded as an Excel file, providing a convenient way to conduct further analysis offline.
+
+#### Implementation Details
+
+We utilized Python's `requests` library to handle API interactions, fetching data based on user inputs. For the data presentation and manipulation, we employed `pandas`, a powerful data analysis library, which seamlessly integrates with Streamlit. Here's a simplified breakdown of the process:
+
+- **Fetching Data**: The application sends requests to the Old Bailey API and processes the JSON responses to extract relevant case details, such as case IDs, titles, and dates.
+
+- **User Interactions**: Streamlit widgets collect user inputs and trigger API calls. For example, a text input widget lets users enter search terms, and a button triggers the detailed data fetch.
+
+- **Data Visualization**: After collecting the initial data, the app provides a histogram of cases over time, utilizing `matplotlib` to visualize the distribution of cases by year. This helps users understand the volume of cases in different periods at a glance.
+
+- **Downloading Data**: The detailed case data fetched on user demand is converted to an Excel format using `pandas` and `xlsxwriter`. Streamlit's `download_button` allows users to download this data directly from the web interface.
+
+#### Deployment
+
+One of the remarkable features of Streamlit is its integration with Streamlit Sharing, a platform that allows developers to deploy their apps directly from their GitHub repositories. This service handles hosting and provides a public URL where the app can be accessed from anywhere, making our tool readily available to researchers, educators, and the general public.
+
+#### Conclusion
+
+By leveraging Streamlit, we transformed a complex API interaction into a straightforward, interactive web application that makes historical legal documents accessible to a broader audience. This project not only demonstrates the power of Python and Streamlit in handling and presenting data but also highlights the importance of making historical data more accessible and usable in the digital humanities.
+
+This application serves as a template for similar projects in other fields where making data accessible and downloadable is crucial, proving that you don't need to be a programmer to dive deep into historical or any other form of data analysis.
