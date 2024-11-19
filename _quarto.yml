@@ -11,6 +11,7 @@ website:
   title: "Interlude One"
   site-url: https://interludeone.com/
   navbar:
+    background: "#FCFCFC"
     logo: assets/favicon_logo.ico
     left:
       - href: index.qmd
