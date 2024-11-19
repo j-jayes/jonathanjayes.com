@@ -40,6 +40,9 @@ My close friend and flatmate duing my Master's degree, Nick, once confidently sa
 It turns out, it’s not that hard. In this post, I’ll share the answer to my question and, if you're interested, explain the technical steps I took to get there.
 
 ```{r}
+#| code-fold: true
+#| echo: true
+
 library(tidyverse)
 library(jsonlite)
 library(gt)
@@ -189,8 +192,9 @@ To improve accuracy, I took a different approach, using the OpenAI API, which no
 Here is the simple data model and prompt I used to get the color classification from the API:
 
 ```{python}
-#| eval: false
 #| code-fold: show
+#| echo: true
+#| eval: false
 
 class CouchColourClassification(BaseModel):
     couch_colour: str = Field(description="The classified color of the couch")

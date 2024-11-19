@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -253,6 +287,79 @@ ul.task-list li input[type="checkbox"] {
 <p>My close friend and flatmate duing my Master’s degree, Nick, once confidently said regarding his interest in audio processing that, “Computer vision is a solved field”—and that was five years ago! So I thought, how hard could it be to use a small, open-source, CPU-based computer vision model to analyze the videos from NeverTooSmall, identify the frames with a couch, extract its color, and visualize the results in a nice waffle chart?</p>
 <p>It turns out, it’s not that hard. In this post, I’ll share the answer to my question and, if you’re interested, explain the technical steps I took to get there.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"posts"</span>, <span class="st">"2024-11-19-grey-couches"</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">"data/couch_info_with_colour_classifications.json"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(df)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>n_videos <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>n_couches <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(couch_detected))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>n_grey_couches <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(couch_detected, couch_colour <span class="sc">==</span> <span class="st">"grey"</span>))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>color_mapping <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"beige"</span> <span class="ot">=</span> <span class="st">"#F5F5DC"</span>, <span class="co"># Soft beige</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"light blue"</span> <span class="ot">=</span> <span class="st">"#A9D8E6"</span>, <span class="co"># Lightened sky blue</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"green"</span> <span class="ot">=</span> <span class="st">"#A3DCA3"</span>, <span class="co"># Soft pastel green</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grey"</span> <span class="ot">=</span> <span class="st">"#C0C0C0"</span>, <span class="co"># Light grey</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"blue"</span> <span class="ot">=</span> <span class="st">"#87CEEB"</span>, <span class="co"># Light blue</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"black"</span> <span class="ot">=</span> <span class="st">"#4E4E4E"</span>, <span class="co"># Dark grey to represent pastel black</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"brown"</span> <span class="ot">=</span> <span class="st">"#C8A165"</span>, <span class="co"># Light brown</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"white"</span> <span class="ot">=</span> <span class="st">"#FFFFFF"</span>, <span class="co"># White</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"red"</span> <span class="ot">=</span> <span class="st">"#FF9999"</span>, <span class="co"># Lightened true red</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"yellow"</span> <span class="ot">=</span> <span class="st">"#FFFFB3"</span>, <span class="co"># Soft pastel yellow</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"teal"</span> <span class="ot">=</span> <span class="st">"#99CED3"</span>, <span class="co"># Soft teal</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"orange"</span> <span class="ot">=</span> <span class="st">"#FFCC99"</span>, <span class="co"># Lightened orange</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pink"</span> <span class="ot">=</span> <span class="st">"#FFB6C1"</span>, <span class="co"># Soft pink</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"purple"</span> <span class="ot">=</span> <span class="st">"#CBA1E6"</span> <span class="co"># Light purple</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Expand the data to repeat each color based on the count</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>expanded_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(couch_colour) <span class="sc">%&gt;%</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(couch_colour)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">uncount</span>(n) <span class="sc">%&gt;%</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">tile_id =</span> <span class="fu">row_number</span>())</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the number of columns and rows for the grid</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>n_cols <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">sqrt</span>(<span class="fu">nrow</span>(expanded_df)))</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a grid with the colors</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n_cols, <span class="at">y =</span> <span class="dv">1</span><span class="sc">:</span>n_cols) <span class="sc">%&gt;%</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(expanded_df)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_cols</span>(expanded_df)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Create legend order using number of couches</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>legend_order <span class="ot">&lt;-</span> expanded_df <span class="sc">%&gt;%</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(couch_colour) <span class="sc">%&gt;%</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(couch_colour)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the grid with colors</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>grid <span class="sc">%&gt;%</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">fill =</span> <span class="fu">factor</span>(couch_colour, <span class="at">levels =</span> legend_order))) <span class="sc">+</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> color_mapping) <span class="sc">+</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        <span class="co"># title = "The colours of the couches in NeverTooSmall videos",</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"Couch Colour"</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -266,23 +373,23 @@ ul.task-list li input[type="checkbox"] {
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="cell">
 <div class="cell-output-display">
-<div id="fyhdmpwkyn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fyhdmpwkyn table {
+<div id="wqkwhgeoht" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wqkwhgeoht table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fyhdmpwkyn thead, #fyhdmpwkyn tbody, #fyhdmpwkyn tfoot, #fyhdmpwkyn tr, #fyhdmpwkyn td, #fyhdmpwkyn th {
+#wqkwhgeoht thead, #wqkwhgeoht tbody, #wqkwhgeoht tfoot, #wqkwhgeoht tr, #wqkwhgeoht td, #wqkwhgeoht th {
   border-style: none;
 }
 
-#fyhdmpwkyn p {
+#wqkwhgeoht p {
   margin: 0;
   padding: 0;
 }
 
-#fyhdmpwkyn .gt_table {
+#wqkwhgeoht .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -308,12 +415,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_caption {
+#wqkwhgeoht .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fyhdmpwkyn .gt_title {
+#wqkwhgeoht .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -325,7 +432,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#fyhdmpwkyn .gt_subtitle {
+#wqkwhgeoht .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -337,7 +444,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#fyhdmpwkyn .gt_heading {
+#wqkwhgeoht .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -349,13 +456,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_bottom_border {
+#wqkwhgeoht .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_col_headings {
+#wqkwhgeoht .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -370,7 +477,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_col_heading {
+#wqkwhgeoht .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -390,7 +497,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#fyhdmpwkyn .gt_column_spanner_outer {
+#wqkwhgeoht .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -402,15 +509,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#fyhdmpwkyn .gt_column_spanner_outer:first-child {
+#wqkwhgeoht .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fyhdmpwkyn .gt_column_spanner_outer:last-child {
+#wqkwhgeoht .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fyhdmpwkyn .gt_column_spanner {
+#wqkwhgeoht .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -422,11 +529,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#fyhdmpwkyn .gt_spanner_row {
+#wqkwhgeoht .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fyhdmpwkyn .gt_group_heading {
+#wqkwhgeoht .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -452,7 +559,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#fyhdmpwkyn .gt_empty_group_heading {
+#wqkwhgeoht .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -467,15 +574,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#fyhdmpwkyn .gt_from_md > :first-child {
+#wqkwhgeoht .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fyhdmpwkyn .gt_from_md > :last-child {
+#wqkwhgeoht .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fyhdmpwkyn .gt_row {
+#wqkwhgeoht .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,7 +601,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#fyhdmpwkyn .gt_stub {
+#wqkwhgeoht .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -507,7 +614,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#fyhdmpwkyn .gt_stub_row_group {
+#wqkwhgeoht .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -521,15 +628,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#fyhdmpwkyn .gt_row_group_first td {
+#wqkwhgeoht .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fyhdmpwkyn .gt_row_group_first th {
+#wqkwhgeoht .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fyhdmpwkyn .gt_summary_row {
+#wqkwhgeoht .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -539,16 +646,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#fyhdmpwkyn .gt_first_summary_row {
+#wqkwhgeoht .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_first_summary_row.thick {
+#wqkwhgeoht .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fyhdmpwkyn .gt_last_summary_row {
+#wqkwhgeoht .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -558,7 +665,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_grand_summary_row {
+#wqkwhgeoht .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -568,7 +675,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#fyhdmpwkyn .gt_first_grand_summary_row {
+#wqkwhgeoht .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -578,7 +685,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_last_grand_summary_row_top {
+#wqkwhgeoht .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -588,11 +695,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_striped {
+#wqkwhgeoht .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fyhdmpwkyn .gt_table_body {
+#wqkwhgeoht .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -601,7 +708,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_footnotes {
+#wqkwhgeoht .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -615,7 +722,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_footnote {
+#wqkwhgeoht .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -624,7 +731,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#fyhdmpwkyn .gt_sourcenotes {
+#wqkwhgeoht .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -638,7 +745,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#fyhdmpwkyn .gt_sourcenote {
+#wqkwhgeoht .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -646,63 +753,63 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#fyhdmpwkyn .gt_left {
+#wqkwhgeoht .gt_left {
   text-align: left;
 }
 
-#fyhdmpwkyn .gt_center {
+#wqkwhgeoht .gt_center {
   text-align: center;
 }
 
-#fyhdmpwkyn .gt_right {
+#wqkwhgeoht .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fyhdmpwkyn .gt_font_normal {
+#wqkwhgeoht .gt_font_normal {
   font-weight: normal;
 }
 
-#fyhdmpwkyn .gt_font_bold {
+#wqkwhgeoht .gt_font_bold {
   font-weight: bold;
 }
 
-#fyhdmpwkyn .gt_font_italic {
+#wqkwhgeoht .gt_font_italic {
   font-style: italic;
 }
 
-#fyhdmpwkyn .gt_super {
+#wqkwhgeoht .gt_super {
   font-size: 65%;
 }
 
-#fyhdmpwkyn .gt_footnote_marks {
+#wqkwhgeoht .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fyhdmpwkyn .gt_asterisk {
+#wqkwhgeoht .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fyhdmpwkyn .gt_indent_1 {
+#wqkwhgeoht .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fyhdmpwkyn .gt_indent_2 {
+#wqkwhgeoht .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fyhdmpwkyn .gt_indent_3 {
+#wqkwhgeoht .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fyhdmpwkyn .gt_indent_4 {
+#wqkwhgeoht .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fyhdmpwkyn .gt_indent_5 {
+#wqkwhgeoht .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -845,6 +952,17 @@ It’s easy for a human to answer, “What color is this?” because our brains 
 </blockquote>
 <p>To improve accuracy, I took a different approach, using the OpenAI API, which now accepts images. I simply asked the GPT-4o model to classify the couch color based on the segmented image. OpenAI’s API now allows you to specify a data model in your request to ensure you get a specific type of response. Using Pydantic data models in the API request helped me standardize outputs and reduced errors significantly. I can <strong>really</strong> recommend having a look at the <a href="https://platform.openai.com/docs/guides/structured-outputs">structured outputs option</a> if you are working with the OpenAI API.</p>
 <p>Here is the simple data model and prompt I used to get the color classification from the API:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CouchColourClassification(BaseModel):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    couch_colour: <span class="bu">str</span> <span class="op">=</span> Field(description<span class="op">=</span><span class="st">"The classified color of the couch"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>PROMPT <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">You will see a still from a video. What color is the couch in the image? Use a single word to describe the color, e.g. 'white', 'black', 'grey', 'beige', 'blue', 'green', 'red', 'brown', 'purple', 'yellow', 'orange', 'pink'. If the couch has multiple colors, choose the most prominent one. </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="visualizing-the-results" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-the-results">5. Visualizing the Results</h3>
@@ -860,23 +978,23 @@ It’s easy for a human to answer, “What color is this?” because our brains 
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Red Couches</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Brown Couches</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Black Couches</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Blue Couches</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">Green Couches</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false">White Couches</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-7" role="tab" aria-controls="tabset-1-7" aria-selected="false">Beige Couches</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-8-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-8" role="tab" aria-controls="tabset-1-8" aria-selected="false">Grey Couches</a></li></ul>
 <div class="cell tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div id="vvvexttuqy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vvvexttuqy table {
+<div id="anhppyahlr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#anhppyahlr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vvvexttuqy thead, #vvvexttuqy tbody, #vvvexttuqy tfoot, #vvvexttuqy tr, #vvvexttuqy td, #vvvexttuqy th {
+#anhppyahlr thead, #anhppyahlr tbody, #anhppyahlr tfoot, #anhppyahlr tr, #anhppyahlr td, #anhppyahlr th {
   border-style: none;
 }
 
-#vvvexttuqy p {
+#anhppyahlr p {
   margin: 0;
   padding: 0;
 }
 
-#vvvexttuqy .gt_table {
+#anhppyahlr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -902,12 +1020,12 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-left-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_caption {
+#anhppyahlr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vvvexttuqy .gt_title {
+#anhppyahlr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -919,7 +1037,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-bottom-width: 0;
 }
 
-#vvvexttuqy .gt_subtitle {
+#anhppyahlr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -931,7 +1049,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-top-width: 0;
 }
 
-#vvvexttuqy .gt_heading {
+#anhppyahlr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -943,13 +1061,13 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-right-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_bottom_border {
+#anhppyahlr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_col_headings {
+#anhppyahlr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -964,7 +1082,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-right-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_col_heading {
+#anhppyahlr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -984,7 +1102,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   overflow-x: hidden;
 }
 
-#vvvexttuqy .gt_column_spanner_outer {
+#anhppyahlr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -996,15 +1114,15 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   padding-right: 4px;
 }
 
-#vvvexttuqy .gt_column_spanner_outer:first-child {
+#anhppyahlr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vvvexttuqy .gt_column_spanner_outer:last-child {
+#anhppyahlr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vvvexttuqy .gt_column_spanner {
+#anhppyahlr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1016,11 +1134,11 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   width: 100%;
 }
 
-#vvvexttuqy .gt_spanner_row {
+#anhppyahlr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vvvexttuqy .gt_group_heading {
+#anhppyahlr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1046,7 +1164,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   text-align: left;
 }
 
-#vvvexttuqy .gt_empty_group_heading {
+#anhppyahlr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1061,15 +1179,15 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   vertical-align: middle;
 }
 
-#vvvexttuqy .gt_from_md > :first-child {
+#anhppyahlr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vvvexttuqy .gt_from_md > :last-child {
+#anhppyahlr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vvvexttuqy .gt_row {
+#anhppyahlr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1088,7 +1206,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   overflow-x: hidden;
 }
 
-#vvvexttuqy .gt_stub {
+#anhppyahlr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1101,7 +1219,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   padding-right: 5px;
 }
 
-#vvvexttuqy .gt_stub_row_group {
+#anhppyahlr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1115,15 +1233,15 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   vertical-align: top;
 }
 
-#vvvexttuqy .gt_row_group_first td {
+#anhppyahlr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vvvexttuqy .gt_row_group_first th {
+#anhppyahlr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vvvexttuqy .gt_summary_row {
+#anhppyahlr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1133,16 +1251,16 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   padding-right: 5px;
 }
 
-#vvvexttuqy .gt_first_summary_row {
+#anhppyahlr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_first_summary_row.thick {
+#anhppyahlr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vvvexttuqy .gt_last_summary_row {
+#anhppyahlr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1152,7 +1270,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-bottom-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_grand_summary_row {
+#anhppyahlr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1162,7 +1280,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   padding-right: 5px;
 }
 
-#vvvexttuqy .gt_first_grand_summary_row {
+#anhppyahlr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1172,7 +1290,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-top-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_last_grand_summary_row_top {
+#anhppyahlr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1182,11 +1300,11 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-bottom-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_striped {
+#anhppyahlr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vvvexttuqy .gt_table_body {
+#anhppyahlr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1195,7 +1313,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-bottom-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_footnotes {
+#anhppyahlr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1209,7 +1327,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-right-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_footnote {
+#anhppyahlr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1218,7 +1336,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   padding-right: 5px;
 }
 
-#vvvexttuqy .gt_sourcenotes {
+#anhppyahlr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1232,7 +1350,7 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   border-right-color: #D3D3D3;
 }
 
-#vvvexttuqy .gt_sourcenote {
+#anhppyahlr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1240,63 +1358,63 @@ It’s easy for a human to answer, “What color is this?” because our brains 
   padding-right: 5px;
 }
 
-#vvvexttuqy .gt_left {
+#anhppyahlr .gt_left {
   text-align: left;
 }
 
-#vvvexttuqy .gt_center {
+#anhppyahlr .gt_center {
   text-align: center;
 }
 
-#vvvexttuqy .gt_right {
+#anhppyahlr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vvvexttuqy .gt_font_normal {
+#anhppyahlr .gt_font_normal {
   font-weight: normal;
 }
 
-#vvvexttuqy .gt_font_bold {
+#anhppyahlr .gt_font_bold {
   font-weight: bold;
 }
 
-#vvvexttuqy .gt_font_italic {
+#anhppyahlr .gt_font_italic {
   font-style: italic;
 }
 
-#vvvexttuqy .gt_super {
+#anhppyahlr .gt_super {
   font-size: 65%;
 }
 
-#vvvexttuqy .gt_footnote_marks {
+#anhppyahlr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vvvexttuqy .gt_asterisk {
+#anhppyahlr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vvvexttuqy .gt_indent_1 {
+#anhppyahlr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vvvexttuqy .gt_indent_2 {
+#anhppyahlr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vvvexttuqy .gt_indent_3 {
+#anhppyahlr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vvvexttuqy .gt_indent_4 {
+#anhppyahlr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vvvexttuqy .gt_indent_5 {
+#anhppyahlr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1339,23 +1457,23 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div id="novstcqcuh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#novstcqcuh table {
+<div id="kzzgkwdkkk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kzzgkwdkkk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#novstcqcuh thead, #novstcqcuh tbody, #novstcqcuh tfoot, #novstcqcuh tr, #novstcqcuh td, #novstcqcuh th {
+#kzzgkwdkkk thead, #kzzgkwdkkk tbody, #kzzgkwdkkk tfoot, #kzzgkwdkkk tr, #kzzgkwdkkk td, #kzzgkwdkkk th {
   border-style: none;
 }
 
-#novstcqcuh p {
+#kzzgkwdkkk p {
   margin: 0;
   padding: 0;
 }
 
-#novstcqcuh .gt_table {
+#kzzgkwdkkk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1381,12 +1499,12 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-left-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_caption {
+#kzzgkwdkkk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#novstcqcuh .gt_title {
+#kzzgkwdkkk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1398,7 +1516,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-bottom-width: 0;
 }
 
-#novstcqcuh .gt_subtitle {
+#kzzgkwdkkk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1410,7 +1528,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-top-width: 0;
 }
 
-#novstcqcuh .gt_heading {
+#kzzgkwdkkk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1422,13 +1540,13 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-right-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_bottom_border {
+#kzzgkwdkkk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_col_headings {
+#kzzgkwdkkk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1443,7 +1561,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-right-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_col_heading {
+#kzzgkwdkkk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1463,7 +1581,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   overflow-x: hidden;
 }
 
-#novstcqcuh .gt_column_spanner_outer {
+#kzzgkwdkkk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1475,15 +1593,15 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   padding-right: 4px;
 }
 
-#novstcqcuh .gt_column_spanner_outer:first-child {
+#kzzgkwdkkk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#novstcqcuh .gt_column_spanner_outer:last-child {
+#kzzgkwdkkk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#novstcqcuh .gt_column_spanner {
+#kzzgkwdkkk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1495,11 +1613,11 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   width: 100%;
 }
 
-#novstcqcuh .gt_spanner_row {
+#kzzgkwdkkk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#novstcqcuh .gt_group_heading {
+#kzzgkwdkkk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1525,7 +1643,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   text-align: left;
 }
 
-#novstcqcuh .gt_empty_group_heading {
+#kzzgkwdkkk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1540,15 +1658,15 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   vertical-align: middle;
 }
 
-#novstcqcuh .gt_from_md > :first-child {
+#kzzgkwdkkk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#novstcqcuh .gt_from_md > :last-child {
+#kzzgkwdkkk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#novstcqcuh .gt_row {
+#kzzgkwdkkk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1567,7 +1685,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   overflow-x: hidden;
 }
 
-#novstcqcuh .gt_stub {
+#kzzgkwdkkk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1580,7 +1698,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   padding-right: 5px;
 }
 
-#novstcqcuh .gt_stub_row_group {
+#kzzgkwdkkk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1594,15 +1712,15 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   vertical-align: top;
 }
 
-#novstcqcuh .gt_row_group_first td {
+#kzzgkwdkkk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#novstcqcuh .gt_row_group_first th {
+#kzzgkwdkkk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#novstcqcuh .gt_summary_row {
+#kzzgkwdkkk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1612,16 +1730,16 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   padding-right: 5px;
 }
 
-#novstcqcuh .gt_first_summary_row {
+#kzzgkwdkkk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_first_summary_row.thick {
+#kzzgkwdkkk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#novstcqcuh .gt_last_summary_row {
+#kzzgkwdkkk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1631,7 +1749,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-bottom-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_grand_summary_row {
+#kzzgkwdkkk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1641,7 +1759,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   padding-right: 5px;
 }
 
-#novstcqcuh .gt_first_grand_summary_row {
+#kzzgkwdkkk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1651,7 +1769,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-top-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_last_grand_summary_row_top {
+#kzzgkwdkkk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1661,11 +1779,11 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-bottom-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_striped {
+#kzzgkwdkkk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#novstcqcuh .gt_table_body {
+#kzzgkwdkkk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1674,7 +1792,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-bottom-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_footnotes {
+#kzzgkwdkkk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1688,7 +1806,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-right-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_footnote {
+#kzzgkwdkkk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1697,7 +1815,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   padding-right: 5px;
 }
 
-#novstcqcuh .gt_sourcenotes {
+#kzzgkwdkkk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1711,7 +1829,7 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   border-right-color: #D3D3D3;
 }
 
-#novstcqcuh .gt_sourcenote {
+#kzzgkwdkkk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1719,63 +1837,63 @@ NEVER TOO SMALL: Spanish Couple’s Multifunctional Apartment, Seville 55sqm/592
   padding-right: 5px;
 }
 
-#novstcqcuh .gt_left {
+#kzzgkwdkkk .gt_left {
   text-align: left;
 }
 
-#novstcqcuh .gt_center {
+#kzzgkwdkkk .gt_center {
   text-align: center;
 }
 
-#novstcqcuh .gt_right {
+#kzzgkwdkkk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#novstcqcuh .gt_font_normal {
+#kzzgkwdkkk .gt_font_normal {
   font-weight: normal;
 }
 
-#novstcqcuh .gt_font_bold {
+#kzzgkwdkkk .gt_font_bold {
   font-weight: bold;
 }
 
-#novstcqcuh .gt_font_italic {
+#kzzgkwdkkk .gt_font_italic {
   font-style: italic;
 }
 
-#novstcqcuh .gt_super {
+#kzzgkwdkkk .gt_super {
   font-size: 65%;
 }
 
-#novstcqcuh .gt_footnote_marks {
+#kzzgkwdkkk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#novstcqcuh .gt_asterisk {
+#kzzgkwdkkk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#novstcqcuh .gt_indent_1 {
+#kzzgkwdkkk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#novstcqcuh .gt_indent_2 {
+#kzzgkwdkkk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#novstcqcuh .gt_indent_3 {
+#kzzgkwdkkk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#novstcqcuh .gt_indent_4 {
+#kzzgkwdkkk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#novstcqcuh .gt_indent_5 {
+#kzzgkwdkkk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1842,23 +1960,23 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div id="bjaguuzpkb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bjaguuzpkb table {
+<div id="oexqwrmnuu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oexqwrmnuu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bjaguuzpkb thead, #bjaguuzpkb tbody, #bjaguuzpkb tfoot, #bjaguuzpkb tr, #bjaguuzpkb td, #bjaguuzpkb th {
+#oexqwrmnuu thead, #oexqwrmnuu tbody, #oexqwrmnuu tfoot, #oexqwrmnuu tr, #oexqwrmnuu td, #oexqwrmnuu th {
   border-style: none;
 }
 
-#bjaguuzpkb p {
+#oexqwrmnuu p {
   margin: 0;
   padding: 0;
 }
 
-#bjaguuzpkb .gt_table {
+#oexqwrmnuu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1884,12 +2002,12 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-left-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_caption {
+#oexqwrmnuu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bjaguuzpkb .gt_title {
+#oexqwrmnuu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1901,7 +2019,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-bottom-width: 0;
 }
 
-#bjaguuzpkb .gt_subtitle {
+#oexqwrmnuu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1913,7 +2031,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-top-width: 0;
 }
 
-#bjaguuzpkb .gt_heading {
+#oexqwrmnuu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1925,13 +2043,13 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-right-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_bottom_border {
+#oexqwrmnuu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_col_headings {
+#oexqwrmnuu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1946,7 +2064,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-right-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_col_heading {
+#oexqwrmnuu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1966,7 +2084,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   overflow-x: hidden;
 }
 
-#bjaguuzpkb .gt_column_spanner_outer {
+#oexqwrmnuu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1978,15 +2096,15 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   padding-right: 4px;
 }
 
-#bjaguuzpkb .gt_column_spanner_outer:first-child {
+#oexqwrmnuu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bjaguuzpkb .gt_column_spanner_outer:last-child {
+#oexqwrmnuu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bjaguuzpkb .gt_column_spanner {
+#oexqwrmnuu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1998,11 +2116,11 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   width: 100%;
 }
 
-#bjaguuzpkb .gt_spanner_row {
+#oexqwrmnuu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bjaguuzpkb .gt_group_heading {
+#oexqwrmnuu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2028,7 +2146,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   text-align: left;
 }
 
-#bjaguuzpkb .gt_empty_group_heading {
+#oexqwrmnuu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2043,15 +2161,15 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   vertical-align: middle;
 }
 
-#bjaguuzpkb .gt_from_md > :first-child {
+#oexqwrmnuu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bjaguuzpkb .gt_from_md > :last-child {
+#oexqwrmnuu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bjaguuzpkb .gt_row {
+#oexqwrmnuu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2070,7 +2188,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   overflow-x: hidden;
 }
 
-#bjaguuzpkb .gt_stub {
+#oexqwrmnuu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2083,7 +2201,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   padding-right: 5px;
 }
 
-#bjaguuzpkb .gt_stub_row_group {
+#oexqwrmnuu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2097,15 +2215,15 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   vertical-align: top;
 }
 
-#bjaguuzpkb .gt_row_group_first td {
+#oexqwrmnuu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bjaguuzpkb .gt_row_group_first th {
+#oexqwrmnuu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bjaguuzpkb .gt_summary_row {
+#oexqwrmnuu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2115,16 +2233,16 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   padding-right: 5px;
 }
 
-#bjaguuzpkb .gt_first_summary_row {
+#oexqwrmnuu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_first_summary_row.thick {
+#oexqwrmnuu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bjaguuzpkb .gt_last_summary_row {
+#oexqwrmnuu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2134,7 +2252,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-bottom-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_grand_summary_row {
+#oexqwrmnuu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2144,7 +2262,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   padding-right: 5px;
 }
 
-#bjaguuzpkb .gt_first_grand_summary_row {
+#oexqwrmnuu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2154,7 +2272,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-top-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_last_grand_summary_row_top {
+#oexqwrmnuu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2164,11 +2282,11 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-bottom-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_striped {
+#oexqwrmnuu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bjaguuzpkb .gt_table_body {
+#oexqwrmnuu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2177,7 +2295,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-bottom-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_footnotes {
+#oexqwrmnuu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2191,7 +2309,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-right-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_footnote {
+#oexqwrmnuu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2200,7 +2318,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   padding-right: 5px;
 }
 
-#bjaguuzpkb .gt_sourcenotes {
+#oexqwrmnuu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2214,7 +2332,7 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   border-right-color: #D3D3D3;
 }
 
-#bjaguuzpkb .gt_sourcenote {
+#oexqwrmnuu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2222,63 +2340,63 @@ NEVER TOO SMALL: Family of 5’s Simple Home, Japan 45sqm/483sqft
   padding-right: 5px;
 }
 
-#bjaguuzpkb .gt_left {
+#oexqwrmnuu .gt_left {
   text-align: left;
 }
 
-#bjaguuzpkb .gt_center {
+#oexqwrmnuu .gt_center {
   text-align: center;
 }
 
-#bjaguuzpkb .gt_right {
+#oexqwrmnuu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bjaguuzpkb .gt_font_normal {
+#oexqwrmnuu .gt_font_normal {
   font-weight: normal;
 }
 
-#bjaguuzpkb .gt_font_bold {
+#oexqwrmnuu .gt_font_bold {
   font-weight: bold;
 }
 
-#bjaguuzpkb .gt_font_italic {
+#oexqwrmnuu .gt_font_italic {
   font-style: italic;
 }
 
-#bjaguuzpkb .gt_super {
+#oexqwrmnuu .gt_super {
   font-size: 65%;
 }
 
-#bjaguuzpkb .gt_footnote_marks {
+#oexqwrmnuu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bjaguuzpkb .gt_asterisk {
+#oexqwrmnuu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bjaguuzpkb .gt_indent_1 {
+#oexqwrmnuu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bjaguuzpkb .gt_indent_2 {
+#oexqwrmnuu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bjaguuzpkb .gt_indent_3 {
+#oexqwrmnuu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bjaguuzpkb .gt_indent_4 {
+#oexqwrmnuu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bjaguuzpkb .gt_indent_5 {
+#oexqwrmnuu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2353,23 +2471,23 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
 </div>
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<div id="mqbjyealvw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mqbjyealvw table {
+<div id="pgsgzeqkre" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pgsgzeqkre table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mqbjyealvw thead, #mqbjyealvw tbody, #mqbjyealvw tfoot, #mqbjyealvw tr, #mqbjyealvw td, #mqbjyealvw th {
+#pgsgzeqkre thead, #pgsgzeqkre tbody, #pgsgzeqkre tfoot, #pgsgzeqkre tr, #pgsgzeqkre td, #pgsgzeqkre th {
   border-style: none;
 }
 
-#mqbjyealvw p {
+#pgsgzeqkre p {
   margin: 0;
   padding: 0;
 }
 
-#mqbjyealvw .gt_table {
+#pgsgzeqkre .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2395,12 +2513,12 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-left-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_caption {
+#pgsgzeqkre .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mqbjyealvw .gt_title {
+#pgsgzeqkre .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2412,7 +2530,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-bottom-width: 0;
 }
 
-#mqbjyealvw .gt_subtitle {
+#pgsgzeqkre .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2424,7 +2542,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-top-width: 0;
 }
 
-#mqbjyealvw .gt_heading {
+#pgsgzeqkre .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2436,13 +2554,13 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-right-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_bottom_border {
+#pgsgzeqkre .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_col_headings {
+#pgsgzeqkre .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2457,7 +2575,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-right-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_col_heading {
+#pgsgzeqkre .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2477,7 +2595,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   overflow-x: hidden;
 }
 
-#mqbjyealvw .gt_column_spanner_outer {
+#pgsgzeqkre .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2489,15 +2607,15 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   padding-right: 4px;
 }
 
-#mqbjyealvw .gt_column_spanner_outer:first-child {
+#pgsgzeqkre .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mqbjyealvw .gt_column_spanner_outer:last-child {
+#pgsgzeqkre .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mqbjyealvw .gt_column_spanner {
+#pgsgzeqkre .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2509,11 +2627,11 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   width: 100%;
 }
 
-#mqbjyealvw .gt_spanner_row {
+#pgsgzeqkre .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mqbjyealvw .gt_group_heading {
+#pgsgzeqkre .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2539,7 +2657,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   text-align: left;
 }
 
-#mqbjyealvw .gt_empty_group_heading {
+#pgsgzeqkre .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2554,15 +2672,15 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   vertical-align: middle;
 }
 
-#mqbjyealvw .gt_from_md > :first-child {
+#pgsgzeqkre .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mqbjyealvw .gt_from_md > :last-child {
+#pgsgzeqkre .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mqbjyealvw .gt_row {
+#pgsgzeqkre .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2581,7 +2699,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   overflow-x: hidden;
 }
 
-#mqbjyealvw .gt_stub {
+#pgsgzeqkre .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2594,7 +2712,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   padding-right: 5px;
 }
 
-#mqbjyealvw .gt_stub_row_group {
+#pgsgzeqkre .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2608,15 +2726,15 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   vertical-align: top;
 }
 
-#mqbjyealvw .gt_row_group_first td {
+#pgsgzeqkre .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mqbjyealvw .gt_row_group_first th {
+#pgsgzeqkre .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mqbjyealvw .gt_summary_row {
+#pgsgzeqkre .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2626,16 +2744,16 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   padding-right: 5px;
 }
 
-#mqbjyealvw .gt_first_summary_row {
+#pgsgzeqkre .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_first_summary_row.thick {
+#pgsgzeqkre .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mqbjyealvw .gt_last_summary_row {
+#pgsgzeqkre .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2645,7 +2763,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-bottom-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_grand_summary_row {
+#pgsgzeqkre .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2655,7 +2773,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   padding-right: 5px;
 }
 
-#mqbjyealvw .gt_first_grand_summary_row {
+#pgsgzeqkre .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2665,7 +2783,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-top-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_last_grand_summary_row_top {
+#pgsgzeqkre .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2675,11 +2793,11 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-bottom-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_striped {
+#pgsgzeqkre .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mqbjyealvw .gt_table_body {
+#pgsgzeqkre .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2688,7 +2806,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-bottom-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_footnotes {
+#pgsgzeqkre .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2702,7 +2820,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-right-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_footnote {
+#pgsgzeqkre .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2711,7 +2829,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   padding-right: 5px;
 }
 
-#mqbjyealvw .gt_sourcenotes {
+#pgsgzeqkre .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2725,7 +2843,7 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   border-right-color: #D3D3D3;
 }
 
-#mqbjyealvw .gt_sourcenote {
+#pgsgzeqkre .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2733,63 +2851,63 @@ NEVER TOO SMALL: Contemporary Attic Conversion for Family of Three, Amsterdam 60
   padding-right: 5px;
 }
 
-#mqbjyealvw .gt_left {
+#pgsgzeqkre .gt_left {
   text-align: left;
 }
 
-#mqbjyealvw .gt_center {
+#pgsgzeqkre .gt_center {
   text-align: center;
 }
 
-#mqbjyealvw .gt_right {
+#pgsgzeqkre .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mqbjyealvw .gt_font_normal {
+#pgsgzeqkre .gt_font_normal {
   font-weight: normal;
 }
 
-#mqbjyealvw .gt_font_bold {
+#pgsgzeqkre .gt_font_bold {
   font-weight: bold;
 }
 
-#mqbjyealvw .gt_font_italic {
+#pgsgzeqkre .gt_font_italic {
   font-style: italic;
 }
 
-#mqbjyealvw .gt_super {
+#pgsgzeqkre .gt_super {
   font-size: 65%;
 }
 
-#mqbjyealvw .gt_footnote_marks {
+#pgsgzeqkre .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mqbjyealvw .gt_asterisk {
+#pgsgzeqkre .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mqbjyealvw .gt_indent_1 {
+#pgsgzeqkre .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mqbjyealvw .gt_indent_2 {
+#pgsgzeqkre .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mqbjyealvw .gt_indent_3 {
+#pgsgzeqkre .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mqbjyealvw .gt_indent_4 {
+#pgsgzeqkre .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mqbjyealvw .gt_indent_5 {
+#pgsgzeqkre .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2888,23 +3006,23 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
 </div>
 </div>
 <div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
-<div id="fieazykodw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fieazykodw table {
+<div id="lhkdozamll" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lhkdozamll table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fieazykodw thead, #fieazykodw tbody, #fieazykodw tfoot, #fieazykodw tr, #fieazykodw td, #fieazykodw th {
+#lhkdozamll thead, #lhkdozamll tbody, #lhkdozamll tfoot, #lhkdozamll tr, #lhkdozamll td, #lhkdozamll th {
   border-style: none;
 }
 
-#fieazykodw p {
+#lhkdozamll p {
   margin: 0;
   padding: 0;
 }
 
-#fieazykodw .gt_table {
+#lhkdozamll .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2930,12 +3048,12 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-left-color: #D3D3D3;
 }
 
-#fieazykodw .gt_caption {
+#lhkdozamll .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fieazykodw .gt_title {
+#lhkdozamll .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2947,7 +3065,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-bottom-width: 0;
 }
 
-#fieazykodw .gt_subtitle {
+#lhkdozamll .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2959,7 +3077,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-top-width: 0;
 }
 
-#fieazykodw .gt_heading {
+#lhkdozamll .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2971,13 +3089,13 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-right-color: #D3D3D3;
 }
 
-#fieazykodw .gt_bottom_border {
+#lhkdozamll .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fieazykodw .gt_col_headings {
+#lhkdozamll .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2992,7 +3110,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-right-color: #D3D3D3;
 }
 
-#fieazykodw .gt_col_heading {
+#lhkdozamll .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3012,7 +3130,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   overflow-x: hidden;
 }
 
-#fieazykodw .gt_column_spanner_outer {
+#lhkdozamll .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3024,15 +3142,15 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   padding-right: 4px;
 }
 
-#fieazykodw .gt_column_spanner_outer:first-child {
+#lhkdozamll .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fieazykodw .gt_column_spanner_outer:last-child {
+#lhkdozamll .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fieazykodw .gt_column_spanner {
+#lhkdozamll .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3044,11 +3162,11 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   width: 100%;
 }
 
-#fieazykodw .gt_spanner_row {
+#lhkdozamll .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fieazykodw .gt_group_heading {
+#lhkdozamll .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3074,7 +3192,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   text-align: left;
 }
 
-#fieazykodw .gt_empty_group_heading {
+#lhkdozamll .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3089,15 +3207,15 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   vertical-align: middle;
 }
 
-#fieazykodw .gt_from_md > :first-child {
+#lhkdozamll .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fieazykodw .gt_from_md > :last-child {
+#lhkdozamll .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fieazykodw .gt_row {
+#lhkdozamll .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3116,7 +3234,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   overflow-x: hidden;
 }
 
-#fieazykodw .gt_stub {
+#lhkdozamll .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3129,7 +3247,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   padding-right: 5px;
 }
 
-#fieazykodw .gt_stub_row_group {
+#lhkdozamll .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3143,15 +3261,15 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   vertical-align: top;
 }
 
-#fieazykodw .gt_row_group_first td {
+#lhkdozamll .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fieazykodw .gt_row_group_first th {
+#lhkdozamll .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fieazykodw .gt_summary_row {
+#lhkdozamll .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3161,16 +3279,16 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   padding-right: 5px;
 }
 
-#fieazykodw .gt_first_summary_row {
+#lhkdozamll .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fieazykodw .gt_first_summary_row.thick {
+#lhkdozamll .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fieazykodw .gt_last_summary_row {
+#lhkdozamll .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3180,7 +3298,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-bottom-color: #D3D3D3;
 }
 
-#fieazykodw .gt_grand_summary_row {
+#lhkdozamll .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3190,7 +3308,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   padding-right: 5px;
 }
 
-#fieazykodw .gt_first_grand_summary_row {
+#lhkdozamll .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3200,7 +3318,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-top-color: #D3D3D3;
 }
 
-#fieazykodw .gt_last_grand_summary_row_top {
+#lhkdozamll .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3210,11 +3328,11 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-bottom-color: #D3D3D3;
 }
 
-#fieazykodw .gt_striped {
+#lhkdozamll .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fieazykodw .gt_table_body {
+#lhkdozamll .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3223,7 +3341,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-bottom-color: #D3D3D3;
 }
 
-#fieazykodw .gt_footnotes {
+#lhkdozamll .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3237,7 +3355,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-right-color: #D3D3D3;
 }
 
-#fieazykodw .gt_footnote {
+#lhkdozamll .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3246,7 +3364,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   padding-right: 5px;
 }
 
-#fieazykodw .gt_sourcenotes {
+#lhkdozamll .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3260,7 +3378,7 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   border-right-color: #D3D3D3;
 }
 
-#fieazykodw .gt_sourcenote {
+#lhkdozamll .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3268,63 +3386,63 @@ NEVER TOO SMALL: Architect’s 19th Century Apartment Restoration, Barcelona - 6
   padding-right: 5px;
 }
 
-#fieazykodw .gt_left {
+#lhkdozamll .gt_left {
   text-align: left;
 }
 
-#fieazykodw .gt_center {
+#lhkdozamll .gt_center {
   text-align: center;
 }
 
-#fieazykodw .gt_right {
+#lhkdozamll .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fieazykodw .gt_font_normal {
+#lhkdozamll .gt_font_normal {
   font-weight: normal;
 }
 
-#fieazykodw .gt_font_bold {
+#lhkdozamll .gt_font_bold {
   font-weight: bold;
 }
 
-#fieazykodw .gt_font_italic {
+#lhkdozamll .gt_font_italic {
   font-style: italic;
 }
 
-#fieazykodw .gt_super {
+#lhkdozamll .gt_super {
   font-size: 65%;
 }
 
-#fieazykodw .gt_footnote_marks {
+#lhkdozamll .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fieazykodw .gt_asterisk {
+#lhkdozamll .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fieazykodw .gt_indent_1 {
+#lhkdozamll .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fieazykodw .gt_indent_2 {
+#lhkdozamll .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fieazykodw .gt_indent_3 {
+#lhkdozamll .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fieazykodw .gt_indent_4 {
+#lhkdozamll .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fieazykodw .gt_indent_5 {
+#lhkdozamll .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3431,23 +3549,23 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
 </div>
 </div>
 <div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
-<div id="qcfojtfliz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qcfojtfliz table {
+<div id="thfqgvkfuq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#thfqgvkfuq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qcfojtfliz thead, #qcfojtfliz tbody, #qcfojtfliz tfoot, #qcfojtfliz tr, #qcfojtfliz td, #qcfojtfliz th {
+#thfqgvkfuq thead, #thfqgvkfuq tbody, #thfqgvkfuq tfoot, #thfqgvkfuq tr, #thfqgvkfuq td, #thfqgvkfuq th {
   border-style: none;
 }
 
-#qcfojtfliz p {
+#thfqgvkfuq p {
   margin: 0;
   padding: 0;
 }
 
-#qcfojtfliz .gt_table {
+#thfqgvkfuq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3473,12 +3591,12 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-left-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_caption {
+#thfqgvkfuq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qcfojtfliz .gt_title {
+#thfqgvkfuq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3490,7 +3608,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-bottom-width: 0;
 }
 
-#qcfojtfliz .gt_subtitle {
+#thfqgvkfuq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3502,7 +3620,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-top-width: 0;
 }
 
-#qcfojtfliz .gt_heading {
+#thfqgvkfuq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3514,13 +3632,13 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-right-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_bottom_border {
+#thfqgvkfuq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_col_headings {
+#thfqgvkfuq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3535,7 +3653,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-right-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_col_heading {
+#thfqgvkfuq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3555,7 +3673,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   overflow-x: hidden;
 }
 
-#qcfojtfliz .gt_column_spanner_outer {
+#thfqgvkfuq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3567,15 +3685,15 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   padding-right: 4px;
 }
 
-#qcfojtfliz .gt_column_spanner_outer:first-child {
+#thfqgvkfuq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qcfojtfliz .gt_column_spanner_outer:last-child {
+#thfqgvkfuq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qcfojtfliz .gt_column_spanner {
+#thfqgvkfuq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3587,11 +3705,11 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   width: 100%;
 }
 
-#qcfojtfliz .gt_spanner_row {
+#thfqgvkfuq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qcfojtfliz .gt_group_heading {
+#thfqgvkfuq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3617,7 +3735,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   text-align: left;
 }
 
-#qcfojtfliz .gt_empty_group_heading {
+#thfqgvkfuq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3632,15 +3750,15 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   vertical-align: middle;
 }
 
-#qcfojtfliz .gt_from_md > :first-child {
+#thfqgvkfuq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qcfojtfliz .gt_from_md > :last-child {
+#thfqgvkfuq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qcfojtfliz .gt_row {
+#thfqgvkfuq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3659,7 +3777,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   overflow-x: hidden;
 }
 
-#qcfojtfliz .gt_stub {
+#thfqgvkfuq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3672,7 +3790,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   padding-right: 5px;
 }
 
-#qcfojtfliz .gt_stub_row_group {
+#thfqgvkfuq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3686,15 +3804,15 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   vertical-align: top;
 }
 
-#qcfojtfliz .gt_row_group_first td {
+#thfqgvkfuq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qcfojtfliz .gt_row_group_first th {
+#thfqgvkfuq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qcfojtfliz .gt_summary_row {
+#thfqgvkfuq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3704,16 +3822,16 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   padding-right: 5px;
 }
 
-#qcfojtfliz .gt_first_summary_row {
+#thfqgvkfuq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_first_summary_row.thick {
+#thfqgvkfuq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qcfojtfliz .gt_last_summary_row {
+#thfqgvkfuq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3723,7 +3841,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-bottom-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_grand_summary_row {
+#thfqgvkfuq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3733,7 +3851,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   padding-right: 5px;
 }
 
-#qcfojtfliz .gt_first_grand_summary_row {
+#thfqgvkfuq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3743,7 +3861,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-top-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_last_grand_summary_row_top {
+#thfqgvkfuq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3753,11 +3871,11 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-bottom-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_striped {
+#thfqgvkfuq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qcfojtfliz .gt_table_body {
+#thfqgvkfuq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3766,7 +3884,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-bottom-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_footnotes {
+#thfqgvkfuq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3780,7 +3898,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-right-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_footnote {
+#thfqgvkfuq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3789,7 +3907,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   padding-right: 5px;
 }
 
-#qcfojtfliz .gt_sourcenotes {
+#thfqgvkfuq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3803,7 +3921,7 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   border-right-color: #D3D3D3;
 }
 
-#qcfojtfliz .gt_sourcenote {
+#thfqgvkfuq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3811,63 +3929,63 @@ NEVER TOO SMALL: Japanese Architect’s Industrial Style Studio, Tokyo 48sqm/516
   padding-right: 5px;
 }
 
-#qcfojtfliz .gt_left {
+#thfqgvkfuq .gt_left {
   text-align: left;
 }
 
-#qcfojtfliz .gt_center {
+#thfqgvkfuq .gt_center {
   text-align: center;
 }
 
-#qcfojtfliz .gt_right {
+#thfqgvkfuq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qcfojtfliz .gt_font_normal {
+#thfqgvkfuq .gt_font_normal {
   font-weight: normal;
 }
 
-#qcfojtfliz .gt_font_bold {
+#thfqgvkfuq .gt_font_bold {
   font-weight: bold;
 }
 
-#qcfojtfliz .gt_font_italic {
+#thfqgvkfuq .gt_font_italic {
   font-style: italic;
 }
 
-#qcfojtfliz .gt_super {
+#thfqgvkfuq .gt_super {
   font-size: 65%;
 }
 
-#qcfojtfliz .gt_footnote_marks {
+#thfqgvkfuq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qcfojtfliz .gt_asterisk {
+#thfqgvkfuq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qcfojtfliz .gt_indent_1 {
+#thfqgvkfuq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qcfojtfliz .gt_indent_2 {
+#thfqgvkfuq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qcfojtfliz .gt_indent_3 {
+#thfqgvkfuq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qcfojtfliz .gt_indent_4 {
+#thfqgvkfuq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qcfojtfliz .gt_indent_5 {
+#thfqgvkfuq .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3998,23 +4116,23 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
 </div>
 </div>
 <div id="tabset-1-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-7-tab">
-<div id="ngujnlvgyf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ngujnlvgyf table {
+<div id="kswnrjbpkb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kswnrjbpkb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ngujnlvgyf thead, #ngujnlvgyf tbody, #ngujnlvgyf tfoot, #ngujnlvgyf tr, #ngujnlvgyf td, #ngujnlvgyf th {
+#kswnrjbpkb thead, #kswnrjbpkb tbody, #kswnrjbpkb tfoot, #kswnrjbpkb tr, #kswnrjbpkb td, #kswnrjbpkb th {
   border-style: none;
 }
 
-#ngujnlvgyf p {
+#kswnrjbpkb p {
   margin: 0;
   padding: 0;
 }
 
-#ngujnlvgyf .gt_table {
+#kswnrjbpkb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4040,12 +4158,12 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-left-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_caption {
+#kswnrjbpkb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ngujnlvgyf .gt_title {
+#kswnrjbpkb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4057,7 +4175,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-bottom-width: 0;
 }
 
-#ngujnlvgyf .gt_subtitle {
+#kswnrjbpkb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4069,7 +4187,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-top-width: 0;
 }
 
-#ngujnlvgyf .gt_heading {
+#kswnrjbpkb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4081,13 +4199,13 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-right-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_bottom_border {
+#kswnrjbpkb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_col_headings {
+#kswnrjbpkb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4102,7 +4220,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-right-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_col_heading {
+#kswnrjbpkb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4122,7 +4240,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   overflow-x: hidden;
 }
 
-#ngujnlvgyf .gt_column_spanner_outer {
+#kswnrjbpkb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4134,15 +4252,15 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   padding-right: 4px;
 }
 
-#ngujnlvgyf .gt_column_spanner_outer:first-child {
+#kswnrjbpkb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ngujnlvgyf .gt_column_spanner_outer:last-child {
+#kswnrjbpkb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ngujnlvgyf .gt_column_spanner {
+#kswnrjbpkb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4154,11 +4272,11 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   width: 100%;
 }
 
-#ngujnlvgyf .gt_spanner_row {
+#kswnrjbpkb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ngujnlvgyf .gt_group_heading {
+#kswnrjbpkb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4184,7 +4302,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   text-align: left;
 }
 
-#ngujnlvgyf .gt_empty_group_heading {
+#kswnrjbpkb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4199,15 +4317,15 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   vertical-align: middle;
 }
 
-#ngujnlvgyf .gt_from_md > :first-child {
+#kswnrjbpkb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ngujnlvgyf .gt_from_md > :last-child {
+#kswnrjbpkb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ngujnlvgyf .gt_row {
+#kswnrjbpkb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4226,7 +4344,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   overflow-x: hidden;
 }
 
-#ngujnlvgyf .gt_stub {
+#kswnrjbpkb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4239,7 +4357,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   padding-right: 5px;
 }
 
-#ngujnlvgyf .gt_stub_row_group {
+#kswnrjbpkb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4253,15 +4371,15 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   vertical-align: top;
 }
 
-#ngujnlvgyf .gt_row_group_first td {
+#kswnrjbpkb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ngujnlvgyf .gt_row_group_first th {
+#kswnrjbpkb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ngujnlvgyf .gt_summary_row {
+#kswnrjbpkb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4271,16 +4389,16 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   padding-right: 5px;
 }
 
-#ngujnlvgyf .gt_first_summary_row {
+#kswnrjbpkb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_first_summary_row.thick {
+#kswnrjbpkb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ngujnlvgyf .gt_last_summary_row {
+#kswnrjbpkb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4290,7 +4408,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-bottom-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_grand_summary_row {
+#kswnrjbpkb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4300,7 +4418,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   padding-right: 5px;
 }
 
-#ngujnlvgyf .gt_first_grand_summary_row {
+#kswnrjbpkb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4310,7 +4428,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-top-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_last_grand_summary_row_top {
+#kswnrjbpkb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4320,11 +4438,11 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-bottom-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_striped {
+#kswnrjbpkb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ngujnlvgyf .gt_table_body {
+#kswnrjbpkb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4333,7 +4451,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-bottom-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_footnotes {
+#kswnrjbpkb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4347,7 +4465,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-right-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_footnote {
+#kswnrjbpkb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4356,7 +4474,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   padding-right: 5px;
 }
 
-#ngujnlvgyf .gt_sourcenotes {
+#kswnrjbpkb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4370,7 +4488,7 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   border-right-color: #D3D3D3;
 }
 
-#ngujnlvgyf .gt_sourcenote {
+#kswnrjbpkb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4378,63 +4496,63 @@ NEVER TOO SMALL: Flexible Family Apartment, Singapore 58sqm/624sqft
   padding-right: 5px;
 }
 
-#ngujnlvgyf .gt_left {
+#kswnrjbpkb .gt_left {
   text-align: left;
 }
 
-#ngujnlvgyf .gt_center {
+#kswnrjbpkb .gt_center {
   text-align: center;
 }
 
-#ngujnlvgyf .gt_right {
+#kswnrjbpkb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ngujnlvgyf .gt_font_normal {
+#kswnrjbpkb .gt_font_normal {
   font-weight: normal;
 }
 
-#ngujnlvgyf .gt_font_bold {
+#kswnrjbpkb .gt_font_bold {
   font-weight: bold;
 }
 
-#ngujnlvgyf .gt_font_italic {
+#kswnrjbpkb .gt_font_italic {
   font-style: italic;
 }
 
-#ngujnlvgyf .gt_super {
+#kswnrjbpkb .gt_super {
   font-size: 65%;
 }
 
-#ngujnlvgyf .gt_footnote_marks {
+#kswnrjbpkb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ngujnlvgyf .gt_asterisk {
+#kswnrjbpkb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ngujnlvgyf .gt_indent_1 {
+#kswnrjbpkb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ngujnlvgyf .gt_indent_2 {
+#kswnrjbpkb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ngujnlvgyf .gt_indent_3 {
+#kswnrjbpkb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ngujnlvgyf .gt_indent_4 {
+#kswnrjbpkb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ngujnlvgyf .gt_indent_5 {
+#kswnrjbpkb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -4629,23 +4747,23 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
 </div>
 </div>
 <div id="tabset-1-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-8-tab">
-<div id="nruvrwzaly" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nruvrwzaly table {
+<div id="gjtpvscghj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gjtpvscghj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nruvrwzaly thead, #nruvrwzaly tbody, #nruvrwzaly tfoot, #nruvrwzaly tr, #nruvrwzaly td, #nruvrwzaly th {
+#gjtpvscghj thead, #gjtpvscghj tbody, #gjtpvscghj tfoot, #gjtpvscghj tr, #gjtpvscghj td, #gjtpvscghj th {
   border-style: none;
 }
 
-#nruvrwzaly p {
+#gjtpvscghj p {
   margin: 0;
   padding: 0;
 }
 
-#nruvrwzaly .gt_table {
+#gjtpvscghj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4671,12 +4789,12 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-left-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_caption {
+#gjtpvscghj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nruvrwzaly .gt_title {
+#gjtpvscghj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4688,7 +4806,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-bottom-width: 0;
 }
 
-#nruvrwzaly .gt_subtitle {
+#gjtpvscghj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4700,7 +4818,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-top-width: 0;
 }
 
-#nruvrwzaly .gt_heading {
+#gjtpvscghj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4712,13 +4830,13 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-right-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_bottom_border {
+#gjtpvscghj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_col_headings {
+#gjtpvscghj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4733,7 +4851,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-right-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_col_heading {
+#gjtpvscghj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4753,7 +4871,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   overflow-x: hidden;
 }
 
-#nruvrwzaly .gt_column_spanner_outer {
+#gjtpvscghj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4765,15 +4883,15 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   padding-right: 4px;
 }
 
-#nruvrwzaly .gt_column_spanner_outer:first-child {
+#gjtpvscghj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nruvrwzaly .gt_column_spanner_outer:last-child {
+#gjtpvscghj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nruvrwzaly .gt_column_spanner {
+#gjtpvscghj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4785,11 +4903,11 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   width: 100%;
 }
 
-#nruvrwzaly .gt_spanner_row {
+#gjtpvscghj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nruvrwzaly .gt_group_heading {
+#gjtpvscghj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4815,7 +4933,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   text-align: left;
 }
 
-#nruvrwzaly .gt_empty_group_heading {
+#gjtpvscghj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4830,15 +4948,15 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   vertical-align: middle;
 }
 
-#nruvrwzaly .gt_from_md > :first-child {
+#gjtpvscghj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nruvrwzaly .gt_from_md > :last-child {
+#gjtpvscghj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nruvrwzaly .gt_row {
+#gjtpvscghj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4857,7 +4975,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   overflow-x: hidden;
 }
 
-#nruvrwzaly .gt_stub {
+#gjtpvscghj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4870,7 +4988,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   padding-right: 5px;
 }
 
-#nruvrwzaly .gt_stub_row_group {
+#gjtpvscghj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4884,15 +5002,15 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   vertical-align: top;
 }
 
-#nruvrwzaly .gt_row_group_first td {
+#gjtpvscghj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nruvrwzaly .gt_row_group_first th {
+#gjtpvscghj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nruvrwzaly .gt_summary_row {
+#gjtpvscghj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4902,16 +5020,16 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   padding-right: 5px;
 }
 
-#nruvrwzaly .gt_first_summary_row {
+#gjtpvscghj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_first_summary_row.thick {
+#gjtpvscghj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nruvrwzaly .gt_last_summary_row {
+#gjtpvscghj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4921,7 +5039,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-bottom-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_grand_summary_row {
+#gjtpvscghj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4931,7 +5049,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   padding-right: 5px;
 }
 
-#nruvrwzaly .gt_first_grand_summary_row {
+#gjtpvscghj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4941,7 +5059,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-top-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_last_grand_summary_row_top {
+#gjtpvscghj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4951,11 +5069,11 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-bottom-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_striped {
+#gjtpvscghj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nruvrwzaly .gt_table_body {
+#gjtpvscghj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4964,7 +5082,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-bottom-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_footnotes {
+#gjtpvscghj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4978,7 +5096,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-right-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_footnote {
+#gjtpvscghj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4987,7 +5105,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   padding-right: 5px;
 }
 
-#nruvrwzaly .gt_sourcenotes {
+#gjtpvscghj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5001,7 +5119,7 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   border-right-color: #D3D3D3;
 }
 
-#nruvrwzaly .gt_sourcenote {
+#gjtpvscghj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5009,63 +5127,63 @@ NEVER TOO SMALL: 3 in 1 Artist’s Home, Studio and Gallery, Lisbon 50sqm/538sqf
   padding-right: 5px;
 }
 
-#nruvrwzaly .gt_left {
+#gjtpvscghj .gt_left {
   text-align: left;
 }
 
-#nruvrwzaly .gt_center {
+#gjtpvscghj .gt_center {
   text-align: center;
 }
 
-#nruvrwzaly .gt_right {
+#gjtpvscghj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nruvrwzaly .gt_font_normal {
+#gjtpvscghj .gt_font_normal {
   font-weight: normal;
 }
 
-#nruvrwzaly .gt_font_bold {
+#gjtpvscghj .gt_font_bold {
   font-weight: bold;
 }
 
-#nruvrwzaly .gt_font_italic {
+#gjtpvscghj .gt_font_italic {
   font-style: italic;
 }
 
-#nruvrwzaly .gt_super {
+#gjtpvscghj .gt_super {
   font-size: 65%;
 }
 
-#nruvrwzaly .gt_footnote_marks {
+#gjtpvscghj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nruvrwzaly .gt_asterisk {
+#gjtpvscghj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nruvrwzaly .gt_indent_1 {
+#gjtpvscghj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nruvrwzaly .gt_indent_2 {
+#gjtpvscghj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nruvrwzaly .gt_indent_3 {
+#gjtpvscghj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nruvrwzaly .gt_indent_4 {
+#gjtpvscghj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nruvrwzaly .gt_indent_5 {
+#gjtpvscghj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
