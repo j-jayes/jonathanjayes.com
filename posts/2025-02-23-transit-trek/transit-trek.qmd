@@ -97,7 +97,7 @@ Here is an example of the JSON output for Heathrow Airport in London:
 
 ## Building the Transit Trek App
 
-Once I had the data, I asked the o3-mini-high model to create a Streamlit app to display it interactively. I think it did a decent job; the app is now live and available for anyone to explore at [transit-trek.streamlit.app](https://transit-trek.streamlit.app/).
+Once I had the data, I asked the o3-mini-high model to create a Streamlit app to display it interactively. I think it did a decent job; the app is now live and available for anyone to explore at [transit-trek.streamlit.app](https://transit-trek.streamlit.app/). You have a look at the Streamlit code [here](https://github.com/j-jayes/TransitTrek/tree/main).
 
 ![This is what the landing page of the Transit Trek app looks like](assets/01.png)
 
