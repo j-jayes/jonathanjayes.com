@@ -62,3 +62,11 @@ execute:
   warning: false
   message: false
   freeze: true
+
+# react:
+#   resources: "posts/2025-02-27-react-production-functions/_resources"
+#   components: "posts/2025-02-27-react-production-functions/_components"
+
+react:
+  resources: "_components"
+  components: "_components"
