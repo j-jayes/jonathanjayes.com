@@ -1,0 +1,15 @@
+{
+  "hash": "71100701424c82ac74f58228b1062930",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Non-tariff barriers\"\nauthor: \"Jonathan Jayes\"\ndate: \"03-10-2025\"\nformat: \n    html:\n        code-fold: true\n        code-block-border-left: \"#31BAE9\"\n        code-overflow: wrap\nexecute:\n    eval: false\n    warning: false\n    message: false\ndraft: true\nknitr:\n  opts_chunk:\n    comment: ''\ninclude-in-header:\n  - text: |\n      <style>\n      .cell-output-stdout code {\n        word-break: break-wor !important;\n        white-space: pre-wrap !important;\n      }\n      </style>\n---\n\n\n\n\n\n\n## Purpose\n\nI don't have to tell you that there has been a great deal of chat about tariffs in the news!\n\nI am making this post to collect some of the great resources that I have found on the topic of tariffs and non-tariff barriers.\n\nI'm a big supporter of free trade and I think that tariffs are a bad idea. But I also think that it is important to understand the arguments on both sides of the debate.\n\nYou can keep up to date on the latest news on tariffs in the USA by visiting this great page from Chad Bown at the Peterson Institute for International Economics: [Trump's trade war timeline 2.0](https://www.piie.com/blogs/realtime-economics/2025/trumps-trade-war-timeline-20-date-guide)\n\n\nCustoms and other import duties (% of tax revenue) data sourced from [World Bank](https://data.worldbank.org/indicator/GC.TAX.IMPT.ZS)\nTax revenue as a percentage of GDP data sourced from [World Bank](https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS)\nGDP per capita data sourced from [World Bank](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.CD)\nPopulation from [World Bank](https://data.worldbank.org/indicator/SP.POP.TOTL)\n\n\n\n\n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
