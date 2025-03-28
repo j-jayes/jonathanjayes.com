@@ -1,6 +1,7 @@
 ---
 title: "HISCO lookup"
 author: "Jonathan Jayes"
+image: preview.jpeg
 date: "03-28-2025"
 format: 
     html:
@@ -31,7 +32,7 @@ This is a post for me to come back to as a refrence. I always need to look up HI
 
 ## Overview of HISCO
 
-The Historical International Standard Classification of Occupations (HISCO) is a standardized system developed to classify and compare historical occupations across different countries and time periods. It is based on the International Standard Classification of Occupations (ISCO) from 1968 and has been adapted for historical research purposes. HISCO provides a common framework that enables researchers to analyze social structures, economic development, and labor market changes over time. citeturn0search0
+The Historical International Standard Classification of Occupations (HISCO) is a standardized system developed to classify and compare historical occupations across different countries and time periods. It is based on the International Standard Classification of Occupations (ISCO) from 1968 and has been adapted for historical research purposes. HISCO provides a common framework that enables researchers to analyze social structures, economic development, and labor market changes over time.
 
 ## Structure of HISCO
 
@@ -42,7 +43,7 @@ HISCO employs a hierarchical coding system consisting of five digits:
 - **Unit Groups:** The third digit further refines the occupation category.
 - **Headings:** The fourth and fifth digits provide detailed occupational titles.
 
-This structure allows for detailed classification and analysis of occupations. citeturn0search2
+This structure allows for detailed classification and analysis of occupations.
 
 
 ### HISCO Major Groups
@@ -128,21 +129,20 @@ df %>%
 
 HISCO serves as a foundation for other classification systems that analyze historical social stratification:
 
-- **HISCLASS:** An occupational stratification scale that classifies occupations into social classes based on HISCO codes, facilitating international comparisons across different periods, countries, and languages. citeturn0search1
+- **HISCLASS:** An occupational stratification scale that classifies occupations into social classes based on HISCO codes, facilitating international comparisons across different periods, countries, and languages.
 
-- **HISCAM:** A social status scale derived from HISCO, developed to analyze social stratification and inequality in historical contexts. citeturn0search13
-
+- **HISCAM:** A social status scale derived from HISCO, developed to analyze social stratification and inequality in historical contexts.
 These systems provide additional tools for researchers studying historical social structures and mobility.
 
 ## Resources and Tools
 
 For further exploration and practical application of HISCO, consider the following resources:
 
-- **HISCO Database:** Hosted by the International Institute of Social History (IISH), this database offers access to occupational titles and their corresponding HISCO codes. citeturn0search0
+- **HISCO Database:** [This database](https://druid.datalegend.net/HistoryOfWork/historyOfWork-all-latest) offers access to occupational titles and their corresponding HISCO codes, as well as CSV downloads.
 
-- **R Package for HISCO Classification:** An R package developed for classifying HISCO codes into social class systems such as HISCLASS, HISCLASS 5, SOCPO, and Universal HISCAM. This tool aids researchers in analyzing historical occupational data. citeturn0search3
+- **R Package for HISCO Classification:** An [R package](https://github.com/cedarfoundation/hisco) developed for classifying HISCO codes into social class systems such as HISCLASS, HISCLASS 5, SOCPO, and Universal HISCAM. This tool aids researchers in analyzing historical occupational data. 
 
-By integrating these resources, you can enhance your research and understanding of historical occupations and their classifications.
+- **Machine Learning Based Classifier** [This GitHub repo](https://github.com/christianvedels/OccCANINE) hosts "a tool designed to transform occupational descriptions into standardized HISCO (Historical International Standard Classification of Occupations) codes automatically. Developed by Christian Møller Dahl, Torben Johansen and Christian Vedel from the University of Southern Denmark, this tool leverages the power of a finetuned language model to process and classify occupational descriptions with high accuracy, precision, and recall."
 
 ## Conclusion
 
