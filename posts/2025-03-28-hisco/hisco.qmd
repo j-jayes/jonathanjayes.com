@@ -1,0 +1,149 @@
+---
+title: "HISCO lookup"
+author: "Jonathan Jayes"
+date: "03-28-2025"
+format: 
+    html:
+        code-fold: true
+        code-block-border-left: "#31BAE9"
+        code-overflow: wrap
+execute:
+    warning: false
+    message: false
+knitr:
+  opts_chunk:
+    comment: ''
+include-in-header:
+  - text: |
+      <style>
+      .cell-output-stdout code {
+        word-break: break-wor !important;
+        white-space: pre-wrap !important;
+      }
+      </style>
+---
+
+
+## Purpose
+
+This is a post for me to come back to as a refrence. I always need to look up HISCO groups, and I have scraped and stored this information in [this github repo](https://github.com/j-jayes/HISCO) but it would be nice to have it in a table to qukickly look up.
+
+
+## Overview of HISCO
+
+The Historical International Standard Classification of Occupations (HISCO) is a standardized system developed to classify and compare historical occupations across different countries and time periods. It is based on the International Standard Classification of Occupations (ISCO) from 1968 and has been adapted for historical research purposes. HISCO provides a common framework that enables researchers to analyze social structures, economic development, and labor market changes over time. citeturn0search0
+
+## Structure of HISCO
+
+HISCO employs a hierarchical coding system consisting of five digits:
+
+- **Major Groups:** The first digit represents broad occupational categories.
+- **Minor Groups:** The second digit specifies subgroups within the major group.
+- **Unit Groups:** The third digit further refines the occupation category.
+- **Headings:** The fourth and fifth digits provide detailed occupational titles.
+
+This structure allows for detailed classification and analysis of occupations. citeturn0search2
+
+
+### HISCO Major Groups
+
+
+```{r}
+library(tidyverse)
+library(gt)
+
+hisco_data <- tibble(
+    code = c("0", "2", "3", "4", "5", "6", "7"),
+    title = c(
+        "Majorgroup 0/1 Professional, technical and related workers",
+        "Majorgroup 2 Administrative and managerial workers",
+        "Majorgroup 3 Clerical and related workers",
+        "Majorgroup 4 Sales workers",
+        "Majorgroup 5 Service workers",
+        "Majorgroup 6 Agricultural, animal husbandry and forestry workers, fishermen and hunters",
+        "Majorgroup 7-8-9 Production and related workers, transport equipment operators and labourers"
+    ),
+    description = c(
+        "Workers in this major group conduct research and apply scientific knowledge to the solution of a variety of technological, economic, social and industrial problems and perform other professional, technical, artistic and related functions in such fields as the physical and natural sciences, engineering, law, medicine, religion, education, literature, art, entertainment and sport.",
+        "Workers in this major group conduct research and apply scientific knowledge to the solution of a variety of technological, economic, social and industrial problems and perform other professional, technical, artistic and related functions in such fields as the physical and natural sciences, engineering, law, medicine, religion, education, literature, art, entertainment and sport.",
+        "Workers in this major group put into effect laws, rules and regulations made by central, state, provincial or local governments; supervise clerical and related work, transport and communications service operations; compile and maintain records of financial and other business transactions; handle cash on behalf of an organisation and its customers; record oral or written matter by shorthand writing, typing and other means; operate office machines and telephone and telegraph equipment; conduct passenger transport vehicles; take part in postal work and mail distribution and perform other duties related to the foregoing.",
+        "Workers in this major group are engaged in, or directly associated with, buying and selling goods and services of all kinds and in conducting wholesale and retail businesses on their own behalf.",
+        "Workers in this major group organise or perform catering, housekeeping, personal, protective and related services.",
+        "Workers in this major group conduct farms on their own behalf or in partnership, perform agricultural, animal husbandry and forestry tasks, catch fish, hunt and trap animals, and perform related tasks.",
+        "Workers in this major group are engaged in or directly associated with the extraction of minerals, petroleum and natural gas from the earth and their treatment; manufacturing processes; the construction, maintenance and repair of various types of roads, structures, machines and other products. Also included are those who handle materials, operate transport and other equipment and perform labouring tasks requiring primarily physical effort."
+    ),
+    link = c(
+        "https://historyofwork.iisg.nl/list_minor.php?text01=0&&text01_qt=strict",
+        "https://historyofwork.iisg.nl/list_minor.php?text01=2&&text01_qt=strict",
+        "https://historyofwork.iisg.nl/list_minor.php?text01=3&&text01_qt=strict",
+        "https://historyofwork.iisg.nl/list_minor.php?text01=4&&text01_qt=strict",
+        "https://historyofwork.iisg.nl/list_minor.php?text01=5&&text01_qt=strict",
+        "https://historyofwork.iisg.nl/list_minor.php?text01=6&&text01_qt=strict",
+        "https://historyofwork.iisg.nl/list_minor.php?text01=7&&text01_qt=strict"
+    )
+)
+
+
+# Create a nicer formatted table for display
+hisco_data %>%
+    mutate(
+        title = str_replace(title, "Majorgroup ", "")
+    ) %>%
+    select(code, title, description) %>%
+    gt() %>%
+    tab_header(
+        title = md("**HISCO Major Groups**"),
+        subtitle = "A table of the HISCO major groups"
+    ) %>%
+    cols_label(
+        code = "HISCO Code",
+        title = "HISCO Title",
+        description = "Description"
+    ) %>%
+    cols_align(
+        align = "left",
+        columns = c(code, title)
+    ) %>%
+    cols_width(
+        code ~ px(100),
+        title ~ px(300),
+        description ~ px(500)
+    ) 
+```
+
+### HISCO Three Digit Occupations
+
+```{r}
+df <- read_csv(here::here("posts", "2025-03-28-hisco", "data", "3-digit-occupations.csv"))
+
+library(DT)
+
+df %>%
+    select(-Link) %>%
+    datatable(, rownames = FALSE)
+```
+
+
+## Related Classification Systems
+
+HISCO serves as a foundation for other classification systems that analyze historical social stratification:
+
+- **HISCLASS:** An occupational stratification scale that classifies occupations into social classes based on HISCO codes, facilitating international comparisons across different periods, countries, and languages. citeturn0search1
+
+- **HISCAM:** A social status scale derived from HISCO, developed to analyze social stratification and inequality in historical contexts. citeturn0search13
+
+These systems provide additional tools for researchers studying historical social structures and mobility.
+
+## Resources and Tools
+
+For further exploration and practical application of HISCO, consider the following resources:
+
+- **HISCO Database:** Hosted by the International Institute of Social History (IISH), this database offers access to occupational titles and their corresponding HISCO codes. citeturn0search0
+
+- **R Package for HISCO Classification:** An R package developed for classifying HISCO codes into social class systems such as HISCLASS, HISCLASS 5, SOCPO, and Universal HISCAM. This tool aids researchers in analyzing historical occupational data. citeturn0search3
+
+By integrating these resources, you can enhance your research and understanding of historical occupations and their classifications.
+
+## Conclusion
+
+This post provides a structured overview of HISCO, its major groups, related classification systems, and available resources. By consolidating this information, it serves as a convenient reference for quickly accessing and understanding historical occupational classifications. 

@@ -36,6 +36,37 @@ I'm a big supporter of free trade and I think that tariffs are a bad idea. But I
 
 You can keep up to date on the latest news on tariffs in the USA by visiting this great page from Chad Bown at the Peterson Institute for International Economics: [Trump's trade war timeline 2.0](https://www.piie.com/blogs/realtime-economics/2025/trumps-trade-war-timeline-20-date-guide)
 
+Here is an article on how Columbia Sportswear gets around tariffs on women's tops: [link](https://www.marketplace.org/2019/05/29/theres-a-reason-your-columbia-shirt-has-a-tiny-pocket-near-your-waistline/)
+
+
+> Tooze and Peter Bragdon, executive vice president and chief administrative officer, are basically the tariff guys at Columbia Sportswear. They told Marketplace host Kai Ryssdal that Columbia has been doing something they call “tariff engineering” for decades — they design apparel and products in accordance with American tariff policy.
+
+> For example, certain women’s garments with “pockets below the waist” get lower duty rates than those without. Because of that, a number of the women’s shirts Columbia Sportswear makes are intentionally designed with tiny pockets near the waistline, which lowers the cost of importing them. One of the company’s shorthands for “pockets below the waist” is “nurse’s pocket.”
+
+Women’s or girls’ blouses, shirts and shirt-blouses of man-made fibers imported from other countries can get tariffed as high as 26.9%. That number is dictated by subhead 6206.40.30 of the Harmonized Tariff Schedule of the United States — a master list of every clothing category you didn’t know existed and their import rates.
+
+But here’s a little loophole: If the garments have “pockets below the waist, a ribbed waistband or other means of tightening at the bottom of the garment,” they get to be excluded from this category.
+
+So if you took that same type of blouse with a 26.9% duty rate and added a pocket or two below the waist, it would instead get tariffed at a rate of 16% (according to subhead 6211.43.1060).
+
+An exception for garments with pockets below the waist dates back to at least 1989, based on our review of U.S. tariff schedules and custom rulings.
+
+“It was Congress that came up with … very obscure classifications, primarily to protect industries and protect some special interests,” according to Frank Samolis, co-chair at the international trade group at the law firm Squire Patton Boggs. “It became very political and … I wouldn’t say corrupt, but you can imagine; there’s just a lot of wheeling and dealing.”
+
+“There’s no science,” said Nate Herman, senior vice president of supply chain at the American Apparel & Footwear Association.
+
+“Thankfully, within outdoor, I’m able to use that pocket for a functional purpose. So we usually call it a ‘ChapStick pocket,’ said Becca Johnson, an innovation designer at the company. “We usually try to spin it to something that’s actually functional.”
+
+
+Here is some more reporting from NPR about how tariffs are being dodged: [link](https://www.npr.org/2025/03/07/nx-s1-5318785/tariff-dodging-companies-exemptions-engineering)
+
+"If you have a tariff that's really high in one product and lower on a very similar product, that's when you can sort of arbitrage that difference," he says. "But if it's 25% regardless of whether it's a truck or a car or a blanket or a garment, you can't really game the system."
+
+
+
+### Data
+
+
 
 Customs and other import duties (% of tax revenue) data sourced from [World Bank](https://data.worldbank.org/indicator/GC.TAX.IMPT.ZS)
 Tax revenue as a percentage of GDP data sourced from [World Bank](https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS)
@@ -48,6 +79,7 @@ library(tidyverse)
 library(readxl)
 library(here)
 library(countrycode)
+library(gt)
 
 # Function to read and tidy World Bank data files
 tidy_wb_data <- function(filename, df_name) {
@@ -90,24 +122,24 @@ combined_data <- combined_data %>%
 ```{r}
 # Calculate average of 5 most recent non-missing values for each country and indicator
 recent_averages <- combined_data %>%
-  # Remove rows with missing values
-  filter(!is.na(value)) %>%
-  # Group by country and indicator
-  group_by(country_code_2, country_name, country_code, indicator_name, indicator_code, region, data_source) %>%
-  # Sort by year in descending order within each group
-  arrange(desc(year), .by_group = TRUE) %>%
-  # Take the 5 most recent observations for each group
-  slice_head(n = 5) %>%
-  # Calculate the average
-  summarize(
-    avg_value = mean(value, na.rm = TRUE),
-    earliest_year = min(year),
-    latest_year = max(year),
-    n_years = n(),
-    .groups = "drop"
-  ) %>%
-  # Add a note about the time period
-  mutate(time_period = paste0(earliest_year, "-", latest_year, " (", n_years, " years)"))
+    # Remove rows with missing values
+    filter(!is.na(value)) %>%
+    # Group by country and indicator
+    group_by(country_code_2, country_name, country_code, indicator_name, indicator_code, region, data_source) %>%
+    # Sort by year in descending order within each group
+    arrange(desc(year), .by_group = TRUE) %>%
+    # Take the 5 most recent observations for each group
+    slice_head(n = 5) %>%
+    # Calculate the average
+    summarize(
+        avg_value = mean(value, na.rm = TRUE),
+        earliest_year = min(year),
+        latest_year = max(year),
+        n_years = n(),
+        .groups = "drop"
+    ) %>%
+    # Add a note about the time period
+    mutate(time_period = paste0(earliest_year, "-", latest_year, " (", n_years, " years)"))
 
 recent_averages %>%
     filter(indicator_name != "Population, total") %>%
@@ -134,33 +166,10 @@ recent_averages %>%
     ) %>%
     tab_header(
         title = "Customs and other import duties (% of tax revenue)",
-        subtitle = "Data sourced from World Bank"
-    )
+        subtitle = "Data averaged over the 5 most recent years of non-missing data"
+    ) %>%
+    tab_source_note("Data sourced from World Bank")
 
-```
-
-
-
-```{r}
-
-recent_averages %>%
-    select(country_name, indicator_name, avg_value) %>%
-    pivot_wider(names_from = indicator_name, values_from = avg_value)  %>% 
-    janitor::clean_names() %>%
-    ggplot(aes(x = customs_and_other_import_duties_percent_of_tax_revenue, y = tax_revenue_percent_of_gdp, size = gdp_per_capita_ppp_current_international)) + 
-    geom_point() +
-    geom_text(aes(label = country_name), check_overlap = TRUE, vjust = -1, hjust = -1) +
-    scale_x_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
-    scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
-    scale_size_continuous(labels = scales::dollar_format(suffix = " GDP per capita")) +
-    labs(
-        x = "Customs and other import duties (% of tax revenue)",
-        y = "Tax revenue (% of GDP)",
-        size = "GDP per capita (PPP, current international $)",
-        title = "Relationship between Customs and other import duties, Tax revenue, and GDP per capita",
-        subtitle = "Data sourced from World Bank"
-    ) +
-    theme_minimal()
 ```
 
 
@@ -286,3 +295,207 @@ recent_averages %>%
 ```
 
 
+
+
+```{r}
+
+recent_averages %>%
+    select(country_name, indicator_name, avg_value) %>%
+    pivot_wider(names_from = indicator_name, values_from = avg_value)  %>% 
+    janitor::clean_names() %>%
+    ggplot(aes(x = customs_and_other_import_duties_percent_of_tax_revenue, y = tax_revenue_percent_of_gdp, size = gdp_per_capita_ppp_current_international)) + 
+    geom_point() +
+    geom_text(aes(label = country_name), check_overlap = TRUE, vjust = -1, hjust = -1) +
+    scale_x_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+    scale_size_continuous(labels = scales::dollar_format(suffix = " GDP per capita")) +
+    labs(
+        x = "Customs and other import duties (% of tax revenue)",
+        y = "Tax revenue (% of GDP)",
+        size = "GDP per capita (PPP, current international $)",
+        title = "Relationship between Customs and other import duties, Tax revenue, and GDP per capita",
+        subtitle = "Data sourced from World Bank"
+    ) +
+    theme_minimal()
+```
+
+
+I want to use the gganimate package to create an animated plot which has gdp_per_capita_ppp_current_international on the x-axis, customs_and_other_import_duties_percent_of_tax_revenue on the y-axis, and size of the points representing population_total. The points should be colored by region. The animation should show how the relationship between GDP per capita and Customs and other import duties has changed over time.
+
+
+
+
+
+
+
+```{r}
+# First load the gganimate package
+library(gganimate)
+library(gifski)
+
+combined_data %>%
+    select(country_name, indicator_name, value, region, year) %>%
+    pivot_wider(names_from = indicator_name, values_from = value) %>%
+    janitor::clean_names() %>%
+    filter(!is.na(region)) %>%
+    # Filter for years and countries with complete data
+    filter(
+        !is.na(gdp_per_capita_ppp_current_international),
+        !is.na(customs_and_other_import_duties_percent_of_tax_revenue),
+        !is.na(population_total)
+    ) %>%
+    # Add a column called country_name_label that is the same as country_name
+    # but only there for the 30 largest countries by population_total
+    group_by(year) %>%
+    mutate(country_name_label = ifelse(rank(-population_total) <= 30, country_name, NA_character_)) %>%
+    ungroup() %>%
+    # Create the plot
+    ggplot(aes(
+        x = gdp_per_capita_ppp_current_international,
+        y = customs_and_other_import_duties_percent_of_tax_revenue
+    )) +
+    geom_smooth(
+        method = "loess",
+        se = FALSE
+    ) +
+    geom_point(aes(size = population_total, color = region)) +
+    geom_text(aes(label = country_name_label), check_overlap = TRUE, vjust = -0.5, hjust = 0.5) +
+    scale_x_log10(labels = scales::dollar_format(suffix = " GDP per capita")) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+    scale_size_continuous(labels = scales::comma, breaks = c(1e6, 1e7, 1e8, 1e9)) +
+    scale_color_brewer(palette = "Set1") +
+    labs(
+        x = "GDP per capita (PPP, current international $)",
+        y = "Customs and other import duties (% of tax revenue)",
+        title = "Relationship between GDP per capita and Import Duties: {frame_time}",
+        subtitle = "Countries sized by population",
+        caption = "Data sourced from World Bank"
+    ) +
+    theme_minimal() +
+    theme(legend.position = "bottom") +
+    guides(
+        color = guide_legend(nrow = 2, title.position = "top", title.hjust = 0.5),
+        size = guide_legend(nrow = 1, title.position = "top", title.hjust = 0.5)
+    ) +
+    # Animation components
+    transition_time(year) +
+    ease_aes("linear") +
+    # Add trails to follow country movement
+    shadow_wake(wake_length = 0.1, alpha = FALSE)
+```
+
+
+```{r}
+
+# Render the animation with higher quality and slower speed
+animate(
+  last_plot(),
+  nframes = 200,
+  fps = 10,
+  width = 800, 
+  height = 600,
+  renderer = gifski_renderer()
+)
+
+# Save the animation
+anim_save("import_duties_gdp_animation.gif")
+```
+
+
+
+
+
+```{r}
+# First load the gganimate package
+library(gganimate)
+library(gifski)
+
+# Create and save the animation in one step
+df_animate <- combined_data %>%
+    select(country_name, indicator_name, value, region, year) %>%
+    pivot_wider(names_from = indicator_name, values_from = value) %>%
+    janitor::clean_names() %>%
+    filter(!is.na(region)) %>%
+    # Filter for years and countries with complete data
+    filter(
+        !is.na(gdp_per_capita_ppp_current_international),
+        !is.na(customs_and_other_import_duties_percent_of_tax_revenue),
+        !is.na(population_total)
+    ) %>%
+    # Add a column called country_name_label that is the same as country_name
+    # but only there for the 30 largest countries by population_total
+    group_by(year) %>%
+    mutate(country_name_label = ifelse(rank(-population_total) <= 30, country_name, NA_character_)) %>%
+    ungroup()
+
+```
+
+
+```{r}
+p <- df_animate %>%
+    # Create the plot
+    ggplot(aes(
+        x = gdp_per_capita_ppp_current_international,
+        y = customs_and_other_import_duties_percent_of_tax_revenue
+    )) +
+    geom_smooth(
+        method = "loess",
+        se = FALSE
+    ) +
+    geom_point(aes(size = population_total, color = region)) +
+    # Animation components
+    transition_time(year) +
+    ease_aes("linear") +
+    # Add trails to follow country movement
+    shadow_wake(wake_length = 0.1, alpha = FALSE)
+
+
+
+
+    geom_text(aes(label = country_name_label), check_overlap = TRUE, vjust = -0.5, hjust = 0.5) +
+    scale_x_log10(labels = scales::dollar_format(suffix = " GDP per capita")) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1, scale = 1)) +
+    scale_size_continuous(labels = scales::comma, breaks = c(1e6, 1e7, 1e8, 1e9)) +
+    scale_color_brewer(palette = "Set1") +
+    labs(
+        x = "GDP per capita (PPP, current international $)",
+        y = "Customs and other import duties (% of tax revenue)",
+        title = "Relationship between GDP per capita and Import Duties: {frame_along}",
+        subtitle = "Countries sized by population",
+        caption = "Data sourced from World Bank"
+    ) +
+    theme_minimal() +
+    theme(legend.position = "bottom") +
+    guides(
+        color = guide_legend(nrow = 2, title.position = "top", title.hjust = 0.5),
+        size = guide_legend(nrow = 1, title.position = "top", title.hjust = 0.5)
+    ) +
+    # Animation components
+    transition_time(year) +
+    ease_aes("linear") +
+    # Add trails to follow country movement
+    shadow_wake(wake_length = 0.1, alpha = FALSE)
+
+
+animate(p, nframes = 100, fps = 10, width = 800, height = 600, renderer = gifski_renderer(file = "cars.gif"))
+
+```
+
+
+```{r}
+# load the cars dataset
+data(cars)
+
+df = cars %>% as_tibble()
+
+# use gganimate to create an animation
+p <- ggplot(df, aes(speed, dist)) +
+  geom_point() +
+  transition_states(dist, transition_length = 2, state_length = 1) +
+  enter_fade() +
+  exit_fade()
+
+# render the animation
+animate(p, nframes = 100, fps = 10, width = 800, height = 600, renderer = gifski_renderer(file = "cars.gif"))
+
+```
