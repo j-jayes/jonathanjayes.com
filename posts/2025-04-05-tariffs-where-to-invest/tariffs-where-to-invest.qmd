@@ -77,6 +77,7 @@ Sectors housing such companies might include:
 #### Medical Devices
 
 Many large US medical device companies have significant manufacturing in the US and leverage USMCA partners like Mexico.
+
 * Johnson & Johnson (JNJ): Has extensive global operations, but also strong North American presence
 
 * Medtronic (MDT): Technically Irish-domiciled for tax purposes, but operational HQ in US and significant North American manufacturing/R&D
@@ -104,6 +105,7 @@ Then again, if you think there is going to be a recession, probably not a good i
 #### Agribusiness
 
 Companies involved in processing North American crops or manufacturing related equipment:
+
 * Archer Daniels Midland (ADM)
 
 * Bunge Global SA (BG) (Swiss domiciled, but major US/NA operations)
@@ -123,7 +125,7 @@ Another way to try and identify potential winners is to examine trade between Ch
 
 This plot shows the value of US imports from China and US exports to China for various products, with the size of the bubble representing the total trade volume (imports + exports) for that product category. The color indicates the broad product section (e.g., Machines, Textiles, Chemical Products). The dashed 45-degree line represents a 1:1 ratio, where US exports to China equal US imports from China for that product. I have replicated this chart with the [OEC](https://oec.world/en/profile/bilateral-country/usa/partner/chn) data.
 
-To the right of the dotted line and in the largest bubbles, we can see that China exoprts more computers, electric batteries and broadcast equipment (monitors, cameras) to the United States than the United States exports to China. 
+To the right of the dotted line and in the largest bubbles, we can see that China exports more computers, electric batteries and broadcast equipment (monitors, cameras) to the United States than the United States exports to China. 
 
 In contrast, the largest bubbles to the left of the line show that the USA exports soybeans and petroleum to China in large volumes. 
 
@@ -224,7 +226,7 @@ I will say here that China exports lots of what I would call 'low value stuff th
 
 My pick for a potential winner is **postcard manufacturers**. The USA exported $57k worth of postcards to China in 2023, but imported from China $253m worth of postcards to the USA.
 
-While I am not an expert, I don't imagine that it will be super difficult for US postcard manufacturers to pivot to the US market. The US postcard manufacturers are probably already set up to print postcards that appeal the American market, they can try and find the buyers of the Chinese cards and sell them to the US market instead. 
+While I am not an expert, I don't imagine that it will be super difficult for US postcard manufacturers to pivot to the US market. The US postcard manufacturers are probably already set up to print postcards that appeal the American market, they can try and find the buyers of the Chinese cards in the US and sell them the US manufactured cards instead. 
 
 In terms of inputs, card stock is made from wood pulp, which is a commodity that is produced in Canada in sufficient volumes, as it also goes into cardboard boxes which Amazon etc demand in huge quantities. Printer inks consist of vegetable oils such as soybean oil or linoleum which the US produces, or a heavy petroleum product as a solvent which the US has in abundance. They are then mixed with pigmented resins, which the US also exports at present. It seems possible that US postcard manufacturers could pivot to the US market and find buyers for their postcards.
 
@@ -241,7 +243,7 @@ This potential shift is far from simple. The very reason production moved offsho
 
 * **Labor-Intensive Goods:** Industries like Apparel (HS 61/62) and Footwear (HS 64) rely heavily on low labor costs abroad. Reshoring these at a competitive price point is highly improbable. Consumers should anticipate significantly higher prices for these goods. This also creates hardship for workers in affected exporting countries.
 
-* **Irreplaceable Imports:** Certain goods (e.g., coffee, bananas) cannot be produced at scale domestically due to climate, making tariffs purely inflationary for those items.
+* **Irreplaceable Imports:** Certain goods (e.g., coffee, bananas) cannot be produced at scale domestically due to climate, making tariffs purely inflationary for those items. While Hawaii produces some coffee, it is not at the scale of imports from Brazil or Colombia, and the time lag between expanding the acreage of coffee trees and the first harvest is significant.
 
 ### Context and Risks: Retaliation, Timeframes, and Diversification
 
