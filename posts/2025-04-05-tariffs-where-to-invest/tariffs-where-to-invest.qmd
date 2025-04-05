@@ -31,6 +31,7 @@ To say that the landscape of global trade has undergone a dramatic upheaval this
 On Wednesday, President Trump has announced tariffs on basically all of the United States of America's trading partners as part of his "liberation day", excluding Russia, North Korea, Cuba and Belarus. The EU received a 20% tariff, the UK a 10% tariff and Landlocked Lesotho received a 50% tariff on their $200m in exports to the US. Importantly, these tariffs were not imposed on goods which the US could feasibly produce domestically, but rather across the board on all goods, according to the trade deficit between the USA and the country in question.
 
 ```{r}
+#| fig-cap: "Map of Tariffs Imposed on US Trading Partners from [the FT](https://www.ft.com/content/dc5bd572-97e5-453e-a6a7-25ecc71ff167)"
 knitr::include_graphics(here::here("posts", "2025-04-05-tariffs-where-to-invest", "assets", "tariff_map.png"))
 ```
 
@@ -43,6 +44,7 @@ My idea is that US companies already manufacturing goods domestically and succes
 The USA imported $436B worth of goods from China in 2023, as shown in the [treemap from the OEC](https://oec.world/en/profile/bilateral-country/usa/partner/chn) below. 
 
 ```{r}
+#| fig-cap: "Treemap of US Imports from China in 2023 from [OEC](https://oec.world/en/profile/bilateral-country/usa/partner/chn)"
 knitr::include_graphics(here::here("posts", "2025-04-05-tariffs-where-to-invest", "assets", "treemap.png"))
 ```
 
@@ -119,7 +121,7 @@ Companies involved in processing North American crops or manufacturing related e
 
 Another way to try and identify potential winners is to examine trade between China and United States by product, considering products traded by both China and United States.
 
-This plot shows the value of US imports from China and US exports to China for various products, with the size of the bubble representing the total trade volume (imports + exports) for that product category. The color indicates the broad product section (e.g., Machines, Textiles, Chemical Products). The dashed 45-degree line represents a 1:1 ratio, where US exports to China equal US imports from China for that product.
+This plot shows the value of US imports from China and US exports to China for various products, with the size of the bubble representing the total trade volume (imports + exports) for that product category. The color indicates the broad product section (e.g., Machines, Textiles, Chemical Products). The dashed 45-degree line represents a 1:1 ratio, where US exports to China equal US imports from China for that product. I have replicated this chart with the [OEC](https://oec.world/en/profile/bilateral-country/usa/partner/chn) data.
 
 To the right of the dotted line and in the largest bubbles, we can see that China exoprts more computers, electric batteries and broadcast equipment (monitors, cameras) to the United States than the United States exports to China. 
 
