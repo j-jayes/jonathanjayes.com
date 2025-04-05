@@ -1,0 +1,255 @@
+---
+title: "Why I would buy stocks in US postcard manufacturers"
+subtitle: "Navigating the Trade War: Identifying US Companies Positioned for a Domestic Pivot"
+date: 2025-04-05
+preview: assets/preview.png
+format: 
+    html: 
+        code-fold: true
+        code-block-border-left: "#31BAE9"
+        code-overflow: wrap
+execute:
+    warning: false
+    message: false
+# knitr:
+#   opts_chunk:
+#     comment: ''
+# include-in-header:
+#   - text: |
+#       <style>
+#       .cell-output-stdout code {
+#         word-break: break-wor !important;
+#         white-space: pre-wrap !important;
+#       }
+#       </style>
+---
+
+To say that the landscape of global trade has undergone a dramatic upheaval this week is an understatement. It seems that the current US administration believes in the aggressive use of tariffs to significantly alter the cost calculus for imports with the hope of forcing a major realignment of supply chains towards US shores. This analysis explores which publicly traded US companies might be relatively well-positioned to navigate this disruption, potentially benefiting from a pivot towards the domestic market.
+
+### What tariffs?
+
+On Wednesday, President Trump has announced tariffs on basically all of the United States of America's trading partners as part of his "liberation day", excluding Russia, North Korea, Cuba and Belarus. The EU received a 20% tariff, the UK a 10% tariff and Landlocked Lesotho received a 50% tariff on their $200m in exports to the US. Importantly, these tariffs were not imposed on goods which the US could feasibly produce domestically, but rather across the board on all goods, according to the trade deficit between the USA and the country in question.
+
+```{r}
+knitr::include_graphics(here::here("posts", "2025-04-05-tariffs-where-to-invest", "assets", "tariff_map.png"))
+```
+
+However the highest effective rate is on goods from China. Following a sequence of escalations – an initial 10% tariff imposed February 1st, 2025, doubled to 20% on March 4th, and augmented by an additional 34% on April 4th – imports from China now face an effective tariff rate of 54%. This development, documented in timelines like this [PIIE blog post](https://www.piie.com/blogs/realtime-economics/2025/trumps-trade-war-timeline-20-date-guide), makes Chinese goods significantly more expensive in the US market. While tariffs have also been applied broadly, including to allies, the situation with USMCA partners appears more fluid. Recent events, such as the temporary delay of tariffs on Mexico following President Sheinbaum's reported commitment to enhance border security, suggest tariffs might be employed as leverage for other political goals. Therefore, while uncertainty persists, there's a working assumption here that deep North American integration (USMCA) might offer a more stable long-term sourcing advantage compared to other regions facing sustained high tariffs.
+
+My idea is that US companies already manufacturing goods domestically and successfully exporting them *might* be able to redirect that output to the US market, filling the gap left by newly expensive imports. This is particularly relevant for product categories where the US both imports significantly (especially from China) and maintains some level of domestic production and export capability.
+
+### Mapping Trade Flows in a High-Tariff World
+
+The USA imported $436B worth of goods from China in 2023, as shown in the [treemap from the OEC](https://oec.world/en/profile/bilateral-country/usa/partner/chn) below. 
+
+```{r}
+knitr::include_graphics(here::here("posts", "2025-04-05-tariffs-where-to-invest", "assets", "treemap.png"))
+```
+
+Examining US trade patterns through the Harmonized System (HS) codes highlights the key areas impacted. Based on recent annual trade data, major US imports from China include at the two digit HS code level:
+
+* **HS Chapter 85:** Electrical machinery/equipment (electronics, components) - roughly $127 billion annually.
+* **HS Chapter 84:** Machinery, mechanical appliances (industrial equipment, computer hardware) - around $85 billion.
+* **HS Chapter 95:** Toys, games, and sports requisites - about $32 billion.
+* **HS Chapter 94:** Furniture, bedding, and lighting - approximately $21 billion.
+* **HS Chapters 61 & 62:** Apparel (knit and non-knit) - combined around $18.4 billion.
+* **HS Chapter 64:** Footwear - roughly $10.3 billion.
+* **HS Chapter 87:** Vehicles (largely parts) - about $18 billion.
+
+While the US does export substantial amounts in some of these broad categories (like HS 84, 85, 87, and 90 - Medical/Optical Instruments), the products often differ. US exports frequently lean towards higher-value, specialized items, whereas imports from China often consist of mass-produced consumer goods or intermediate components. Acknowledging this, our analysis uses these broad categories to identify sectors where *some* potential for domestic substitution exists, recognizing this requires making broad assumptions to initiate the discussion.
+
+### Identifying Potential Relative Winners
+
+In this challenging environment, the focus shifts to resilience and adaptation. Companies potentially better positioned are those with:
+
+1.  Existing, strong US or North American manufacturing operations.
+2.  Lower direct reliance on inputs now subject to the highest tariffs (especially from China).
+3.  Products falling into categories where the US has existing export capabilities, suggesting some domestic production know-how.
+
+Sectors housing such companies might include:
+
+* **Medical Devices:** Manufacturers where quality control favors regionalized or domestic production.
+* **Energy:** Businesses focused on North American resource extraction and infrastructure.
+* **Agribusiness:** Processors and equipment makers with strong domestic foundations.
+
+#### Medical Devices
+
+Many large US medical device companies have significant manufacturing in the US and leverage USMCA partners like Mexico.
+* Johnson & Johnson (JNJ): Has extensive global operations, but also strong North American presence
+
+* Medtronic (MDT): Technically Irish-domiciled for tax purposes, but operational HQ in US and significant North American manufacturing/R&D
+
+* Abbott Laboratories (ABT)
+
+* Boston Scientific (BSX)
+
+* Stryker (SYK)
+
+* Becton, Dickinson and Company (BDX)
+
+* GE HealthCare (GEHC)
+
+#### Energy
+
+Focusing on infrastructure and North American resources:
+
+* Major integrated energy companies like ExxonMobil (XOM) and Chevron (CVX) have vast global operations but significant North American upstream and downstream assets.
+
+* Midstream companies operating pipelines crucial for US-Canada/Mexico trade like Kinder Morgan (KMI) or Energy Transfer (ET) could be relevant, though sensitive to trade policies.
+
+Then again, if you think there is going to be a recession, probably not a good idea to invest in energy companies.
+
+#### Agribusiness
+
+Companies involved in processing North American crops or manufacturing related equipment:
+* Archer Daniels Midland (ADM)
+
+* Bunge Global SA (BG) (Swiss domiciled, but major US/NA operations)
+
+* Corteva (CTVA) (Seeds and crop protection)
+
+* AGCO (AGCO) (Farm equipment)
+
+* CF Industries Holdings (CF) (Fertilizers, leverages North American natural gas)
+
+* The Mosaic Company (MOS) (Fertilizers)
+
+
+### Theoretical Winners: Postcard Manufacturers
+
+Another way to try and identify potential winners is to examine trade between China and United States by product, considering products traded by both China and United States.
+
+This plot shows the value of US imports from China and US exports to China for various products, with the size of the bubble representing the total trade volume (imports + exports) for that product category. The color indicates the broad product section (e.g., Machines, Textiles, Chemical Products). The dashed 45-degree line represents a 1:1 ratio, where US exports to China equal US imports from China for that product.
+
+To the right of the dotted line and in the largest bubbles, we can see that China exoprts more computers, electric batteries and broadcast equipment (monitors, cameras) to the United States than the United States exports to China. 
+
+In contrast, the largest bubbles to the left of the line show that the USA exports soybeans and petroleum to China in large volumes. 
+
+I will say here that China exports lots of what I would call 'low value stuff that fills up houses' to the USA, like festive decorations, toys, and plastic homeware items. While tariffs make these imports more expensive, attempting to pivot US manufacturing towards these specific product lines presents challenges; they are often sold through big box retailers like Walmart, where margins are typically very thin due to intense pricing pressure. Replicating the scale and cost structure for these items domestically, even with tariffs, could prove difficult and potentially unprofitable. Even if successful, Walmart will likely exert huge pressure on the suppliers to keep prices as low as possible.
+
+My pick for a potential winner is **postcard manufacturers**. The USA exported $57k worth of postcards to China in 2023, but imported from China $253m worth of postcards to the USA.
+
+While I am not an expert, I don't imagine that it will be super difficult for US postcard manufacturers to pivot to the US market. The US postcard manufacturers are probably already set up to print postcards that appeal the American market, they can try and find the buyers of the Chinese cards and sell them to the US market instead. 
+
+In terms of inputs, card stock is made from wood pulp, which is a commodity that is produced in Canada in sufficient volumes. Printer inks consist of vegetable oils such as soybean oil or linoleum which the US produces, or a heavy petroleum product as a solvent which the US has in abundance. They are then mixed with pigmented resins, which the US also exports at present.
+
+If you know of any postcard manufacturers, please let me know in the comments below. I would love to hear from you.
+
+Have a browse through the plot below and see if you can find any other potential winners.
+
+```{r}
+#| code-fold: true
+
+# --- Ensure Libraries are Loaded ---
+library(tidyverse)
+library(ggiraph)
+library(glue)
+library(here)
+library(readxl)
+library(scales) # Ensure scales is loaded for dollar format
+
+df <- readxl::read_excel(here::here("posts", "2025-04-05-tariffs-where-to-invest", "assets", "Comparative-Advantage-China---United-States.xlsx"), sheet = 1)
+
+df <- df %>% janitor::clean_names()
+
+
+# --- Define Custom Palette (reuse from before) ---
+custom_palette <- c(
+    "Animal Hides" = "#DAA58C", "Animal Products" = "#D6DC90",
+    "Animal and Vegetable Bi-Products" = "#3CB371", "Arts and Antiques" = "#228B22",
+    "Chemical Products" = "#D2691E", "Foodstuffs" = "#8A2BE2",
+    "Footwear and Headwear" = "#4682B4", "Instruments" = "#87CEEB",
+    "Machines" = "#8B0000", "Metals" = "#AFEEEE",
+    "Mineral Products" = "#A9A9A9", "Miscellaneous" = "#FFD700",
+    "Paper Goods" = "#FFDAB9", "Plastics and Rubbers" = "#9ACD32",
+    "Precious Metals" = "#654321", "Stone And Glass" = "#DA70D6",
+    "Textiles" = "#90EE90", "Transportation" = "#DDA0DD",
+    "Vegetable Products" = "#CD0000", "Weapons" = "#FA8072",
+    "Wood Products" = "#778899", "Other" = "#808080"
+)
+
+# --- Load and Prepare Data (Example using your structure) ---
+# df <- readxl::read_excel(here::here("posts", "2025-04-05-tariffs-where-to-invest", "assets", "Comparative-Advantage-China---United-States.xlsx"), sheet = 1)
+# df <- df %>% janitor::clean_names()
+
+# Prepare the data for plotting
+df_plot_data <- df %>%
+    filter(!is.na(section)) %>%
+    mutate(section = fct_lump(section, n = 11)) %>%
+    mutate(total_volume = trade_value_1_2 + trade_value_2_2) %>%
+    mutate(across(c(section_id, hs2_id, hs4_id), ~ replace_na(., "N/A")))
+
+
+# --- Create the Interactive Plot Object with Updated Labels ---
+gg_interactive <- df_plot_data %>%
+    ggplot(aes(x = trade_value_1_2, y = trade_value_2_2)) +
+    geom_point_interactive(aes(
+        colour = section,
+        size = total_volume,
+        # Define tooltip with updated labels using glue::glue
+        tooltip = glue::glue(
+            "<b>Section:</b> {section} (ID: {section_id})
+           <b>HS2:</b> {hs2} (ID: {hs2_id})
+           <b>HS4:</b> {hs4} (ID: {hs4_id})
+           ---
+           <b>Exports CHN -> USA:</b> {scales::dollar(trade_value_1_2, accuracy=1)}
+           <b>Exports USA -> CHN:</b> {scales::dollar(trade_value_2_2, accuracy=1)}"
+        ),
+        data_id = hs4_id
+    ), alpha = 0.7) +
+    scale_x_log10(labels = scales::dollar_format()) +
+    scale_y_log10(labels = scales::dollar_format()) +
+    scale_size_continuous(labels = scales::dollar_format(), breaks = 3
+    # c(1e4, 1e6, 1e8)
+    ) +
+    scale_color_manual(values = custom_palette) +
+    geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey50") +
+    coord_cartesian() +
+    # Update labels in labs()
+    labs(
+        title = "Interactive Comparison of China-USA Exports by Product Section",
+        subtitle = "Hover over points for details",
+        x = "China Exports to USA (Log Scale)", # Updated X-axis label
+        y = "USA Exports to China (Log Scale)", # Updated Y-axis label
+        colour = "Product Section",
+        size = "Total Trade Volume (CHN<>USA)" # Slightly clarified size label
+    ) +
+    theme_minimal() +
+    theme(
+        plot.title.position = "plot",
+        plot.subtitle = element_text(color = "gray40")
+    )
+
+```
+
+```{r}
+#| column: page
+
+# --- Render the Interactive Plot ---
+girafe(ggobj = gg_interactive)
+```
+
+### The Complex Reality of Reshoring
+
+This potential shift is far from simple. The very reason production moved offshore – lower costs – highlights the economic challenge tariffs attempt to override. Successfully pivoting production involves significant hurdles:
+
+* **Investment & Retooling:** Shifting production lines, even for superficially "similar" goods within an HS code, requires capital investment and time. It's not an overnight process.
+* **Skills Gap:** As illustrated by the difficulties in domestically producing even [seemingly simple items like a BBQ scrubber as discussed on a favorite podcast called Search Engine](https://podcasts.apple.com/us/podcast/the-puzzle-of-the-all-american-bbq-scrubber/id1614253637?i=1000699197820), specialized manufacturing skills (like tooling and die-making for plastics) may be scarce in the US, hindering rapid expansion.
+
+* **Labor-Intensive Goods:** Industries like Apparel (HS 61/62) and Footwear (HS 64) rely heavily on low labor costs abroad. Reshoring these at a competitive price point is highly improbable. Consumers should anticipate significantly higher prices for these goods. This also creates hardship for workers in affected exporting countries.
+
+* **Irreplaceable Imports:** Certain goods (e.g., coffee, bananas) cannot be produced at scale domestically due to climate, making tariffs purely inflationary for those items.
+
+### Context and Risks: Retaliation, Timeframes, and Diversification
+
+The global trade environment under widespread tariffs is inherently confrontational. Retaliatory tariffs from China and other nations are a reality, directly impacting the existing export markets of US companies. This complicates the ability to pivot; companies might be forced to rely more on the domestic market not just out of opportunity, but because their export options are shrinking. In this "crazy situation," the goal becomes identifying firms best equipped to *minimize losses* and adapt, rather than expecting windfall gains.
+
+Furthermore, this industrial shift requires time. Given a potential four-year presidential term horizon, companies with less complex products or more adaptable production lines might be favored, as they could potentially complete a domestic pivot more quickly.
+
+It's also worth noting that this potential tariff-driven reshoring builds on existing trends. Companies had already begun diversifying supply chains away from China for several years due to factors like: tariffs imposed during Trump's first term, heightened awareness of geopolitical and pandemic-related supply risks, and rising labor costs within China itself, making other locations relatively more attractive (as discussed in resources like this [Money and Macro video](https://www.youtube.com/watch?v=7bOSWQttmvU&t=678s&ab_channel=Money%26Macro)). Companies that already initiated such diversification may have an advantage now.
+
+## Conclusion: Navigating Uncertainty
+
+The current high-tariff environment presents a potential inflection point for US manufacturing. While significant opportunities *could* arise for domestic companies capable of capturing market share from expensive imports, the path is complex and uncertain. Success likely favors firms with strong North American operations, relevant product lines, and the agility to adapt production within a challenging multi-year timeframe, all while navigating retaliatory measures and domestic operational hurdles.
+
+The persistence of these tariffs, the precise treatment of USMCA partners, and the practical ability of individual companies to execute a domestic pivot remain critical unknowns. Therefore, while this analysis identifies potential areas of interest, it underscores the need for deep, company-specific research and caution. This is just an economic framework for considering the potential industrial consequences of a dramatically altered trade policy.
