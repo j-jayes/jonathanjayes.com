@@ -2,7 +2,7 @@
 title: "Why I would buy stocks in US postcard manufacturers"
 subtitle: "Navigating the Trade War: Identifying US Companies Positioned for a Domestic Pivot"
 date: 2025-04-05
-preview: assets/preview.png
+preview: preview.png
 format: 
     html: 
         code-fold: true
@@ -125,18 +125,6 @@ To the right of the dotted line and in the largest bubbles, we can see that Chin
 
 In contrast, the largest bubbles to the left of the line show that the USA exports soybeans and petroleum to China in large volumes. 
 
-I will say here that China exports lots of what I would call 'low value stuff that fills up houses' to the USA, like festive decorations, toys, and plastic homeware items. While tariffs make these imports more expensive, attempting to pivot US manufacturing towards these specific product lines presents challenges; they are often sold through big box retailers like Walmart, where margins are typically very thin due to intense pricing pressure. Replicating the scale and cost structure for these items domestically, even with tariffs, could prove difficult and potentially unprofitable. Even if successful, Walmart will likely exert huge pressure on the suppliers to keep prices as low as possible.
-
-My pick for a potential winner is **postcard manufacturers**. The USA exported $57k worth of postcards to China in 2023, but imported from China $253m worth of postcards to the USA.
-
-While I am not an expert, I don't imagine that it will be super difficult for US postcard manufacturers to pivot to the US market. The US postcard manufacturers are probably already set up to print postcards that appeal the American market, they can try and find the buyers of the Chinese cards and sell them to the US market instead. 
-
-In terms of inputs, card stock is made from wood pulp, which is a commodity that is produced in Canada in sufficient volumes. Printer inks consist of vegetable oils such as soybean oil or linoleum which the US produces, or a heavy petroleum product as a solvent which the US has in abundance. They are then mixed with pigmented resins, which the US also exports at present.
-
-If you know of any postcard manufacturers, please let me know in the comments below. I would love to hear from you.
-
-Have a browse through the plot below and see if you can find any other potential winners.
-
 ```{r}
 #| code-fold: true
 
@@ -228,6 +216,19 @@ gg_interactive <- df_plot_data %>%
 # --- Render the Interactive Plot ---
 girafe(ggobj = gg_interactive)
 ```
+
+
+I will say here that China exports lots of what I would call 'low value stuff that fills up houses' to the USA, like festive decorations, toys, and plastic homeware items. While tariffs make these imports more expensive, attempting to pivot US manufacturing towards these specific product lines presents challenges; they are often sold through big box retailers like Walmart, where margins are typically very thin due to intense pricing pressure. Replicating the scale and cost structure for these items domestically, even with tariffs, could prove difficult and potentially unprofitable. Even if successful, Walmart will likely exert huge pressure on the suppliers to keep prices as low as possible.
+
+My pick for a potential winner is **postcard manufacturers**. The USA exported $57k worth of postcards to China in 2023, but imported from China $253m worth of postcards to the USA.
+
+While I am not an expert, I don't imagine that it will be super difficult for US postcard manufacturers to pivot to the US market. The US postcard manufacturers are probably already set up to print postcards that appeal the American market, they can try and find the buyers of the Chinese cards and sell them to the US market instead. 
+
+In terms of inputs, card stock is made from wood pulp, which is a commodity that is produced in Canada in sufficient volumes, as it also goes into cardboard boxes which Amazon etc demand in huge quantities. Printer inks consist of vegetable oils such as soybean oil or linoleum which the US produces, or a heavy petroleum product as a solvent which the US has in abundance. They are then mixed with pigmented resins, which the US also exports at present. It seems possible that US postcard manufacturers could pivot to the US market and find buyers for their postcards.
+
+If you know of any privately help postcard manufacturers, please let me know in the comments below. I would love to hear from you and how we could invest in such a company.
+
+Have a browse through the plot above and see if you can find any other potential winners.
 
 ### The Complex Reality of Reshoring
 
