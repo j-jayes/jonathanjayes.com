@@ -447,7 +447,7 @@ p <- df_animate %>%
     transition_time(year) +
     ease_aes("linear") +
     # Add trails to follow country movement
-    shadow_wake(wake_length = 0.1, alpha = FALSE)
+    shadow_wake(wake_length = 0.1, alpha = FALSE) +
 
 
 

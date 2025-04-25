@@ -1,0 +1,162 @@
+---
+title: "Untitled"
+format: html
+---
+
+
+
+```{r}
+# Load the stringr library
+library(stringr)
+
+# Define the word
+word <- "strawberry"
+
+# Define the letter to count
+letter_to_count <- "r"
+
+# Count the occurrences (case-insensitive)
+# str_count counts pattern occurrences in a string.
+# We convert the word to lowercase first to ensure case-insensitivity.
+r_count_stringr <- str_count(tolower(word), letter_to_count)
+
+# Print the result
+cat("The letter '", letter_to_count, "' appears ", r_count_stringr, " times in the word '", word, "'.\n", sep = "")
+```
+
+
+```{r}
+
+# Install leaflet if you haven't already
+# install.packages("leaflet")
+
+# Load the leaflet library
+library(leaflet)
+
+# Create a data frame with the 10 largest cities and their coordinates
+# Data sourced from simplemaps.com and geonames.org
+denmark_cities <- data.frame(
+  City = c("Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg",
+           "Randers", "Kolding", "Horsens", "Vejle", "Roskilde"),
+  Lat = c(55.6761, 56.1572, 55.3958, 57.0500, 55.4833,
+          56.4570, 55.4917, 55.8583, 55.7167, 55.6500),
+  Lng = c(12.5683, 10.2107, 10.3886, 9.9167, 8.4500,
+          10.0390, 9.5000, 9.8500, 9.5333, 12.0833)
+)
+
+# Create the leaflet map
+leaflet(data = denmark_cities) %>% # Initialize leaflet with the city data
+  addTiles() %>% # Add default OpenStreetMap map tiles
+  addMarkers(
+    lng = ~Lng, # Specify longitude column using formula interface
+    lat = ~Lat, # Specify latitude column using formula interface
+    popup = ~City # Add popups showing the city name
+  ) %>%
+  # Optional: Set the initial view to fit the bounds of the cities
+  fitBounds(
+    lng1 = min(denmark_cities$Lng),
+    lat1 = min(denmark_cities$Lat),
+    lng2 = max(denmark_cities$Lng),
+    lat2 = max(denmark_cities$Lat)
+  )
+
+# The map will be displayed in the RStudio Viewer pane or a web browser
+```
+
+
+
+
+```{r}
+
+# Install leaflet if you haven't already
+# install.packages("leaflet")
+
+# Load the leaflet library
+library(leaflet)
+
+# Create a data frame with the 10 largest cities and their coordinates
+denmark_cities <- data.frame(
+  City = c("Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg",
+           "Randers", "Kolding", "Horsens", "Vejle", "Roskilde"),
+  Lat = c(55.6761, 56.1572, 55.3958, 57.0500, 55.4833,
+          56.4570, 55.4917, 55.8583, 55.7167, 55.6500),
+  Lng = c(12.5683, 10.2107, 10.3886, 9.9167, 8.4500,
+          10.0390, 9.5000, 9.8500, 9.5333, 12.0833)
+)
+
+# Create the leaflet map
+leaflet(data = denmark_cities) %>%
+  # Add greyscale tiles using a provider
+  addProviderTiles("CartoDB.Positron") %>%
+  addMarkers(
+    lng = ~Lng,
+    lat = ~Lat,
+    popup = ~City, # Keep the popup for click interaction
+    label = ~City, # Add the city name as a label
+    # Make the label always visible (not just on hover)
+    labelOptions = labelOptions(noHide = TRUE, textOnly = TRUE, direction = 'top', offset=c(0,-10))
+  ) %>%
+  # Set the initial view to fit the bounds of the cities
+  fitBounds(
+    lng1 = min(denmark_cities$Lng),
+    lat1 = min(denmark_cities$Lat),
+    lng2 = max(denmark_cities$Lng),
+    lat2 = max(denmark_cities$Lat)
+  )
+
+# The map will be displayed in the RStudio Viewer pane or a web browser
+```
+
+
+
+```{r}
+# Install leaflet if you haven't already
+# install.packages("leaflet")
+
+# Load the leaflet library
+library(leaflet)
+
+# Create a data frame with the 10 largest cities and their coordinates
+denmark_cities <- data.frame(
+  City = c("Copenhagen", "Aarhus", "Odense", "Aalborg", "Esbjerg",
+           "Randers", "Kolding", "Horsens", "Vejle", "Roskilde"),
+  Lat = c(55.6761, 56.1572, 55.3958, 57.0500, 55.4833,
+          56.4570, 55.4917, 55.8583, 55.7167, 55.6500),
+  Lng = c(12.5683, 10.2107, 10.3886, 9.9167, 8.4500,
+          10.0390, 9.5000, 9.8500, 9.5333, 12.0833)
+)
+
+# Create the leaflet map
+leaflet(data = denmark_cities) %>%
+  # Add greyscale tiles
+  addProviderTiles("CartoDB.Positron") %>%
+  # Use labelOnlyMarkers to display labels without icons
+  addLabelOnlyMarkers(
+    lng = ~Lng,
+    lat = ~Lat,
+    label = ~City, # Use city name as the label content
+    labelOptions = labelOptions(
+      noHide = TRUE, # Make label always visible
+      # Add some CSS styling to make the label look like a marker
+      style = list(
+        "color" = "black", # Text color
+        "font-weight" = "bold",
+        "font-size" = "12px",
+        "border-color" = "rgba(0,0,0,0.5)", # Border color with transparency
+        "border-width" = "1px",
+        "border-radius" = "3px", # Rounded corners
+        "padding" = "3px 6px", # Padding inside the border
+        "background-color" = "rgba(255, 255, 255, 0.8)" # Semi-transparent white background
+      )
+    )
+  ) %>%
+  # Set the initial view
+  fitBounds(
+    lng1 = min(denmark_cities$Lng),
+    lat1 = min(denmark_cities$Lat),
+    lng2 = max(denmark_cities$Lng),
+    lat2 = max(denmark_cities$Lat)
+  )
+
+# The map will be displayed
+```
