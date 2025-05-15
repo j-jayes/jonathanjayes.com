@@ -497,5 +497,106 @@ p <- ggplot(df, aes(speed, dist)) +
 
 # render the animation
 animate(p, nframes = 100, fps = 10, width = 800, height = 600, renderer = gifski_renderer(file = "cars.gif"))
-
 ```
+
+
+
+## Blog post
+
+**1. Introduction: Beyond Tariffs**
+
+Everyone talks about tariffs. But tariffs are only part of the story of global trade barriers. In today's economy, the real action is often with *non-tariff barriers* (NTBs). These are the rules, regulations, and practices that countries use, intentionally or not, to make trade harder, protect local industries, or steer markets[cite: 30, 31].
+
+This primer dives into these NTBs. We'll use the U.S. government's 2023 National Trade Estimate Report as our guide, breaking down the 14 main types of barriers identified there[cite: 17, 35]. The goal is simple: understand what these barriers are and how they work, using examples from the report.
+
+**2. What Are Trade Barriers?**
+
+Think of trade barriers as government actions that get in the way of international trade. This can include laws, policies, or practices that:
+
+* Restrict or block the flow of goods and services[cite: 30].
+* Shield domestic companies from foreign competition[cite: 31].
+* Give artificial boosts to domestic exporters[cite: 31].
+* Don't properly protect intellectual property[cite: 32].
+* Hinder foreign investment or e-commerce[cite: 32].
+* Block cross-border data flows[cite: 33].
+
+Tariffs are a well-known type, essentially taxes on imports. Under global rules like the GATT, tariffs are generally accepted, as long as they don't exceed agreed-upon limits[cite: 26]. NTBs, however, are a much broader and more complex category[cite: 30]. They can range from product standards and customs procedures to investment rules and digital restrictions, making them harder to spot and address than simple tariffs.
+
+
+Okay, here's section 3, covering the 14 categories of non-tariff barriers:
+
+***
+
+**3. A Landscape of Non-Tariff Barriers**
+
+Beyond simple tariffs, governments use a variety of tools that act as barriers to trade. The 2023 NTE report groups these into 14 main types[cite: 35]. Let's break them down:
+
+* **1. Import Policies:** This is a broad category covering many things besides standard tariffs. Think import charges, outright bans or quotas (limiting quantity), complex or slow import licensing, burdensome customs procedures, or unfair valuation practices[cite: 35]. Basically, anything at the border making imports tougher or more expensive.
+    * *Example:* Algeria restricts the import of certain pharmaceutical products and medical devices where local equivalents are available[cite: 90, 91]. Argentina uses non-automatic import licenses for sensitive goods, requiring detailed submissions and slowing down imports[cite: 353, 354, 356].
+
+* **2. Technical Barriers to Trade (TBT):** These are standards, technical regulations, and conformity assessment procedures (like testing or certification)[cite: 36]. While necessary for safety and interoperability, they become barriers when they are discriminatory, unnecessarily restrictive, or differ from international norms without good reason[cite: 36].
+    * *Example:* Korea requires specific domestic cybersecurity certification (SES) for ICT products sold to most public institutions, even if the products meet international standards like the Common Criteria[cite: 4297, 4298, 4299]. The EU's REACH regulation for chemicals imposes complex registration and data requirements that can be burdensome, especially for smaller businesses[cite: 2424, 2425, 2428].
+
+* **3. Sanitary and Phytosanitary (SPS) Measures:** These rules protect human, animal, or plant life and health, covering things like food safety, pests, and animal diseases[cite: 37]. They become barriers when they aren't based on science, are maintained without sufficient evidence, are discriminatory, or are stricter than necessary to achieve the desired protection[cite: 37].
+    * *Example:* Bangladesh requires fumigation of imported U.S. cotton due to boll weevil concerns, despite U.S. eradication efforts and pre-export processing that eliminate the risk[cite: 535, 536, 537, 538]. Australia prohibits imports of uncooked poultry meat from all countries except New Zealand, citing disease concerns, and requires high cooking temperatures for cooked imports, limiting commercial viability[cite: 419, 420, 421].
+
+* **4. Government Procurement:** This involves the rules governments follow when buying goods and services. Barriers arise when processes lack transparency, favor domestic suppliers (through explicit preferences or requirements like local content), or use closed bidding[cite: 38, 618].
+    * *Example:* Bolivia has a "Buy Bolivian" program giving preference margins to domestic producers in government procurement[cite: 617]. Indonesia requires government entities to prioritize domestic goods and services and imposes local content requirements[cite: 3613, 3614].
+
+* **5. Intellectual Property (IP) Protection:** Barriers exist when a country's laws or enforcement actions don't adequately protect patents, copyrights, trademarks, or trade secrets. This includes weak enforcement against counterfeiting and piracy, or insufficient legal frameworks[cite: 39].
+    * *Example:* Argentina faces challenges with patent backlogs for pharmaceuticals and inadequate protection against unfair use of test data[cite: 376, 378]. Counterfeit and pirated goods remain widely available in Cambodian markets like the Tuol Tompoung (Russian) Market[cite: 796, 797].
+
+* **6. Services Barriers:** These restrict foreign companies from participating in service sectors. Examples include outright bans on foreign participation, discriminatory licensing rules, requirements to have a local presence, or limits on the types of services that can be offered[cite: 40].
+    * *Example:* China prohibits foreign companies from directly providing many cloud computing services, forcing them into partnerships with local firms[cite: 1286, 1287, 1288]. India requires foreign law firms to partner with local firms and doesn't allow them to hire Indian-licensed lawyers[cite: 3411, 3412].
+
+* **7. Digital Trade and Electronic Commerce Barriers:** These specifically target online trade and data. They include barriers to cross-border data flows (like requiring data to be stored locally), discriminatory practices against digital products, restrictions on internet services, or other restrictive technology requirements[cite: 41].
+    * *Example:* Vietnam's Cybersecurity Law requires certain data on Vietnamese citizens to be stored within Vietnam and requires foreign suppliers to establish a local presence[cite: 6825, 6826, 6827]. China restricts cross-border data transfers for "important data" and personal information, often requiring local storage and processing[cite: 1325, 1326, 1327].
+
+* **8. Investment Barriers:** These limit foreign direct investment. Common examples include caps on foreign equity ownership, restricting access to government-funded research, local content requirements (mandating use of local inputs), technology transfer requirements, or restricting the repatriation of profits[cite: 42].
+    * *Example:* Algeria reimposed a requirement for 51 percent local ownership in strategic sectors like energy and mining[cite: 147, 148]. Malaysia requires businesses in some sectors to limit foreign equity, often to 70 percent, when applying for licenses[cite: 4539].
+
+* **9. Subsidies:** Government financial contributions that provide a benefit can distort trade. Particularly problematic are export subsidies (contingent on exporting) and local content subsidies (contingent on using domestic over imported goods)[cite: 43].
+    * *Example:* The EU provides payments to producer organizations for fruit and vegetables like peaches and olives to support crisis management and promotion[cite: 2355, 2356]. China provides extensive subsidies to its fisheries sector, contributing to overcapacity[cite: 1405, 1406, 1407].
+
+* **10. Competition:** Barriers arise when governments tolerate anticompetitive practices by state-owned or private firms, or when competition laws are used unfairly against foreign companies. Lack of due process in investigations is also a concern[cite: 44].
+    * *Example:* U.S. industry has raised concerns about China's application of its Anti-monopoly Law, suggesting selective enforcement against foreign companies and remedies seemingly aimed at industrial policy goals rather than restoring competition[cite: 1456, 1457, 1458].
+
+* **11. State-Owned Enterprises (SOEs):** Actions by SOEs or by governments regarding SOEs can create barriers. This includes subsidies provided to SOEs, discrimination against foreign goods or services, or SOEs making decisions based on non-commercial factors[cite: 45, 46].
+    * *Example:* In Algeria, state-owned Algerie Telecom holds a monopoly over undersea data cables, giving it an advantage over private competitors[cite: 153]. In China, SOEs benefit from significant state intervention and support, often disadvantaging private and foreign competitors[cite: 1501, 1502].
+
+* **12. Labor:** Failures by a government to protect internationally recognized worker rights (like freedom of association, collective bargaining, prohibitions on forced labor or child labor, acceptable work conditions) can become trade barriers if they influence trade or investment flows unfairly[cite: 47, 59].
+    * *Example:* The report notes the US suspended Generalized System of Preferences (GSP) benefits for Bangladesh in 2013 due to concerns about worker rights and safety in the garment sector[cite: 586].
+
+* **13. Environment:** Concerns about a government's level of environmental protection, resource management, or harmful practices can be barriers if they distort trade or investment flows[cite: 48].
+    * *Example:* China restricts or bans imports of various scrap materials, such as plastics and paper, impacting the global recycling market[cite: 1531, 1532, 1533]. It also prohibits imports of many remanufactured goods[cite: 1542].
+
+* **14. Other Barriers:** This is a catch-all for barriers not covered above, or those spanning multiple categories. Bribery and corruption are key examples frequently cited by firms[cite: 49, 50, 51, 52].
+    * *Example:* Corruption affecting customs practices, licensing, or government contracts is noted as a widespread problem hindering trade and investment in countries like Angola [cite: 181] and Bangladesh[cite: 588].
+
+Okay, here is section 4, incorporating the information from the web search:
+
+***
+
+**4. Navigating Disputes: A Note on the WTO**
+
+When countries disagree over trade rules, they can turn to the World Trade Organization (WTO). The WTO has a formal process to settle these disputes, typically involving an initial ruling by a panel of experts. If a country involved in the dispute isn't satisfied with the panel's decision, it historically had the right to appeal to the WTO's Appellate Body. This two-stage system was designed to provide predictability and enforce agreed-upon trade rules.
+
+However, this system is currently facing a major challenge. The Appellate Body requires a minimum number of members (judges) to hear appeals, but since late 2019, it hasn't had enough members to function. This is because the United States, citing concerns over issues like judicial overreach and specific past rulings, has blocked the consensus-based process for appointing new members. This stance has persisted across recent US administrations.
+
+The impact is significant. Without a functioning Appellate Body, a country that loses a case at the panel stage can effectively block the final outcome by appealing the decision "into the void". This prevents the ruling from becoming legally binding and enforceable, potentially leaving trade disputes unresolved and undermining the effectiveness of the WTO's enforcement mechanism. WTO members are currently negotiating reforms with the goal of having a fully functioning dispute settlement system accessible to all by 2024, but restoring the appeals mechanism remains a difficult challenge.
+
+
+**Sources:**
+
+* [Breaking the Impasse of Appointing Members of the WTO Appellate Body: A Perspective from International Institutional Law | World Trade Review](https://www.cambridge.org/core/journals/world-trade-review/article/breaking-the-impasse-of-appointing-members-of-the-wto-appellate-body-a-perspective-from-international-institutional-law/82A2014C52DC6393406E98D630ED3640)
+* [International trade dispute settlement: World Trade Organisation Appellate Body crisis and the multi-party interim appeal arbitration arrangement | Think Tank | European Parliament](https://www.europarl.europa.eu/thinktank/en/document/EPRS_BRI(2024)762342)
+* [THE APPELLATE BODY IMPASSE: HOW TO MAKE THE WTO GREAT AGAIN? - NYU Journal of International Law and Politics](https://nyujilp.org/wp-content/uploads/2024/09/SUAREZ-FINAL_NYI_56_3-139-154.pdf)
+* [The Appellate Body in Crisis | TradeLinks - Linklaters](https://www.linklaters.com/en/insights/blogs/tradelinks/the-appellate-body-in-crisis)
+* [The dispute settlement crisis in the World Trade Organization: Issues, challenges and directions - Research Outreach](https://researchoutreach.org/articles/dispute-settlement-crisis-world-trade-organization-issues-challenges-directions/)
+
+
+**5. Conclusion: The Evolving Trade Landscape**
+
+So, while tariffs get a lot of headlines, the real complexity in global trade often lies in the non-tariff barriers. As we've seen, these NTBs are a diverse toolkit – ranging from explicit quotas and burdensome licensing to subtle standards, investment rules, and digital hurdles.
+
+Understanding this landscape, framed by the 14 categories outlined here, is crucial. These barriers shape market access, influence competition, and ultimately impact how goods and services flow across borders. Staying aware of this evolving, intricate web of rules is essential for navigating the world of international commerce today.

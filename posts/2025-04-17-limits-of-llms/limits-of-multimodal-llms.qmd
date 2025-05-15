@@ -5,6 +5,15 @@ draft: true
 ---
 
 
+Blog post; continual confusion between whether a LLM is the best tool for a task, and if that makes it intelligent.
+
+Examples; counting letters. 
+
+Issue; seems trivial to humans beacuse we read in 
+
+non-deterministic nature of LLMs. Confusing for people that have grown up with computers that are deterministic.
+
+
 
 ```{r}
 # Load the stringr library

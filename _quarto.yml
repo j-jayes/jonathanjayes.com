@@ -18,7 +18,7 @@ website:
         text: Home
       - href: about.qmd
         text: About
-      - href: content/phd-planning.qmd
+      # - href: content/phd-planning.qmd
       - href: content/teaching.qmd
       - href: content/research.qmd
         text: Research

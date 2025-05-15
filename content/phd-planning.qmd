@@ -1,5 +1,6 @@
 ---
 title: "PhD planning"
+draft: true
 ---
 
 I need to commit to more structure and deadlines in order to complete my PhD on time.
