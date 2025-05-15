@@ -8,7 +8,9 @@ image: "img/final_seminar.png"
 
 I presented the final seminar on my dissertation at the Lund University Economic History Department seminar on May 7, 2025.
 
-I was grateful for comments and feedback from Josef Taalbi and Kristin Ranestad. 
+I was grateful for comments and feedback from Josef Taalbi and Kristin Ranestad.
+
+On this page I include my slides, the Kappa (or introductory chapter) of my dissertation, and the drafts of the four papers that make up the dissertation.
 
 Here are the slides from my presentation:
 
@@ -18,7 +20,7 @@ Here are the slides from my presentation:
 knitr::include_url("https://j-jayes.github.io/kappa/#/title-slide", height = "900")
 ```
 
-Here is the Kappa, or introdctory chapter, of my disseratation. 
+Here is the Kappa, or introductory chapter, of my dissertation.
 
 ```{=html}
 <object data="papers/00-kappa.pdf" type="application/pdf" width="100%" height="900" style="min-height:100vh;">

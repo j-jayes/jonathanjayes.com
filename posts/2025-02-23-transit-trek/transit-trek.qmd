@@ -27,7 +27,7 @@ For a long time, I have had an idea simmering in the back of my mind: could I ge
 
 ## The Spark of Inspiration
 
-The inspiration came from a personal experience. My girlfriend Kathy lives in Paris, while I call Lund, Sweden home. Over the past couple of years, I've made many trips to Paris -- mostly by plane (I do my best to minimize my environmental footprint in other ways). One recurring frustration was the transit experience at Paris CDG. Arriving in the evening often meant missing the last RER B train, leaving me to try and find a fellow frustrated flier to share an expensive taxi ride with into the city. By contrast, Copenhagen’s airport offers a seamless metro connection that runs round the clock from the airport into the city (the trains drive themselves!).
+The inspiration came from a personal experience. My girlfriend Kathy lives in Paris, while I call Lund, Sweden home. Over the past couple of years, I've made many trips to Paris -- mostly by plane (I do my best to minimize my environmental footprint in other ways). One recurring frustration was the transit experience at Paris CDG. Arriving in the evening often meant missing the last RER B train, leaving me to try and find a fellow frustrated flyer to share an expensive taxi ride with into the city. By contrast, Copenhagen’s airport offers a seamless metro connection that runs round the clock from the airport into the city (the trains drive themselves!).
 
 This contrast led me to wonder: how do transit options from European airports compare? How do factors like travel time, cost, and service frequency vary from one city to another?
 
@@ -136,7 +136,7 @@ The app immediately uncovered some interesting patterns:
 
 ![](assets/06.png)
 
-I think that the current app is a very good start, especially given that it took me a couple of hours to refine based on the output from the o3 model. 
+I think that the current app is a very good start, especially given that it took me a couple of hours to refine based on the output from the o3-mini-high model. 
 
 Looking ahead, there are plenty of opportunities to improve the app:
 
