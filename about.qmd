@@ -91,3 +91,23 @@ education %>%
 **Laboratory for the Economics of Africa's Past** | Researcher under [Prof Johan Fourie](https://www.johanfourie.com/)| January 2020 - July 2021
 
 **FTI Consulting** | Junior Economist in [Economic and Financial Consulting Practice](https://www.linkedin.com/showcase/fti-consulting-south-africa/) | March 2019 - January 2020
+
+
+<!-- 
+```{mermaid}
+
+gantt
+    title Education and Career Timeline
+    dateFormat  YYYY-MM
+    axisFormat %Y-%m
+
+    section Education
+    PhD in Economic History (Lund University)           :active, phd, 2021-01, 2025-10
+    Masters in Economics (Stellenbosch University)      :done, masters, 2020-01, 2021-12
+    Honours & Bachelors (University of Cape Town)     :done, ug, 2015-01, 2018-12
+
+    section Professional Experience
+    Data Scientist (Codera Analytics)                   :active, codera, 2022-12, 2025-05
+    Junior Data Scientist (Fathom Data)                 :done, fathom, 2022-01, 2022-03
+    Jr. Econ Consultant (FTI Consulting South Africa) :done, fti, 2019-03, 2020-01
+``` -->
