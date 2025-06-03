@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demand for R, Python & Stata Skills in Swedish Graduate Job Market</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+        }
+        .header-gradient {
+            background: linear-gradient(to right, #3b82f6, #10b981); /* Blue to green gradient */
+        }
+        .stat-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* More rounded */
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .skill-tag {
+            background-color: #e0e7ff; /* Light indigo */
+            color: #3730a3; /* Dark indigo */
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px; /* Pill shape */
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        .section-title {
+            font-size: 1.875rem; /* 30px */
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e3a8a; /* Darker blue */
+            border-bottom: 3px solid #3b82f6; /* Blue underline */
+            padding-bottom: 0.5rem;
+        }
+        .sub-section-title {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: #1d4ed8; /* Medium blue */
+        }
+        .icon-placeholder {
+            width: 3rem;
+            height: 3rem;
+            background-color: #d1d5db; /* Gray 300 */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #4b5563; /* Gray 600 */
+            margin-bottom: 0.5rem;
+        }
+        .language-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.375rem; /* Rounded-md */
+            font-weight: bold;
+            color: white;
+        }
+        .python-bg { background-color: #3b82f6; /* Blue 500 */ }
+        .r-bg { background-color: #10b981; /* Green 500 */ }
+        .stata-bg { background-color: #6366f1; /* Indigo 500 */ }
+        .highlight-number {
+            font-size: 2.25rem; /* 36px */
+            font-weight: 700;
+            color: #2563eb; /* Blue 600 */
+        }
+        .recommendation-card {
+            background-color: #e0f2fe; /* Light sky blue */
+            border-left: 5px solid #0ea5e9; /* Sky blue */
+        }
+        /* Custom SVG icon styling */
+        .svg-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.5rem;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="header-gradient text-white p-6 sm:p-8 text-center rounded-b-xl shadow-lg">
+        <h1 class="text-3xl sm:text-4xl font-bold text-black">Swedish Graduate Job Market</h1>
+        <p class="text-xl sm:text-2xl font-semibold mt-2">Demand for Python, R & Stata Skills</p>
+        <p class="mt-2 text-sm italic">Based on analysis of job ads, university portals, and labor market reports.</p>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6">
+
+        <section class="my-8">
+            <h2 class="section-title text-center">Overall Demand Snapshot</h2>
+            <div class="grid md:grid-cols-3 gap-6 mt-6">
+                <div class="stat-card text-center">
+                    <div class="language-icon python-bg mx-auto mb-2">Py</div>
+                    <h3 class="text-xl font-semibold text-blue-600 mb-1">Python: Broad Demand</h3>
+                    <p class="text-gray-600">Most frequently mentioned. Strong in general software, data engineering & analysis.</p>
+                    <p class="highlight-number mt-2">75+</p>
+                    <p class="text-sm text-gray-500">"Junior Python" roles (Indeed.se, indicative)</p>
+                </div>
+                <div class="stat-card text-center">
+                    <div class="language-icon r-bg mx-auto mb-2">R</div>
+                    <h3 class="text-xl font-semibold text-green-600 mb-1">R: Specialized Analytical</h3>
+                    <p class="text-gray-600">Data analysis, research, statistics, econometrics. Low competition for statisticians.</p>
+                </div>
+                <div class="stat-card text-center">
+                    <div class="language-icon stata-bg mx-auto mb-2">St</div>
+                    <h3 class="text-xl font-semibold text-indigo-600 mb-1">Stata: Niche & Academic</h3>
+                    <p class="text-gray-600">Academic research (economics, social sciences), specialized quantitative analysis.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-12">
+            <h2 class="section-title text-center">In-Depth Look: Skill Demand</h2>
+
+            <div class="stat-card my-6 p-6">
+                <div class="flex items-center mb-4">
+                    <div class="language-icon python-bg mr-3">Py</div>
+                    <h3 class="text-2xl font-bold text-blue-700">Python</h3>
+                </div>
+                <p class="mb-3 text-gray-700">Stands out for graduate/junior roles. High demand aligns with growth in data science, AI, and general software development.</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="sub-section-title">Common Job Titles:</h4>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Junior Backend/Software Developer</li>
+                            <li>Jr. Data/Analytics Engineer</li>
+                            <li>Data Analyst</li>
+                            <li>Junior Python Systemutvecklare</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="sub-section-title">Key Sectors:</h4>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Technology (Software, AI)</li>
+                            <li>Industrial & Manufacturing</li>
+                            <li>Finance, Telecom, Public Sector</li>
+                            <li>Consulting</li>
+                        </ul>
+                    </div>
+                </div>
+                <h4 class="sub-section-title mt-4">Often Paired With:</h4>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <span class="skill-tag">SQL</span><span class="skill-tag">Azure</span><span class="skill-tag">C/C++</span>
+                    <span class="skill-tag">Git</span><span class="skill-tag">Linux</span><span class="skill-tag">Machine Learning</span>
+                </div>
+                <p class="mt-3 text-sm text-blue-600 font-medium">Internships often lead to full-time employment.</p>
+            </div>
+
+            <div class="stat-card my-6 p-6">
+                 <div class="flex items-center mb-4">
+                    <div class="language-icon r-bg mr-3">R</div>
+                    <h3 class="text-2xl font-bold text-green-700">R</h3>
+                </div>
+                <p class="mb-3 text-gray-700">Concentrated in analytical and research roles. Favorable conditions for statisticians.</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="sub-section-title">Common Job Titles:</h4>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Junior Data Analyst</li>
+                            <li>Research Assistant</li>
+                            <li>Statistician</li>
+                            <li>Pre-doctoral Researcher</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="sub-section-title">Key Sectors:</h4>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Research Institutions (Economics, Health)</li>
+                            <li>Public Sector / Policy</li>
+                            <li>Healthcare / Pharma</li>
+                            <li>Transport & Logistics</li>
+                        </ul>
+                    </div>
+                </div>
+                <h4 class="sub-section-title mt-4">Often Paired With:</h4>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <span class="skill-tag">Statistics</span><span class="skill-tag">Econometrics</span><span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Python</span><span class="skill-tag">Stata</span><span class="skill-tag">Data Visualization</span>
+                </div>
+                 <p class="mt-3 text-sm text-green-600 font-medium">Valued for blending quantitative skills with domain expertise.</p>
+            </div>
+
+            <div class="stat-card my-6 p-6">
+                <div class="flex items-center mb-4">
+                    <div class="language-icon stata-bg mr-3">St</div>
+                    <h3 class="text-2xl font-bold text-indigo-700">Stata</h3>
+                </div>
+                <p class="mb-3 text-gray-700">Primarily in academic research (economics, social sciences) and specialized quantitative roles.</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="sub-section-title">Common Job Titles:</h4>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Junior Physicist</li>
+                            <li>Junior Quantitative Analyst (Energy)</li>
+                            <li>Research Assistant</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="sub-section-title">Key Sectors:</h4>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Academic Research (Economics)</li>
+                            <li>Specialized Quantitative Finance</li>
+                            <li>Energy Trading</li>
+                        </ul>
+                    </div>
+                </div>
+                <h4 class="sub-section-title mt-4">Often Paired With:</h4>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <span class="skill-tag">Econometrics</span><span class="skill-tag">Advanced Statistics</span>
+                    <span class="skill-tag">Panel Data Analysis</span><span class="skill-tag">R</span><span class="skill-tag">Python</span>
+                </div>
+                <p class="mt-3 text-sm text-indigo-600 font-medium">Strong niche in traditional strongholds; valuable for econometric modeling.</p>
+            </div>
+        </section>
+        
+        <section class="my-12 grid md:grid-cols-2 gap-6">
+            <div class="stat-card p-6">
+                <div class="flex items-center mb-3">
+                     <svg class="svg-icon text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <h3 class="text-xl font-semibold text-yellow-700">Combined Skills are a Plus!</h3>
+                </div>
+                <p class="text-gray-600">Growing preference for proficiency in multiple analytical languages (e.g., Python + R/Stata). Signals adaptability and broader problem-solving capability, especially in research and advanced analytics.</p>
+            </div>
+
+            <div class="stat-card p-6">
+                 <div class="flex items-center mb-3">
+                    <svg class="svg-icon text-purple-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                       <path fill-rule="evenodd" d="M2.5 3A1.5 1.5 0 001 4.5v11A1.5 1.5 0 002.5 17h15a1.5 1.5 0 001.5-1.5v-11A1.5 1.5 0 0017.5 3h-15zm10.955 2.408a.75.75 0 00-1.06 1.06L14.586 8.66l-2.191 2.192a.75.75 0 101.06 1.061l2.721-2.721a.75.75 0 000-1.061l-2.721-2.72Z M5.274 8.659a.75.75 0 011.06 0L8.526 10.85l2.192-2.191a.75.75 0 111.06 1.06l-2.72 2.721a.75.75 0 01-1.061 0L5.274 9.72a.75.75 0 010-1.06Z" clip-rule="evenodd" />
+                    </svg>
+                    <h3 class="text-xl font-semibold text-purple-700">Swedish Job Market: Tech Hotspot</h3>
+                </div>
+                <p class="text-gray-600 mb-2">High demand for IT, data science, AI, and analytics skills. Persistent skills shortage.</p>
+                <p class="highlight-number">~18,000</p>
+                <p class="text-sm text-gray-500">Tech competence needed annually (up to 2028).</p>
+                <p class="text-gray-600 mt-2">Favorable for graduates with relevant skills; companies invest in junior talent.</p>
+            </div>
+        </section>
+<!-- 
+        <section class="my-12">
+            <h2 class="section-title text-center">Navigating Your Job Search</h2>
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <div class="stat-card p-6">
+                    <div class="flex items-center mb-3">
+                        <svg class="svg-icon text-cyan-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                        </svg>
+                        <h3 class="text-xl font-semibold text-cyan-700">Key Job Platforms</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>Arbetsförmedlingen (Official)</li>
+                        <li>Indeed Sweden</li>
+                        <li>LinkedIn (Crucial for networking)</li>
+                        <li>JobTeaser (Student/Graduate focused)</li>
+                        <li>Blocket Jobb</li>
+                        <li>Academic Work (Young professionals)</li>
+                        <li>Specialized boards (e.g., EuroScienceJobs)</li>
+                    </ul>
+                </div>
+                <div class="stat-card p-6">
+                     <div class="flex items-center mb-3">
+                        <svg class="svg-icon text-pink-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M11.983 1.904a.75.75 0 00-1.292-.752l-5.5 9.5a.75.75 0 00.646 1.101h.255a.75.75 0 01.708.461l1.5 3.75a.75.75 0 001.416-.002l1.5-3.75a.75.75 0 01.708-.461h.255a.75.75 0 00.646-1.101l-5.5-9.5zM17.232 9.104a.75.75 0 00-1.292-.752l-1.5 2.598a.75.75 0 00.646 1.101h.255a.75.75 0 01.708.46L16.5 15.25a.75.75 0 001.416-.002l.45-1.125a.75.75 0 01.708-.46h.255a.75.75 0 00.646-1.101l-1.5-2.598zM3.476 11.603a.75.75 0 00.646-1.101l-1.5-2.598a.75.75 0 00-1.292.752l1.5 2.598a.75.75 0 00.646 1.101h.255a.75.75 0 01.708.46l.45 1.125a.75.75 0 001.416-.002L5.5 12.522a.75.75 0 01.708-.46h.255a.75.75 0 00.646-1.101l-1.5-2.598a.75.75 0 10-1.292.752l1.5 2.598z" />
+                        </svg>
+                        <h3 class="text-xl font-semibold text-pink-700">"Graduate Programmes" (Traineeprogram)</h3>
+                    </div>
+                    <p class="text-gray-600">Structured 1-2 year programs. Excellent entry point for career development and organizational insight. Actively seek these out!</p>
+                </div>
+            </div>
+        </section> -->
+
+        <section class="my-12">
+            <h2 class="section-title text-center">Strategic Recommendations for Graduates</h2>
+            <div class="mt-6 space-y-4">
+                <div class="recommendation-card p-4 rounded-lg shadow">
+                    <h3 class="font-semibold text-lg text-sky-700 mb-1">Build Strong Foundations & Complementary Skills</h3>
+                    <p class="text-gray-700">Master one core language (Python, R, or Stata). Add paired skills (e.g., Python + SQL/Azure; R/Stata + econometrics). Familiarity with multiple tools is a plus.</p>
+                </div>
+                <div class="recommendation-card p-4 rounded-lg shadow">
+                    <h3 class="font-semibold text-lg text-sky-700 mb-1">Gain Practical Experience</h3>
+                    <p class="text-gray-700">Seek internships, projects (academic/personal), open-source contributions. Bridge academic knowledge with industry needs.</p>
+                </div>
+                <div class="recommendation-card p-4 rounded-lg shadow">
+                    <h3 class="font-semibold text-lg text-sky-700 mb-1">Diversify Job Search & Target Trainee Programs</h3>
+                    <p class="text-gray-700">Use major job boards and specialized graduate platforms. Actively look for "traineeprogram" for structured entry.</p>
+                </div>
+                 <!-- <div class="recommendation-card p-4 rounded-lg shadow">
+                    <h3 class="font-semibold text-lg text-sky-700 mb-1">Tailor Applications & Network Actively</h3>
+                    <p class="text-gray-700">Adapt CVs/cover letters to Swedish norms. Build professional connections (LinkedIn, events).</p>
+                </div> -->
+                <div class="recommendation-card p-4 rounded-lg shadow">
+                    <h3 class="font-semibold text-lg text-sky-700 mb-1">Language & Continuous Learning</h3>
+                    <p class="text-gray-700">Consider learning Swedish for long-term career. Embrace ongoing skill development in the evolving tech sector.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-6 mt-8 bg-gray-800 text-gray-300 rounded-t-xl">
+        <p>&copy; 2025 Infographic. Data indicative and based on the "Demand for R, Python, and Stata Skills in the Swedish Graduate Job Market" report.</p>
+        <p class="text-xs mt-1">This infographic is for informational purposes only.</p>
+    </footer>
+
+</body>
+</html>

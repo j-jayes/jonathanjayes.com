@@ -1,0 +1,27 @@
+---
+title: "HTML Rendering in Quarto Documents"
+format: html
+draft: true
+---
+
+### Third level heading
+
+Normal text
+
+
+```{r}
+library(tidyverse)
+library(gt)
+
+cars %>%
+    data.frame() %>%
+    gt()
+```
+
+:::{.column-page}
+
+```{=html}
+<iframe src="assets/infographic.html" width="100%" height="2000px" style="border:none;"></iframe>
+```
+
+:::
