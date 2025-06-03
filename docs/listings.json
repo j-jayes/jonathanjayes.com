@@ -1,22 +1,5 @@
 [
   {
-    "listing": "/content/generative-ai-articles-listing.html",
-    "items": [
-      "/content/generative-ai-articles/uk-china-shipping-forecast.html"
-    ]
-  },
-  {
-    "listing": "/content/research.html",
-    "items": [
-      "/content/research/kappa-infographic.html",
-      "/content/research/final-seminar.html",
-      "/content/research/Wired-for-success-abstract.html",
-      "/content/research/Ratio-seminar.html",
-      "/content/research/Wired-for-success.html",
-      "/content/research/Warwick-poster.html"
-    ]
-  },
-  {
     "listing": "/index.html",
     "items": [
       "/posts/2025-04-23-windturbines/wind-turbines.html",
@@ -50,6 +33,24 @@
       "/posts/2021-03-18-car-price-explorer/car-price-explorer.html",
       "/posts/2021-04-21-chips/chips.html",
       "/posts/welcome/welcome.html"
+    ]
+  },
+  {
+    "listing": "/content/research.html",
+    "items": [
+      "/content/research/kappa-infographic.html",
+      "/content/research/final-seminar.html",
+      "/content/research/Wired-for-success-abstract.html",
+      "/content/research/Ratio-seminar.html",
+      "/content/research/Wired-for-success.html",
+      "/content/research/Warwick-poster.html"
+    ]
+  },
+  {
+    "listing": "/content/generative-ai-articles-listing.html",
+    "items": [
+      "/content/generative-ai-articles/gemini-2.5-on-OECD-jobs.html",
+      "/content/generative-ai-articles/uk-china-shipping-forecast.html"
     ]
   }
 ]

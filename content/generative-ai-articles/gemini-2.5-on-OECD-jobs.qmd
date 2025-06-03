@@ -1,0 +1,525 @@
+---
+title: Gemini 2.5 helps me found out which jobs are available for South Africans at the OECD
+description: |
+  A post about the abilities of Deep Research with Gemini 2.5
+image: "https://interludeone.com/posts/2021-04-03-container-ships/container-ships_files/figure-html/unnamed-chunk-6-1.png"
+author:
+  - name: Jonathan Jayes & Gemini 2.5
+date: 2025-06-02
+---
+
+
+:::{.column-page}
+
+```{=html}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OECD Employment Opportunities for South African Nationals: An Infographic Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light grey background for overall page */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .stat-icon {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .section-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #073B4C; /* Midnight Green Eagle Green */
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #118AB2; /* Blue NCS */
+        }
+        .sub-section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #118AB2; /* Blue NCS */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .palette-coral { color: #FF6B6B; }
+        .palette-yellow { color: #FFD166; }
+        .palette-green { color: #06D6A0; }
+        .palette-blue { color: #118AB2; }
+        .palette-dark-slate { color: #073B4C; }
+
+        .bg-palette-coral { background-color: #FF6B6B; }
+        .bg-palette-yellow { background-color: #FFD166; }
+        .bg-palette-green { background-color: #06D6A0; }
+        .bg-palette-blue { background-color: #118AB2; }
+        .bg-palette-dark-slate { background-color: #073B4C; }
+        
+        .text-palette-coral { color: #FF6B6B; }
+        .text-palette-yellow { color: #FFD166; }
+        .text-palette-green { color: #06D6A0; }
+        .text-palette-blue { color: #118AB2; }
+        .text-palette-dark-slate { color: #073B4C; }
+
+        .border-palette-coral { border-color: #FF6B6B; }
+        .border-palette-yellow { border-color: #FFD166; }
+        .border-palette-green { border-color: #06D6A0; }
+        .border-palette-blue { border-color: #118AB2; }
+        .border-palette-dark-slate { border-color: #073B4C; }
+
+        .flowchart-step {
+            background-color: white;
+            border: 2px solid #118AB2; /* Blue NCS */
+            color: #073B4C; /* Midnight Green Eagle Green */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flowchart-arrow {
+            font-size: 2rem;
+            color: #118AB2; /* Blue NCS */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.5rem;
+        }
+         .tooltip-custom {
+            background-color: #073B4C;
+            color: white;
+            border-radius: 0.25rem;
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- 
+        Infographic Plan:
+        Title: Navigating OECD-Affiliated Employment Opportunities for South African Nationals: An Infographic Guide.
+        Color Palette Chosen: Energetic & Playful (#FF6B6B, #FFD166, #06D6A0, #118AB2, #073B4C)
+
+        Sections:
+        1. Hero/Introduction: Purpose, SA Key Partner status.
+           - Visualization: Large headline, "Key Partner" big number + Unicode icon (🤝).
+        2. South Africa & OECD: A Strategic Partnership: JWP, G20 Presidency.
+           - Visualization: JWP objectives (styled list), G20 highlight (text + icon 🌍).
+        3. Overall Opportunity Landscape: Chart comparing likelihood scores.
+           - Visualization: Horizontal Bar Chart (Chart.js) for top-tier bodies.
+        4. High-Likelihood Opportunities: Development Centre, IFT/TOSSD, Global Forum, CEM, BEPS Framework.
+           - Visualization: Material Design cards with Unicode icons (🏛️, 📊, 🌐, 💡, ⚖️), key facts, expertise.
+        5. Promising & Possible Opportunities: PARIS21, FATF, IEA.
+           - Visualization: Similar cards, distinct visual cue. Icons (📈, 🛡️, ⚡).
+        6. Lower Likelihood & Why: Energy Efficiency Hub, GPAI, Climate Club, DAC, ACN.
+           - Visualization: Compact list or smaller cards.
+        7. Strategic Application Advice: Key takeaways from the report.
+           - Visualization: Styled HTML list with icons (✅) or a simple HTML/CSS flowchart.
+        8. Footer: Brief note on data source (OECD Eligibility Report).
+
+        Visualization Choices Summary (Confirming NO SVG, NO MERMAID JS):
+        - Big Numbers/Stats: Large styled text (HTML/CSS). Goal: Inform.
+        - Icons: Unicode characters (e.g., 🤝, 🌍, 🏛️, ✅). Goal: Inform/Organize.
+        - Lists (JWP Objectives, Strategic Advice): Styled HTML `<ul>` or `<ol>`. Goal: Organize.
+        - Bar Chart (Opportunity Scores): Chart.js (Canvas). Goal: Compare.
+        - Cards (Individual Bodies): Structured HTML/CSS with Tailwind. Goal: Organize/Inform.
+        - Flowchart (Application Strategy): Structured HTML divs, borders, flexbox (Tailwind). Goal: Organize.
+        - All chart rendering via Canvas (Chart.js). No Plotly.js deemed necessary for this data.
+        - No SVG graphics will be used.
+        - No Mermaid JS will be used.
+    -->
+
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-palette-dark-slate mb-4">Navigating OECD-Affiliated Employment Opportunities</h1>
+            <p class="text-xl text-palette-blue font-semibold">An Infographic Guide for South African Nationals</p>
+        </header>
+
+        <section id="intro" class="mb-12 card">
+            <h2 class="section-title">A Unique Position: South Africa & The OECD</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-lg mb-4 text-palette-dark-slate">
+                        This guide visualizes pathways for South African nationals seeking employment within the Organisation for Economic Co-operation and Development (OECD) and its affiliated bodies. While the OECD primarily comprises 38 member countries, its ecosystem includes numerous initiatives with broader membership, offering potential avenues for professionals from non-member nations.
+                    </p>
+                    <p class="text-lg text-palette-dark-slate">
+                        South Africa's formal designation as an OECD Key Partner since 2007 provides a distinct platform for engagement and can be advantageous when seeking opportunities. This status facilitates deeper policy dialogue and participation in various OECD activities.
+                    </p>
+                </div>
+                <div class="text-center p-6 bg-palette-green rounded-lg text-white">
+                    <div class="stat-icon mb-2">🤝</div>
+                    <p class="text-2xl font-bold">OECD Key Partner</p>
+                    <p class="text-lg">Since 2007</p>
+                    <p class="mt-2 text-sm">Fostering enhanced cooperation and mutual learning.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategic-partnership" class="mb-12 card">
+            <h2 class="section-title">Strengthening Ties: Key Collaborative Frameworks</h2>
+            <p class="text-md mb-6 text-palette-dark-slate">South Africa's engagement with the OECD is reinforced by structured programmes and significant international roles, creating a dynamic environment for collaboration and highlighting areas of mutual strategic interest.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-palette-yellow rounded-lg text-palette-dark-slate">
+                    <h3 class="sub-section-title text-palette-dark-slate !mt-0">OECD-South Africa Joint Work Programme (JWP)</h3>
+                    <p class="mb-2">Formalized in July 2023, this 5-year framework aims to:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Support SA in realizing its economic potential.</li>
+                        <li>Contribute to better lives for all South Africans.</li>
+                        <li>Facilitate closer alignment with OECD standards.</li>
+                        <li>Build on collaboration in macro policy, governance, and more.</li>
+                    </ul>
+                    <p class="mt-3 text-sm">This programme signals prioritized areas for joint work, potentially creating needs for specialized South African expertise.</p>
+                </div>
+                <div class="p-6 bg-palette-coral rounded-lg text-white">
+                    <h3 class="sub-section-title text-white !mt-0">South Africa's G20 Presidency (2025) <span class="stat-icon text-2xl align-middle">🌍</span></h3>
+                    <p class="mb-2">South Africa's upcoming G20 Presidency in 2025 elevates its global profile. Key focus areas include:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Enhancing energy security.</li>
+                        <li>Ensuring just, affordable, and inclusive energy transitions.</li>
+                        <li>Fostering African regional energy interconnectivity.</li>
+                    </ul>
+                    <p class="mt-3 text-sm">While not direct OECD employment, this leadership role, supported by OECD technical expertise, can highlight South African capabilities on the global stage.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="opportunity-overview" class="mb-12 card">
+            <h2 class="section-title">Opportunity Snapshot: Likelihood of Employment</h2>
+            <p class="text-md mb-6 text-palette-dark-slate">The likelihood of employment for South African nationals varies across different OECD-affiliated bodies, largely depending on South Africa's membership status and level of engagement. This chart provides a comparative overview of entities offering more promising prospects.</p>
+            <div class="chart-container bg-white p-4 rounded-lg shadow">
+                <canvas id="opportunityLikelihoodChart"></canvas>
+            </div>
+            <p class="mt-4 text-sm text-center text-palette-dark-slate">Likelihood Score: 5 = Very High, 4 = High, 3 = Likely/Possible. Based on analysis of membership, leadership roles, and direct relevance of work programmes.</p>
+        </section>
+
+        <section id="high-likelihood" class="mb-12">
+            <h2 class="section-title">Top-Tier Prospects: High & Very High Likelihood</h2>
+            <p class="text-md mb-6 text-palette-dark-slate">These entities represent the most promising avenues due to South Africa's full membership, leadership roles, or deep strategic alignment with their mandates. Expertise in related fields is highly valued.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="card">
+                    <div class="flex items-center mb-3">
+                        <span class="stat-icon text-palette-green mr-3">🏛️</span>
+                        <h3 class="sub-section-title text-palette-green !mt-0 !mb-0">OECD Development Centre</h3>
+                    </div>
+                    <p class="font-semibold text-palette-dark-slate">Status: SA Full Member (Governing Board)</p>
+                    <p class="text-sm my-2 text-palette-dark-slate">A platform for OECD and non-OECD countries to collaborate on sustainable development. South Africa's active role makes it a prime target.</p>
+                    <p class="text-sm font-medium text-palette-blue">Expertise Needed: African economic development, natural resource governance, infrastructure finance, social inclusion.</p>
+                    <div class="mt-2 p-2 bg-green-50 rounded-md text-xs text-green-700"><strong>Likelihood: Very High</strong></div>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center mb-3">
+                        <span class="stat-icon text-palette-blue mr-3">📊</span>
+                        <h3 class="sub-section-title text-palette-blue !mt-0 !mb-0">IFT/TOSSD Secretariat</h3>
+                    </div>
+                    <p class="font-semibold text-palette-dark-slate">Status: SA Co-Chairs Forum</p>
+                    <p class="text-sm my-2 text-palette-dark-slate">The International Forum on Total Official Support for Sustainable Development. SA's leadership is a strong positive indicator.</p>
+                    <p class="text-sm font-medium text-palette-blue">Expertise Needed: Development finance, international statistics, sustainable development monitoring.</p>
+                    <div class="mt-2 p-2 bg-green-50 rounded-md text-xs text-green-700"><strong>Likelihood: Very High</strong></div>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center mb-3">
+                        <span class="stat-icon text-palette-coral mr-3">🌐</span>
+                        <h3 class="sub-section-title text-palette-coral !mt-0 !mb-0">Global Forum on Tax Transparency</h3>
+                    </div>
+                    <p class="font-semibold text-palette-dark-slate">Status: SA Full Member (Equal Footing)</p>
+                    <p class="text-sm my-2 text-palette-dark-slate">Monitors implementation of international tax transparency standards (EOIR & AEOI). Inclusive membership.</p>
+                    <p class="text-sm font-medium text-palette-blue">Expertise Needed: International tax law, tax administration, EOI/AEOI mechanisms, peer review.</p>
+                    <div class="mt-2 p-2 bg-yellow-50 rounded-md text-xs text-yellow-700"><strong>Likelihood: High</strong></div>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center mb-3">
+                        <span class="stat-icon text-palette-yellow mr-3">💡</span>
+                        <h3 class="sub-section-title text-palette-yellow !mt-0 !mb-0">Clean Energy Ministerial (CEM) Secretariat</h3>
+                    </div>
+                    <p class="font-semibold text-palette-dark-slate">Status: SA Full Member (IEA Hosted)</p>
+                    <p class="text-sm my-2 text-palette-dark-slate">Promotes policies to accelerate clean energy deployment. SA is also an IEA Association country.</p>
+                    <p class="text-sm font-medium text-palette-blue">Expertise Needed: Clean energy policy, just energy transitions, renewable energy technologies, international energy cooperation.</p>
+                    <div class="mt-2 p-2 bg-yellow-50 rounded-md text-xs text-yellow-700"><strong>Likelihood: High</strong></div>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-center mb-3">
+                        <span class="stat-icon text-palette-blue mr-3">⚖️</span>
+                         <h3 class="sub-section-title text-palette-blue !mt-0 !mb-0">OECD/G20 BEPS Framework Support</h3>
+                    </div>
+                    <p class="font-semibold text-palette-dark-slate">Status: SA Full Member (Equal Footing)</p>
+                    <p class="text-sm my-2 text-palette-dark-slate">The Inclusive Framework on Base Erosion and Profit Shifting addresses tax avoidance by MNEs. Supported by OECD's CTPA.</p>
+                    <p class="text-sm font-medium text-palette-blue">Expertise Needed: International tax policy, transfer pricing, digital economy taxation, BEPS measures.</p>
+                    <div class="mt-2 p-2 bg-yellow-50 rounded-md text-xs text-yellow-700"><strong>Likelihood: High</strong></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="possible-opportunities" class="mb-12">
+            <h2 class="section-title">Promising & Possible Avenues</h2>
+            <p class="text-md mb-6 text-palette-dark-slate">These bodies offer potential opportunities, often due to South Africa's specific engagement (e.g., as an Association Country or through regional statistical leadership) or evolving situations that create a demand for specialized expertise.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card">
+                    <div class="flex items-center mb-3">
+                        <span class="stat-icon text-palette-green mr-3">📈</span>
+                        <h3 class="sub-section-title text-palette-green !mt-0 !mb-0">PARIS21 Secretariat</h3>
+                    </div>
+                    <p class="font-semibold text-palette-dark-slate">Status: Strong Africa Focus, SA Statistical Leadership</p>
+                    <p class="text-sm my-2 text-palette-dark-slate">Partnership in Statistics for Development in the 21st Century. Focus on statistical capacity in developing countries.</p>
+                    <p class="text-sm font-medium text-palette-blue">Expertise Needed: Statistics, data science, development data, statistical systems in Africa.</p>
+                    <div class="mt-2 p-2 bg-blue-50 rounded-md text-xs text-blue-700"><strong>Likelihood: Likely/Possible</strong></div>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center mb-3">
+                        <span class="stat-icon text-palette-coral mr-3">🛡️</span>
+                        <h3 class="sub-section-title text-palette-coral !mt-0 !mb-0">Financial Action Task Force (FATF) Secretariat</h3>
+                    </div>
+                    <p class="font-semibold text-palette-dark-slate">Status: SA under increased monitoring (ESAAMLG Member)</p>
+                    <p class="text-sm my-2 text-palette-dark-slate">Global standard-setter for AML/CFT. SA's current status may create demand for specific regional expertise.</p>
+                    <p class="text-sm font-medium text-palette-blue">Expertise Needed: AML/CFT, financial crime investigation, legal/regulatory reform in finance.</p>
+                    <div class="mt-2 p-2 bg-blue-50 rounded-md text-xs text-blue-700"><strong>Likelihood: Possible</strong></div>
+                </div>
+
+                <div class="card">
+                    <div class="flex items-center mb-3">
+                        <span class="stat-icon text-palette-yellow mr-3">⚡</span>
+                        <h3 class="sub-section-title text-palette-yellow !mt-0 !mb-0">International Energy Agency (IEA) Secretariat</h3>
+                    </div>
+                    <p class="font-semibold text-palette-dark-slate">Status: SA is an IEA Association Country</p>
+                    <p class="text-sm my-2 text-palette-dark-slate">Works on reliable, affordable, clean energy. Association status opens doors for roles involving emerging economies.</p>
+                    <p class="text-sm font-medium text-palette-blue">Expertise Needed: Energy policy, energy markets in emerging economies, just transitions, energy data analysis.</p>
+                    <div class="mt-2 p-2 bg-blue-50 rounded-md text-xs text-blue-700"><strong>Likelihood: Possible</strong></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lower-likelihood" class="mb-12 card">
+            <h2 class="section-title">Other Considerations: Lower Likelihood Areas</h2>
+            <p class="text-md mb-6 text-palette-dark-slate">For some OECD-related bodies, opportunities for South African nationals are less likely, primarily due to factors like non-membership in the specific initiative or a narrow regional focus that does not include Southern Africa. It's important to understand these distinctions.</p>
+            <ul class="list-none space-y-3">
+                <li class="p-3 bg-gray-50 rounded-md shadow-sm"><strong>Energy Efficiency Hub Secretariat:</strong> Less likely as SA is not a member of the Hub itself, though hosted by IEA.</li>
+                <li class="p-3 bg-gray-50 rounded-md shadow-sm"><strong>Global Partnership on Artificial Intelligence (GPAI) Secretariat:</strong> Low likelihood as SA is not a GPAI member.</li>
+                <li class="p-3 bg-gray-50 rounded-md shadow-sm"><strong>Climate Club Secretariat:</strong> Low likelihood due to SA's non-membership in the Club.</li>
+                <li class="p-3 bg-gray-50 rounded-md shadow-sm"><strong>Development Assistance Committee (DAC) Secretariat:</strong> Low likelihood for core roles, as SA is an ODA recipient, not a donor member.</li>
+                <li class="p-3 bg-gray-50 rounded-md shadow-sm"><strong>Anti-Corruption Network for Eastern Europe & Central Asia (ACN):</strong> Very low likelihood due to its specific regional focus.</li>
+            </ul>
+            <p class="mt-4 text-sm text-palette-dark-slate">While core roles may be limited in these areas, project-specific consultancies or roles requiring broader developing country perspectives might occasionally arise, particularly within the DCD's wider analytical work.</p>
+        </section>
+
+        <section id="strategic-advice" class="mb-12 card">
+            <h2 class="section-title">Strategic Application Advice for South Africans</h2>
+            <p class="text-md mb-6 text-palette-dark-slate">Maximizing your chances requires a targeted approach. Consider these key strategies when applying for positions within the OECD ecosystem:</p>
+            
+            <div class="mb-8">
+                <h3 class="sub-section-title">Key Recommendations:</h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start p-3 bg-palette-green text-white rounded-md shadow-sm">
+                        <span class="text-2xl mr-3">🎯</span>
+                        <div><strong>Prioritize Strategically:</strong> Focus on bodies where SA has full membership, leadership roles, or strong engagement (e.g., Development Centre, IFT/TOSSD, Global Forum, CEM, BEPS Framework).</div>
+                    </li>
+                    <li class="flex items-start p-3 bg-palette-blue text-white rounded-md shadow-sm">
+                        <span class="text-2xl mr-3">🛰️</span>
+                        <div><strong>Monitor Key Programmes:</strong> Stay informed about the OECD-SA Joint Work Programme (JWP) for emerging, targeted opportunities.</div>
+                    </li>
+                    <li class="flex items-start p-3 bg-palette-yellow text-palette-dark-slate rounded-md shadow-sm">
+                        <span class="text-2xl mr-3">🏆</span>
+                        <div><strong>Leverage G20 Expertise:</strong> Highlight skills relevant to SA's 2025 G20 Presidency themes (e.g., just energy transitions, African development).</div>
+                    </li>
+                    <li class="flex items-start p-3 bg-palette-coral text-white rounded-md shadow-sm">
+                        <span class="text-2xl mr-3">✍️</span>
+                        <div><strong>Tailor Applications Meticulously:</strong> Emphasize specialized skills and experience directly aligning with the specific body's mandate and work. Generic applications are less effective.</div>
+                    </li>
+                     <li class="flex items-start p-3 bg-palette-green text-white rounded-md shadow-sm">
+                        <span class="text-2xl mr-3">🌍</span>
+                        <div><strong>Highlight Contextual Understanding:</strong> Stress your understanding of developing country challenges and the African context, a valuable asset for many relevant bodies.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="sub-section-title">General Application Flow:</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2 items-stretch">
+                    <div class="flowchart-step">1. Identify Relevant Bodies & Roles</div>
+                    <div class="flowchart-arrow hidden md:flex">➔</div>
+                    <div class="flowchart-step">2. Monitor Vacancies (OECD Careers etc.)</div>
+                    <div class="flowchart-arrow hidden md:flex">➔</div>
+                    <div class="flowchart-step md:col-start-1 md:col-end-2 mt-2 md:mt-0">3. Tailor CV & Cover Letter</div>
+                    <div class="flowchart-arrow hidden md:flex md:col-start-2 md:col-end-3 mt-2 md:mt-0">➔</div>
+                    <div class="flowchart-step md:col-start-3 md:col-end-4 mt-2 md:mt-0">4. Emphasize SA's Unique Position & Your Expertise</div>
+                    <div class="flowchart-arrow hidden md:flex md:col-start-4 md:col-end-5 mt-2 md:mt-0">➔</div>
+                    <div class="flowchart-step md:col-start-5 md:col-end-6 mt-2 md:mt-0">5. Prepare for Language & Competency Checks</div>
+                </div>
+                 <p class="mt-4 text-sm text-palette-dark-slate">This simplified flow illustrates key stages. Remember that proficiency in English is essential, and French is often a strong asset. Vacancies are typically advertised on oecd.org/careers and respective body websites.</p>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 pt-8 border-t border-palette-blue">
+            <p class="text-sm text-palette-dark-slate">
+                This infographic is based on the "Navigating OECD-Affiliated Employment Opportunities for South African Nationals" Deep Research report.
+                Data and assessments reflect the information available within that report. For the most current vacancies and specific hiring criteria, always consult official OECD and affiliated body career portals.
+            </p>
+            <p class="text-xs text-gray-500 mt-2">Infographic generated: May 2025.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function wrapLabels(labels, maxLength) {
+            return labels.map(label => {
+                if (typeof label === 'string' && label.length > maxLength) {
+                    const words = label.split(' ');
+                    const lines = [];
+                    let currentLine = '';
+                    words.forEach(word => {
+                        if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+                            lines.push(currentLine.trim());
+                            currentLine = word + ' ';
+                        } else {
+                            currentLine += word + ' ';
+                        }
+                    });
+                    lines.push(currentLine.trim());
+                    return lines;
+                }
+                return label;
+            });
+        }
+
+        const opportunityData = {
+            labels: wrapLabels([
+                'OECD Development Centre', 
+                'IFT/TOSSD Secretariat', 
+                'Global Forum on Tax Transparency', 
+                'CEM Secretariat', 
+                'OECD/G20 BEPS Framework Support',
+                'PARIS21 Secretariat',
+                'FATF Secretariat',
+                'IEA Secretariat'
+            ], 16),
+            datasets: [{
+                label: 'Opportunity Likelihood Score (out of 5)',
+                data: [5, 5, 4, 4, 4, 3.5, 3, 3], // Very High=5, High=4, Likely/Possible=3 or 3.5
+                backgroundColor: [
+                    '#06D6A0', // Green
+                    '#06D6A0', // Green
+                    '#FFD166', // Yellow
+                    '#FFD166', // Yellow
+                    '#FFD166', // Yellow
+                    '#118AB2', // Blue
+                    '#FF6B6B', // Coral
+                    '#FF6B6B'  // Coral
+                ],
+                borderColor: [
+                    '#073B4C',
+                    '#073B4C',
+                    '#073B4C',
+                    '#073B4C',
+                    '#073B4C',
+                    '#073B4C',
+                    '#073B4C',
+                    '#073B4C'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const configOpportunity = {
+            type: 'bar', // Changed to bar for better readability with wrapped labels
+            data: opportunityData,
+            options: {
+                indexAxis: 'y', // Horizontal bar chart
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 5,
+                        title: {
+                            display: true,
+                            text: 'Likelihood Score (1=Low, 5=Very High)',
+                            color: '#073B4C'
+                        },
+                        ticks: { color: '#073B4C' }
+                    },
+                    y: {
+                         ticks: { color: '#073B4C', autoSkip: false } // Ensure all labels are shown
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Hiding legend as it's a single dataset
+                    },
+                    title: {
+                        display: true,
+                        text: 'Comparative Likelihood for Key OECD-Affiliated Bodies',
+                        font: { size: 16 },
+                        color: '#073B4C'
+                    },
+                    tooltip: {
+                        enabled: true,
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: '#073B4C',
+                        titleColor: '#FFFFFF',
+                        bodyColor: '#FFFFFF',
+                        borderColor: '#118AB2',
+                        borderWidth: 1,
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        window.onload = function() {
+            const ctxOpportunity = document.getElementById('opportunityLikelihoodChart').getContext('2d');
+            new Chart(ctxOpportunity, configOpportunity);
+        };
+    </script>
+</body>
+</html>
+
+```
+
+:::
