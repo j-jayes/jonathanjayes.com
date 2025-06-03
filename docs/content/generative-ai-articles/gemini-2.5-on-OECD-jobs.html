@@ -181,8 +181,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#eligibility" id="toc-eligibility" class="nav-link active" data-scroll-target="#eligibility">Eligibility</a></li>
+  <li><a href="#structure-secretariats-of-the-oecd" id="toc-structure-secretariats-of-the-oecd" class="nav-link" data-scroll-target="#structure-secretariats-of-the-oecd">Structure &amp; Secretariats of the OECD</a></li>
+  <li><a href="#the-iea-international-energy-agenc" id="toc-the-iea-international-energy-agenc" class="nav-link" data-scroll-target="#the-iea-international-energy-agenc">The IEA (International Energy Agenc)</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -223,6 +231,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="eligibility" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="eligibility">Eligibility</h2>
+<p>First, I asked Gemini 2.5 to find out which jobs are available for South Africans at the OECD.</p>
 <div class="column-page">
 
 
@@ -733,8 +744,605 @@ ul.task-list li input[type="checkbox"] {
 
 
 </div>
+</section>
+<section id="structure-secretariats-of-the-oecd" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="structure-secretariats-of-the-oecd">Structure &amp; Secretariats of the OECD</h2>
+<div class="column-page">
 
 
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deconstructing the OECD: A Visual Guide to its Structure &amp; Secretariats</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F8FF;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #073B4C;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 4px solid #118AB2;
+        }
+        .sub-section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #118AB2;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .palette-coral { color: #FF6B6B; }
+        .palette-yellow { color: #FFD166; }
+        .palette-green { color: #06D6A0; }
+        .palette-blue { color: #118AB2; }
+        .palette-dark-slate { color: #073B4C; }
+
+        .bg-palette-coral { background-color: #FF6B6B; }
+        .bg-palette-yellow { background-color: #FFD166; }
+        .bg-palette-green { background-color: #06D6A0; }
+        .bg-palette-blue { background-color: #118AB2; }
+        .bg-palette-dark-slate { background-color: #073B4C; }
+        
+        .text-palette-coral { color: #FF6B6B; }
+        .text-palette-yellow { color: #FFD166; }
+        .text-palette-green { color: #06D6A0; }
+        .text-palette-blue { color: #118AB2; }
+        .text-palette-dark-slate { color: #073B4C; }
+
+        .border-palette-coral { border-color: #FF6B6B; }
+        .border-palette-yellow { border-color: #FFD166; }
+        .border-palette-green { border-color: #06D6A0; }
+        .border-palette-blue { border-color: #118AB2; }
+        .border-palette-dark-slate { border-color: #073B4C; }
+
+        .flow-item {
+            background-color: white;
+            border: 2px solid #118AB2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #118AB2;
+            margin: 0.5rem 0;
+        }
+        .ecosystem-hub {
+            grid-column: 2 / span 2;
+            grid-row: 2 / span 2;
+            background-color: #073B4C;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            aspect-ratio: 1/1;
+            z-index: 10;
+        }
+        .ecosystem-spoke {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        .ecosystem-spoke:hover {
+            transform: scale(1.05);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            background-color: #f8fafc;
+            border-radius: 0.375rem;
+        }
+    </style>
+
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-palette-dark-slate mb-4">Deconstructing the OECD</h1>
+            <p class="text-2xl text-palette-blue font-semibold">A Visual Guide to its Structure &amp; Secretariats</p>
+        </header>
+
+        <section id="core-architecture" class="mb-16 card">
+            <h2 class="section-title anchored">The Core Architecture: Three Pillars of the OECD</h2>
+            <p class="text-lg mb-8 text-center max-w-4xl mx-auto">The OECD's foundational structure is built on three main pillars that work in concert: the Council sets the direction, the Committees develop the policies, and the Secretariat provides the operational and analytical power.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <div class="flex flex-col items-center">
+                    <div class="flow-item w-full">
+                        <div class="text-5xl mb-2">🏛️</div>
+                        <h3 class="text-xl font-bold text-palette-dark-slate anchored">The OECD Council</h3>
+                        <p class="text-sm mt-2">The ultimate decision-making body, composed of ambassadors from 38 Member countries and the EU. Operates by consensus.</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex flex-col items-center justify-center pt-16">
+                    <div class="flow-arrow -mt-8">→</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="flow-arrow md:hidden">↓</div>
+                    <div class="flow-item w-full">
+                        <div class="text-5xl mb-2">👥</div>
+                        <h3 class="text-xl font-bold text-palette-dark-slate anchored">Substantive Committees</h3>
+                        <p class="text-sm mt-2">Over 300 expert committees, working groups, and task forces where policy is developed, data is assessed, and peer reviews are conducted.</p>
+                    </div>
+                </div>
+                 <div class="hidden md:flex flex-col items-center justify-center pt-16">
+                    <div class="flow-arrow -mt-8">→</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="flow-arrow md:hidden">↓</div>
+                    <div class="flow-item w-full">
+                        <div class="text-5xl mb-2">🏢</div>
+                        <h3 class="text-xl font-bold text-palette-dark-slate anchored">The Central Secretariat</h3>
+                        <p class="text-sm mt-2">The operational and analytical engine of the Organisation, supporting the work of the Council and Committees with research, data, and policy advice.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="secretariat-breakdown" class="mb-16 card">
+            <h2 class="section-title anchored">Inside the Central Secretariat</h2>
+            <p class="text-lg mb-8 text-center max-w-4xl mx-auto">The Secretariat is the international civil service of the OECD, headed by the Secretary-General. It is organized into directorates that provide leadership, thematic policy expertise, and essential corporate support.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 bg-palette-dark-slate text-white rounded-lg text-center">
+                    <div class="text-4xl mb-3">👑</div>
+                    <h3 class="text-2xl font-bold anchored">Office of the Secretary-General</h3>
+                    <p>Provides overall leadership, strategic direction, and external representation for the entire Organisation.</p>
+                </div>
+                <div class="p-6 bg-palette-blue text-white rounded-lg text-center">
+                     <div class="text-4xl mb-3">🧠</div>
+                    <h3 class="text-2xl font-bold anchored">Key Policy Directorates</h3>
+                    <p>Thematic departments that conduct research and support committees. Examples include:</p>
+                    <ul class="text-sm mt-2 list-none">
+                        <li>Economics Department (ECO)</li>
+                        <li>Environment Directorate (ENV)</li>
+                        <li>Centre for Tax Policy (CTP)</li>
+                        <li>Development Co-operation (DCD)</li>
+                    </ul>
+                </div>
+                <div class="p-6 bg-palette-green text-palette-dark-slate rounded-lg text-center">
+                     <div class="text-4xl mb-3">⚙️</div>
+                    <h3 class="text-2xl font-bold anchored">Corporate Directorates</h3>
+                    <p>Enabling functions that support the Organisation's operations. Examples include:</p>
+                     <ul class="text-sm mt-2 list-none">
+                        <li>Executive Directorate (EXD)</li>
+                        <li>Communications (COM)</li>
+                        <li>Legal Affairs (LEG)</li>
+                        <li>Global Relations (GRC)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="ecosystem" class="mb-16 card">
+            <h2 class="section-title anchored">The Broader OECD Ecosystem: A Hub &amp; Spoke Model</h2>
+            <p class="text-lg mb-8 text-center max-w-4xl mx-auto">The OECD is more than just its core structure. It serves as an institutional "hub" for a diverse family of specialised agencies, programmes, and initiatives. These "spokes" have varying degrees of autonomy but are connected to the OECD's framework, creating a powerful global network.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <div class="ecosystem-spoke border-palette-green">
+                    <h4 class="font-bold text-lg anchored">⚡ International Energy Agency (IEA)</h4>
+                    <p class="text-sm mt-1">An <strong class="text-palette-green">Autonomous Agency</strong> within the OECD framework, with its own governance and budget, focused on global energy policy.</p>
+                </div>
+                <div class="ecosystem-spoke border-palette-blue">
+                     <h4 class="font-bold text-lg anchored">🚗 International Transport Forum (ITF)</h4>
+                    <p class="text-sm mt-1">An <strong class="text-palette-blue">Administratively Integrated</strong> but politically autonomous global think tank for transport policy.</p>
+                </div>
+
+                <div class="ecosystem-hub hidden md:flex">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold anchored">CORE OECD</h3>
+                        <p class="text-sm">(Council, Committees, Central Secretariat)</p>
+                    </div>
+                </div>
+                
+                <div class="ecosystem-spoke border-palette-yellow">
+                    <h4 class="font-bold text-lg anchored">🏛️ Development Centre (DEV)</h4>
+                    <p class="text-sm mt-1"><strong class="text-palette-yellow">Part of OECD with Distinct Governance</strong>, bridging OECD and developing countries on an "equal footing".</p>
+                </div>
+                <div class="ecosystem-spoke border-palette-coral">
+                    <h4 class="font-bold text-lg anchored">🛡️ Financial Action Task Force (FATF)</h4>
+                    <p class="text-sm mt-1">An independent global standard-setter whose Secretariat is <strong class="text-palette-coral">Administratively Housed</strong> at the OECD.</p>
+                </div>
+                <div class="md:hidden mt-4 card bg-palette-dark-slate text-white text-center">
+                    <h3 class="text-xl font-bold anchored">CORE OECD HUB</h3>
+                </div>
+                 <div class="ecosystem-spoke border-palette-blue">
+                     <h4 class="font-bold text-lg anchored">☢️ Nuclear Energy Agency (NEA)</h4>
+                    <p class="text-sm mt-1">An <strong class="text-palette-blue">Autonomous Agency</strong> within the OECD framework, focused on co-operation in nuclear energy.</p>
+                </div>
+                <div class="ecosystem-spoke border-palette-green">
+                    <h4 class="font-bold text-lg anchored">📈 PARIS21</h4>
+                    <p class="text-sm mt-1">A global partnership whose Secretariat is <strong class="text-palette-green">Hosted within an OECD Directorate</strong> (Statistics) to build statistical capacity.</p>
+                </div>
+                 <div class="ecosystem-spoke border-palette-coral">
+                     <h4 class="font-bold text-lg anchored">🌍 Sahel and West Africa Club (SWAC)</h4>
+                    <p class="text-sm mt-1">A regional policy platform whose Secretariat is <strong class="text-palette-coral">Hosted by the OECD</strong> to support its specific geographic mandate.</p>
+                </div>
+                <div class="ecosystem-spoke border-palette-yellow">
+                     <h4 class="font-bold text-lg anchored">🤝 Part II Programmes</h4>
+                    <p class="text-sm mt-1"><strong class="text-palette-yellow">Specific Interest Programmes</strong> with limited country participation and dedicated support within OECD directorates.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="legend" class="mb-16 card">
+            <h2 class="section-title anchored">Understanding the Relationships: A Legend</h2>
+            <p class="text-lg mb-6">The relationship between the Core OECD and its affiliated bodies varies. This legend clarifies the key terms used to describe these connections.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="legend-item">
+                    <div class="w-4 h-4 rounded-full bg-palette-green mr-3 flex-shrink-0"></div>
+                    <div><strong class="text-palette-green">Autonomous Agency:</strong> Operates with its own governance and budget but within the OECD's legal framework (e.g., IEA, NEA). High degree of independence.</div>
+                </div>
+                <div class="legend-item">
+                    <div class="w-4 h-4 rounded-full bg-palette-blue mr-3 flex-shrink-0"></div>
+                    <div><strong class="text-palette-blue">Administratively Integrated:</strong> Shares OECD administrative systems and is housed at the OECD, but maintains political autonomy and a distinct membership/mandate (e.g., ITF).</div>
+                </div>
+                <div class="legend-item">
+                    <div class="w-4 h-4 rounded-full bg-palette-coral mr-3 flex-shrink-0"></div>
+                    <div><strong class="text-palette-coral">Hosted Secretariat:</strong> The OECD provides an operational base and support for an independent body's secretariat, lending stability and credibility (e.g., FATF, SWAC).</div>
+                </div>
+                <div class="legend-item">
+                     <div class="w-4 h-4 rounded-full bg-palette-yellow mr-3 flex-shrink-0"></div>
+                    <div><strong class="text-palette-yellow">Distinct Governance:</strong> A body that is part of the OECD but has its own governing board with a unique membership, often including non-OECD countries (e.g., Development Centre).</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="conclusion" class="card">
+            <h2 class="section-title anchored">Why This Structure Matters for Global Policy &amp; Employment</h2>
+            <div class="text-lg space-y-4">
+                <p>This networked "hub and spoke" structure is the OECD's key strength. It allows the Organisation to be both a <strong class="text-palette-dark-slate">stable, member-driven institution</strong> and a <strong class="text-palette-dark-slate">flexible, dynamic platform</strong> for global cooperation.</p>
+                <p>For international policy, it means the OECD can tackle a vast range of issues by combining the deep expertise of its specialised bodies with the broad oversight of its core committees. It can launch targeted initiatives with inclusive, global memberships without needing full consensus from all 38 core members every time.</p>
+                <p>For prospective employees, this structure is crucial to understand. It creates two primary types of opportunities:</p>
+                <ul class="list-disc list-inside space-y-2 pl-4">
+                    <li><strong class="text-palette-blue">Core Secretariat Roles:</strong> Positions within the central directorates, often focused on serving the main OECD committees and member countries.</li>
+                    <li><strong class="text-palette-green">Specialised Body Roles:</strong> Positions within the secretariats of entities like the IEA, FATF, ITF, or Development Centre. These roles serve a different, often broader, membership and governance structure, which can lead to more inclusive hiring criteria that extend beyond nationals of the 38 OECD member countries.</li>
+                </ul>
+                <p>Navigating this complex landscape is key to identifying the right opportunities and understanding the specific mandate and mission of each part of the wider OECD family.</p>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 pt-8 border-t border-palette-blue">
+            <p class="text-sm text-palette-dark-slate">
+                This infographic is a visual summary based on the research report "Navigating the Labyrinth: An Overview of the OECD's Secretariats and Organisational Structure".
+            </p>
+             <p class="text-xs text-gray-500 mt-2">Infographic Generated: June 2025.</p>
+        </footer>
+
+    </div>
+
+
+
+</div>
+</section>
+<section id="the-iea-international-energy-agenc" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-iea-international-energy-agenc">The IEA (International Energy Agenc)</h2>
+<div class="column-page">
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEA Infographic: Navigating the Global Energy Landscape</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide-react@0.292.0/dist/umd/lucide-react.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+        }
+        .section-title {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 700;
+            color: #1e3a8a; /* Dark blue */
+            border-bottom: 3px solid #fbbf24; /* Amber accent */
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem; /* 12px */
+            padding: 1.5rem; /* 24px */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .icon-placeholder {
+            width: 3rem; /* 48px */
+            height: 3rem; /* 48px */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem; /* 8px */
+            margin-right: 1rem; /* 16px */
+        }
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem; /* 12px */
+        }
+        .list-item svg {
+            flex-shrink: 0;
+            margin-right: 0.75rem; /* 12px */
+            margin-top: 0.25rem; /* 4px */
+            color: #1e3a8a; /* Dark Blue */
+        }
+        .stat-box {
+            background-color: #e0f2fe; /* Light sky blue */
+            border-left: 4px solid #0284c7; /* Sky blue */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .publication-icon {
+            width: 2.5rem; /* 40px */
+            height: 2.5rem; /* 40px */
+        }
+        .challenge-item {
+            background-color: #fff1f2; /* Light pink */
+            border-left: 4px solid #e11d48; /* Rose */
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+        }
+    </style>
+
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-5xl">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-blue-700 mb-2">Navigating the Global Energy Landscape</h1>
+            <h2 class="text-2xl font-semibold text-blue-900 anchored">The International Energy Agency (IEA)</h2>
+        </header>
+
+        <section class="mb-12">
+            <h3 class="section-title anchored">About the IEA</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card">
+                    <div class="flex items-center mb-3">
+                        <div class="icon-placeholder bg-blue-100 text-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-landmark"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-700 anchored">What it is</h4>
+                    </div>
+                    <p class="text-gray-600">An autonomous intergovernmental organization, the world's foremost energy authority, working to shape a secure and sustainable energy future for all.</p>
+                </div>
+                <div class="card">
+                    <div class="flex items-center mb-3">
+                        <div class="icon-placeholder bg-green-100 text-green-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-700 anchored">Founded</h4>
+                    </div>
+                    <p class="text-gray-600">November 1974, in response to the 1973-1974 oil crisis. Original mandate focused on oil supply security.</p>
+                </div>
+                <div class="card">
+                     <div class="flex items-center mb-3">
+                        <div class="icon-placeholder bg-yellow-100 text-yellow-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-700 anchored">Headquarters</h4>
+                    </div>
+                    <p class="text-gray-600">Paris, France. Operates within the OECD framework.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h3 class="section-title anchored">Evolution &amp; Modernization</h3>
+            <div class="card mb-6">
+                <div class="flex items-center mb-3">
+                    <div class="icon-placeholder bg-purple-100 text-purple-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-700 anchored">Expanded Mandate</h4>
+                </div>
+                <p class="text-gray-600 mb-2">Beyond oil security to a comprehensive spectrum of energy issues:</p>
+                <ul class="list-disc list-inside text-gray-600 space-y-1 pl-2">
+                    <li>Climate change mitigation &amp; decarbonization</li>
+                    <li>Universal energy access &amp; energy efficiency</li>
+                    <li>Sustainable energy investment &amp; innovation</li>
+                    <li>Critical minerals for clean energy technologies</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="flex items-center mb-3">
+                    <div class="icon-placeholder bg-indigo-100 text-indigo-600">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-700 anchored">Dr. Fatih Birol's Modernization (since 2015)</h4>
+                </div>
+                <ul class="list-disc list-inside text-gray-600 space-y-1 pl-2">
+                    <li>Broader energy security: electricity, natural gas, renewables, critical minerals.</li>
+                    <li>Positioning IEA as a global hub for energy efficiency and clean technologies.</li>
+                    <li>"Opening the doors" to major emerging economies: IEA Family now covers nearly 80% of global energy demand.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h3 class="section-title anchored">Core Mission: The 4 Pillars</h3>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card text-center">
+                    <div class="mx-auto icon-placeholder bg-red-100 text-red-600 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-700 anchored">Energy Security</h4>
+                </div>
+                <div class="card text-center">
+                    <div class="mx-auto icon-placeholder bg-yellow-100 text-yellow-600 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-line-chart"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-700 anchored">Economic Development</h4>
+                </div>
+                <div class="card text-center">
+                    <div class="mx-auto icon-placeholder bg-green-100 text-green-600 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf"><path d="M11 20A7 7 0 0 1 4 13H2a10 10 0 0 0 10 10z"></path><path d="M12 18a7 7 0 0 0 7-7h2a10 10 0 0 1-10 10z"></path><path d="M14 14A7 7 0 0 0 7 7H5a10 10 0 0 1 10 10z"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-700 anchored">Environmental Awareness</h4>
+                </div>
+                <div class="card text-center">
+                    <div class="mx-auto icon-placeholder bg-blue-100 text-blue-600 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-700 anchored">Engagement Worldwide</h4>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h3 class="section-title anchored">Key Areas of Work</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card">
+                    <ul class="space-y-3">
+                        <li class="list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                            <span class="text-gray-700"><strong>Data &amp; Analysis:</strong> Energy Data Centre collects data from 180+ countries.</span>
+                        </li>
+                        <li class="list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><line x1="10" x2="8" y1="9" y2="9"></line></svg>
+                            <span class="text-gray-700"><strong>Policy Recommendations</strong> &amp; Country Reviews.</span>
+                        </li>
+                         <li class="list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-siren"><path d="M12 2c-.6 0-1.4.3-2.2.7L6.2 4.8c-1 .6-1.8 1.6-1.8 2.7v4.8c0 1.6.8 3.1 2.2 4.1l3.6 2.8c.8.6 1.6.8 2.2.8s1.4-.3 2.2-.7l3.6-2.8c1.4-1 2.2-2.5 2.2-4.1V7.5c0-1.1-.8-2.1-1.8-2.7l-3.6-2.1C13.4 2.3 12.6 2 12 2z"></path><path d="M12 2v6"></path><path d="m10 8 4 4"></path><path d="m14 8-4 4"></path></svg>
+                            <span class="text-gray-700"><strong>Emergency Response</strong> Coordination.</span>
+                        </li>
+                        <li class="list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-recycle"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.756 1.756 0 0 1 .018-1.7L7.93 12 3.26 7.584A1.756 1.756 0 0 1 3.24 5.88 1.83 1.83 0 0 1 4.814 5H7"></path><path d="M14 12h2.52a1.83 1.83 0 0 0 1.57-.881 1.756 1.756 0 0 0-.018-1.7L13.387 5l4.674 4.416a1.756 1.756 0 0 0 .018 1.704 1.83 1.83 0 0 0 1.569.88H17"></path><path d="m10 19 4.673-4.416a1.756 1.756 0 0 0 .018-1.704 1.83 1.83 0 0 0-1.57-.88H10.52"></path><path d="M10 5V2"></path><path d="M7 19l-3 3"></path><path d="M14 12v3.52a1.83 1.83 0 0 0 .882 1.57 1.756 1.756 0 0 0 1.7.018L19 15.387"></path></svg>
+                            <span class="text-gray-700"><strong>Clean Energy Transitions</strong> Support.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                     <ul class="space-y-3">
+                        <li class="list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gem"><path d="M6 3h12l4 6-10 13L2 9Z"></path><path d="m12 22 4-13-3-6h-2L8 9Z"></path><path d="M2 9h20"></path></svg>
+                            <span class="text-gray-700"><strong>Critical Minerals</strong> Analysis.</span>
+                        </li>
+                        <li class="list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                            <span class="text-gray-700"><strong>Energy Efficiency</strong> Promotion.</span>
+                        </li>
+                        <li class="list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain-circuit"><path d="M12 2a2.5 2.5 0 0 0-2.5 2.5v.75a2.5 2.5 0 0 0 5 0V4.5A2.5 2.5 0 0 0 12 2Z"></path><path d="M19.5 9.75c.41-.41.75-.89.97-1.42"></path><path d="M4.53 9.75A5.07 5.07 0 0 1 4 8.5c0-1.42.75-2.67 1.9-3.44"></path><path d="M19.37 5.81A5.07 5.07 0 0 1 19.5 8.5c0 .75-.21 1.42-.53 2.02"></path><path d="M12 14.5a2.5 2.5 0 0 0-2.5 2.5v.75a2.5 2.5 0 0 0 5 0V17a2.5 2.5 0 0 0-2.5-2.5Z"></path><path d="M21.53 16.25c.41.41.75.89.97 1.42"></path><path d="M2.53 16.25a5.07 5.07 0 0 0-.53 2.25c0 1.42.75 2.67 1.9 3.44"></path><path d="M21.37 20.19A5.07 5.07 0 0 0 19.5 17c0-.75-.21-1.42-.53-2.02"></path><path d="M12 22.5a2.5 2.5 0 0 0 2.5-2.5v-.75a2.5 2.5 0 0 0-5 0V20a2.5 2.5 0 0 0 2.5 2.5Z"></path><path d="M17.5 12a2.5 2.5 0 0 0-2.5-2.5h-.75a2.5 2.5 0 0 0 0 5h.75a2.5 2.5 0 0 0 2.5-2.5Z"></path><path d="M9.25 14.5c.41.41.89.75 1.42.97"></path><path d="M9.25 9.5A5.07 5.07 0 0 0 7.5 9c-1.42 0-2.67.75-3.44 1.9"></path><path d="M15.19 16.37A5.07 5.07 0 0 0 16.5 15c.75 0 1.42-.21 2.02-.53"></path><path d="M6.5 12a2.5 2.5 0 0 0 2.5 2.5h.75a2.5 2.5 0 0 0 0-5h-.75A2.5 2.5 0 0 0 6.5 12Z"></path><path d="M14.75 9.5c-.41-.41-.89-.75-1.42-.97"></path><path d="M14.75 14.5a5.07 5.07 0 0 1 1.75.5c1.42 0 2.67-.75 3.44-1.9"></path><path d="M8.81 7.63A5.07 5.07 0 0 1 7.5 9c0 .75.21 1.42.53 2.02"></path></svg>
+                            <span class="text-gray-700"><strong>AI &amp; Energy:</strong> Analyzing impacts and opportunities.</span>
+                        </li>
+                         <li class="list-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-fog"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M16 17H7"></path><path d="M17 21H9"></path></svg>
+                            <span class="text-gray-700"><strong>Methane Abatement:</strong> Reducing emissions from energy sector.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-6 card">
+                <h4 class="text-xl font-semibold text-gray-700 mb-3 text-center anchored">Flagship Publications</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 text-center">
+                    <div class="flex flex-col items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open publication-icon text-blue-500 mb-1"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                        <p class="text-sm text-gray-600">World Energy Outlook (WEO)</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fuel publication-icon text-gray-500 mb-1"><line x1="3" x2="15" y1="22" y2="22"></line><line x1="4" x2="14" y1="9" y2="9"></line><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"></path><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2Z"></path></svg>
+                        <p class="text-sm text-gray-600">Oil Market Report (OMR)</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-goal publication-icon text-green-500 mb-1"><path d="M12 13V2l8 4-8 4"></path><path d="M12 22v-9"></path><path d="M20.55 17.8a2.5 2.5 0 0 0-3.1 3.1c.75.75 2 1.11 3.1 1.1"></path><path d="M3.45 17.8a2.5 2.5 0 0 1 3.1 3.1c-.75.75-2 1.11-3.1 1.1"></path><path d="M12 22a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 0 0 5Z"></path></svg>
+                        <p class="text-sm text-gray-600">Net Zero Roadmap</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-car publication-icon text-purple-500 mb-1"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><path d="M7 17h10"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg>
+                        <p class="text-sm text-gray-600">Global EV Outlook</p>
+                    </div>
+                     <div class="flex flex-col items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flask-conical publication-icon text-teal-500 mb-1"><path d="M10 10C7.786 10 6.106 8.327 6 6h12c-.106 2.327-1.786 4-4 4"></path><path d="m6 6 2-4h8l2 4"></path><path d="M10 10v10a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V10"></path></svg>
+                        <p class="text-sm text-gray-600">Energy Tech Perspectives</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h3 class="section-title anchored">Global Impact &amp; Engagement</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="stat-box">
+                    <h4 class="text-lg font-semibold text-sky-800 mb-1 anchored">Policy &amp; Investment Influence</h4>
+                    <p class="text-sky-700">Shapes global energy policy and investment through authoritative data, analysis, and recommendations.</p>
+                </div>
+                <div class="stat-box">
+                    <h4 class="text-lg font-semibold text-sky-800 mb-1 anchored">Global Network</h4>
+                    <p class="text-sky-700"><strong>32 Member Countries</strong> and <strong>13+ Association Countries</strong> (incl. China, India, Brazil), covering ~80% of global energy demand.</p>
+                </div>
+                <div class="stat-box md:col-span-2">
+                    <h4 class="text-lg font-semibold text-sky-800 mb-1 anchored">Focus on Global South</h4>
+                    <p class="text-sky-700">Supports energy transitions in emerging and developing economies, with initiatives in Southeast Asia (Singapore regional office), Latin America, and Africa.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h3 class="section-title anchored">Navigating Challenges</h3>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="challenge-item">
+                    <p class="text-rose-700 font-medium">Balancing energy security with climate goals.</p>
+                </div>
+                <div class="challenge-item">
+                    <p class="text-rose-700 font-medium">Geopolitical tensions impacting markets.</p>
+                </div>
+                <div class="challenge-item">
+                    <p class="text-rose-700 font-medium">Surging energy demand from AI.</p>
+                </div>
+                <div class="challenge-item">
+                    <p class="text-rose-700 font-medium">Critical mineral supply chain security.</p>
+                </div>
+                <div class="challenge-item">
+                    <p class="text-rose-700 font-medium">Investment gaps for clean energy (Global South).</p>
+                </div>
+                <div class="challenge-item">
+                    <p class="text-rose-700 font-medium">Criticisms on transition pace &amp; fossil fuel outlooks.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-10 pt-6 border-t border-gray-300">
+            <p class="text-lg font-semibold text-blue-800">IEA: Shaping a Secure and Sustainable Energy Future for All.</p>
+            <p class="text-sm text-gray-500 mt-1">Infographic based on "Navigating the Global Energy Landscape" report.</p>
+        </footer>
+
+    </div>
+
+
+
+</div>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
