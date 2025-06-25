@@ -84,9 +84,9 @@ education %>%
 
 ## Experience
 
-**Codera Analytics** | Data Scientist at [Codera Analytics](https://www.linkedin.com/company/coderaanalytics/)| December 2023 - March 2023
+**Codera Analytics** | Data Scientist at [Codera Analytics](https://www.linkedin.com/company/coderaanalytics/)| December 2022 - Present
 
-**Fathom Data** | Data Science Intern at [Fathom Data](https://www.linkedin.com/company/fathomdata/)| Feb 2022 - April 2022
+**Fathom Data** | Data Science Intern at [Fathom Data](https://www.linkedin.com/company/fathomdata/)| Summer 2022
 
 **Laboratory for the Economics of Africa's Past** | Researcher under [Prof Johan Fourie](https://www.johanfourie.com/)| January 2020 - July 2021
 
