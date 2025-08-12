@@ -2,7 +2,20 @@
 title: "Publications"
 ---
 
-I have one paper that I'm proud to have published in World Development with my master's supervisor Johan Fourie. Have a look at it below.
+I have two papers that I'm proud to have published!
+
+One is in Explorations in Economic History, with my PhD supervisors Kerstin Enflo and Jakob Molinder. Have a gander below.
+
+
+```{r}
+#| column: page
+#| out-width: "100%"
+
+knitr::include_url(url = "https://www.sciencedirect.com/science/article/pii/S001449832500049X", height = 800)
+```
+
+
+One is in World Development with my master's supervisor Johan Fourie. Have a look at it below.
 
 ```{r}
 #| column: page
