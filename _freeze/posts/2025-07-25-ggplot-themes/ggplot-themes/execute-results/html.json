@@ -1,0 +1,17 @@
+{
+  "hash": "f84bd797368d57594986a8af21cd5624",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Untitled\"\nformat: html\ndraft: true\n---\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"Logo file not found. Displaying plot without logo.\"\n```\n\n\n:::\n\n::: {.cell-output-display}\n![](ggplot-themes_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n::: {.cell}\n::: {.cell-output-display}\n![](ggplot-themes_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::",
+    "supporting": [
+      "ggplot-themes_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

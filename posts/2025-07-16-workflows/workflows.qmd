@@ -1,0 +1,22 @@
+---
+title: "Workflows"
+date: "2025-07-16"
+format: 
+    html:
+        code-fold: true
+        code-block-border-left: "#31BAE9"
+        code-overflow: wrap
+execute:
+    warning: false
+    message: false
+---
+
+<br>
+
+:::{.column-page}
+
+```{=html}
+<iframe src="assets/workflows.html" width="100%" height="3200px" style="border:none;"></iframe>
+```
+
+:::

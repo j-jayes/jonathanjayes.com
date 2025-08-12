@@ -1,0 +1,258 @@
+---
+title: "Untitled"
+format: html
+draft: true
+---
+
+
+```{r}
+library(ggplot2)
+library(ggtext)
+library(cowplot)
+
+# 1. Create a mock data frame in a "tidy" format
+data <- data.frame(
+  year = rep(c(2023, 2030, 2050), each = 10),
+  metric = rep(rep(c("Energy consumption", "CO2 emissions"), each = 5), 3),
+  sector = rep(c("Buildings", "Industry", "Transport", "Agriculture", "Other"), 6),
+  value = c(
+    # Energy 2023
+    130, 180, 110, 15, 15,
+    # CO2 2023
+    3.5, 9, 7, 0.5, 0.5,
+    # Energy 2030
+    140, 200, 120, 18, 18,
+    # CO2 2030
+    3.0, 9.5, 7.5, 0.6, 0.6,
+    # Energy 2050
+    150, 220, 140, 20, 20,
+    # CO2 2050
+    2.0, 9.0, 7.0, 0.7, 0.7
+  )
+)
+
+# Set the factor levels to control stacking and legend order
+data$sector <- factor(data$sector, levels = c("Other", "Agriculture", "Transport", "Industry", "Buildings"))
+
+```
+
+
+
+```{r}
+
+# 2. Define the custom theme function
+theme_iea <- function() {
+  theme_minimal(base_family = "Helvetica") +
+  theme(
+    # Plot titles and positioning
+    plot.title.position = "plot",
+    plot.caption.position = "plot",
+    plot.title = element_markdown(
+      size = 22,
+      face = "bold",
+      color = "#333333",
+      lineheight = 1.2,
+    #   margin = margin(bottom = 10)
+    ),
+    plot.subtitle = element_text(
+      size = 14,
+      color = "grey30",
+    #   margin = margin(bottom = 25)
+    ),
+    plot.caption = element_text(
+        color = "grey50",
+        hjust = 0,
+        # margin = margin(top = 15)
+    ),
+    # Facet labels
+    strip.text = element_text(
+      hjust = 0,
+      size = 12,
+      face = "bold",
+      color = "#333333"
+    ),
+    # Legend
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size = 12, color = "#333333"),
+    legend.key.size = unit(0.7, "lines"),
+    # Axes
+    axis.title = element_blank(),
+    axis.text = element_text(size = 11, color = "#333333"),
+    axis.ticks = element_blank(),
+    # Gridlines
+    panel.grid.major.y = element_line(color = "grey80"),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    # Panel
+    panel.spacing = unit(2, "lines"),
+    panel.background = element_rect(fill = "white", color = NA)
+  )
+}
+```
+
+
+
+```{r}
+
+# 3. Define the color palette
+iea_colors <- c(
+  "Buildings"   = "#008080",
+  "Industry"    = "#F0E442",
+  "Transport"   = "#56B4E9",
+  "Agriculture" = "#CC79A7",
+  "Other"       = "#D3D3D3"
+)
+
+# 4. Build the main plot
+p <- ggplot(data, aes(x = year, y = value, fill = sector)) +
+  geom_bar(stat = "identity", position = "stack", width = 0.7) +
+  facet_wrap(
+    ~metric,
+    scales = "free_y", # Allow y-axes to have different scales
+    labeller = as_labeller(c(
+        `Energy consumption` = "Energy consumption",
+        `CO2 emissions` = "CO2 emissions"
+    ))
+  ) +
+  scale_fill_manual(
+    values = iea_colors,
+    guide = guide_legend(
+        reverse = TRUE, # Reverse order to match plot stacking
+        override.aes = list(shape = 21, size = 5) # Use circles for legend keys
+    )
+  ) +
+  # Use specific breaks for y-axis
+  scale_y_continuous(breaks = scales::pretty_breaks(n = 4), expand = c(0, 0)) +
+  coord_cartesian(clip = "off") + # Allows elements to be drawn outside plot panel
+  labs(
+    title = "<span style='color:#00008B;'>&#9644;</span> Buildings are among the<br>largest consumers of energy",
+    subtitle = "Total final energy consumption & CO₂ emissions by end-use sector\nunder today's policy settings",
+    caption = "Source: IEA analysis"
+  ) +
+  theme_iea()
+
+# 5. Add the logo (requires a local 'iea_logo.png' file)
+# You would need to download the IEA logo and save it in your project directory
+logo_file <- "iea_logo.png"
+
+if (file.exists(logo_file)) {
+  final_plot <- ggdraw() +
+    draw_plot(p) +
+    draw_image(
+      logo_file,
+      x = 0.95,          # x position (0-1) from left
+      y = 0.98,          # y position (0-1) from bottom
+      hjust = 1,
+      vjust = 1,
+      width = 0.1,       # Width of the logo
+      height = 0.05      # Height of the logo
+    )
+  print(final_plot)
+} else {
+  print("Logo file not found. Displaying plot without logo.")
+  print(p)
+}
+```
+
+
+
+
+
+
+```{r}
+
+library(ggplot2)
+library(ggtext)
+library(patchwork) # For combining plots
+
+# 1. Update the mock data based on the new image (years 2030 & 2050)
+data <- data.frame(
+  year = rep(c(2030, 2050), each = 10),
+  metric = rep(rep(c("CO2 emissions", "Energy consumption"), each = 5), 2),
+  sector = rep(c("Buildings", "Industry", "Transport", "Agriculture", "Other"), 4),
+  value = c(
+    # CO2 2030
+    3, 7, 8, 1, 1,
+    # Energy 2030
+    120, 200, 100, 15, 15,
+    # CO2 2050
+    2, 9, 7.5, 0.5, 0.5,
+    # Energy 2050
+    130, 240, 120, 20, 15
+  )
+)
+
+# Set the factor levels to control stacking and legend order
+data$sector <- factor(data$sector, levels = c("Other", "Agriculture", "Transport", "Industry", "Buildings"))
+
+# 2. Define the color palette (unchanged)
+iea_colors <- c(
+  "Buildings"   = "#008080",
+  "Industry"    = "#F0E442",
+  "Transport"   = "#56B4E9",
+  "Agriculture" = "#CC79A7",
+  "Other"       = "#D3D3D3"
+)
+
+# 3. Update the theme (e.g., light grey background)
+theme_iea_revised <- function() {
+  theme_minimal(base_family = "Helvetica") +
+  theme(
+    plot.background = element_rect(fill = "#f5f5f5", color = NA),
+    panel.background = element_rect(fill = "#f5f5f5", color = NA),
+    plot.title = element_text(hjust = 0, size = 12, face = "bold", color = "#333333"),
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    legend.text = element_text(size = 11, color = "#333333"),
+    axis.title = element_blank(),
+    axis.text = element_text(size = 10, color = "#333333"),
+    axis.ticks = element_blank(),
+    panel.grid.major.y = element_line(color = "grey80"),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
+  )
+}
+
+# 4. Create the two separate plots
+
+# Plot 1: CO2 Emissions
+p_co2 <- ggplot(subset(data, metric == "CO2 emissions"), aes(x = year, y = value, fill = sector)) +
+  geom_bar(stat = "identity", position = "stack", width = 8) + # Wider bars
+  scale_x_continuous(breaks = c(2030, 2040, 2050), limits = c(2020, 2060)) + # Custom axis breaks
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_fill_manual(values = iea_colors) +
+  labs(title = "CO2 emissions") +
+  theme_iea_revised() +
+  theme(legend.position = "none") # Hide legend for this plot
+
+# Plot 2: Energy Consumption
+p_energy <- ggplot(subset(data, metric == "Energy consumption"), aes(x = year, y = value, fill = sector)) +
+  geom_bar(stat = "identity", position = "stack", width = 8) + # Wider bars
+  scale_x_continuous(breaks = c(2030, 2040, 2050), limits = c(2020, 2060)) + # Custom axis breaks
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_fill_manual(
+    values = iea_colors,
+    guide = guide_legend(reverse = TRUE, override.aes = list(shape = 21, size = 4))
+  ) +
+  labs(title = "Energy consumption") +
+  theme_iea_revised()
+
+# 5. Combine the plots and add the main titles and caption
+final_plot <- plot_grid(p_co2, p_energy) +
+  plot_annotation(
+    title = "<span style='font-size:22pt;'>&#9633; Buildings are among the</span><br><span style='font-size:22pt; font-weight:bold;'>largest consumers of energy</span>",
+    subtitle = "Total final energy consumption & CO₂ emissions by end-use sector under today's policy settings",
+    caption = "Source: IEA analysis",
+    theme = theme(
+      plot.background = element_rect(fill = "#f5f5f5", color = NA),
+      plot.title = element_markdown(lineheight = 1.2, margin = margin(b = 10)),
+      plot.subtitle = element_text(size = 14, color = "grey30", margin = margin(b = 25)),
+      plot.caption = element_text(hjust = 0, color = "grey50", margin = margin(t = 15))
+    )
+  )
+
+print(final_plot)
+```

@@ -1,0 +1,145 @@
+---
+title: "Swedish Wages and Foreign Employment"
+format: html
+draft: true
+---
+
+## Idea
+
+Create a post about which occupations you can get an exemption from the new work visa rules in Sweden, and those which are VERY SIMILAR, but not on the list. How do do? Get list of exempt occupations, join SSYK codes to ESCO, get skills etc, do clustering, and identify similar occupations that are and are not on the list. Two ways to measure similarity, content of the job in terms of skills and tasks, and then pay. In my head I can see a plot that has the distribution of income on the x-axis, the job on the y-axis, and then colouring of the bar based on whether the job is on the list or not. Then you can see which jobs are similar to those on the list, but not on the list, and which ones are not similar.
+
+
+In Sweden, it used to be that you could get a work visa for a job that paid at least ~13,000 SEK per month. This was the minimum wage for foreign workers in Sweden.
+
+In 2024, the government changed the rules. The threshold was set at 80% of the median salary. So, you needed to earn at least 26,000 SEK per month to get a work visa in 2024.
+
+This increased in 2025, as SCB published new median salary figures.
+
+Now, the public employment agency has put out a list of 152 occupations that will be exempt from the new rules. This means that if you work in one of these jobs, you can still get a work visa even if your salary is below the 80% threshold.
+
+These include soldiers (which you need Swedish citizenship for), chefs, and many other jobs that are in high demand in Sweden, or fulfill a specific societal function.
+
+
+## Resources
+
+
+### List of jobs that are exempt from the new work visa rules
+
+[Migrationsverket](https://www.migrationsverket.se/download/18.4e31eed3197084b858817af/1753876110192/Migrationsverkets%20redovisning%20av%20lista%20med%20f%C3%B6rslag%20p%C3%A5%20yrken%20som%20kan%20undantas%20fr%C3%A5n%20ett%20l%C3%B6nekrav%20som%20villkor%20f%C3%B6r%20arbetstillst%C3%A5nd%20inkl%20bilagor.pdf)
+
+List in English from [the Local](https://datawrapper.dwcdn.net/bKEkM/5/)
+
+Distribution of income by SSYK [at the Statistics Database](https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__AM__AM0110__AM0110A/LoneSpridSektYrk4AN/).
+
+Descriptions of occupations: https://www.scb.se/contentassets/c9d055b6f2114b62bd23c33602b56da5/ov9999_2012a01_br_x70br1201.pdf 
+
+E.G. 
+code: 1251
+title: Försäljnings- och marknadschefer nivå 1. 
+description: Funktionschef eller chef på mellanchefsnivå. Underställd verkställande direktör eller motsvarande. Planerar, leder, utvecklar och samordnar den övergripande försäljnings- eller marknadsverksamheten i företag eller organisation, i samråd med högsta chef, chefer för andra avdelningar och underställda chefer.
+
+description_english: Function manager or manager at middle management level. Reporting to the CEO or equivalent. Plans, directs, develops and coordinates the overall sales or marketing activities in a company or organization, in consultation with the top manager, managers of other departments and subordinate managers.
+
+### Info on SSYK
+
+Below are the easiest places to grab the **full, official job-descriptions for every SSYK code**—both the human-readable handbook and the machine-readable spreadsheets.
+
+---
+
+### 1. The handbook: *MIS 2012:1 – Standard för svensk yrkesklassificering 2012*
+
+| What you get                                                                                                                                                                                                                                       | Where it is                                                                                        | Notes                                           |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| • A 178-page PDF that spells out, in Swedish (pp. 1-164) and English (pp. 165-178), exactly **what each 1-, 2-, 3- and 4-digit SSYK 2012 code covers**.<br>• Chapter 5 (pp. 31-103) gives the concise “This job entails…” text you’re looking for. | Download the PDF directly from SCB: <br>`MIS_2012-1__SSYK_2012.pdf` ([diskrimineringslagen.se](https://www.diskrimineringslagen.se/uploads/MIS_2012-1__SSYK_2012.pdf?utm_source=chatgpt.com)) | Freely licensed; you can copy / parse the text. |
+
+---
+
+### 2. The code lists & look-ups (ready for Excel / databases)
+
+| File (all XLSX)                  | What’s inside                                                                                                                            | Link on SCB’s SSYK page                                                                                 |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **SSYK 2012 – koder**            | One sheet with the whole hierarchy (10 major groups → 429 four-digit under-groups) in Swedish + English, ready to join to your own data. | Visible under “SSYK 2012 indelning … undergrupper” on the SSYK web page ([Statistikmyndigheten SCB](https://www.scb.se/dokumentation/klassifikationer-och-standarder/standard-for-svensk-yrkesklassificering-ssyk/?utm_source=chatgpt.com)) |
+| **SSYK 2012 – yrkesbenämningar** | >35 000 job titles as actually used in Sweden, each mapped to its four-digit code—great for free-text matching.                          | Same page, just below the code file ([Statistikmyndigheten SCB][2])                                     |
+| **SSYK 2012 (English) – xlsx**   | Same structure as the first file, but column headers and job names in English only.                                                      | Section “In English” on the same SCB page ([Statistikmyndigheten SCB](https://www.scb.se/dokumentation/klassifikationer-och-standarder/standard-for-svensk-yrkesklassificering-ssyk/?utm_source=chatgpt.com))                               |
+
+*(If you need cross-walks, the same page also hosts ready-made look-ups between SSYK 2012 ↔ SSYK 1996 and SSYK 2012 ↔ ISCO-08.)*
+
+---
+
+### 3. Interactive lookup (browser only)
+
+* **SCB Klassifikationsdatabasen** – choose *Arbetsmarknad → SSYK 2012* and click down the tree to see codes and short descriptions one by one. Handy for quick checks, but slower than the spreadsheets for bulk work. ([metadata.scb.se](https://metadata.scb.se/klassdb.aspx))
+
+---
+
+#### Quick example (taken from the handbook)
+
+| Code | Swedish title      | English title         | Handbook description (abridged)                                                                                 |
+| ---- | ------------------ | --------------------- | --------------------------------------------------------------------------------------------------------------- |
+| 2221 | **Sjuksköterskor** | Nursing professionals | “Provides nursing care, plans and carries out medical treatments, informs and supports patients and relatives.” |
+| 7112 | **Murare**         | Bricklayers           | “Builds and repairs walls, partitions and other structures of brick, block or similar materials.”               |
+
+---
+
+### How to use these resources
+
+1. **Need human-readable explanations?**
+   → Download the PDF (link #1); search or copy the text from Chapter 5.
+
+2. **Building a database / doing analytics?**
+   → Load *SSYK 2012 – koder.xlsx* into your system; join on the four-digit code.
+   → If you have raw job titles, fuzzy-match them to *yrkesbenämningar.xlsx* first, then join.
+
+3. **Occasional look-ups or demos?**
+   → Use the Klassifikationsdatabasen tree in your browser.
+
+That’s all you need to have every SSYK job description at your fingertips. Happy coding!
+
+[1]: https://www.diskrimineringslagen.se/uploads/MIS_2012-1__SSYK_2012.pdf?utm_source=chatgpt.com "MIS: Standard för svensk yrkesklassificering 2012"
+[2]: https://www.scb.se/dokumentation/klassifikationer-och-standarder/standard-for-svensk-yrkesklassificering-ssyk/?utm_source=chatgpt.com "Standard för svensk yrkesklassificering (SSYK)"
+[3]: https://metadata.scb.se/klassdb.aspx "Klassifikationsdatabasen - www.scb.se"
+
+
+## Workflow
+
+Join SSYK to ESCO, get skills, do clustering, identify similar occupations that are and are not on the list.
+
+How to join SSYK to ESCO?? Use jobtech links; [JobTech Taxonomy – occupation.ttl](https://data.arbetsformedlingen.se/taxonomy/version/latest/skos/raw/ttl/index.html)
+
+Why is ESCO useful? [It has skills clustering aalready done](https://esco.ec.europa.eu/en)
+
+## News coverage
+
+[Norran](https://www.norran.se/english/engelska/artikel/152-exemptions-expose-the-work-permit-salary-rule-as-a-farce/rk3168zl)
+
+## English language table
+
+**Annex 1 – List updated with migration-law aspects**
+*Rows highlighted in red refer to occupations that are either proposed to be excluded from the possibility of being granted a work-permit under SOU 2024:15, or occupations in which the Swedish Migration Agency has identified a heightened risk of labour-force exploitation or abuse.*
+
+| SSYK | Occupation (English)                               | Geographic area\*                 | May constitute a socially-critical function | Labour immigration occurs | Requires Swedish citizenship | Proposed for exclusion from work-permit eligibility (SOU 2024:15) | Heightened risk of labour exploitation / abuse |
+| ---- | -------------------------------------------------- | --------------------------------- | ------------------------------------------- | ------------------------- | ---------------------------- | ----------------------------------------------------------------- | ---------------------------------------------- |
+| 110  | Officers                                           | National                          | **X**                                       |                           | **X**                        |                                                                   |                                                |
+| 210  | Specialist officers                                | National                          | **X**                                       |                           | **X**                        |                                                                   |                                                |
+| 310  | Soldiers etc.                                      | National                          | **X**                                       |                           | **X**                        |                                                                   |                                                |
+| 1380 | Managers in forestry & agriculture etc.            | National                          | **X**                                       |                           |                              |                                                                   |                                                |
+| 1721 | Restaurant & kitchen managers, level 1             | National                          |                                             | **X**                     |                              |                                                                   |                                                |
+| 1722 | Restaurant & kitchen managers, level 2             | National                          |                                             | **X**                     |                              |                                                                   |                                                |
+| 2112 | Meteorologists                                     | National                          | **X**                                       |                           |                              |                                                                   |                                                |
+| 2114 | Geologists & geophysicists etc.                    | Upper Norrland                    | **X**                                       | **X**                     |                              |                                                                   |                                                |
+| 2122 | Statisticians                                      | National                          | **X**                                       | **X**                     |                              |                                                                   |                                                |
+| 2134 | Agricultural specialists & advisers etc.           | National                          | **X**                                       | **X**                     |                              |                                                                   |                                                |
+| 2135 | Forestry specialists & advisers                    | National                          | **X**                                       |                           |                              |                                                                   |                                                |
+| 2141 | Civil engineers – logistics & production planning  | National                          | **X**                                       | **X**                     |                              |                                                                   |                                                |
+| 2145 | Civil engineers – chemistry & chemical engineering | National                          | **X**                                       | **X**                     |                              |                                                                   |                                                |
+| 2163 | Planning architects etc.                           | Central Norrland & Upper Norrland | **X**                                       |                           |                              |                                                                   |                                                |
+| 2164 | Surveyors (land surveyors)                         | National                          | **X**                                       |                           |                              |                                                                   |                                                |
+| 2182 | Environmental & public-health inspectors           | Upper Norrland                    | **X**                                       |                           |                              |                                                                   |                                                |
+
+\* **Area legend** (direct translations of Swedish regional designations)
+
+* **Nationellt** – National
+* **Mellersta Norrland** – Central Norrland
+* **Övre Norrland** – Upper Norrland
+
+“X” means the criterion applies to that occupation; blank cells indicate “no/­not applicable”.
