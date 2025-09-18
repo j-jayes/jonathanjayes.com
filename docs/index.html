@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -33,15 +33,17 @@ ul.task-list li input[type="checkbox"] {
 <link href="./assets/favicon.ico" rel="icon">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bb790506c7131d5817f3caa621d4e62c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f607d7e08750e7644a57817e83cba976.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -117,7 +119,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -135,7 +137,7 @@ window.Quarto = {
 
 <link rel="alternate" type="application/rss+xml" title="Interlude One" href="index.xml" data-external="1"></head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -143,7 +145,8 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./assets/favicon_logo.ico" alt="" class="navbar-logo">
+    <img src="./assets/favicon_logo.ico" alt="" class="navbar-logo light-content">
+    <img src="./assets/favicon_logo.ico" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Interlude One</span>
@@ -247,7 +250,7 @@ window.Quarto = {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
@@ -259,11 +262,11 @@ window.Quarto = {
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
 <div class="quarto-post image-right" data-index="0" data-listing-date-sort="1748901600000" data-listing-file-modified-sort="1752672902363" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1126">
-<div class="thumbnail">
-<p><a href="./posts/2025-05-22-gemini-infographic/gemini-infographic.html" class="no-external"></a></p><a href="./posts/2025-05-22-gemini-infographic/gemini-infographic.html" class="no-external">
-<p><img loading="lazy" src="./posts/2025-05-22-gemini-infographic/assets/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2025-05-22-gemini-infographic/gemini-infographic.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2025-05-22-gemini-infographic/gemini-infographic.html" class="no-external">
+
+<img loading="lazy" src="./posts/2025-05-22-gemini-infographic/assets/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-05-22-gemini-infographic/gemini-infographic.html" class="no-external">LLMs as Research Grunts: Surprisingly Useful, Even When They Don’t Get It ‘Right’</a>
@@ -271,9 +274,9 @@ window.Quarto = {
 <div class="listing-subtitle">
 <a href="./posts/2025-05-22-gemini-infographic/gemini-infographic.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2025-05-22-gemini-infographic/gemini-infographic.html" class="no-external">So, I teach a course on data visualization here at Lund University. We get our students to wrestle with data, trying to make sense of regional development in Europe using…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/2025-05-22-gemini-infographic/gemini-infographic.html" class="no-external">
+So, I teach a course on data visualization here at Lund University. We get our students to wrestle with data, trying to make sense of regional development in Europe using…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2025-05-22-gemini-infographic/gemini-infographic.html" class="no-external">
@@ -284,11 +287,11 @@ Jun 3, 2025
 </div>
 </div>
 <div class="quarto-post image-right" data-index="1" data-listing-date-sort="1745359200000" data-listing-file-modified-sort="1749112891586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3764">
-<div class="thumbnail">
-<p><a href="./posts/2025-04-23-windturbines/wind-turbines.html" class="no-external"></a></p><a href="./posts/2025-04-23-windturbines/wind-turbines.html" class="no-external">
-<p><img loading="lazy" src="./posts/2025-04-23-windturbines/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2025-04-23-windturbines/wind-turbines.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2025-04-23-windturbines/wind-turbines.html" class="no-external">
+
+<img loading="lazy" src="./posts/2025-04-23-windturbines/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-04-23-windturbines/wind-turbines.html" class="no-external">How Rare-Earth Element Dependency Threatens the Global Wind Rollout</a>
@@ -296,9 +299,9 @@ Jun 3, 2025
 <div class="listing-subtitle">
 <a href="./posts/2025-04-23-windturbines/wind-turbines.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2025-04-23-windturbines/wind-turbines.html" class="no-external">A couple of weeks back, I read an article in the FT about Ørsted, the big Danish offshore wind developer. Its stock was getting hammered. Part of the story involved project…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/2025-04-23-windturbines/wind-turbines.html" class="no-external">
+A couple of weeks back, I read an article in the FT about Ørsted, the big Danish offshore wind developer. Its stock was getting hammered. Part of the story involved project…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2025-04-23-windturbines/wind-turbines.html" class="no-external">
@@ -312,11 +315,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="2" data-listing-date-sort="1743804000000" data-listing-file-modified-sort="1749112859701" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2594">
-<div class="thumbnail">
-<p><a href="./posts/2025-04-05-tariffs-where-to-invest/tariffs-where-to-invest.html" class="no-external"></a></p><a href="./posts/2025-04-05-tariffs-where-to-invest/tariffs-where-to-invest.html" class="no-external">
+<div class="thumbnail"><a href="./posts/2025-04-05-tariffs-where-to-invest/tariffs-where-to-invest.html" class="no-external">
+
 <p class="card-img-top"><img src="posts/2025-04-05-tariffs-where-to-invest/assets/tariff_map.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/2025-04-05-tariffs-where-to-invest/tariffs-where-to-invest.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-04-05-tariffs-where-to-invest/tariffs-where-to-invest.html" class="no-external">Why I would buy stocks in US postcard manufacturers</a>
@@ -324,9 +327,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2025-04-05-tariffs-where-to-invest/tariffs-where-to-invest.html" class="no-external">Navigating the Trade War: Identifying US Companies Positioned for a Domestic Pivot</a>
 </div>
-<div class="listing-description">
-<a href="./posts/2025-04-05-tariffs-where-to-invest/tariffs-where-to-invest.html" class="no-external">To say that the landscape of global trade has undergone a dramatic upheaval this week is an understatement. It seems that the current US administration believes in the…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/2025-04-05-tariffs-where-to-invest/tariffs-where-to-invest.html" class="no-external">
+To say that the landscape of global trade has undergone a dramatic upheaval this week is an understatement. It seems that the current US administration believes in the…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2025-04-05-tariffs-where-to-invest/tariffs-where-to-invest.html" class="no-external">
@@ -337,11 +340,11 @@ Apr 5, 2025
 </div>
 </div>
 <div class="quarto-post image-right" data-index="3" data-listing-date-sort="1743116400000" data-listing-file-modified-sort="1743161822471" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1212">
-<div class="thumbnail">
-<p><a href="./posts/2025-03-28-hisco/hisco.html" class="no-external"></a></p><a href="./posts/2025-03-28-hisco/hisco.html" class="no-external">
-<p><img loading="lazy" src="./posts/2025-03-28-hisco/preview.jpeg" class="thumbnail-image"></p>
-</a><p><a href="./posts/2025-03-28-hisco/hisco.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2025-03-28-hisco/hisco.html" class="no-external">
+
+<img loading="lazy" src="./posts/2025-03-28-hisco/preview.jpeg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-03-28-hisco/hisco.html" class="no-external">HISCO lookup</a>
@@ -349,9 +352,9 @@ Apr 5, 2025
 <div class="listing-subtitle">
 <a href="./posts/2025-03-28-hisco/hisco.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2025-03-28-hisco/hisco.html" class="no-external">This is a post for me to come back to as a refrence. I always need to look up HISCO groups, and I have scraped and stored this information in this github repo but it would…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/2025-03-28-hisco/hisco.html" class="no-external">
+This is a post for me to come back to as a refrence. I always need to look up HISCO groups, and I have scraped and stored this information in this github repo but it would…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2025-03-28-hisco/hisco.html" class="no-external">
@@ -365,11 +368,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="4" data-listing-date-sort="1741647600000" data-listing-file-modified-sort="1741712291817" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3976">
-<div class="thumbnail">
-<p><a href="./posts/2024-06-05-solar-payback-time/solar-payback-time-report.html" class="no-external"></a></p><a href="./posts/2024-06-05-solar-payback-time/solar-payback-time-report.html" class="no-external">
-<p><img loading="lazy" src="./posts/2024-06-05-solar-payback-time/assets/preview.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/2024-06-05-solar-payback-time/solar-payback-time-report.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2024-06-05-solar-payback-time/solar-payback-time-report.html" class="no-external">
+
+<img loading="lazy" src="./posts/2024-06-05-solar-payback-time/assets/preview.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2024-06-05-solar-payback-time/solar-payback-time-report.html" class="no-external">DRAFT: Analysis for a Solar PV &amp; Battery System (South Africa)</a>
@@ -377,9 +380,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2024-06-05-solar-payback-time/solar-payback-time-report.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2024-06-05-solar-payback-time/solar-payback-time-report.html" class="no-external">I asked GPT-4.5 with deep research to investigate a solar system for me, in order to test its capabilities, inspired by a post by Timothy B. Lee titled in a somewhat…<em></em></a>
-</div>
+<div class="delink listing-description"><a href="./posts/2024-06-05-solar-payback-time/solar-payback-time-report.html" class="no-external">
+I asked GPT-4.5 with deep research to investigate a solar system for me, in order to test its capabilities, inspired by a post by Timothy B. Lee titled in a somewhat…<em></em>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2024-06-05-solar-payback-time/solar-payback-time-report.html" class="no-external">
@@ -393,11 +396,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="5" data-listing-date-sort="1740610800000" data-listing-file-modified-sort="1740831546156" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-word-count-sort="4193">
-<div class="thumbnail">
-<p><a href="./posts/2025-02-27-react-production-functions/react-production-functions.html" class="no-external"></a></p><a href="./posts/2025-02-27-react-production-functions/react-production-functions.html" class="no-external">
+<div class="thumbnail"><a href="./posts/2025-02-27-react-production-functions/react-production-functions.html" class="no-external">
+
 <p class="card-img-top"><img src="posts/2025-02-27-react-production-functions/assets/03.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/2025-02-27-react-production-functions/react-production-functions.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-02-27-react-production-functions/react-production-functions.html" class="no-external">Claude 3.7: React and Reactions</a>
@@ -405,9 +408,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2025-02-27-react-production-functions/react-production-functions.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2025-02-27-react-production-functions/react-production-functions.html" class="no-external">One of the best parts of my work as a PhD student is teaching. In a course on regional development in Lund, we cover data visualization and map-making. Both of these are an…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/2025-02-27-react-production-functions/react-production-functions.html" class="no-external">
+One of the best parts of my work as a PhD student is teaching. In a course on regional development in Lund, we cover data visualization and map-making. Both of these are an…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2025-02-27-react-production-functions/react-production-functions.html" class="no-external">
@@ -421,11 +424,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="6" data-listing-date-sort="1740265200000" data-listing-file-modified-sort="1747317850827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1385">
-<div class="thumbnail">
-<p><a href="./posts/2025-02-23-transit-trek/transit-trek.html" class="no-external"></a></p><a href="./posts/2025-02-23-transit-trek/transit-trek.html" class="no-external">
+<div class="thumbnail"><a href="./posts/2025-02-23-transit-trek/transit-trek.html" class="no-external">
+
 <p class="card-img-top"><img src="posts/2025-02-23-transit-trek/assets/01.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/2025-02-23-transit-trek/transit-trek.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2025-02-23-transit-trek/transit-trek.html" class="no-external">Transit Trek</a>
@@ -433,9 +436,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2025-02-23-transit-trek/transit-trek.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2025-02-23-transit-trek/transit-trek.html" class="no-external">For a long time, I have had an idea simmering in the back of my mind: could I get a large language model to collect transit data for European airports without me spending…</a>
-</div>
+<div class="delink listing-description"><a href="./posts/2025-02-23-transit-trek/transit-trek.html" class="no-external">
+For a long time, I have had an idea simmering in the back of my mind: could I get a large language model to collect transit data for European airports without me spending…
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2025-02-23-transit-trek/transit-trek.html" class="no-external">
@@ -449,11 +452,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="7" data-listing-date-sort="1731970800000" data-listing-file-modified-sort="1732040189758" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1929">
-<div class="thumbnail">
-<p><a href="./posts/2024-11-19-grey-couches/grey-couches.html" class="no-external"></a></p><a href="./posts/2024-11-19-grey-couches/grey-couches.html" class="no-external">
+<div class="thumbnail"><a href="./posts/2024-11-19-grey-couches/grey-couches.html" class="no-external">
+
 <p class="card-img-top"><img src="posts/2024-11-19-grey-couches/grey-couches_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/2024-11-19-grey-couches/grey-couches.html" class="no-external"></a></p>
-</div>
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2024-11-19-grey-couches/grey-couches.html" class="no-external">NeverTooSmall Couch Colours</a>
@@ -461,9 +464,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2024-11-19-grey-couches/grey-couches.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2024-11-19-grey-couches/grey-couches.html" class="no-external">I really enjoy watching the YouTube channel NeverTooSmall, which showcases cleverly designed small spaces from around the world.</a>
-</div>
+<div class="delink listing-description"><a href="./posts/2024-11-19-grey-couches/grey-couches.html" class="no-external">
+I really enjoy watching the YouTube channel NeverTooSmall, which showcases cleverly designed small spaces from around the world.
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2024-11-19-grey-couches/grey-couches.html" class="no-external">
@@ -477,11 +480,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="8" data-listing-date-sort="1699311600000" data-listing-file-modified-sort="1699367540568" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="470">
-<div class="thumbnail">
-<p><a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external"></a></p><a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external">
-<p><img loading="lazy" src="./posts/2023-11-07-q-and-a/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external">
+
+<img loading="lazy" src="./posts/2023-11-07-q-and-a/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external">A modern question and answer site: SCB Users Group</a>
@@ -489,9 +492,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external">A post about creating a question and answer site for users of Statistics Sweden data </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external">
+<p>A post about creating a question and answer site for users of Statistics Sweden data</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2023-11-07-q-and-a/q-and-a.html" class="no-external">
@@ -505,11 +508,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="9" data-listing-date-sort="1696197600000" data-listing-file-modified-sort="1699353373404" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1947">
-<div class="thumbnail">
-<p><a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external"></a></p><a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external">
-<p><img loading="lazy" src="./posts/2023-10-02-geocoding/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external">
+
+<img loading="lazy" src="./posts/2023-10-02-geocoding/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external">Geocoding: two ways</a>
@@ -517,9 +520,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external">A post about geocoding place names using R and python to access the OSM and Google Maps geocoding APIs. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external">
+<p>A post about geocoding place names using R and python to access the OSM and Google Maps geocoding APIs.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2023-10-02-geocoding/geocoding.html" class="no-external">
@@ -533,11 +536,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="10" data-listing-date-sort="1688508000000" data-listing-file-modified-sort="1738009064664" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2129">
-<div class="thumbnail">
-<p><a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external"></a></p><a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external">
-<p><img loading="lazy" src="./posts/2023-07-05-langchain-demo/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external">
+
+<img loading="lazy" src="./posts/2023-07-05-langchain-demo/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external">Transforming National Budget Documents into Queryable Knowledge</a>
@@ -545,9 +548,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external">A post about automating the data retrieval process from PDF documents using LangChain and the OpenAI API. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external">
+<p>A post about automating the data retrieval process from PDF documents using LangChain and the OpenAI API.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2023-07-05-langchain-demo/langchain-demo.html" class="no-external">
@@ -561,11 +564,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="11" data-listing-date-sort="1688421600000" data-listing-file-modified-sort="1699353373396" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1719">
-<div class="thumbnail">
-<p><a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external"></a></p><a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external">
-<p><img loading="lazy" src="./posts/2023-07-04-hot-water-tap-efficiency/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external">
+
+<img loading="lazy" src="./posts/2023-07-04-hot-water-tap-efficiency/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external">The Economics of Instant Hot Water: Quooker vs Kettle</a>
@@ -573,9 +576,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external">How long will it take for an instant hot water tap to save some money? </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external">
+<p>How long will it take for an instant hot water tap to save some money?</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2023-07-04-hot-water-tap-efficiency/hot-water-tap-efficiency.html" class="no-external">
@@ -589,11 +592,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="12" data-listing-date-sort="1684792800000" data-listing-file-modified-sort="1699353373396" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1229">
-<div class="thumbnail">
-<p><a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external"></a></p><a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external">
-<p><img loading="lazy" src="./posts/2023-05-23-youtube-caption-summaries/images/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external">
+
+<img loading="lazy" src="./posts/2023-05-23-youtube-caption-summaries/images/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external">Building a YouTube Video Transcript Summarizer (with some help)</a>
@@ -601,9 +604,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external">A post on what it means to be a data scientist in the age of such capable generative AI. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external">
+<p>A post on what it means to be a data scientist in the age of such capable generative AI.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2023-05-23-youtube-caption-summaries/youtube-caption-summaries.html" class="no-external">
@@ -617,11 +620,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="13" data-listing-date-sort="1678402800000" data-listing-file-modified-sort="1699353373386" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1599">
-<div class="thumbnail">
-<p><a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external"></a></p><a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external">
-<p><img loading="lazy" src="./posts/2023-03-10/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external">
+
+<img loading="lazy" src="./posts/2023-03-10/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external">ChatGPT as translator and text wizard</a>
@@ -629,9 +632,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external">A post showing how ChatGPT can be used to create structred data from text. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external">
+<p>A post showing how ChatGPT can be used to create structred data from text.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2023-03-10/chatgpt-as-translator.html" class="no-external">
@@ -645,11 +648,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="14" data-listing-date-sort="1675119600000" data-listing-file-modified-sort="1699353373311" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="994">
-<div class="thumbnail">
-<p><a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external"></a></p><a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external">
-<p><img loading="lazy" src="./posts/2023-01-31-map-projections/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external">
+
+<img loading="lazy" src="./posts/2023-01-31-map-projections/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external">Map projections in R</a>
@@ -657,9 +660,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external">A post on how to change projections for mapping and save out the new shapefiles. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external">
+<p>A post on how to change projections for mapping and save out the new shapefiles.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2023-01-31-map-projections/Map-projections.html" class="no-external">
@@ -673,11 +676,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="15" data-listing-date-sort="1675033200000" data-listing-file-modified-sort="1699353373307" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1460">
-<div class="thumbnail">
-<p><a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external"></a></p><a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external">
-<p><img loading="lazy" src="./posts/2023-01-29-electricity-generation-per-capita/images/Asia_ranking.jpeg" class="thumbnail-image"></p>
-</a><p><a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external">
+
+<img loading="lazy" src="./posts/2023-01-29-electricity-generation-per-capita/images/Asia_ranking.jpeg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external">Electricity generation per capita</a>
@@ -685,9 +688,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external">A post on electricity generation per capita across the world since 2000. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external">
+<p>A post on electricity generation per capita across the world since 2000.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2023-01-29-electricity-generation-per-capita/electricity-generation-per-capita.html" class="no-external">
@@ -701,11 +704,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="16" data-listing-date-sort="1674946800000" data-listing-file-modified-sort="1699353373282" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2993">
-<div class="thumbnail">
-<p><a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external"></a></p><a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external">
-<p><img loading="lazy" src="https://github.com/j-jayes/img-repo/raw/1f154af0b081a6423c73c6fe453c93ea16c891c2/images/owid_smokers.PNG" class="thumbnail-image"></p>
-</a><p><a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external">
+
+<img loading="lazy" src="https://github.com/j-jayes/img-repo/raw/1f154af0b081a6423c73c6fe453c93ea16c891c2/images/owid_smokers.PNG" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external">Our World In Data choropleth</a>
@@ -713,9 +716,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external">A post on how recreate the Our World In Data characteristic choropleth in R. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external">
+<p>A post on how recreate the Our World In Data characteristic choropleth in R.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2022-10-17-our-world-in-data-choropleth/our-world-in-data-choropleth.html" class="no-external">
@@ -729,11 +732,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="17" data-listing-date-sort="1674169200000" data-listing-file-modified-sort="1699353373294" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="302">
-<div class="thumbnail">
-<p><a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external"></a></p><a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external">
-<p><img loading="lazy" src="./posts/2023-01-20-chatgpt-cooks-me-dinner/images/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external">
+
+<img loading="lazy" src="./posts/2023-01-20-chatgpt-cooks-me-dinner/images/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external">ChatGPT cooks me dinner</a>
@@ -741,9 +744,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external">🍲 Master the kitchen like a pro with the help of ChatGPT! 🍴 I tried it out and the results will blow your mind! 🤯 Find out what happened when I asked a language model for recipe ideas and cooking instructions. 😲 You won’t believe how delicious my Gammon and Vegetable Stew with Mint turned out! 🍽️ Don’t miss out on this must-read blog post! 👀 </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external">
+<p>🍲 Master the kitchen like a pro with the help of ChatGPT! 🍴 I tried it out and the results will blow your mind! 🤯 Find out what happened when I asked a language model for recipe ideas and cooking instructions. 😲 You won’t believe how delicious my Gammon and Vegetable Stew with Mint turned out! 🍽️ Don’t miss out on this must-read blog post! 👀</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2023-01-20-chatgpt-cooks-me-dinner/chatgpt-cooks-me-dinner.html" class="no-external">
@@ -757,11 +760,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="18" data-listing-date-sort="1671490800000" data-listing-file-modified-sort="1699353373290" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="835">
-<div class="thumbnail">
-<p><a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external"></a></p><a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external">
-<p><img loading="lazy" src="./posts/2022-12-20-gpt-chat-blog-post-author/images/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external">
+
+<img loading="lazy" src="./posts/2022-12-20-gpt-chat-blog-post-author/images/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external">ChatGPT fills in for me as a blog post author</a>
@@ -769,9 +772,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external">I ask ChatGPT to write a blog post in the same manner as one I wrote last week. The results will amaze you! </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external">
+<p>I ask ChatGPT to write a blog post in the same manner as one I wrote last week. The results will amaze you!</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2022-12-20-gpt-chat-blog-post-author/gpt-chat-blog-post-author.html" class="no-external">
@@ -785,11 +788,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="19" data-listing-date-sort="1671058800000" data-listing-file-modified-sort="1699353373285" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="936">
-<div class="thumbnail">
-<p><a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external"></a></p><a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external">
-<p><img loading="lazy" src="./posts/2022-12-15-coef-plots/lter_penguins.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external">
+
+<img loading="lazy" src="./posts/2022-12-15-coef-plots/lter_penguins.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external">Coefficient plots in <code>ggplot</code></a>
@@ -797,9 +800,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external">Drawing coefficient plots in R and <code>ggplot</code>. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external">
+<p>Drawing coefficient plots in R and <code>ggplot</code>.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2022-12-15-coef-plots/coef-plots.html" class="no-external">
@@ -813,11 +816,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="20" data-listing-date-sort="1652997600000" data-listing-file-modified-sort="1699353373188" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="670">
-<div class="thumbnail">
-<p><a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external"></a></p><a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external">
-<p><img loading="lazy" src="https://raw.githubusercontent.com/j-jayes/jjayes_distill/main/_posts/2022-06-01-linkedin-style-about-info/images/gt_educ.PNG" class="thumbnail-image"></p>
-</a><p><a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external">
+
+<img loading="lazy" src="https://raw.githubusercontent.com/j-jayes/jjayes_distill/main/_posts/2022-06-01-linkedin-style-about-info/images/gt_educ.PNG" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external">LinkedIn style tables for personal websites</a>
@@ -825,9 +828,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external">A post on how to us the {gt} table package to make tables for the about page of a pesonal website or blog. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external">
+<p>A post on how to us the {gt} table package to make tables for the about page of a pesonal website or blog.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2022-06-01-linkedin-style-about-info/linkedin-style-about-info.html" class="no-external">
@@ -841,11 +844,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="21" data-listing-date-sort="1646348400000" data-listing-file-modified-sort="1699353373180" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1216">
-<div class="thumbnail">
-<p><a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external"></a></p><a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external">
-<p><img loading="lazy" src="https://raw.githubusercontent.com/j-jayes/Monday-Munch/main/images/cover.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external">
+
+<img loading="lazy" src="https://raw.githubusercontent.com/j-jayes/Monday-Munch/main/images/cover.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external">Programmatically generate tabs in Rmarkdown</a>
@@ -853,9 +856,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external">A walk-though for writing code that writes it’s own code. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external">
+<p>A walk-though for writing code that writes it’s own code.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2022-03-04-programmatically-generate-tabs-in-rmarkdown/programmatically-generate-tabs-in-rmarkdown.html" class="no-external">
@@ -869,11 +872,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="22" data-listing-date-sort="1644879600000" data-listing-file-modified-sort="1699353373161" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="17" data-listing-word-count-sort="3394">
-<div class="thumbnail">
-<p><a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external"></a></p><a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external">
-<p><img loading="lazy" src="./posts/2022-01-17-flavours-of-cocoa/images/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external">
+
+<img loading="lazy" src="./posts/2022-01-17-flavours-of-cocoa/images/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external">Flavours of cocoa</a>
@@ -881,9 +884,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external">An exploration of chocolate bar reviews </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external">
+<p>An exploration of chocolate bar reviews</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2022-01-17-flavours-of-cocoa/flavours-of-cocoa.html" class="no-external">
@@ -897,11 +900,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="23" data-listing-date-sort="1642374000000" data-listing-file-modified-sort="1699353373174" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1394">
-<div class="thumbnail">
-<p><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external"></a></p><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external">
-<p><img loading="lazy" src="./posts/2022-01-24-fathom-twitter/images/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external">
+
+<img loading="lazy" src="./posts/2022-01-24-fathom-twitter/images/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external">R vs Python? R &amp; Python!</a>
@@ -909,8 +912,8 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external">Mining the twitter archive of <span>Fathom Data</span> </a>
+<div class="delink listing-description"><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external">
+</a><p><a href="./posts/2022-01-24-fathom-twitter/fathom-twitter.html" class="no-external">Mining the twitter archive of </a><a href="https://www.fathomdata.dev/">Fathom Data</a></p>
 </div>
 </div>
 <div class="metadata">
@@ -925,11 +928,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="24" data-listing-date-sort="1625522400000" data-listing-file-modified-sort="1699353372840" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3723">
-<div class="thumbnail">
-<p><a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external"></a></p><a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external">
-<p><img loading="lazy" src="./posts/2021-07-06-students-speak/images/preview.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external">
+
+<img loading="lazy" src="./posts/2021-07-06-students-speak/images/preview.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external">Students Speak</a>
@@ -937,9 +940,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external">Text analysis of students’ diary entries during the Covid-19 lockdown in South Africa </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external">
+<p>Text analysis of students’ diary entries during the Covid-19 lockdown in South Africa</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2021-07-06-students-speak/students-speak.html" class="no-external">
@@ -953,11 +956,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="25" data-listing-date-sort="1621548000000" data-listing-file-modified-sort="1699353372796" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2045">
-<div class="thumbnail">
-<p><a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external"></a></p><a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/2021-05-21-ggplot-resources/images/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external">
+
+<img loading="lazy" data-src="./posts/2021-05-21-ggplot-resources/images/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external">Resources for Learning R and Mastering ggplot</a>
@@ -965,9 +968,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external">A collection of videos and resources to get you started using R and the tidyverse for exploratory data analysis and visualization. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external">
+<p>A collection of videos and resources to get you started using R and the tidyverse for exploratory data analysis and visualization.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2021-05-21-ggplot-resources/ggplot-resources.html" class="no-external">
@@ -981,11 +984,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="26" data-listing-date-sort="1620252000000" data-listing-file-modified-sort="1699353372796" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="413">
-<div class="thumbnail">
-<p><a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external"></a></p><a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/2021-05-06-swedenmap/images/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external">
+
+<img loading="lazy" data-src="./posts/2021-05-06-swedenmap/images/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external">Mapping Sweden’s Regional GDP</a>
@@ -993,9 +996,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external">Visualizing the relationship between population and regional GDP share in 1571, based on data from Enflo and Missiaia (2018). </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external">
+<p>Visualizing the relationship between population and regional GDP share in 1571, based on data from Enflo and Missiaia (2018).</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2021-05-06-swedenmap/swedenmap.html" class="no-external">
@@ -1009,11 +1012,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="27" data-listing-date-sort="1617832800000" data-listing-file-modified-sort="1699353372447" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3163">
-<div class="thumbnail">
-<p><a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external"></a></p><a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/2021-04-03-container-ships/images/preview_ship_linkedin.jpeg" class="thumbnail-image"></p>
-</a><p><a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external">
+
+<img loading="lazy" data-src="./posts/2021-04-03-container-ships/images/preview_ship_linkedin.jpeg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external">Shipping and Scraping - Part 1 in a Series on Shipping</a>
@@ -1021,9 +1024,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external">In this post I walk through scraping data on cargo ships from Wikipedia as part of a series on shipping. I make use of R, the rvest package for webscraping and the SelectorGadget tool for CSS selection. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external">
+<p>In this post I walk through scraping data on cargo ships from Wikipedia as part of a series on shipping. I make use of R, the rvest package for webscraping and the SelectorGadget tool for CSS selection.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2021-04-03-container-ships/container-ships.html" class="no-external">
@@ -1037,11 +1040,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="28" data-listing-date-sort="1613775600000" data-listing-file-modified-sort="1699353372438" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1613">
-<div class="thumbnail">
-<p><a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external"></a></p><a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/images/reg_1.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external">
+
+<img loading="lazy" data-src="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/images/reg_1.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external">Swedish trade in goods and exchange students</a>
@@ -1049,9 +1052,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external">I wanted to see if there was an association between the volume of trade between a country and Sweden, and the number of exchange students that have come to Lund Univesity from there, this semester. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external">
+<p>I wanted to see if there was an association between the volume of trade between a country and Sweden, and the number of exchange students that have come to Lund Univesity from there, this semester.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2021-03-16-swedish-trade-in-goods-and-exchange-students/swedish-trade-in-goods-and-exchange-students.html" class="no-external">
@@ -1065,11 +1068,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="29" data-listing-date-sort="1606172400000" data-listing-file-modified-sort="1721392444919" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1595">
-<div class="thumbnail">
-<p><a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external"></a></p><a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/2021-03-13-south-africa-car-colour-exploration/images/stacked_area.jpeg" class="thumbnail-image"></p>
-</a><p><a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external">
+
+<img loading="lazy" data-src="./posts/2021-03-13-south-africa-car-colour-exploration/images/stacked_area.jpeg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external">South African Car Colour Exploration</a>
@@ -1077,9 +1080,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external">In this document I walk through creating a stacked area chart showing the evolution of car colour over time in South Africa. The data comes from nearly 45,000 adverts for cars that I scraped from Gumtree. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external">
+<p>In this document I walk through creating a stacked area chart showing the evolution of car colour over time in South Africa. The data comes from nearly 45,000 adverts for cars that I scraped from Gumtree.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2021-03-13-south-africa-car-colour-exploration/south-africa-car-colour-exploration.html" class="no-external">
@@ -1093,11 +1096,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="30" data-listing-date-sort="1602280800000" data-listing-file-modified-sort="1699353372446" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="115">
-<div class="thumbnail">
-<p><a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external"></a></p><a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/2021-03-18-car-price-explorer/images/preview.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external">
+
+<img loading="lazy" data-src="./posts/2021-03-18-car-price-explorer/images/preview.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external">Car Price Comparison Tool</a>
@@ -1105,9 +1108,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external">This web app helps South Africans gauge the median price for a second hand car. You can compare price by odometer reading, make and model, and province. Ad links are included in a table beside the output. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external">
+<p>This web app helps South Africans gauge the median price for a second hand car. You can compare price by odometer reading, make and model, and province. Ad links are included in a table beside the output.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2021-03-18-car-price-explorer/car-price-explorer.html" class="no-external">
@@ -1121,11 +1124,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="31" data-listing-date-sort="1586296800000" data-listing-file-modified-sort="1699353372462" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="718">
-<div class="thumbnail">
-<p><a href="./posts/2021-04-21-chips/chips.html" class="no-external"></a></p><a href="./posts/2021-04-21-chips/chips.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/2021-04-21-chips/figures/Transistors_colour.jpeg" class="thumbnail-image"></p>
-</a><p><a href="./posts/2021-04-21-chips/chips.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/2021-04-21-chips/chips.html" class="no-external">
+
+<img loading="lazy" data-src="./posts/2021-04-21-chips/figures/Transistors_colour.jpeg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/2021-04-21-chips/chips.html" class="no-external">Recreating Our World In Data’s Beautiful Transistor Count Graphic</a>
@@ -1133,9 +1136,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/2021-04-21-chips/chips.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/2021-04-21-chips/chips.html" class="no-external">Scraping data from Wikipedia and recreating OWID’s figure with ggplot2. </a>
-</div>
+<div class="delink listing-description"><a href="./posts/2021-04-21-chips/chips.html" class="no-external">
+<p>Scraping data from Wikipedia and recreating OWID’s figure with ggplot2.</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/2021-04-21-chips/chips.html" class="no-external">
@@ -1149,11 +1152,11 @@ Jonathan Jayes
 </div>
 </div>
 <div class="quarto-post image-right" data-index="32" data-listing-date-sort="1584054000000" data-listing-file-modified-sort="1699353373406" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="86">
-<div class="thumbnail">
-<p><a href="./posts/welcome/welcome.html" class="no-external"></a></p><a href="./posts/welcome/welcome.html" class="no-external">
-<p><img loading="lazy" data-src="./posts/welcome/images/alt-j.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/welcome/welcome.html" class="no-external"></a></p>
-</div>
+<div class="thumbnail"><a href="./posts/welcome/welcome.html" class="no-external">
+
+<img loading="lazy" data-src="./posts/welcome/images/alt-j.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/welcome/welcome.html" class="no-external">Welcome to Interlude One</a>
@@ -1161,9 +1164,9 @@ Jonathan Jayes
 <div class="listing-subtitle">
 <a href="./posts/welcome/welcome.html" class="no-external"></a>
 </div>
-<div class="listing-description">
-<a href="./posts/welcome/welcome.html" class="no-external">“Like all good fruit, the balance of life is in the ripe and ruin” </a>
-</div>
+<div class="delink listing-description"><a href="./posts/welcome/welcome.html" class="no-external">
+<p>“Like all good fruit, the balance of life is in the ripe and ruin”</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/welcome/welcome.html" class="no-external">
@@ -1177,247 +1180,249 @@ Jonathan Jayes
 </div>
 </div>
 </div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
+<div class="listing-no-matching d-none">No matching items</div>
 <nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
   <ul class="pagination"></ul>
 </nav>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/interludeone\.com\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/interludeone\.com\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1425,185 +1430,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 
 

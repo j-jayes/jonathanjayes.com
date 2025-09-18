@@ -84,7 +84,7 @@ education %>%
 
 ## Experience
 
-**Codera Analytics** | Data Scientist at [Codera Analytics](https://www.linkedin.com/company/coderaanalytics/)| December 2022 - Present
+**Codera Analytics** | Data Scientist at [Codera Analytics](https://www.linkedin.com/company/coderaanalytics/)| December 2022 - October 2025
 
 **Fathom Data** | Data Science Intern at [Fathom Data](https://www.linkedin.com/company/fathomdata/)| Summer 2022
 
