@@ -8,8 +8,8 @@ project:
 
 website:
   favicon: assets/favicon.ico
-  title: "Interlude One"
-  site-url: https://interludeone.com/
+  title: "Jonathan Jayes"
+  site-url: https://jonathanjayes.com/
   navbar:
     background: "#FCFCFC"
     logo: assets/favicon_logo.ico
