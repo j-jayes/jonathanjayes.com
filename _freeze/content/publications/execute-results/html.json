@@ -1,0 +1,15 @@
+{
+  "hash": "d38f4d319a4c4f1c0a819718b43ccb6d",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Publications\"\n---\n\n\n\n\nI have two papers that I'm proud to have published!\n\nOne is in Explorations in Economic History, with my PhD supervisors Kerstin Enflo and Jakob Molinder. Have a gander below.\n\n\n\n\n\n::: {.cell .column-page}\n<iframe src=\"https://www.sciencedirect.com/science/article/pii/S001449832500049X\" width=\"100%\" height=\"800\" data-external=\"1\"></iframe>\n:::\n\n\n\n\n\nOne is in World Development with my master's supervisor Johan Fourie. Have a look at it below.\n\n\n\n\n::: {.cell .column-page}\n<iframe src=\"https://www.sciencedirect.com/science/article/abs/pii/S0305750X2100019X\" width=\"100%\" height=\"800\" data-external=\"1\"></iframe>\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "hash": "2ed01e3bdfc09c025824b4d4e1bee9bb",
+  "result": {
+    "markdown": "---\ntitle: \"Warwick Poster\"\ndate: 2023-03-31\n---\n\n\nI am delighted to present a poster at the EHS conference in Warwick this year!\n\nYou can have have a look at the poster on this page below. I also include the slides for a presentation of the paper which I am writing along with my two supervisors, Kerstin Enflo and Jakob Molinder.\n\n<!-- ![Poster ](img/Poster-Shocking-Technology-Jayes.pdf){width=100% height=1150} -->\n\n\n::: {.cell .column-page}\n::: {.cell-output-display}\n![](img/Poster-Shocking-Technology-Jayes.pdf)\n:::\n:::\n\n\n\n<br>\n\n![](img/Slide1.JPG)\n\n<br>\n\n![](img/Slide2.JPG)\n\n<br>\n\n![](img/Slide3.JPG)\n\n<br>\n\n![](img/Slide4.JPG)\n\n<br>\n\n![](img/Slide5.JPG)\n\n<br>\n\n![](img/Slide6.JPG)\n\n<br>\n\n![](img/Slide7.JPG)\n\n<br>\n\n![](img/Slide8.JPG)\n\n<br>\n\n![](img/Slide9.JPG)\n\n<br>\n\n![](img/Slide10.JPG)\n\n<br>\n\n![](img/Slide11.JPG)\n\n<br>\n\n![](img/Slide12.JPG)\n\n<br>\n\n![](img/Slide13.JPG)\n\n<br>\n\n![](img/Slide14.JPG)\n\n<br>\n\n![](img/Slide15.JPG)\n\n<br>\n\n![](img/Slide16.JPG)\n\n<br>\n\n![](img/Slide17.JPG)\n\n<br>\n\n![](img/Slide18.JPG)\n\n<br>\n\n![](img/Slide19.JPG)\n\n<br>\n\n![](img/Slide20.JPG)\n\n<br>\n\n![](img/Slide21.JPG)\n\n<br>\n\n![](img/Slide22.JPG)\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

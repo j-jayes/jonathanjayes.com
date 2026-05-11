@@ -1,0 +1,58 @@
+---
+title: "Occupational classification from strings"
+format: html
+draft: true
+---
+
+## TLDR
+
+I detail the process of classifying occupations from strings using embeddings and clustering. I use the [Historical International Standard Classification of Occupations (HISCO)](https://www.rug.nl/ggdc/historicaldevelopment/maddison/themes/occupations) as a benchmark.
+
+## Purpose
+
+I am working on a research project that looks at the importance of migration to the development of industrial Sweden in the first half of the 20th century. 
+
+Th project involves a source of biographical data on 70,000 individuals of some level of notability in Sweden.
+
+As part of this project, I am faced with a problem that many economic historians face. I have a list of occupations, but I want to classify them into a smaller number of categories, ideally to a clasification scheme that others have worked. One such classification scheme is the Historical International Standard Classification of Occupations (HISCO). 
+
+In previous research, I spent a long time with the Swedish Census of 1930 manually coding occupations to HISCO codes with the help of a very knowledgeable colleague, Anders Larsson. I then used this to train a classifier to predict HISCO major group catefory from the strings. It was not very effective, as the amount of information contained in the string was minimal. For example, the string "Kontorist" (clerk) could be found in many different HISCO major groups. (Finish this section)
+
+In this instance, I have a different source of information on occupations. I have a list of occupations from a biographical dictionary. I want to classify these occupations into HISCO codes. I want to do this in a way that is as automated as possible, as I have 70,000 individuals with multiple occupational strings per individual.
+
+## To remember
+
+There are likely some occupations for whom career progression is limited or not recorded. For instance, many of the parish priests recieve significant educational training, and then record one occupationl title (kyrkoherde) in several different parishes. 
+
+In contrast, 
+
+
+      "workExperience": [
+            {
+                "@type": "Library",
+                "name": "Lund City Library",
+                "jobTitle": "Assistant Librarian",
+                "startDate": "1932",
+                "endDate": "1934"
+            },
+            {
+                "@type": "Library",
+                "name": "Getebergsängs Branch of Gothenburg City Library",
+                "jobTitle": "Head Librarian",
+                "startDate": "1934",
+                "endDate": "1939"
+            },
+            {
+                "@type": "Library",
+                "name": "Halmstad City Library",
+                "jobTitle": "Central Library Assistant",
+                "startDate": "1939",
+                "endDate": "1945"
+            },
+            {
+                "@type": "Library",
+                "name": "Västervik City Library",
+                "jobTitle": "City Librarian",
+                "startDate": "1945"
+            }
+        ],

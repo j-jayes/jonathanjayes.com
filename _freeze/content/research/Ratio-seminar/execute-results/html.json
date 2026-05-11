@@ -1,0 +1,14 @@
+{
+  "hash": "4c01a30dae5e9856292b72adc6d1398c",
+  "result": {
+    "markdown": "---\ntitle: \"Ratio Seminar: Hur påverkar AI-utvecklingen jobben?\"\nformat: html\ndate: 2023-05-23\nimage: img/ratio.png\n---\n\n\nI'm thrilled to present a summary of my research on the impact of electrification on the labour market at the [Ratio](https://www.ratio.se/) seminar on May 23rd 2023. The seminar will look at the impact of AI on the labour market, and I am providing some context on a previous technological revolution. The prompt for the seminar is as follows:\n\nNu går det fort. Utvecklingen av AI rusar fram och med det dess effekter på arbetsmarknad och övrigt samhälle, och det går fortare än något tidigare. Vad betyder det? Vilka yrken kommer att påverkas mest – respektive minst av AI-utvecklingen? Och vad krävs för att de samhälleliga och socioekonomiska följderna av framtidens AI ska bli bra? Vad kan vi lära av historien?\n\nHave a look at my slides below.\n\n\n::: {.cell}\n<iframe src=\"https://j-jayes.github.io/ratio/#/title-slide\" width=\"672\" height=\"600\" data-external=\"1\"></iframe>\n:::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

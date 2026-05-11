@@ -1,0 +1,16 @@
+---
+title: "Ratio Seminar: Hur påverkar AI-utvecklingen jobben?"
+format: html
+date: 2023-05-23
+image: img/ratio.png
+---
+
+I'm thrilled to present a summary of my research on the impact of electrification on the labour market at the [Ratio](https://www.ratio.se/) seminar on May 23rd 2023. The seminar will look at the impact of AI on the labour market, and I am providing some context on a previous technological revolution. The prompt for the seminar is as follows:
+
+Nu går det fort. Utvecklingen av AI rusar fram och med det dess effekter på arbetsmarknad och övrigt samhälle, och det går fortare än något tidigare. Vad betyder det? Vilka yrken kommer att påverkas mest – respektive minst av AI-utvecklingen? Och vad krävs för att de samhälleliga och socioekonomiska följderna av framtidens AI ska bli bra? Vad kan vi lära av historien?
+
+Have a look at my slides below.
+
+```{r}
+knitr::include_url("https://j-jayes.github.io/ratio/#/title-slide", height = 600)
+```

@@ -1,0 +1,15 @@
+---
+title: "Consulting"
+---
+
+[📊👨💻🎨💡🤝📈📚]{style="text-align: center;"}
+
+I am keen to work as consultant in data analysis and visualization, as well as web design.
+
+As a data analyst with experience in both medical and historical data, I offer expertise in tidying, analyzing, and reporting on complex data sets. I specialize in crafting engaging visualizations that help organizations understand their data and make informed decisions.
+
+My experience includes working with a not-for-profit medical office, where I was responsible for analyzing and reporting on a complex database of medical records. Additionally, I have experience crafting more than 30 data visualizations for [Our Long Walk to Economic Freedom by Prof. Johan Fourie](https://www.nb.co.za/en/view-book?id=9780624091608), a non-fiction book about the economic history of South Africa, which has subsequently been turned into a textbook.
+
+Furthermore, I have designed, built, and maintained [the website for the 15th Swedish Economic History Meeting](https://sehm2023.com/) for the Swedish Economic History Association.
+
+If you're looking for a consultant to help you make sense of your data, please don't hesitate to get in touch through the links on the [about me page](https://interludeone.com/about.html). I'd be happy to discuss your needs and see if we're a good fit.

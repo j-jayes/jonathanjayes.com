@@ -1,0 +1,62 @@
+
+Interactive chart 
+
+```{r}
+library(ggiraph)
+
+g <- df_rank %>%
+  mutate(across(contains("value"), ~ scales::percent(.x, scale = 1, accuracy = 1)),
+         tooltip = country_name) %>% 
+  ggplot(aes(year, rank, colour = right_rank, group = country_name)) +
+  geom_line_interactive(size = 2.8, aes(year, rank, group = country_name, tooltip = tooltip), colour = "black") +
+  geom_line_(size = 2) +
+  geom_text_interactive(aes(
+    x = 2000,
+    y = left_rank,
+    label = paste0(left_rank, ". ", country_name, " ", left_value)
+  ),
+  colour = "grey20",
+  hjust = 1.1,
+  cex = 3
+  ) +
+  geom_text_interactive(aes(
+    x = 2020,
+    y = right_rank,
+    label = paste0(right_rank, ". ", country_name, " ", right_value)
+  ),
+  colour = "grey20",
+  hjust = 0,
+  cex = 3
+  ) +
+  scale_y_reverse() +
+  scale_color_gradient2(
+    low = "blue",
+    high = "red",
+    mid = "pink",
+    midpoint = 20
+  ) +
+  scale_x_continuous(breaks = c(2000, 2005, 2010, 2015, 2018, 2019, 2020)) +
+  coord_cartesian(xlim = c(1995, 2025)) +
+  theme(legend.position = "none",
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()) +
+  labs(x = NULL,
+       y = NULL,
+       title = "Evolution of African country rankings in share of adults who smoke",
+       caption = "Data: WHO via World Bank\nGraphic: @JonathanJayes")
+
+ggiraph(ggobj = g) %>% 
+  girafe_options(
+    opts_hover(css = girafe_css(
+      css = "fill:none;stroke:red;r:5pt",
+      text = "fill:black;stroke:none"
+    )),
+    opts_hover_inv(css = girafe_css(
+      css = "fill:none;stroke:gray;opacity:.9",
+      text = "fill:gray;stroke:none;opacity:.9"
+    ))
+  )
+```
+

@@ -1,0 +1,194 @@
+"Continent","Continent ID","Country","Country ID","ISO 3","Trade Value","Year"
+"Africa","af","Angola","afago","ago",91062.30798431586,2018
+"Africa","af","Burundi","afbdi","bdi",3971284.9538125056,2018
+"Africa","af","Burkina Faso","afbfa","bfa",311808.9119377353,2018
+"Africa","af","Cote d'Ivoire","afciv","civ",113895.90560467183,2018
+"Africa","af","Cameroon","afcmr","cmr",288542.7030239719,2018
+"Africa","af","Democratic Republic of the Congo","afcod","cod",105457.12539343719,2018
+"Africa","af","Republic of the Congo","afcog","cog",231151.176165011,2018
+"Africa","af","Comoros","afcom","com",17679.668330833698,2018
+"Africa","af","Djibouti","afdji","dji",556846.8352601946,2018
+"Africa","af","Algeria","afdza","dza",3052625.391062198,2018
+"Africa","af","Egypt","afegy","egy",99178248.96560697,2018
+"Africa","af","Eritrea","aferi","eri",16587.8420890563,2018
+"Africa","af","Ethiopia","afeth","eth",8315462.875894988,2018
+"Africa","af","Gabon","afgab","gab",65118673.8713867,2018
+"Africa","af","Ghana","afgha","gha",9680461.134085046,2018
+"Africa","af","Guinea","afgin","gin",1150,2018
+"Africa","af","Gambia","afgmb","gmb",7325.4712547116,2018
+"Africa","af","Equatorial Guinea","afgnq","gnq",17377,2018
+"Africa","af","Kenya","afken","ken",31988428.689053085,2018
+"Africa","af","Liberia","aflbr","lbr",2633.10905851873,2018
+"Africa","af","Libya","aflby","lby",486952049.9075491,2018
+"Africa","af","Morocco","afmar","mar",146716611.5547617,2018
+"Africa","af","Madagascar","afmdg","mdg",34732223.46279052,2018
+"Africa","af","Mali","afmli","mli",322706.5822244133,2018
+"Africa","af","Mozambique","afmoz","moz",890866.8224545271,2018
+"Africa","af","Mauritania","afmrt","mrt",113012.409195707,2018
+"Africa","af","Mauritius","afmus","mus",16340970.707577897,2018
+"Africa","af","Malawi","afmwi","mwi",1004013.3056491705,2018
+"Africa","af","Niger","afner","ner",82420.69637199766,2018
+"Africa","af","Nigeria","afnga","nga",1899733039.5597532,2018
+"Africa","af","Rwanda","afrwa","rwa",4256809.784659663,2018
+"Africa","af","Sudan","afsdn","sdn",352734,2018
+"Africa","af","Senegal","afsen","sen",2686645.234304636,2018
+"Africa","af","Sierra Leone","afsle","sle",1265,2018
+"Africa","af","Somalia","afsom","som",9673.57262913967,2018
+"Africa","af","South Sudan","afssd","ssd",4947,2018
+"Africa","af","Seychelles","afsyc","syc",8573,2018
+"Africa","af","Togo","aftgo","tgo",6275.3220188053,2018
+"Africa","af","Tunisia","aftun","tun",16879042.579090875,2018
+"Africa","af","Tanzania","aftza","tza",16814058.115394063,2018
+"Africa","af","Uganda","afuga","uga",9751773.268294033,2018
+"Africa","af","South Africa","afzaf","zaf",198428151.2149661,2018
+"Africa","af","Zambia","afzmb","zmb",1720247.2022998084,2018
+"Africa","af","Zimbabwe","afzwe","zwe",2202120.5504380874,2018
+"Antarctica","an","French South Antarctic Territory","anatf","atf",208993.99999999997,2018
+"Asia","as","Afghanistan","asafg","afg",274739.3839584254,2018
+"Asia","as","United Arab Emirates","asare","are",93164506.5218497,2018
+"Asia","as","Armenia","asarm","arm",512736.7822486009,2018
+"Asia","as","Azerbaijan","asaze","aze",1112726.9361224421,2018
+"Asia","as","Bangladesh","asbgd","bgd",532576784.0231668,2018
+"Asia","as","Bahrain","asbhr","bhr",1079122.4857625552,2018
+"Asia","as","Brunei","asbrn","brn",269431.21948465594,2018
+"Asia","as","Bhutan","asbtn","btn",31763,2018
+"Asia","as","China","aschn","chn",7924511383.510835,2018
+"Asia","as","Cyprus","ascyp","cyp",54914227.29197722,2018
+"Asia","as","Georgia","asgeo","geo",448350.7162146223,2018
+"Asia","as","Hong Kong","ashkg","hkg",972942375.7310585,2018
+"Asia","as","Indonesia","asidn","idn",173375680.2155253,2018
+"Asia","as","India","asind","ind",789307250.4336162,2018
+"Asia","as","British Indian Ocean Territory","asiot","iot",368964,2018
+"Asia","as","Iran","asirn","irn",14758383.560861846,2018
+"Asia","as","Iraq","asirq","irq",48377648.252808504,2018
+"Asia","as","Israel","asisr","isr",170786915.51251572,2018
+"Asia","as","Jordan","asjor","jor",6696142.112993521,2018
+"Asia","as","Japan","asjpn","jpn",1575573431.7050717,2018
+"Asia","as","Kazakhstan","askaz","kaz",305750658.95049196,2018
+"Asia","as","Kyrgyzstan","askgz","kgz",41641.34990888212,2018
+"Asia","as","Cambodia","askhm","khm",72481649.36866239,2018
+"Asia","as","South Korea","askor","kor",1086429470.5424426,2018
+"Asia","as","Kuwait","askwt","kwt",28773618.32164435,2018
+"Asia","as","Laos","aslao","lao",17163553.90696072,2018
+"Asia","as","Lebanon","aslbn","lbn",16286214.09871526,2018
+"Asia","as","Sri Lanka","aslka","lka",71572114.55207747,2018
+"Asia","as","Macau","asmac","mac",7278599,2018
+"Asia","as","Maldives","asmdv","mdv",242035,2018
+"Asia","as","Burma","asmmr","mmr",71194509.26023854,2018
+"Asia","as","Mongolia","asmng","mng",358582.20516711636,2018
+"Asia","as","Malaysia","asmys","mys",356759516.6193321,2018
+"Asia","as","Nepal","asnpl","npl",1228653.2784645304,2018
+"Asia","as","Oman","asomn","omn",45893182.43613949,2018
+"Asia","as","Pakistan","aspak","pak",149075311.81477523,2018
+"Asia","as","Philippines","asphl","phl",50561668.84670084,2018
+"Asia","as","North Korea","asprk","prk",152028,2018
+"Asia","as","Palestine","aspse","pse",599608.0086410585,2018
+"Asia","as","Qatar","asqat","qat",214306971.07890353,2018
+"Asia","as","Saudi Arabia","assau","sau",135077331.82052198,2018
+"Asia","as","Singapore","assgp","sgp",244941609.78604436,2018
+"Asia","as","Syria","assyr","syr",4551264.444703296,2018
+"Asia","as","Thailand","astha","tha",520578650.0818919,2018
+"Asia","as","Tajikistan","astjk","tjk",44594.96630680571,2018
+"Asia","as","Turkmenistan","astkm","tkm",319819,2018
+"Asia","as","Timor-Leste","astls","tls",3222,2018
+"Asia","as","Turkey","astur","tur",1440341160.8783586,2018
+"Asia","as","Uzbekistan","asuzb","uzb",38270.0619457818,2018
+"Asia","as","Vietnam","asvnm","vnm",1139580224.8500326,2018
+"Asia","as","Chinese Taipei","asxxb",,681687926.2922617,2018
+"Asia","as","Yemen","asyem","yem",3106.9999999999995,2018
+"Europe","eu","Albania","eualb","alb",20621014.704220906,2018
+"Europe","eu","Andorra","euand","and",238899.42623114042,2018
+"Europe","eu","Austria","euaut","aut",2000286914.2057426,2018
+"Europe","eu","Bulgaria","eubgr","bgr",296646788.0491352,2018
+"Europe","eu","Bosnia and Herzegovina","eubih","bih",67093112.79026816,2018
+"Europe","eu","Belarus","eublr","blr",57135293.93853376,2018
+"Europe","eu","Belgium-Luxembourg","eublx","blx",7570481706.118087,2018
+"Europe","eu","Switzerland","euche","che",1447499823.1754265,2018
+"Europe","eu","Czechia","eucze","cze",3299495990.0459843,2018
+"Europe","eu","Germany","eudeu","deu",29997854575.82486,2018
+"Europe","eu","Denmark","eudnk","dnk",11196008155.280186,2018
+"Europe","eu","Spain","euesp","esp",2554195451.5851507,2018
+"Europe","eu","Estonia","euest","est",1721586883.2000406,2018
+"Europe","eu","Finland","eufin","fin",7463781609.828841,2018
+"Europe","eu","France","eufra","fra",6054226291.477701,2018
+"Europe","eu","United Kingdom","eugbr","gbr",7631216664.281678,2018
+"Europe","eu","Gibraltar","eugib","gib",6213,2018
+"Europe","eu","Greece","eugrc","grc",260127967.5660988,2018
+"Europe","eu","Croatia","euhrv","hrv",128020594.83158301,2018
+"Europe","eu","Hungary","euhun","hun",1830805201.2100816,2018
+"Europe","eu","Ireland","euirl","irl",1492440675.9619772,2018
+"Europe","eu","Iceland","euisl","isl",33062826.932791587,2018
+"Europe","eu","Italy","euita","ita",5551858731.802185,2018
+"Europe","eu","Lithuania","eultu","ltu",1552003547.3990905,2018
+"Europe","eu","Latvia","eulva","lva",1093672323.0814626,2018
+"Europe","eu","Moldova","eumda","mda",1432648.8271889088,2018
+"Europe","eu","North Macedonia","eumkd","mkd",25183575.99618102,2018
+"Europe","eu","Malta","eumlt","mlt",55439890.496619776,2018
+"Europe","eu","Montenegro","eumne","mne",4184092.709932968,2018
+"Europe","eu","Netherlands","eunld","nld",13847551030.8134,2018
+"Europe","eu","Norway","eunor","nor",9804995239.202131,2018
+"Europe","eu","Poland","eupol","pol",6931318987.636879,2018
+"Europe","eu","Portugal","euprt","prt",763436299.6223598,2018
+"Europe","eu","Romania","eurou","rou",614855409.044529,2018
+"Europe","eu","Russia","eurus","rus",3645148853.1114454,2018
+"Europe","eu","San Marino","eusmr","smr",399111,2018
+"Europe","eu","Serbia","eusrb","srb",218056066.64651397,2018
+"Europe","eu","Slovakia","eusvk","svk",1253261311.1529973,2018
+"Europe","eu","Slovenia","eusvn","svn",462797695.9163748,2018
+"Europe","eu","Ukraine","euukr","ukr",112278613.53354844,2018
+"North America","na","Aruba","naabw","abw",6328,2018
+"North America","na","Anguilla","naaia","aia",26469,2018
+"North America","na","Antigua and Barbuda","naatg","atg",18570.01848287942,2018
+"North America","na","Bahamas","nabhs","bhs",1584549.8611155099,2018
+"North America","na","Belize","nablz","blz",101909.90484152027,2018
+"North America","na","Bermuda","nabmu","bmu",3578879.234331842,2018
+"North America","na","Barbados","nabrb","brb",732109.2511680722,2018
+"North America","na","Canada","nacan","can",428986129.9091299,2018
+"North America","na","Costa Rica","nacri","cri",31301184.55746809,2018
+"North America","na","Cuba","nacub","cub",2334324.282668129,2018
+"North America","na","Curaçao","nacuw","cuw",187359,2018
+"North America","na","Cayman Islands","nacym","cym",14558.487313570198,2018
+"North America","na","Dominica","nadma","dma",23135.246193748302,2018
+"North America","na","Dominican Republic","nadom","dom",18122559.60660126,2018
+"North America","na","Greenland","nagrl","grl",127512,2018
+"North America","na","Guatemala","nagtm","gtm",17738680.036517855,2018
+"North America","na","Honduras","nahnd","hnd",32350945.266798574,2018
+"North America","na","Haiti","nahti","hti",64207.018299017625,2018
+"North America","na","Jamaica","najam","jam",230078.6008145065,2018
+"North America","na","Saint Kitts and Nevis","nakna","kna",87161.1763335926,2018
+"North America","na","Saint Martin","namaf","maf",10586,2018
+"North America","na","Mexico","namex","mex",135864963.94222403,2018
+"North America","na","Nicaragua","nanic","nic",10892238.480380464,2018
+"North America","na","Panama","napan","pan",10863375.723692248,2018
+"North America","na","El Salvador","naslv","slv",1340312.730993113,2018
+"North America","na","Turks and Caicos Islands","natca","tca",58756.549928384375,2018
+"North America","na","Trinidad and Tobago","natto","tto",206432.9311542416,2018
+"North America","na","United States","nausa","usa",4436337887.826081,2018
+"North America","na","British Virgin Islands","navgb","vgb",2038544.550236989,2018
+"Oceania","oc","American Samoa","ocasm","asm",7825,2018
+"Oceania","oc","Australia","ocaus","aus",343467544.48255426,2018
+"Oceania","oc","Cook Islands","occok","cok",2877,2018
+"Oceania","oc","Fiji","ocfji","fji",44582,2018
+"Oceania","oc","New Caledonia","ocncl","ncl",3962099.1245832606,2018
+"Oceania","oc","Norfolk Island","ocnfk","nfk",11508,2018
+"Oceania","oc","Niue","ocniu","niu",101542.47399143499,2018
+"Oceania","oc","Nauru","ocnru","nru",3067.260274851,2018
+"Oceania","oc","New Zealand","ocnzl","nzl",57802045.29431301,2018
+"Oceania","oc","Papua New Guinea","ocpng","png",726119.9646286404,2018
+"Oceania","oc","French Polynesia","ocpyf","pyf",2531,2018
+"Oceania","oc","Tokelau","octkl","tkl",62838.82889665241,2018
+"Oceania","oc","Tuvalu","octuv","tuv",49950.727032015704,2018
+"Oceania","oc","Vanuatu","ocvut","vut",4833,2018
+"Oceania","oc","Samoa","ocwsm","wsm",162009.0801817465,2018
+"South America","sa","Argentina","saarg","arg",65974707.99997516,2018
+"South America","sa","Bolivia","sabol","bol",2071841.2471127056,2018
+"South America","sa","Brazil","sabra","bra",621770266.3692629,2018
+"South America","sa","Chile","sachl","chl",105115646.81416053,2018
+"South America","sa","Colombia","sacol","col",41812126.77907098,2018
+"South America","sa","Ecuador","saecu","ecu",60195900.58089024,2018
+"South America","sa","Guyana","saguy","guy",82249.8846247171,2018
+"South America","sa","Peru","saper","per",89144601.90630376,2018
+"South America","sa","Paraguay","sapry","pry",9861856.711115781,2018
+"South America","sa","Suriname","sasur","sur",311541,2018
+"South America","sa","Uruguay","saury","ury",18270338.72177705,2018
+"South America","sa","Venezuela","saven","ven",326287304.5049326,2018

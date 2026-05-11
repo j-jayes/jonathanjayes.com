@@ -1,0 +1,53 @@
+---
+title: "Untitled"
+format: html
+draft: true
+---
+
+## Brainstorming
+
+South Africa has decided to remove the re minimus rule from its import of small packages from overseas. This means that imported clothing items will now be subject to a 45% customs duty, plus VAT. This will raise the price of imported clothing from China. 
+
+[As reported on Tech Central](https://techcentral.co.za/sars-takes-the-shine-off-shein/246126/).
+
+Industry groups in South Africa say that ecommerce retailers are breaking up shipments into smaller packages to avoid the customs duties, and that the removal of the de minimus rule will level the playing field for local retailers.
+
+What are my views on the protection of local industry?
+
+When it comes to industrial policy, you need to decide what your objectives are.
+
+I think that if you are a government who is building a big infrastructure project, e.g. building a new rail line, you should procure the trains and infrastructure from the provider who can do it the best and cheapest, irrespective of their origin.
+
+
+
+---
+
+I am thinking about the economics of South Africa removing the de minimis rule for international e-commerce retailers. In effect, this raises the tariff on imported clothing from sites like Shein based in China to 45% plus VAT. Can you give me an argument for the pros and cons for doing so, here is the start of my thinking.
+
+On the pro side, you might protect domestic textile manufacturers who struggle to compete with the Chinese imported goods prices, and you stop fast fashion poor quality clothing being worn a small number of times and then dumped in landfills in South Africa. 
+
+On the con side, you hurt poor consumers who need to buy clothes in order to protect a domestic industry that is not internationally competitive - normally we do this to protect infant industry, but in this case South African textile manufacturers aren't really internationally competitive even after an extensive period of import protections.
+
+In general, I am against the idea of local content requirements in projects funded by taxpayers, e.g. when you build a train system I think you should get the company who can do it best and cheapest to do it, irrespective of the amount of locally manufactured trains or infrastructure. 
+
+Similarly, if you are the South African government and you're faced with a shortage of electricity, I do not think that imposing large tariffs on imported solar panels is a good idea. You should only do this if you think that your domestic industry can become globally competitive. Private individuals and companies are the ones purchasing the solar panels, decreasing the demand for electricity from the grid, and the government should make it as easy as possible for them to do so. As a side note, that is why the government should make it easier for private individuals to sell electricity back to the grid, as this will increase the demand for solar panels and decrease the payback period for the investment in solar panels.
+
+However, when it comes to the import of clothing, I am not sure what the right answer is. I think that the government should not be in the business of protecting domestic industries that are not internationally competitive, but I also think that the fast fashion industry is a scourge on the environment and that we should be doing everything we can to reduce the amount of clothing that is thrown away after being worn a few times. In addition, the low low prices that fast fashion companies like Shein offer are only possible because of the exploitation of workers in countries like China.
+
+Economics vs politics.
+
+Sometimes the economics make things appear very simple, but state capacity gets in the way of implementing the lowest cost solution. Take for instance the case of anti-dumping duties imposed by the United States on washing machines between 2012 and 2016. The result was a 12 percent increase in the price of washing machines in the US, and the protection of 1800 workers in the country. 
+
+According to the paper in the AER, The Production Relocation and Price Effects of US Trade Policy: The Case of Washing Machines. by Aaron Flaaen, Ali Hortaçsu, and Felix Tintelnot;
+
+"Absent additional factors, the reports of increases in domestic employment attributed to this policy of roughly 1,800 workers would result in an average annual cost to consumers of over US$815,000 per job created (after netting out tariff revenues)."
+
+This is clearly not optimal. It would be better to help the 1800 workers find new jobs in a growing industry in the US through retraining and other programs, rather than protecting the industry through tariffs. However, the anti-dumping duties in the US were very popular with voters. Voters in the United States don't see themselves as consumers of washing machines, but can put themselves in the shoes of someone being put out of work due to offshoring. Further, voters might not believe that the government can in reality help the 1800 workers find new jobs in a growing industry, and so they might prefer the protectionist policy.
+
+
+---
+
+I think the framing here is important. 
+
+Thank you for sharing Sammy! While I don't think the case for protecting the domestic industry is very strong, I think there is an issue here around assessing the quality of products on these e-commerce platforms, both in terms of use and production. If the imported Shein clothing degrades after a couple of uses and is manufactured in part thanks to coerced labour, perhaps there is a moral case to be made to discourage its import into South African landfills?
+

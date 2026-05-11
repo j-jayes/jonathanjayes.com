@@ -1,0 +1,9 @@
+---
+pagetitle: "Home - Interlude One"
+listing:
+  contents: posts
+  sort:
+    - "date desc"
+    - "title desc"
+  feed: true
+---

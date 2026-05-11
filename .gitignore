@@ -1,0 +1,16 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+/.quarto/
+
+/.luarc.json
+
+
+.env
+
+.venv/*
+
+posts/2024-05-17-two-thirds-of-the-avg/.env
+**/*.quarto_ipynb

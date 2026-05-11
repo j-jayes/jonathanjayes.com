@@ -1,0 +1,12 @@
+{
+  "hash": "b0a385fbf217b7b62b243f235a542b2c",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Untitled\"\nformat: html\n---\n\n```{javascript}\nfunction MyComponent() {    \n    const [text, setText] = React.useState(['Click me'])\n    return (\n      <div onClick={() => setText((previous) => [previous, ...[' and me']])}>\n        <p>{text.map(value => <span>{value}</span>)} </p>\n      </div>\n    );\n  }\n\nexport default MyComponent\n```\n\n{{< react MyComponent >}}\n\n",
+    "supporting": [
+      "react-production-functions_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

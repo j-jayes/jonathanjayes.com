@@ -1,0 +1,14 @@
+---
+title: "Wired for Success - Sweden’s Electrical Innovators in the Age of Industrial Transformation"
+format: html
+date: 2023-06-07
+image: "img/wired-for-success-abstract.png"
+---
+
+## Abstract
+
+This paper delves into the intersection of technological innovation and economic leveling in Sweden during the first half of the 20th century, with a particular focus on the electrification revolution. As electricity transitioned from a luxury to an essential component of production and lifestyle, it not only improved the marginal product of labor, but also led to more equitable income distribution and job creation. Central to this transition were the individuals who championed and adopted this new technology.
+
+The purpose of this study is to meticulously trace the career trajectories of these innovators and early adopters, by exploring their personal backgrounds, professional connections, and global linkages. Leveraging an unconventional data source, the Vem är vem? (Who is who?) series, this paper curates a comprehensive database of biographical information on approximately 70,000 notable Swedes from 1945-1950 and 1962-1968. We make use of OpenAI's GPT-3.5 turbo API to unabbreviate the biographical text (from mid-20th-century Swedish), and structure it into a format that is amenable to network analysis (the Schema.org/Person schema). The resulting dataset contains information on the individuals education, employment, and social connections, as well as their geographical location and industry affiliation.
+
+By systematically analyzing this rich data, we reconstruct a multi-layered network of individuals, their geographical loci, the companies they were associated with, and the industries they were part of. This innovative approach elucidates the dynamic interplay between technological progress, economic development, and social mobility, while shedding light on the critical role played by human agents in technological adoption and diffusion. The study enhances our understanding of the historical roots of Sweden's economic leveling and can provide insights into the complex processes underlying similar technological transitions globally.

@@ -1,0 +1,14 @@
+{
+  "hash": "c74d55741842e5529929020104971019",
+  "result": {
+    "markdown": "---\ntitle: \"Academic Data Processing\"\n---\n\n\nI have been happy to help a number of my colleagues with scraping data from public websites or processing geographic data. I link these GitHub repositories here, in case you're looking for inspiration on how to structure a scraping project, or perhaps want to access data on soil suitability or Europe's urban populations.\n\n## Scraping a genealogy wiki of Sweden's noble families\n\n[Here](https://github.com/j-jayes/adelsvapen) I scraped and structured a database of more than 120,000 individuals belonging to various branches of Sweden's nobility.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](https://raw.githubusercontent.com/j-jayes/adelsvapen/main/images/example_data.PNG){width=100%}\n:::\n:::\n\n\n\n## Scraping tax registers from the Stockholm City Archive\n\n[Here](https://github.com/j-jayes/mantalsregister-1909) I scraped an index of records from 1800 to 1880 for residents of Sweden's most populous city, Stockholm. \n\n\n::: {.cell}\n::: {.cell-output-display}\n![](https://raw.githubusercontent.com/j-jayes/mantalsregister-1909/main/README_files/figure-commonmark/unnamed-chunk-5-1.png){width=100%}\n:::\n:::\n\n\n## Soil suitability calculation\n\n[In this project](https://github.com/j-jayes/soil-suitability#purpose), I helped acquire data on soil suitability for wheat cultivation across Europe, and aggregate the raster spatial data to NUTS 2 and NUT 3 regions for use as control variables in a study of persistence.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](https://raw.githubusercontent.com/j-jayes/soil-suitability/main/images/fao_interface.PNG){width=100%}\n:::\n:::\n\n\n## European population aggregations\n\n[In this project](https://github.com/j-jayes/european-population-aggregations#download-the-data), I helped aggregate the population from cities across Europe to NUTS2 and NUTS3 regions, to show the growth of urban populations across time.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](https://raw.githubusercontent.com/j-jayes/european-population-aggregations/main/images/map-pop-1950.png){width=100%}\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

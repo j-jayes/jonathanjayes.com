@@ -1,0 +1,9 @@
+---
+pagetitle: "Research"
+listing:
+  contents: research
+  sort:
+    - "date desc"
+    - "title desc"
+---
+

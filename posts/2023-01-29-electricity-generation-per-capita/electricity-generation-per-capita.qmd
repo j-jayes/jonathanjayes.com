@@ -1,0 +1,316 @@
+---
+title: "Electricity generation per capita"
+description: |
+  A post on electricity generation per capita across the world since 2000.
+image: images/Asia_ranking.jpeg
+author:
+  - name: Jonathan Jayes
+date: 2023-01-30
+---
+
+## Introduction
+
+🔥In this blog post, we will take a closer look at the evolution of electricity generation per capita across the world and examine how China has rapidly climbed above its neighbors in per capita terms📈. Through the use of data visualization📊, we will explore the decrease of electricity generation per capita in New Zealand over the past few decades and compare it to other countries in the region🌎. This analysis will provide a deeper understanding of the world's energy landscape and the global energy market🌡️. So, let's dive in and see how energy consumption has evolved over time!🔍
+
+## Inspiration
+
+🚀 I am inspired by the company [Electricity Maps](https://www.electricitymaps.com/) based in Copenhagen, who allow you to understand the electricity grid through data. They collect data from all around the world and compute the data in an hourly resolution, allowing you to gain granular insights accounting for the variance of the grid.💡
+While we won't use their data in this blog post, we will take a look at some great annual statistics compiled by the team at [Our World in Data](https://ourworldindata.org/energy-access). This organization is dedicated to providing data-driven insights on global issues and their data on electricity generation per capita is a valuable resource for understanding how different countries are progressing in terms of energy production.📊
+
+## Visualization
+
+```{r}
+# preamble
+library(tidyverse)
+library(sf)
+theme_set(theme_light())
+
+# load map
+map <- st_as_sf(maps::map(database="world", plot = FALSE, fill = TRUE))
+
+# create code to match coutnry to data with
+library(countrycode)
+map <- map %>% 
+  mutate(code = countrycode(ID, "country.name", "iso3c"))
+
+# remove clutter from map
+country_to_remove <- c(
+  'Antarctica','Greenland', 'French Southern and Antarctic Lands'
+)
+
+map <- map %>% 
+  filter(!ID %in% country_to_remove)
+
+df <- read_csv(here::here("posts/2023-01-29-electricity-generation-per-capita/data/per-capita-electricity-generation.csv"))
+
+df <- df %>% 
+  as_tibble() %>% 
+  rename(value = `Per capita electricity (kWh)`) %>% 
+  janitor::clean_names()
+
+df <- df %>% 
+  filter(code %in% map$code) %>% 
+  # 2000?
+  filter(year >= 2000,
+         value != 0)
+
+
+# function to get ranking
+get_ranking <- function(continent_in) {
+  message("Getting ranking for ", continent_in)
+
+  continent_out <- df %>%
+    mutate(continent = countrycode(code, "iso3c", "continent")) %>%
+    filter(continent == continent_in)
+
+  df_rank <- continent_out %>%
+    select(year, country_name = entity, value) %>%
+    distinct()
+
+  df_rank <- df_rank %>%
+    group_by(year) %>%
+    mutate(rank = rank(desc(value), ties.method = "first")) %>%
+    ungroup()
+
+  labels_left <- df_rank %>%
+    filter(year == min(year)) %>%
+    mutate(
+      left_rank = rank,
+      left_value = value
+    ) %>%
+    select(country_name, left_rank, left_value)
+
+  labels_right <- df_rank %>%
+    filter(year == max(year)) %>%
+    mutate(
+      right_rank = rank,
+      right_value = value
+    ) %>%
+    select(country_name, right_rank, right_value)
+
+  df_rank <- df_rank %>%
+    inner_join(labels_left) %>%
+    inner_join(labels_right)
+  
+  return(df_rank)
+}
+
+africa_rank <- get_ranking("Africa")
+
+```
+
+
+
+```{r, fig.height=10, fig.width=8}
+plot_levels <- function(continent_in, highlight_country_in){
+  
+  tbl <- get_ranking(continent_in)
+  
+  midpoint_in <- tbl %>% 
+    summarise(mean(value)) %>% 
+    pull()
+  
+  tbl %>%
+  mutate(left_lab = scales::number(left_value, accuracy = 1, big.mark = " "),
+         right_lab = scales::number(right_value, accuracy = 1, big.mark = " ")) %>%
+  ggplot(aes(year, value, colour = right_value, group = country_name)) +
+  geom_line(size = 2.8, aes(year, value, group = country_name), colour = "black") +
+  geom_line(size = 2) +
+  geom_line(size = 3, colour = "black", data = tbl %>% filter(country_name == highlight_country_in)) +
+  geom_text(aes(
+    x = 2000,
+    y = left_value,
+    label = paste0(country_name, " ", left_lab, " kWh pc")
+  ),
+  check_overlap = T,
+  colour = "grey20",
+  hjust = 1.1,
+  cex = 3
+  ) +
+  geom_text(aes(
+    x = 2021,
+    y = right_value,
+    label = paste0(country_name, " ", right_lab, " kWh pc")
+  ),
+  check_overlap = T,
+  colour = "grey20",
+  hjust = 0,
+  cex = 3
+  ) +
+  # scale_y_reverse() +
+  scale_color_gradient2(
+    low = "#3C5488",
+    high = "#00A087",
+    mid = "#4DBBD5",
+    midpoint = midpoint_in
+  ) +
+  coord_cartesian(xlim = c(1990, 2030)) +
+  theme(
+    legend.position = "none",
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.y = element_blank()
+  ) +
+  labs(
+    x = NULL,
+    y = "Electricity generated per capita",
+    title = glue::glue("Evolution of per capita electricity generation (kWh) in {continent_in}"),
+    subtitle = glue::glue("{highlight_country_in} is highlighted in black"),
+    caption = "Data: Data is compiled by Our World in Data based on three main sources:\n- BP Statistical Review of World Energy.\n- Ember Yearly Electricity Data (2022).\n- Ember European Electricity Review (2022). \nGraphic: @JonathanJayes"
+  )
+  
+}
+```
+
+
+```{r, fig.height=10, fig.width=8}
+#| column: page
+
+
+# jpeg(
+#   filename = "~/Recon/interlude-one/posts/2023-01-29-electricity-generation-per-capita/images/Asia_ranking.jpeg",
+#   height = 10,
+#   width = 10,
+#   units = "in",
+#   res = 1000
+# )
+
+plot_levels(continent_in = "Africa",
+            highlight_country_in = "South Africa")
+
+# dev.off()
+
+```
+
+
+
+```{r, fig.height=10, fig.width=8}
+plot_ranking <- function(continent_in, highlight_country_in){
+  
+  tbl <- get_ranking(continent_in)
+  
+  midpoint_in <- tbl %>% 
+    distinct(country_name) %>% 
+    count() %>% 
+    pull() / 2
+  
+tbl %>%
+  mutate(left_lab = scales::number(left_value, accuracy = 1, big.mark = " "),
+         right_lab = scales::number(right_value, accuracy = 1, big.mark = " ")) %>%
+  ggplot(aes(year, rank, colour = right_rank, group = country_name)) +
+  geom_line(size = 2.8, aes(year, rank, group = country_name), colour = "black") +
+  geom_line(size = 2) +
+  geom_line(size = 3, colour = "black", data = tbl %>% filter(country_name == highlight_country_in)) +
+  geom_text(aes(
+    x = 2000,
+    y = left_rank,
+    label = paste0(left_rank, ". ", country_name, " ", left_lab, " kWh pc")
+  ),
+  check_overlap = T,
+  colour = "grey20",
+  hjust = 1.1,
+  cex = 3
+  ) +
+  geom_text(aes(
+    x = 2021,
+    y = right_rank,
+    label = paste0(right_rank, ". ", country_name, " ", right_lab, " kWh pc")
+  ),
+  check_overlap = T,
+  colour = "grey20",
+  hjust = 0,
+  cex = 3
+  ) +
+    scale_y_reverse() +
+    scale_color_gradient2(
+      low = "blue",
+      high = "red",
+      mid = "pink",
+      midpoint = midpoint_in
+    ) +
+  coord_cartesian(xlim = c(1990, 2030)) +
+    theme(
+      legend.position = "none",
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      axis.text.y = element_blank()
+    )  +
+  labs(
+    x = NULL,
+    y = " Per capita electricity generation (kWh)",
+    title = glue::glue("Evolution in ranking of per capita electricity generation (kWh) in {continent_in}"),
+    subtitle = glue::glue("{highlight_country_in} is highlighted in black"),
+    caption = "Data: Data is compiled by Our World in Data based on three main sources:\n- BP Statistical Review of World Energy.\n- Ember Yearly Electricity Data (2022).\n- Ember European Electricity Review (2022). \nGraphic: @JonathanJayes"
+  )
+}
+```
+
+
+```{r, fig.height=10, fig.width=8}
+#| column: page
+
+
+# jpeg(
+#   filename = "posts/2022-10-17-our-world-in-data-choropleth/images/Africa_ranking.jpeg",
+#   height = 10,
+#   width = 8,
+#   units = "in",
+#   res = 1000
+# )
+
+plot_ranking("Africa", "South Africa")
+
+# dev.off()
+```
+
+Now we can see that South Africa has climbed the rankings from 18th place in 2000 up to 7th in 2020. Interesting!
+
+### What about the other continents?
+
+Have a look at each below, and then give my Shiny app a gander (TODO).
+
+```{r}
+
+make_tab <- function(continent_in, highlight_country_in) { # function to make the tabs
+  cat("##", continent_in) # Label tab
+  cat("\n") # Close tab
+  p <- plot_levels(
+    continent_in,
+    highlight_country_in
+  ) # Create plot in levels
+  print(p) # Display plot
+  cat("\n") # Space
+  q <- plot_ranking(
+    continent_in,
+    highlight_country_in
+  ) # Create plot in levels
+  print(q)
+  cat("\n") # Close tab
+}
+
+```
+
+:::: {.column-page}
+::: {.panel-tabset}
+
+```{r}
+#| results: asis
+#| fig-height: 8
+#| fig-width: 10
+
+
+make_tab("Americas", "Canada")
+
+make_tab("Asia", "China")
+
+make_tab("Europe", "Sweden")
+
+make_tab("Oceania", "New Zealand")
+
+
+```
+
+:::
+::::
