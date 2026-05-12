@@ -9,7 +9,7 @@ project:
 website:
   favicon: assets/favicon.ico
   title: "Jonathan Jayes"
-  site-url: https://jonathanjayes.com/
+  site-url: https://blog.jonathanjayes.com/
   navbar:
     background: "#FCFCFC"
     logo: assets/favicon_logo.ico
