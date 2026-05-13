@@ -46,8 +46,6 @@ website:
           href: "content/generative-ai-articles-listing.qmd"
       - text: "{{< fa brands github >}}"
         href: https://github.com/j-jayes/interlude-one
-      - icon: rss
-        href: index.xml
 
 
 format:
