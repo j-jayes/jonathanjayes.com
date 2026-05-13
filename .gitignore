@@ -15,3 +15,6 @@
 posts/2024-05-17-two-thirds-of-the-avg/.env
 **/*.quarto_ipynb
 .firebase/
+
+# R binary data files - large, not needed for rendering (Quarto freeze covers this)
+**/*.rds
