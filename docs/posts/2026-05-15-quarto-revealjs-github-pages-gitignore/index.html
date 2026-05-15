@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jonathan Jayes">
-<meta name="dcterms.date" content="2023-01-30">
-<meta name="description" content="A post on electricity generation per capita across the world since 2000.">
+<meta name="dcterms.date" content="2026-05-15">
 
-<title>Electricity generation per capita – Jonathan Jayes</title>
+<title>Why your reveal.js slides have no styling on GitHub Pages – Jonathan Jayes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -44,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-6e9b8b815d456891a7660788bfd7dc16.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-0db445968362fb1159dc5ae2ecd5f2cd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-aff18cab76a7ff9da781c96adc5cbdbd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -188,28 +222,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#inspiration" id="toc-inspiration" class="nav-link" data-scroll-target="#inspiration">Inspiration</a></li>
-  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a>
-  <ul class="collapse">
-  <li><a href="#what-about-the-other-continents" id="toc-what-about-the-other-continents" class="nav-link" data-scroll-target="#what-about-the-other-continents">What about the other continents?</a></li>
-  </ul></li>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem">The problem</a></li>
+  <li><a href="#the-cause" id="toc-the-cause" class="nav-link" data-scroll-target="#the-cause">The cause</a></li>
+  <li><a href="#the-fix" id="toc-the-fix" class="nav-link" data-scroll-target="#the-fix">The fix</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Electricity generation per capita</h1>
+<h1 class="title">Why your reveal.js slides have no styling on GitHub Pages</h1>
 </div>
 
-<div>
-  <div class="description">
-    <p>A post on electricity generation per capita across the world since 2000.</p>
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -224,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 30, 2023</p>
+      <p class="date">May 15, 2026</p>
     </div>
   </div>
   
@@ -236,112 +262,44 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>🔥In this blog post, we will take a closer look at the evolution of electricity generation per capita across the world and examine how China has rapidly climbed above its neighbors in per capita terms📈. Through the use of data visualization📊, we will explore the decrease of electricity generation per capita in New Zealand over the past few decades and compare it to other countries in the region🌎. This analysis will provide a deeper understanding of the world’s energy landscape and the global energy market🌡️. So, let’s dive in and see how energy consumption has evolved over time!🔍</p>
+<section id="the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem">The problem</h2>
+<p>I hit this bug again recently and it took me longer than I care to admit to track down, so writing it up here for future me.</p>
+<p>My default workflow when starting a new project is to create a GitHub repo and grab GitHub’s default <code>.gitignore</code> for Python. It’s a sensible habit — the file covers the usual suspects and saves me from accidentally committing virtual environments or build artefacts. I also very frequently create a <code>website/</code> folder inside the repo with a Quarto project in it: some <code>.qmd</code> files that render to HTML, and often a set of slides in revealjs format. I use <code>output-dir: ../docs</code> to render everything out to <code>docs/</code>, then configure GitHub Pages to serve from that folder. Clean, simple, works great.</p>
+<p>Until it doesn’t.</p>
+<p>The symptom is maddening: the site looks perfect locally, but after pushing to GitHub the reveal.js slides are completely unstyled — raw HTML, no fonts, no layout, no colour. Everything else on the site is fine.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/unstyled-slides.png" class="img-fluid figure-img"></p>
+<figcaption>My slides rendered without any styling on GitHub Pages</figcaption>
+</figure>
+</div>
 </section>
-<section id="inspiration" class="level2">
-<h2 class="anchored" data-anchor-id="inspiration">Inspiration</h2>
-<p>🚀 I am inspired by the company <a href="https://www.electricitymaps.com/">Electricity Maps</a> based in Copenhagen, who allow you to understand the electricity grid through data. They collect data from all around the world and compute the data in an hourly resolution, allowing you to gain granular insights accounting for the variance of the grid.💡 While we won’t use their data in this blog post, we will take a look at some great annual statistics compiled by the team at <a href="https://ourworldindata.org/energy-access">Our World in Data</a>. This organization is dedicated to providing data-driven insights on global issues and their data on electricity generation per capita is a valuable resource for understanding how different countries are progressing in terms of energy production.📊</p>
+<section id="the-cause" class="level2">
+<h2 class="anchored" data-anchor-id="the-cause">The cause</h2>
+<p>GitHub’s default Python <code>.gitignore</code> contains this line:</p>
+<pre><code>dist/</code></pre>
+<p>That rule is there to ignore Python packaging build output. Completely reasonable. But Quarto renders reveal.js slides by copying the reveal.js library into <code>docs/site_libs/revealjs/dist/</code>, and that path matches <code>dist/</code> exactly. Git silently ignores the entire folder, so it never gets committed, and GitHub Pages never receives those files.</p>
+<p>What lives in <code>dist/</code> that your slides need:</p>
+<ul>
+<li><code>reveal.css</code> / <code>reset.css</code> — the core stylesheet</li>
+<li><code>reveal.js</code> / <code>reveal.esm.js</code> — the core JavaScript</li>
+<li><code>theme/</code> — fonts and the Quarto theme CSS</li>
+</ul>
+<p>Without those, the browser gets the HTML but none of the presentation layer. Hence the raw dump of text.</p>
 </section>
-<section id="visualization" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="visualization">Visualization</h2>
-<div class="cell page-columns page-full">
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="electricity-generation-per-capita_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img column-page" width="768"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell page-columns page-full">
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="electricity-generation-per-capita_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img column-page" width="768"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Now we can see that South Africa has climbed the rankings from 18th place in 2000 up to 7th in 2020. Interesting!</p>
-<section id="what-about-the-other-continents" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="what-about-the-other-continents">What about the other continents?</h3>
-<p>Have a look at each below, and then give my Shiny app a gander (TODO).</p>
-<div class="column-page">
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Americas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Asia</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Europe</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Oceania</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="electricity-generation-per-capita_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="electricity-generation-per-capita_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="electricity-generation-per-capita_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="electricity-generation-per-capita_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="electricity-generation-per-capita_files/figure-html/unnamed-chunk-7-5.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="electricity-generation-per-capita_files/figure-html/unnamed-chunk-7-6.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="electricity-generation-per-capita_files/figure-html/unnamed-chunk-7-7.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="electricity-generation-per-capita_files/figure-html/unnamed-chunk-7-8.png" class="img-fluid figure-img" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<section id="the-fix" class="level2">
+<h2 class="anchored" data-anchor-id="the-fix">The fix</h2>
+<p>Add a negation rule immediately after the <code>dist/</code> entry in your <code>.gitignore</code>:</p>
+<pre><code>dist/
+!docs/site_libs/revealjs/dist/</code></pre>
+<p>The <code>!</code> prefix un-ignores that specific path while leaving the broader <code>dist/</code> rule in place for everything else. After adding the rule, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add docs/site_libs/revealjs/dist/</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"fix: un-ignore revealjs dist/ for GitHub Pages"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Thanks current me!</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
