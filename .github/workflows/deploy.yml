@@ -18,6 +18,12 @@ on:
         type: string
         required: true
 
+# action-hosting-deploy reports PR preview URLs as a check run and a comment.
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
 jobs:
   changes:
     runs-on: ubuntu-latest
