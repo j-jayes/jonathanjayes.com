@@ -1,0 +1,9 @@
+node_modules/
+.svelte-kit/
+build/
+build-*/
+.firebase/
+.env
+.env.*
+.DS_Store
+*.log

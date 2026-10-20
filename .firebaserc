@@ -1,0 +1,23 @@
+{
+  "projects": {
+    "default": "jonathanjayes-com"
+  },
+  "targets": {
+    "jonathanjayes-com": {
+      "hosting": {
+        "home": [
+          "jonathanjayes-home"
+        ],
+        "talks": [
+          "jonathanjayes-talks"
+        ],
+        "projects": [
+          "jonathanjayes-projects"
+        ],
+        "insta": [
+          "jonathanjayes-insta"
+        ]
+      }
+    }
+  }
+}

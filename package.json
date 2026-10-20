@@ -1,0 +1,33 @@
+{
+  "name": "jonathanjayes.com",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.7",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @jj/home dev",
+    "dev:talks": "pnpm --filter @jj/catalogue dev:talks",
+    "dev:projects": "pnpm --filter @jj/catalogue dev:projects",
+    "dev:insta": "pnpm --filter @jj/insta dev",
+    "build": "pnpm build:home && pnpm build:talks && pnpm build:projects && pnpm build:insta",
+    "build:home": "pnpm --filter @jj/home build",
+    "build:talks": "pnpm --filter @jj/catalogue build:talks",
+    "build:projects": "pnpm --filter @jj/catalogue build:projects",
+    "build:insta": "pnpm --filter @jj/insta build",
+    "check": "pnpm -r check",
+    "check-links": "tsx scripts/check-links.ts",
+    "thumbs": "tsx scripts/capture-thumbs.ts",
+    "ig:fetch": "tsx scripts/fetch-instagram.ts",
+    "ig:refresh": "tsx scripts/fetch-instagram.ts --refresh-only"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^26.6.5",
+    "js-yaml": "^5.5.0",
+    "playwright": "^1.64.1",
+    "sharp": "^0.35.5",
+    "tsx": "^4.23.15"
+  }
+}

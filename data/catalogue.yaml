@@ -1,0 +1,461 @@
+# Everything shown on talks.jonathanjayes.com and projects.jonathanjayes.com.
+#
+# section: talks | projects
+# group:   talks    -> talk | workshop | teaching
+#          projects -> scrolly | website | tool | analysis | template
+# live:    the page people should open
+# repo:    leave out for private repos
+# featured: true pins an item to the top of its group
+# hidden:  true keeps an entry in the file but off the site
+# Thumbnails: pnpm thumbs writes apps/catalogue/static/thumbs/<slug>.webp
+
+# ---------------------------------------------------------------- talks
+
+- slug: foocafe-talk
+  section: talks
+  group: talk
+  title: "Messy biographies to clean data"
+  description: "Structuring text with LLMs and Pydantic. A talk at Foo Café in Malmö on turning entries from the Vem är Vem? biographical dictionary into a dataset, and what it shows about Swedish engineers who went to America and came back."
+  date: 2025-10-15
+  live: https://j-jayes.github.io/foocafe-talk/
+  repo: https://github.com/j-jayes/foocafe-talk
+  tags: [llm, pydantic, economic-history]
+  featured: true
+
+- slug: literate-broccoli
+  section: talks
+  group: talk
+  title: "CTL + ALT + DELISH"
+  description: "A Nexer Insight lunch and learn on MCP and agentic systems, framed around getting from \"what shall we have for lunch?\" to \"order placed\"."
+  date: 2026-04-16
+  live: https://j-jayes.github.io/literate-broccoli/
+  repo: https://github.com/j-jayes/literate-broccoli
+
+- slug: adk-sidecar-setup
+  section: talks
+  group: talk
+  title: "ADK and Docling sidecar demo"
+  description: "A walkthrough of running Docling next to an agent built with Google's Agent Development Kit, so the agent can read documents."
+  date: 2026-03-13
+  live: https://j-jayes.github.io/adk-sidecar-setup/
+  repo: https://github.com/j-jayes/adk-sidecar-setup
+  tags: [agents, documents]
+
+- slug: mistral-hackathon-july-2026
+  section: talks
+  group: talk
+  title: "Parking the Vélib is the hard part"
+  description: "Hackathon pitch for a phone compass that guides you to a free dock for the last few minutes of a Vélib trip in Paris."
+  date: 2026-07-18
+  live: https://j-jayes.github.io/mistral-hackathon-july-2026/
+  repo: https://github.com/j-jayes/mistral-hackathon-july-2026
+  tags: [hackathon, paris]
+
+- slug: NBER-methods-etl
+  section: talks
+  group: talk
+  title: "Following the fashion in economic research"
+  description: "Tracking which empirical methods show up in NBER working papers, and how that has changed over time."
+  date: 2025-06-30
+  live: https://j-jayes.github.io/NBER-methods-etl/
+  repo: https://github.com/j-jayes/NBER-methods-etl
+  tags: [text-as-data, economics]
+
+- slug: ikea-product-names
+  section: talks
+  group: talk
+  title: "Text embeddings to help predict IKEA product types"
+  description: "Can the name of an IKEA product tell you whether it is a sofa or a shelf? A small experiment with text embeddings."
+  date: 2025-06-24
+  live: https://j-jayes.github.io/ikea-product-names/
+  repo: https://github.com/j-jayes/ikea-product-names
+  tags: [embeddings]
+
+- slug: Who-is-who
+  section: talks
+  group: talk
+  title: "Conductors of progress"
+  description: "Upper-tail human capital in electrifying Sweden. Presented at CAS, the Centre for Advanced Study in Oslo."
+  date: 2024-04-23
+  live: https://j-jayes.github.io/Who-is-who/
+  repo: https://github.com/j-jayes/Who-is-who
+  tags: [economic-history, electrification]
+
+- slug: shocked-by-electricity
+  section: talks
+  group: talk
+  title: "Power for progress"
+  description: "The impact of electricity on individual labour market outcomes in early twentieth-century Sweden."
+  date: 2024-04-10
+  live: https://j-jayes.github.io/shocked-by-electricity/
+  repo: https://github.com/j-jayes/shocked-by-electricity
+  tags: [economic-history, electrification]
+
+- slug: swedish-company-reports-data-extraction
+  section: talks
+  group: talk
+  title: "Extracting tabular information from PDF documents with a language model"
+  description: "Presented at the Machine Learning in Economic History workshop, January 2024."
+  date: 2024-01-23
+  live: https://j-jayes.github.io/swedish-company-reports-data-extraction/
+  repo: https://github.com/j-jayes/swedish-company-reports-data-extraction
+  tags: [llm, pdf, economic-history]
+
+- slug: american-time-use-survey
+  section: talks
+  group: talk
+  title: "Why not a pie chart?"
+  description: "A response to a LinkedIn critique of Nathan Yau's animated chart of how Americans spend their day, using the American Time Use Survey."
+  date: 2024-11-04
+  live: https://j-jayes.github.io/american-time-use-survey/
+  repo: https://github.com/j-jayes/american-time-use-survey
+  tags: [dataviz]
+
+- slug: PhD-Proposal
+  section: talks
+  group: talk
+  title: "Like moths to a flame"
+  description: "My PhD proposal presentation at Lund University."
+  date: 2022-01-20
+  live: https://j-jayes.github.io/PhD-Proposal/
+  repo: https://github.com/j-jayes/PhD-Proposal
+  tags: [economic-history]
+
+- slug: presentations
+  section: talks
+  group: talk
+  title: "The gift of moving"
+  description: "Intergenerational consequences of a mobility shock. A presentation of a published paper, from 2021."
+  date: 2021-10-24
+  live: https://j-jayes.github.io/presentations/
+  repo: https://github.com/j-jayes/presentations
+
+- slug: copilot-studio-education
+  section: talks
+  group: workshop
+  title: "Copilot Studio day course"
+  description: "Reusable training materials, guided labs and MCP starter projects for a one-day Copilot Studio course."
+  date: 2026-03-10
+  live: https://j-jayes.github.io/copilot-studio-education/
+  repo: https://github.com/j-jayes/copilot-studio-education
+  tags: [agents, training]
+  featured: true
+
+- slug: webscraping-tutorial
+  section: talks
+  group: workshop
+  title: "Webscraping tutorial"
+  description: "A Python web scraping tutorial: virtual environments, scraping basics and tables, automating it, and a Streamlit app at the end."
+  date: 2024-08-25
+  live: https://j-jayes.github.io/webscraping-tutorial/
+  repo: https://github.com/j-jayes/webscraping-tutorial
+  tags: [scraping]
+
+- slug: Data-Visualization-in-R-Lund
+  section: talks
+  group: workshop
+  title: "Data visualisation in R"
+  description: "Workshop materials for a data visualisation course in R at Lund University."
+  date: 2022-11-04
+  live: https://j-jayes.github.io/Data-Visualization-in-R-Lund/
+  repo: https://github.com/j-jayes/Data-Visualization-in-R-Lund
+  tags: [r, dataviz]
+
+- slug: data-viz-workshop
+  section: talks
+  group: workshop
+  title: "Data visualisation for economic historians"
+  description: "A workshop on making clear charts from historical data."
+  date: 2022-12-19
+  live: https://j-jayes.github.io/data-viz-workshop/
+  repo: https://github.com/j-jayes/data-viz-workshop
+  tags: [r, dataviz, economic-history]
+
+- slug: EOSE09-site
+  section: talks
+  group: teaching
+  title: "EOSE09: Economy and society"
+  description: "Course site for Regional Development and Growth at Lund University, with the computer labs."
+  date: 2023-01-19
+  live: https://j-jayes.github.io/EOSE09-site/
+  repo: https://github.com/j-jayes/EOSE09-site
+  tags: [teaching, stata]
+
+- slug: Causal-Inference-Time-Series-and-Economic-History
+  section: talks
+  group: teaching
+  title: "Causal inference, time series and economic history"
+  description: "Replicating the course exercises in R, from Okun's law to Swedish real GDP per capita since 1800."
+  date: 2022-04-27
+  live: https://j-jayes.github.io/Causal-Inference-Time-Series-and-Economic-History/
+  repo: https://github.com/j-jayes/Causal-Inference-Time-Series-and-Economic-History
+  tags: [teaching, econometrics]
+
+- slug: screencasts
+  section: talks
+  group: teaching
+  title: "R screencasts"
+  description: "Recorded walkthroughs of data analysis in R."
+  date: 2022-04-14
+  live: https://j-jayes.github.io/screencasts/
+  repo: https://github.com/j-jayes/screencasts
+  tags: [r, video]
+
+- slug: Monday-Munch
+  section: talks
+  group: teaching
+  title: "Programmatically creating tabs in R Markdown"
+  description: "A short how-to for generating tabbed output from a loop."
+  date: 2022-03-04
+  live: https://j-jayes.github.io/Monday-Munch/
+  repo: https://github.com/j-jayes/Monday-Munch
+  tags: [r]
+
+- slug: workflow
+  section: talks
+  group: talk
+  title: "Penguin presentation"
+  description: "A demo deck."
+  date: 2025-07-17
+  live: https://j-jayes.github.io/workflow/
+  repo: https://github.com/j-jayes/workflow
+  hidden: true
+
+- slug: Northvolt
+  section: talks
+  group: talk
+  title: "Northvolt and technological spillovers in Skellefteå"
+  description: "A paper idea."
+  date: 2024-10-25
+  live: https://j-jayes.github.io/Northvolt/
+  repo: https://github.com/j-jayes/Northvolt
+  hidden: true
+
+- slug: svensk-industrikalender
+  section: talks
+  group: talk
+  title: "Electricity paper next steps"
+  description: "Working notes."
+  date: 2023-12-04
+  live: https://j-jayes.github.io/svensk-industrikalender/
+  repo: https://github.com/j-jayes/svensk-industrikalender
+  hidden: true
+
+- slug: swedish-patent-data
+  section: talks
+  group: talk
+  title: "Forte update"
+  description: "A project update."
+  date: 2022-05-20
+  live: https://j-jayes.github.io/swedish-patent-data/
+  repo: https://github.com/j-jayes/swedish-patent-data
+  hidden: true
+
+# ------------------------------------------------------------- projects
+
+- slug: hello-fresh
+  section: projects
+  group: scrolly
+  title: "Inside the HelloFresh ingredient catalogue"
+  description: "A scrollytelling walkthrough of an anonymised sample of HelloFresh's ingredient catalogue: naming, emission factors, cold-chain storage and how the two markets differ. Built with SvelteKit."
+  date: 2026-03-02
+  live: https://j-jayes.github.io/hello-fresh/
+  tags: [scrollytelling, svelte]
+  featured: true
+
+- slug: grey-couches
+  section: projects
+  group: scrolly
+  title: "NeverTooSmall couch colours"
+  description: "Is every second couch on the NeverTooSmall YouTube channel really a boring grey one? Measuring couch colours across the small-space videos to find out."
+  date: 2024-11-15
+  live: https://j-jayes.github.io/grey-couches/
+  repo: https://github.com/j-jayes/grey-couches
+  tags: [computer-vision, dataviz]
+
+- slug: wehc25
+  section: projects
+  group: website
+  title: "World Economic History Congress 2025"
+  description: "The website for the World Economic History Congress in Lund, 2025, built with Quarto."
+  date: 2025-08-11
+  live: https://wehc2025.com/
+  repo: https://github.com/j-jayes/wehc25
+  tags: [quarto, conference]
+  featured: true
+
+- slug: SEHM-23
+  section: projects
+  group: website
+  title: "15th Swedish Economic History Meeting"
+  description: "Conference website for the Swedish Economic History Meeting in 2023."
+  date: 2023-09-28
+  live: https://j-jayes.github.io/SEHM-23/
+  repo: https://github.com/j-jayes/SEHM-23
+  tags: [quarto, conference]
+
+- slug: recipes
+  section: projects
+  group: website
+  title: "Cookbook"
+  description: "My personal recipe collection, built with Quarto."
+  date: 2023-04-13
+  live: https://j-jayes.github.io/recipes/  # becomes https://recipes.jonathanjayes.com/ once that domain is live
+  repo: https://github.com/j-jayes/recipes
+  tags: [quarto]
+
+- slug: Google-Art-Project-Clone
+  section: projects
+  group: website
+  title: "Google Art Project clone"
+  description: "A rebuild of Google's Art Project gallery interface."
+  date: 2024-02-19
+  live: https://j-jayes.github.io/Google-Art-Project-Clone/
+  repo: https://github.com/j-jayes/Google-Art-Project-Clone
+
+- slug: is-there-a-velib
+  section: projects
+  group: tool
+  title: "Is there a Vélib?"
+  description: "A quick check for electric bikes at the stations near home and free docks at the stations near work."
+  date: 2026-03-18
+  live: https://j-jayes.github.io/is-there-a-velib/
+  repo: https://github.com/j-jayes/is-there-a-velib
+  tags: [paris, open-data]
+
+- slug: hymnary
+  section: projects
+  group: tool
+  title: "Hymnary organ and hymnal crossover"
+  description: "Matching hymns on an Allen organ to their tunes and to entries in the hymn book."
+  date: 2026-01-31
+  live: https://j-jayes.github.io/hymnary/
+  repo: https://github.com/j-jayes/hymnary
+
+- slug: SC-1930
+  section: projects
+  group: tool
+  title: "1930 census codebook"
+  description: "A codebook for the 1930 Swedish census."
+  date: 2022-08-17
+  live: https://j-jayes.github.io/SC-1930/
+  repo: https://github.com/j-jayes/SC-1930
+  tags: [economic-history, census]
+
+- slug: slides
+  section: projects
+  group: template
+  title: "Nexer slide kit"
+  description: "A Quarto Reveal.js template that renders one file to branded HTML and editable PowerPoint, plus the Claude Code skills for writing the deck."
+  date: 2026-09-18
+  live: https://j-jayes.github.io/slides/template.html#/title-slide
+  repo: https://github.com/j-jayes/slides
+  tags: [quarto, revealjs, powerpoint]
+  featured: true
+
+- slug: Scratching-the-Surface-2
+  section: projects
+  group: analysis
+  title: "Scratching the surface"
+  description: "Classical computer vision against vision-language models for spotting defects in rolled metal."
+  date: 2026-05-18
+  live: https://j-jayes.github.io/Scratching-the-Surface-2/
+  repo: https://github.com/j-jayes/Scratching-the-Surface-2
+  tags: [computer-vision, vlm]
+
+- slug: Scratching-the-Surface
+  section: projects
+  group: analysis
+  title: "Project cascade defect"
+  description: "A cost-effective cascade of models for real-time surface defect detection in rolled metal."
+  date: 2026-05-13
+  live: https://j-jayes.github.io/Scratching-the-Surface/
+  repo: https://github.com/j-jayes/Scratching-the-Surface
+  tags: [computer-vision]
+
+- slug: SA-Road-Quality
+  section: projects
+  group: analysis
+  title: "Road quality in South Africa from Street View"
+  description: "Assessing road quality in South Africa using Google Street View images."
+  date: 2026-04-03
+  live: https://j-jayes.github.io/SA-Road-Quality/
+  tags: [computer-vision, south-africa]
+
+- slug: malmo-homes
+  section: projects
+  group: analysis
+  title: "Remote work and the local labour market"
+  description: "A description of Swedish property data for a project on how remote work affects local labour markets."
+  date: 2024-04-17
+  live: https://j-jayes.github.io/malmo-homes/
+  repo: https://github.com/j-jayes/malmo-homes
+  tags: [housing, sweden]
+
+- slug: sweden-electrification-committee
+  section: projects
+  group: analysis
+  title: "Digitising the Swedish Electrification Committee"
+  description: "Turning the scanned reports of the Swedish Electrification Committee into data."
+  date: 2022-03-10
+  live: https://j-jayes.github.io/sweden-electrification-committee/
+  repo: https://github.com/j-jayes/sweden-electrification-committee
+  tags: [economic-history, ocr]
+
+- slug: EOSE09
+  section: projects
+  group: analysis
+  title: "Supplementing the Rosés-Wolf regional GDP database"
+  description: "Extra NUTS 2 indicators collected to supplement the Rosés-Wolf database on regional GDP, prepared for students."
+  date: 2023-01-10
+  live: https://j-jayes.github.io/EOSE09/
+  repo: https://github.com/j-jayes/EOSE09
+  tags: [economic-history]
+
+- slug: European-population
+  section: projects
+  group: analysis
+  title: "European urban populations"
+  description: "European urban population at the NUTS 2 level, with a download link and a few descriptive maps."
+  date: 2023-02-01
+  live: https://j-jayes.github.io/European-population/
+  repo: https://github.com/j-jayes/European-population
+  tags: [dataviz]
+
+- slug: animal-husbandry
+  section: projects
+  group: analysis
+  title: "Animal husbandry"
+  description: "Agriculture and livestock data, with a companion Shiny app."
+  date: 2022-09-13
+  live: https://j-jayes.github.io/animal-husbandry/
+  repo: https://github.com/j-jayes/animal-husbandry
+  tags: [r, shiny]
+
+- slug: greenwashing
+  section: projects
+  group: analysis
+  title: "Green claims initiative"
+  description: "Client scope proposal."
+  date: 2026-04-16
+  live: https://j-jayes.github.io/greenwashing/
+  hidden: true
+
+- slug: cyber-agentic-framework
+  section: projects
+  group: tool
+  title: "Nexer cyber advisory agent"
+  description: "An AI-powered gap analysis tool for cybersecurity consultants."
+  date: 2026-10-08
+  live: https://j-jayes.github.io/cyber-agentic-framework/
+  hidden: true
+
+- slug: kingfisher-frontend
+  section: projects
+  group: website
+  title: "Alcedo KYC"
+  description: "Frontend for Alcedo Know Your Customer."
+  date: 2024-08-20
+  live: https://alcedokyc.com/
+  repo: https://github.com/j-jayes/kingfisher-frontend
+  hidden: true

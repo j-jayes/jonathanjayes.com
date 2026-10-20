@@ -1,0 +1,52 @@
+name: Instagram sync
+
+on:
+  schedule:
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+concurrency: instagram-sync
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      changed: ${{ steps.commit.outputs.changes_detected }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Fetch posts and refresh the token
+        id: ig
+        run: pnpm ig:fetch --refresh
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+
+      # Long-lived tokens last 60 days. Storing the refreshed one keeps the chain alive.
+      - name: Store refreshed token
+        run: gh secret set INSTAGRAM_ACCESS_TOKEN --body "$TOKEN" --repo "$GITHUB_REPOSITORY"
+        env:
+          TOKEN: ${{ steps.ig.outputs.token }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        id: commit
+        with:
+          commit_message: 'chore(insta): sync Instagram posts'
+          file_pattern: 'data/instagram.json apps/insta/static/ig/*'
+
+  # Pushes made with GITHUB_TOKEN don't trigger other workflows, so call the deploy directly.
+  deploy:
+    needs: sync
+    if: needs.sync.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy.yml
+    with:
+      app: insta
+    secrets: inherit

@@ -1,0 +1,83 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      app:
+        description: Which site to deploy
+        type: choice
+        options: [all, home, talks, projects, insta]
+        default: all
+  workflow_call:
+    inputs:
+      app:
+        type: string
+        required: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      apps: ${{ steps.pick.outputs.apps }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: f
+        if: ${{ !inputs.app }}
+        with:
+          filters: |
+            shared:   ['packages/**', 'pnpm-lock.yaml', 'package.json', 'firebase.json', '.github/workflows/deploy.yml']
+            home:     ['apps/home/**']
+            catalogue: ['apps/catalogue/**', 'data/catalogue.yaml']
+            insta:    ['apps/insta/**', 'data/instagram.json']
+      - id: pick
+        env:
+          INPUT: ${{ inputs.app }}
+          SHARED: ${{ steps.f.outputs.shared }}
+          HOME_: ${{ steps.f.outputs.home }}
+          CAT: ${{ steps.f.outputs.catalogue }}
+          INSTA: ${{ steps.f.outputs.insta }}
+        run: |
+          if [ -n "$INPUT" ] && [ "$INPUT" != "all" ]; then apps="[\"$INPUT\"]"
+          elif [ "$INPUT" = "all" ] || [ "$SHARED" = "true" ]; then apps='["home","talks","projects","insta"]'
+          else
+            list=()
+            [ "$HOME_" = "true" ] && list+=('"home"')
+            [ "$CAT" = "true" ] && list+=('"talks"' '"projects"')
+            [ "$INSTA" = "true" ] && list+=('"insta"')
+            apps="[$(IFS=,; echo "${list[*]}")]"
+          fi
+          echo "apps=$apps" >> "$GITHUB_OUTPUT"
+          echo "Deploying: $apps"
+
+  deploy:
+    needs: changes
+    if: needs.changes.outputs.apps != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app: ${{ fromJson(needs.changes.outputs.apps) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # When called after the Instagram sync, build the commit it just pushed.
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || 'main' }}
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:${{ matrix.app }}
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JONATHANJAYES_COM }}
+          projectId: jonathanjayes-com
+          target: ${{ matrix.app }}
+          channelId: ${{ github.event_name == 'pull_request' && '' || 'live' }}
