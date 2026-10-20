@@ -15,18 +15,25 @@ Nameservers are set to Bluehost defaults:
 
 ## DNS records (Bluehost)
 
+Values as returned by the Firebase Hosting customDomains API on 2026-10-20.
+
 | Type | Host | Value | Status (2026-10-20) |
 |---|---|---|---|
 | CNAME | `blog` | `jonathanjayes-com.web.app` | live |
-| A | `@` | `199.36.158.100` and `199.36.158.101` | to do; replaces Bluehost parking `66.81.203.198` |
-| TXT | `@` | value from the Firebase console for `jonathanjayes-home` | to do |
-| CNAME | `www` | `jonathanjayes-home.web.app` | to do; add `www` in Firebase as a redirect to the apex |
+| A | `@` | `199.36.158.100` | to do; **delete** the Bluehost parking A `66.81.203.198` |
+| TXT | `@` | `hosting-site=jonathanjayes-home` | to do |
+| TXT | `_acme-challenge` | `DqKyNH-BRxOzu6NX-94mzre9jFPEcX8iZFY41QfpSGg` | to do |
+| CNAME | `www` | `jonathanjayes-home.web.app` | to do; registered in Firebase as a redirect to the apex |
+| TXT | `_acme-challenge.www` | `0-djSXcSrthFCZ5j__X9yh4erWIpoLyBn8KoTpBg-o0` | to do |
 | CNAME | `talks` | `jonathanjayes-talks.web.app` | to do |
+| TXT | `_acme-challenge.talks` | `cyoRFvLbDWxNxJetMrGaw9aDNRbRQ5-7h11rfc4Tm4o` | to do |
 | CNAME | `projects` | `jonathanjayes-projects.web.app` | to do |
+| TXT | `_acme-challenge.projects` | `8Kf2_uoHgMSkgxDoryD50gyz7UF_VfHFPmyAV2s4WcU` | to do |
 | CNAME | `insta` | `jonathanjayes-insta.web.app` | to do |
-| CNAME | `recipes` | `j-jayes.github.io` | to do; GitHub Pages custom domain on `j-jayes/recipes` |
+| TXT | `_acme-challenge.insta` | `zcPettFsUpu2Gp3uSZBQiMOS5akkAWmIslfP73Sd6o0` | to do |
+| CNAME | `recipes` | `j-jayes.github.io` | to do; then push branch `custom-domain` in `j-jayes/recipes` and set the Pages custom domain |
 
-Add any `_acme-challenge` TXT records the Firebase console asks for. Leave MX records alone. Update the status column as records go live.
+If `www` already exists as a CNAME to the apex or as an A record, replace it. Leave MX records alone. Re-read the required records from the API (firebase-hosting skill) if a cert stalls, since Firebase can rotate the ACME values.
 
 ## Old domain
 
