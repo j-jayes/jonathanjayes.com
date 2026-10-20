@@ -46,6 +46,11 @@ jobs:
   deploy:
     needs: sync
     if: needs.sync.outputs.changed == 'true'
+    # A called workflow cannot hold more permissions than its caller grants.
+    permissions:
+      checks: write
+      contents: read
+      pull-requests: write
     uses: ./.github/workflows/deploy.yml
     with:
       app: insta
