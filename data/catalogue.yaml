@@ -300,7 +300,7 @@
   title: "Cookbook"
   description: "My personal recipe collection, built with Quarto."
   date: 2023-04-13
-  live: https://j-jayes.github.io/recipes/  # becomes https://recipes.jonathanjayes.com/ once that domain is live
+  live: https://recipes.jonathanjayes.com/
   repo: https://github.com/j-jayes/recipes
   tags: [quarto]
 
